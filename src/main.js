@@ -8,16 +8,24 @@ import 'element-ui/lib/theme-default/index.css'
 import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
 
+// 主要模块
+import Portal from './portal/Portal.vue'
+import GroupPage from './portal/pages/GroupPage.vue'
+
 Vue.use(ElementUI)
 Vue.use(VueRouter)
 Vue.use(VueResource)
 
+// 路由配置
 const routes = [{
-  path: '/main/:id',
-  component: App,
+  path: '/portal',
+  component: Portal,
   children: [
-    {path: 'item_one', component: App},
-    {path: 'item_two', component: App}]
+    // TODO: 暂时全部使用 GroupPage 占位
+    {path: 'group', component: GroupPage},
+    {path: 'personal', component: GroupPage},
+    {path: 'newEmployee', component: GroupPage},
+    {path: 'area', component: GroupPage}]
 }]
 
 const router = new VueRouter({routes})

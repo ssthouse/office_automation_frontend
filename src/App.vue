@@ -1,8 +1,32 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <hello></hello>
-    <el-button @click="connectServer">Hi I'am a button from element-ui</el-button>
+  <div id="app"
+       style="margin-top: 0px">
+
+    <!--上方顶栏 固定不变的-->
+    <el-menu theme="dark"
+             :router=true
+             default-active="/portal"
+             mode="horizontal"
+             @select="changeMenuItem">
+      <!--最左端图标-->
+      <el-menu-item index="/">AO 系统</el-menu-item>
+      <!--右边导航菜单-->
+      <el-menu-item index="/portal">门户</el-menu-item>
+      <el-menu-item index="/flow">流程</el-menu-item>
+      <el-menu-item index="/knowledge">知识</el-menu-item>
+      <el-submenu index="other">
+        <template slot="title">其他</template>
+        <el-menu-item index="other_one">4-1</el-menu-item>
+        <el-menu-item index="other_two">4-2</el-menu-item>
+        <el-menu-item index="other_three">4-3</el-menu-item>
+      </el-submenu>
+    </el-menu>
+
+    <el-col :span="24">
+      <!--路由匹配的控件将会被填充在这-->
+      <!--整个下部都被填充上-->
+      <router-view></router-view>
+    </el-col>
   </div>
 </template>
 
@@ -21,6 +45,9 @@
           console.log(userinfo.username)
           console.log(userinfo.age)
         })
+      },
+      changeMenuItem: function (key, keyPath) {
+        console.log(key + ' ' + keyPath)
       }
     }
   }
