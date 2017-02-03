@@ -6,7 +6,9 @@
     </el-col>
     <!--承载右边内容==>会随着左边菜单改变而改变-->
     <el-col :span="18">
-      <router-view></router-view>
+      <keep-alive>
+        <router-view></router-view>
+      </keep-alive>
     </el-col>
   </div>
 </template>

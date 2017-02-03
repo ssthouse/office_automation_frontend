@@ -12,7 +12,7 @@
       <el-menu-item index="/">AO 系统</el-menu-item>
       <!--右边导航菜单-->
       <el-menu-item index="/portal">门户</el-menu-item>
-      <el-menu-item index="/flow">流程</el-menu-item>
+      <el-menu-item index="/official_doc">公文</el-menu-item>
       <el-menu-item index="/knowledge">知识</el-menu-item>
       <el-submenu index="other">
         <template slot="title">其他</template>
@@ -25,7 +25,9 @@
     <el-col :span="24">
       <!--路由匹配的控件将会被填充在这-->
       <!--整个下部都被填充上-->
-      <router-view></router-view>
+      <keep-alive>
+        <router-view></router-view>
+      </keep-alive>
     </el-col>
   </div>
 </template>
