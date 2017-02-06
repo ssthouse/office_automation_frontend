@@ -1,10 +1,9 @@
-<template>
-  <div id="app"
-       style="margin-top: 0px">
-
+<template style="height: 100%">
+  <div id="app" style="height: 100%">
     <!--上方顶栏 固定不变的-->
     <el-menu theme="dark"
              :router=true
+             style="height: 8%;"
              default-active="/portal"
              mode="horizontal"
              @select="changeMenuItem">
@@ -22,7 +21,8 @@
       </el-submenu>
     </el-menu>
 
-    <el-col :span="24">
+    <!--下方占据92空间-->
+    <el-col :span="24" style="height: 92%">
       <!--路由匹配的控件将会被填充在这-->
       <!--整个下部都被填充上-->
       <keep-alive>
@@ -62,6 +62,7 @@
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
-    margin-top: 60px;
+    background-color: #2c3e50;
+    margin-top: 0px;
   }
 </style>

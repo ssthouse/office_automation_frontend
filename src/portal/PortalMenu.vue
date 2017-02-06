@@ -1,8 +1,9 @@
-<template>
-  <div>
+<template style="height: 100%">
+  <div style="height: 100%;">
     <el-menu
       :router=true
-      default-active="1">
+      default-active="1"
+      style="height: 100%">
       <el-menu-item :index="urls[0]">集团门户</el-menu-item>
       <el-menu-item :index="urls[1]">个人门户</el-menu-item>
       <el-menu-item :index="urls[2]">新员工门户</el-menu-item>
