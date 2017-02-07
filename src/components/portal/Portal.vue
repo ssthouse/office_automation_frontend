@@ -7,7 +7,7 @@
     <!--承载右边内容==>会随着左边菜单改变而改变-->
     <el-col :span="20">
       <keep-alive>
-        <router-view></router-view>
+        <router-view :tabs="tabs"></router-view>
       </keep-alive>
     </el-col>
   </div>
@@ -19,7 +19,15 @@
   export default{
     name: '',
     data () {
-      return {}
+      return {
+        tabs: [{
+          label: 'lable1',
+          content: 'content1'
+        }, {
+          label: 'lable1',
+          content: 'content1'
+        }]
+      }
     },
     props: [],
     components: {

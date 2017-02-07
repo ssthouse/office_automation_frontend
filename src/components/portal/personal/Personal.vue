@@ -11,15 +11,11 @@
           </el-col>
         </el-tab-pane>
         <!--其他动态增加减少的标签-->
+        <!--标签的关闭在本组件中处理 ===> 标签的开启在父组件处理-->
         <el-tab-pane v-for="tab in tabs"
                      closable
                      :label="tab.label">
           {{tab.content}}
-        </el-tab-pane>
-        <el-tab-pane label="调查问卷"
-                     :hidden="tabsStatus.questionnaire"
-                     closable>
-          <questionnaire></questionnaire>
         </el-tab-pane>
 
         <el-tab-pane label="配置管理"
@@ -43,17 +39,15 @@
       return {
         tabsStatus: {
           questionnaire: false
-        },
-        tabs: [{
-          label: 'lable1',
-          content1: 'content1'
-        }, {
-          label: 'lable1',
-          content1: 'content1'
-        }]
+        }
       }
     },
-    props: [],
+    props: {
+      // tab 的数据由上一层组件控制
+      tabs: {
+        default: []
+      }
+    },
     components: {
       'questionnaireCard': QuestionnaireCard,
       'questionnaire': Questionnaire
@@ -61,7 +55,8 @@
     methods: {
       handleClick: function () {
       },
-      handleRemove: function () {
+      handleRemove: function (tab, event) {
+        this.tabs.push({label: 'add label' + this.tabs.length, content: 'added content'})
       }
     }
   }
