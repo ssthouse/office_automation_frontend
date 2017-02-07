@@ -9,7 +9,10 @@
                      icon="delete"
                      :loading="isDeleting"
                      @click="onDeleting"/>
-          <el-button size="small" icon="plus"></el-button>
+          <el-button size="small"
+                     icon="plus"
+                     @click="onAdd">
+          </el-button>
         </el-button-group>
       </div>
       <!--问卷列表-->
@@ -23,6 +26,8 @@
 </template>
 
 <script>
+  import * as types from '../../../store/mutation-types'
+
   export default{
     name: '',
     data () {
@@ -54,6 +59,9 @@
           vue.isDeleting = false
           vue.isLoading = false
         }, 10000)
+      },
+      onAdd: function () {
+        this.$store.commit(types.ADD_QUESTIONNAIRE_TAB, 'questionnaire')
       }
     },
     props: []

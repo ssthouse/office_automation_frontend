@@ -1,3 +1,4 @@
+<script src="../../../store/mutation-types.js"></script>
 <template>
   <div style="width: 100%; height: 100%">
     <el-col style="width: 100%; height: 100%">
@@ -15,15 +16,16 @@
         <el-tab-pane v-for="tab in tabs"
                      closable
                      :label="tab.label">
-          {{tab.content}}
+          <div :is="tab.contentIs"></div>
         </el-tab-pane>
 
-        <el-tab-pane label="配置管理"
-                     closable>配置管理
-        </el-tab-pane>
-        <el-tab-pane label="角色管理"
-                     closable>角色管理
-        </el-tab-pane>
+        <!--<el-tab-pane label="配置管理"-->
+                     <!--closable>-->
+          <!--<div :is="questionnaire"></div>-->
+        <!--</el-tab-pane>-->
+        <!--<el-tab-pane label="角色管理"-->
+                     <!--closable>角色管理-->
+        <!--</el-tab-pane>-->
       </el-tabs>
     </el-col>
   </div>
@@ -32,6 +34,7 @@
 <script>
   import QuestionnaireCard from './QuestionnaireCard.vue'
   import Questionnaire from './Questionnaire.vue'
+  import * as types from '../../../store/mutation-types.js'
 
   export default{
     name: '',
@@ -39,15 +42,16 @@
       return {
         tabsStatus: {
           questionnaire: false
-        }
+        },
+        questionnaire: 'questionnaireCard'
       }
     },
-    props: {
-      // tab 的数据由上一层组件控制
-      tabs: {
-        default: []
+    computed: {
+      tabs: function () {
+        return this.$store.state.portalModule.personal_tabs
       }
     },
+    props: {},
     components: {
       'questionnaireCard': QuestionnaireCard,
       'questionnaire': Questionnaire
@@ -56,7 +60,8 @@
       handleClick: function () {
       },
       handleRemove: function (tab, event) {
-        this.tabs.push({label: 'add label' + this.tabs.length, content: 'added content'})
+        console.log(tab.index)
+        this.$store.commit(types.PORTAL_REMOVE_TAB, tab.index)
       }
     }
   }

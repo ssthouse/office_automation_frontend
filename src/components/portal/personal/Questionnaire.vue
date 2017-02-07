@@ -1,6 +1,6 @@
 <template>
   <div style="height: 100%; width: 100%;">
-    这里是新建调查问卷
+    <el-button>这里是新建调查问卷</el-button>
   </div>
 </template>
 
