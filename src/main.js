@@ -7,13 +7,13 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
 import VueResource from 'vue-resource'
 
-import VueQuillEditor from 'vue-quill-editor'
+// import VueQuillEditor from 'vue-quill-editor'
 import router from './router'
 import store from './store'
 
 Vue.use(ElementUI)
 Vue.use(VueResource)
-Vue.use(VueQuillEditor)
+// Vue.use(VueQuillEditor)
 
 /* eslint-disable no-new */
 new Vue({

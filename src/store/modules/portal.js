@@ -7,7 +7,7 @@ const state = {
 
 const mutations = {
   // 增加调查问卷的 tab
-  [types.ADD_QUESTIONNAIRE_TAB] (state, {contentIs}) {
+  [types.ADD_QUESTIONNAIRE_TAB] (state, contentIs) {
     state.personal_tabs.push({
       label: '创建调查问卷',
       contentIs: contentIs
@@ -15,7 +15,7 @@ const mutations = {
   },
   // 移除某一个 tab
   [types.PORTAL_REMOVE_TAB] (state, tabIndex) {
-    //TODO 这里没办法对 tab 进行移除  饿了吗没给接口===> 会导致 tab 越来越多 希望不会有问题
+    // TODO 这里没办法对 tab 进行移除  饿了吗没给接口===> 会导致 tab 越来越多 希望不会有问题
   }
 }
 

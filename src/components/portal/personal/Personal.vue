@@ -12,7 +12,6 @@
           </el-col>
         </el-tab-pane>
         <!--其他动态增加减少的标签-->
-        <!--标签的关闭在本组件中处理 ===> 标签的开启在父组件处理-->
         <el-tab-pane v-for="tab in tabs"
                      closable
                      :label="tab.label">
@@ -20,11 +19,11 @@
         </el-tab-pane>
 
         <!--<el-tab-pane label="配置管理"-->
-                     <!--closable>-->
-          <!--<div :is="questionnaire"></div>-->
+        <!--closable>-->
+        <!--<div :is="questionnaire"></div>-->
         <!--</el-tab-pane>-->
         <!--<el-tab-pane label="角色管理"-->
-                     <!--closable>角色管理-->
+        <!--closable>角色管理-->
         <!--</el-tab-pane>-->
       </el-tabs>
     </el-col>
