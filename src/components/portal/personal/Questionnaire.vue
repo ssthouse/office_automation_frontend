@@ -1,5 +1,5 @@
 <template>
-  <div style="height: 100%; width: 100%;">
+  <div class="outter_div">
     <!--标题-->
     <el-input placeholder="问卷标题"
               v-model="questionnaire.title"></el-input>
@@ -23,6 +23,7 @@
       <el-input type="textarea" autosize placeholder="请输入内容"
                 v-if="question.type === QUESTION_TYPES.TEXT_AREA"></el-input>
       <!--操作按钮-->
+      <!--TODO 按钮实际作用还没做-->
       <el-button-group style="text-align: right; float: right; margin-right: 10px;">
         <el-button>上移</el-button>
         <el-button>下移</el-button>
@@ -79,9 +80,11 @@
       <div v-text="previewRadioOptions"></div>
       <div style="margin-top: 10px">
         <el-button type="primary"
-                   @click="cancelDialog(QUESTION_TYPES.RADIO)">取消
+                   @click="onCancelDialog(QUESTION_TYPES.RADIO)">取消
         </el-button>
-        <el-button type="primary">确认</el-button>
+        <el-button type="primary"
+                   @click="onEnsureDialog(QUESTION_TYPES.RADIO)">确认
+        </el-button>
       </div>
     </el-dialog>
 
@@ -129,11 +132,11 @@
           // }
           questions: [{
             title: 'questionOne',
-            type: 'radio',
+            type: QUESTION_TYPES.RADIO,
             selections: ['options1', 'options2']
           }, {
             title: 'questionOne',
-            type: 'checkbox',
+            type: QUESTION_TYPES.CHECK_BOX,
             selections: ['options1', 'options2']
           }],
           // 用字符串表示日期时间
@@ -176,7 +179,7 @@
      * 本地的方法
      */
     methods: {
-      // 时候显示三种题目
+      // 是否显示三种题目
       toggleShowQuestions: function () {
         this.showQuestions = !this.showQuestions
       },
@@ -193,7 +196,7 @@
       /**
        * 增加问题的dialog 按钮事件
        */
-      cancelDialog: function (questionType) {
+      onCancelDialog: function (questionType) {
         switch (questionType) {
           case QUESTION_TYPES.RADIO:
             this.showAddRadioDialog = false
@@ -206,13 +209,27 @@
             break
         }
       },
+      onEnsureDialog (questionType) {
+        switch (questionType) {
+          case QUESTION_TYPES.RADIO:
+            // TODO 增加单选题逻辑
+            this.showAddRadioDialog = false
+            break
+          case QUESTION_TYPES.CHECK_BOX:
+            this.showAddCheckboxDialog = false
+            break
+          case QUESTION_TYPES.TEXT_AREA:
+            this.showAddTextAreaDialog = false
+            break
+        }
+      },
       // 保存问卷
       saveQuestionnaire: function () {
-        // TODO
+        // TODO 后台需要准备接扩了
       },
       // 发布问卷
       publishQuestionnaire: function () {
-        // TODO
+        // TODO 后台需要准备接口了
       }
     }
   }
@@ -237,5 +254,11 @@
   .el-row {
     margin-top: 30px;
     margin-bottom: 10px;
+  }
+
+  .outter_div {
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
   }
 </style>

@@ -1,5 +1,5 @@
 <template style="height: 100%">
-  <div id="app" style="height: 100%">
+  <div id="app">
     <!--上方顶栏 固定不变的-->
     <el-menu theme="dark"
              :router=true
@@ -64,5 +64,7 @@
     color: #2c3e50;
     background-color: #2c3e50;
     margin-top: 0px;
+    height: 100%;
+    overflow-y: hidden;
   }
 </style>

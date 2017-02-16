@@ -5,9 +5,9 @@
       <portal-menu></portal-menu>
     </el-col>
     <!--承载右边内容==>会随着左边菜单改变而改变-->
-    <el-col :span="20">
+    <el-col :span="20" class="content_tab_pane">
       <keep-alive>
-        <router-view :tabs="tabs"></router-view>
+        <router-view></router-view>
       </keep-alive>
     </el-col>
   </div>
@@ -40,5 +40,10 @@
   .el-col {
     height: 100%;
     background-color: azure;
+  }
+
+  .content_tab_pane {
+    height: 100%;
+    overflow-y: hidden;
   }
 </style>

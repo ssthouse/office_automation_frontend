@@ -1,10 +1,10 @@
 <script src="../../../store/mutation-types.js"></script>
 <template>
   <div style="width: 100%; height: 100%">
-    <el-col style="width: 100%; height: 100%">
       <el-tabs type="card"
                @tab-click="handleClick"
-               @tab-remove="handleRemove">
+               @tab-remove="handleRemove"
+               class="content_tabs">
         <!--个人主业标签-->
         <el-tab-pane label="个人主页">
           <el-col :span="12">
@@ -15,7 +15,8 @@
         <el-tab-pane v-for="tab in tabs"
                      closable
                      :label="tab.label">
-          <div :is="tab.contentIs"></div>
+          <div :is="tab.contentIs"
+               class="tab_content"></div>
         </el-tab-pane>
 
         <!--<el-tab-pane label="配置管理"-->
@@ -26,7 +27,6 @@
         <!--closable>角色管理-->
         <!--</el-tab-pane>-->
       </el-tabs>
-    </el-col>
   </div>
 </template>
 
@@ -67,9 +67,16 @@
 </script>
 
 <style type="text/css">
-  .el-tabs {
+  .content_tabs {
     background-color: white;
     width: 100%;
     height: 100%;
+    overflow-y: scroll;
   }
+
+  /*.tab_content {*/
+    /*width: 100%;*/
+    /*height: 100%;*/
+    /*overflow-y: scroll;*/
+  /*}*/
 </style>
