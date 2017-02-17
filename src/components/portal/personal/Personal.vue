@@ -31,8 +31,8 @@
 </template>
 
 <script>
-  import QuestionnaireCard from './QuestionnaireCard.vue'
-  import Questionnaire from './Questionnaire.vue'
+  import QuestionnaireCard from './questionnaire/QuestionnaireCard.vue'
+  import Questionnaire from './questionnaire/Questionnaire.vue'
   import * as types from '../../../store/mutation-types.js'
 
   export default{

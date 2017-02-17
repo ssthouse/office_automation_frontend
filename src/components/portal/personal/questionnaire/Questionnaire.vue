@@ -25,10 +25,10 @@
       <!--操作按钮-->
       <!--TODO 按钮实际作用还没做-->
       <el-button-group class="question_edit_btn_group">
-        <el-button>上移</el-button>
-        <el-button>下移</el-button>
-        <el-button>删除</el-button>
-        <el-button>复用</el-button>
+        <el-button @click="onQuestionUpClicked(questionnaire.questions.indexOf(question))">上移</el-button>
+        <el-button @click="onQuestionDownClicked(questionnaire.questions.indexOf(question))">下移</el-button>
+        <el-button @click="onQuestionDelecClicked(questionnaire.questions.indexOf(question))">删除</el-button>
+        <el-button @click="onQuestionDuplicateClick(questionnaire.questions.indexOf(question))">复用</el-button>
       </el-button-group>
     </el-card>
 
@@ -68,14 +68,14 @@
     <!--增加单选题 dialog-->
     <el-dialog title="增加单选题" v-model="showAddRadioDialog">
       <el-input placeholder="标题"
-                v-model="radioQuestionTitle"
+                v-model="currentRadioQuestion.title"
                 style="width: 90%;">
       </el-input>
       <el-input type="textarea"
                 autosize
                 placeholder="选项, 以回车换行"
                 style="width: 90%;"
-                v-model="radioQuestionContent"></el-input>
+                v-model="currentRadioQuestion.selections"></el-input>
       <p>预览</p>
       <div v-text="previewRadioOptions"></div>
       <div style="margin-top: 10px">
@@ -91,14 +91,14 @@
     <!--增加多选题 dialog-->
     <el-dialog title="增加多选题" v-model="showAddCheckboxDialog">
       <el-input placeholder="标题"
-                v-model="checkboxQuestionTitle"
+                v-model="currentCheckboxQuestion.title"
                 style="width: 90%;">
       </el-input>
       <el-input type="textarea"
                 autosize
                 placeholder="选项, 以回车换行"
                 style="width: 90%;"
-                v-model="checkboxQuestionContent"></el-input>
+                v-model="currentCheckboxQuestion.selections"></el-input>
       <p>预览</p>
       <div v-text="previewCheckBoxOptions"></div>
       <div style="margin-top: 10px">
@@ -114,7 +114,7 @@
     <!--增加文字题 dialog-->
     <el-dialog title="增加文字题" v-model="showAddTextAreaDialog">
       <el-input placeholder="标题"
-                v-model="textareaQuestionTitle"
+                v-model="currentTextAreaQuestion.title"
                 style="width: 90%;">
       </el-input>
       <el-button type="primary"
@@ -125,39 +125,18 @@
 </template>
 
 <script>
-  //  题目类型
-  const QUESTION_TYPES = {
-    RADIO: 'radio',
-    CHECK_BOX: 'checkbox',
-    TEXT_AREA: 'textArea'
-  }
+  import {QUESTION_TYPES, Question} from './question'
 
   // check is
   var checkNewQuestionInput = function (data, questionType) {
     switch (questionType) {
       case QUESTION_TYPES.RADIO:
-        if (data.radioQuestionTitle.length === 0) {
-          return false
-        }
-        if (data.radioQuestionContent.length === 0) {
-          return false
-        }
-        break
+        return data.currentRadioQuestion.isEmpty()
       case QUESTION_TYPES.CHECK_BOX:
-        if (data.checkboxQuestionTitle.length === 0) {
-          return false
-        }
-        if (data.checkboxQuestionContent.length === 0) {
-          return false
-        }
-        break
+        return data.currentCheckboxQuestion.isEmpty()
       case QUESTION_TYPES.TEXT_AREA:
-        if (data.textareaQuestionTitle.length === 0) {
-          return false
-        }
-        break
+        return data.currentTextAreaQuestion.isEmpty()
     }
-    return true
   }
 
   export default{
@@ -179,31 +158,19 @@
          */
         questionnaire: {
           title: '',
-          // {
-          //    title:'',
-          //    type:'textArea'|| 'radio' || 'checkbox'
-          //    selections:['options1', 'options2']
-          // }
-          questions: [{
-            title: 'questionOne',
-            type: QUESTION_TYPES.RADIO,
-            selections: ['options1', 'options2']
-          }, {
-            title: 'questionOne',
-            type: QUESTION_TYPES.CHECK_BOX,
-            selections: ['options1', 'options2']
-          }],
+          questions: [
+            new Question('questionOne', QUESTION_TYPES.RADIO, ['options1', 'options2']),
+            new Question('questionOne', QUESTION_TYPES.CHECK_BOX, ['options1', 'options2'])
+          ],
           // 用字符串表示日期时间
           deadline: ''
         },
         /**
          * 三种题目的数据 单选题 多选题 文字题
          */
-        radioQuestionTitle: '',
-        radioQuestionContent: '',
-        checkboxQuestionTitle: '',
-        checkboxQuestionContent: '',
-        textareaQuestionTitle: '',
+        currentRadioQuestion: new Question('', QUESTION_TYPES.RADIO, ''),
+        currentCheckboxQuestion: new Question('', QUESTION_TYPES.CHECK_BOX, ''),
+        currentTextAreaQuestion: new Question('', QUESTION_TYPES.TEXT_AREA, ''),
         /**
          * dialog显示标志位
          */
@@ -217,10 +184,15 @@
      */
     computed: {
       previewRadioOptions: function () {
-        return '选项共' + this.radioQuestionContent.split('\n').length + '个' + this.radioQuestionContent.split('\n')
+        if (this.currentRadioQuestion.isEmpty()) {
+          return ''
+        }
+        return '选项共' + this.currentRadioQuestion.selections.split('\n').length +
+          '个' + this.currentRadioQuestion.selections.split('\n')
       },
       previewCheckBoxOptions: function () {
-        return '选项共' + this.checkboxQuestionContent.split('\n').length + '个' + this.checkboxQuestionContent.split('\n')
+        return '选项共' + this.currentCheckboxQuestion.selections.split('\n').length + '个' +
+          this.currentCheckboxQuestion.selections.split('\n')
       }
     },
     /**
@@ -269,6 +241,10 @@
             break
         }
       },
+      /**
+       * 确定新增问题的回调
+       * @param questionType
+       */
       onEnsureDialog (questionType) {
         if (!checkNewQuestionInput(this, questionType)) {
           console.log('input invalid')
@@ -278,28 +254,41 @@
           case QUESTION_TYPES.RADIO:
             // 添加数据到 questionnaire
             this.questionnaire.questions.push({
-              title: this.radioQuestionTitle,
+              title: this.currentRadioQuestion.title,
               type: QUESTION_TYPES.RADIO,
-              selections: this.radioQuestionContent.split('\n')
+              selections: this.currentRadioQuestion.selections.split('\n')
             })
             this.showAddRadioDialog = false
             break
           case QUESTION_TYPES.CHECK_BOX:
             this.questionnaire.questions.push({
-              title: this.checkboxQuestionTitle,
+              title: this.currentCheckboxQuestion.title,
               type: QUESTION_TYPES.CHECK_BOX,
-              selections: this.checkboxQuestionContent.split('\n')
+              selections: this.currentCheckboxQuestion.selections.split('\n')
             })
             this.showAddCheckboxDialog = false
             break
           case QUESTION_TYPES.TEXT_AREA:
             this.questionnaire.questions.push({
-              title: this.textareaQuestionTitle,
+              title: this.currentTextAreaQuestion.title,
               type: QUESTION_TYPES.TEXT_AREA
             })
             this.showAddTextAreaDialog = false
             break
         }
+      },
+      onQuestionUpClicked (questionIndex) {
+        var question = this.questionnaire.questions[questionIndex]
+        question.title = '这里改成了新的 title'
+      },
+      onQuestionDownClicked (questionIndex) {
+
+      },
+      onQuestionDeleteClicked (questionIndex) {
+
+      },
+      onQuestionDuplicateClicked (questionIndex) {
+
       },
       // 保存问卷
       saveQuestionnaire: function () {
