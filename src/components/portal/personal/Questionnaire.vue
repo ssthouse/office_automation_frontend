@@ -24,7 +24,7 @@
                 v-if="question.type === QUESTION_TYPES.TEXT_AREA"></el-input>
       <!--操作按钮-->
       <!--TODO 按钮实际作用还没做-->
-      <el-button-group style="text-align: right; float: right; margin-right: 10px;">
+      <el-button-group class="question_edit_btn_group">
         <el-button>上移</el-button>
         <el-button>下移</el-button>
         <el-button>删除</el-button>
@@ -90,10 +90,36 @@
 
     <!--增加多选题 dialog-->
     <el-dialog title="增加多选题" v-model="showAddCheckboxDialog">
+      <el-input placeholder="标题"
+                v-model="checkboxQuestionTitle"
+                style="width: 90%;">
+      </el-input>
+      <el-input type="textarea"
+                autosize
+                placeholder="选项, 以回车换行"
+                style="width: 90%;"
+                v-model="checkboxQuestionContent"></el-input>
+      <p>预览</p>
+      <div v-text="previewCheckBoxOptions"></div>
+      <div style="margin-top: 10px">
+        <el-button type="primary"
+                   @click="onCancelDialog(QUESTION_TYPES.CHECK_BOX)">取消
+        </el-button>
+        <el-button type="primary"
+                   @click="onEnsureDialog(QUESTION_TYPES.CHECK_BOX)">确认
+        </el-button>
+      </div>
     </el-dialog>
 
     <!--增加文字题 dialog-->
     <el-dialog title="增加文字题" v-model="showAddTextAreaDialog">
+      <el-input placeholder="标题"
+                v-model="textareaQuestionTitle"
+                style="width: 90%;">
+      </el-input>
+      <el-button type="primary"
+                 @click="onEnsureDialog(QUESTION_TYPES.TEXT_AREA)">确认
+      </el-button>
     </el-dialog>
   </div>
 </template>
@@ -104,6 +130,34 @@
     RADIO: 'radio',
     CHECK_BOX: 'checkbox',
     TEXT_AREA: 'textArea'
+  }
+
+  // check is
+  var checkNewQuestionInput = function (data, questionType) {
+    switch (questionType) {
+      case QUESTION_TYPES.RADIO:
+        if (data.radioQuestionTitle.length === 0) {
+          return false
+        }
+        if (data.radioQuestionContent.length === 0) {
+          return false
+        }
+        break
+      case QUESTION_TYPES.CHECK_BOX:
+        if (data.checkboxQuestionTitle.length === 0) {
+          return false
+        }
+        if (data.checkboxQuestionContent.length === 0) {
+          return false
+        }
+        break
+      case QUESTION_TYPES.TEXT_AREA:
+        if (data.textareaQuestionTitle.length === 0) {
+          return false
+        }
+        break
+    }
+    return true
   }
 
   export default{
@@ -143,10 +197,13 @@
           deadline: ''
         },
         /**
-         * 三种题目的数据
+         * 三种题目的数据 单选题 多选题 文字题
          */
         radioQuestionTitle: '',
         radioQuestionContent: '',
+        checkboxQuestionTitle: '',
+        checkboxQuestionContent: '',
+        textareaQuestionTitle: '',
         /**
          * dialog显示标志位
          */
@@ -161,6 +218,9 @@
     computed: {
       previewRadioOptions: function () {
         return '选项共' + this.radioQuestionContent.split('\n').length + '个' + this.radioQuestionContent.split('\n')
+      },
+      previewCheckBoxOptions: function () {
+        return '选项共' + this.checkboxQuestionContent.split('\n').length + '个' + this.checkboxQuestionContent.split('\n')
       }
     },
     /**
@@ -210,15 +270,33 @@
         }
       },
       onEnsureDialog (questionType) {
+        if (!checkNewQuestionInput(this, questionType)) {
+          console.log('input invalid')
+          return
+        }
         switch (questionType) {
           case QUESTION_TYPES.RADIO:
-            // TODO 增加单选题逻辑
+            // 添加数据到 questionnaire
+            this.questionnaire.questions.push({
+              title: this.radioQuestionTitle,
+              type: QUESTION_TYPES.RADIO,
+              selections: this.radioQuestionContent.split('\n')
+            })
             this.showAddRadioDialog = false
             break
           case QUESTION_TYPES.CHECK_BOX:
+            this.questionnaire.questions.push({
+              title: this.checkboxQuestionTitle,
+              type: QUESTION_TYPES.CHECK_BOX,
+              selections: this.checkboxQuestionContent.split('\n')
+            })
             this.showAddCheckboxDialog = false
             break
           case QUESTION_TYPES.TEXT_AREA:
+            this.questionnaire.questions.push({
+              title: this.textareaQuestionTitle,
+              type: QUESTION_TYPES.TEXT_AREA
+            })
             this.showAddTextAreaDialog = false
             break
         }
@@ -233,6 +311,7 @@
       }
     }
   }
+
 </script>
 
 <style>
@@ -260,5 +339,12 @@
     width: 100%;
     height: 100%;
     overflow-y: scroll;
+  }
+
+  .question_edit_btn_group {
+    text-align: right;
+    float: right;
+    margin-right: 10px;
+    margin-top: 10px;
   }
 </style>
