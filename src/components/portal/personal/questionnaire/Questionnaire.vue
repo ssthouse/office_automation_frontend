@@ -11,7 +11,7 @@
         <span>{{questionnaire.questions.indexOf(question) + 1}}.{{question.title}}</span>
       </p>
       <!--单选和多选-->
-      <div v-for="selection in question.selections"
+      <div v-for="selection in question.getSelections()"
            v-if="question.type === QUESTION_TYPES.RADIO || question.type === QUESTION_TYPES.CHECK_BOX"
            style="text-align: left; padding-left: 20px">
         <input
@@ -126,6 +126,7 @@
 
 <script>
   import {QUESTION_TYPES, Question} from './question'
+  import Questionnaire from './questionnaire'
 
   // check is
   var checkNewQuestionInput = function (data, questionType) {
@@ -156,15 +157,10 @@
         /**
          * 当前调查问卷的数据
          */
-        questionnaire: {
-          title: '',
-          questions: [
-            new Question('questionOne', QUESTION_TYPES.RADIO, ['options1', 'options2']),
-            new Question('questionOne', QUESTION_TYPES.CHECK_BOX, ['options1', 'options2'])
-          ],
-          // 用字符串表示日期时间
-          deadline: ''
-        },
+        questionnaire: new Questionnaire('', [
+          new Question('questionOne', QUESTION_TYPES.RADIO, 'options1\noptions2'),
+          new Question('questionOne', QUESTION_TYPES.CHECK_BOX, 'options1\noptions2')
+        ], ''),
         /**
          * 三种题目的数据 单选题 多选题 文字题
          */
@@ -187,12 +183,10 @@
         if (this.currentRadioQuestion.isEmpty()) {
           return ''
         }
-        return '选项共' + this.currentRadioQuestion.selections.split('\n').length +
-          '个' + this.currentRadioQuestion.selections.split('\n')
+        return '选项为:' + this.currentRadioQuestion.getSelections()
       },
       previewCheckBoxOptions: function () {
-        return '选项共' + this.currentCheckboxQuestion.selections.split('\n').length + '个' +
-          this.currentCheckboxQuestion.selections.split('\n')
+        return '选项为:' + this.currentCheckboxQuestion.getSelections()
       }
     },
     /**
@@ -252,28 +246,19 @@
         }
         switch (questionType) {
           case QUESTION_TYPES.RADIO:
-            // 添加数据到 questionnaire
-            this.questionnaire.questions.push({
-              title: this.currentRadioQuestion.title,
-              type: QUESTION_TYPES.RADIO,
-              selections: this.currentRadioQuestion.selections.split('\n')
-            })
+            this.questionnaire.addQuestion(this.currentRadioQuestion.getCopy())
             this.showAddRadioDialog = false
+            this.currentRadioQuestion.clearQuestion()
             break
           case QUESTION_TYPES.CHECK_BOX:
-            this.questionnaire.questions.push({
-              title: this.currentCheckboxQuestion.title,
-              type: QUESTION_TYPES.CHECK_BOX,
-              selections: this.currentCheckboxQuestion.selections.split('\n')
-            })
+            this.questionnaire.addQuestion(this.currentCheckboxQuestion.getCopy())
             this.showAddCheckboxDialog = false
+            this.currentCheckboxQuestion.clearQuestion()
             break
           case QUESTION_TYPES.TEXT_AREA:
-            this.questionnaire.questions.push({
-              title: this.currentTextAreaQuestion.title,
-              type: QUESTION_TYPES.TEXT_AREA
-            })
+            this.questionnaire.addQuestion(this.currentTextAreaQuestion.getCopy())
             this.showAddTextAreaDialog = false
+            this.currentTextAreaQuestion.clearQuestion()
             break
         }
       },

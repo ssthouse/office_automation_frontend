@@ -1,4 +1,11 @@
 class Question {
+
+  /**
+   *
+   * @param title
+   * @param questionType
+   * @param selections 各个选项之间  用换行符隔开
+   */
   constructor (title, questionType, selections) {
     this.title = title
     this.type = questionType
@@ -30,6 +37,20 @@ class Question {
         break
     }
     return true
+  }
+
+  getSelections () {
+    return this.selections.split('\n')
+  }
+
+  clearQuestion () {
+    this.title = ''
+    this.selections = ''
+  }
+
+  getCopy () {
+    console.log(this.selections)
+    return new Question(this.title, this.type, this.selections)
   }
 }
 
