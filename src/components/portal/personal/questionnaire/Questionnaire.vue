@@ -27,8 +27,8 @@
       <el-button-group class="question_edit_btn_group">
         <el-button @click="onQuestionUpClicked(questionnaire.questions.indexOf(question))">上移</el-button>
         <el-button @click="onQuestionDownClicked(questionnaire.questions.indexOf(question))">下移</el-button>
-        <el-button @click="onQuestionDelecClicked(questionnaire.questions.indexOf(question))">删除</el-button>
-        <el-button @click="onQuestionDuplicateClick(questionnaire.questions.indexOf(question))">复用</el-button>
+        <el-button @click="onQuestionDeleteClicked(questionnaire.questions.indexOf(question))">删除</el-button>
+        <el-button @click="onQuestionDuplicateClicked(questionnaire.questions.indexOf(question))">复用</el-button>
       </el-button-group>
     </el-card>
 
@@ -159,7 +159,7 @@
          */
         questionnaire: new Questionnaire('', [
           new Question('questionOne', QUESTION_TYPES.RADIO, 'options1\noptions2'),
-          new Question('questionOne', QUESTION_TYPES.CHECK_BOX, 'options1\noptions2')
+          new Question('questionTwo', QUESTION_TYPES.CHECK_BOX, 'hahahah1\nhahahah2')
         ], ''),
         /**
          * 三种题目的数据 单选题 多选题 文字题
@@ -263,17 +263,16 @@
         }
       },
       onQuestionUpClicked (questionIndex) {
-        var question = this.questionnaire.questions[questionIndex]
-        question.title = '这里改成了新的 title'
+        this.questionnaire.upQuestion(questionIndex)
       },
       onQuestionDownClicked (questionIndex) {
-
+        this.questionnaire.downQuestion(questionIndex)
       },
       onQuestionDeleteClicked (questionIndex) {
-
+        this.questionnaire.deleteQuestion(questionIndex)
       },
       onQuestionDuplicateClicked (questionIndex) {
-
+        this.questionnaire.duplicateQuestion(questionIndex)
       },
       // 保存问卷
       saveQuestionnaire: function () {
