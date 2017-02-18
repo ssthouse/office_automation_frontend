@@ -23,7 +23,6 @@
       <el-input type="textarea" autosize placeholder="请输入内容"
                 v-if="question.type === QUESTION_TYPES.TEXT_AREA"></el-input>
       <!--操作按钮-->
-      <!--TODO 按钮实际作用还没做-->
       <el-button-group class="question_edit_btn_group">
         <el-button @click="onQuestionUpClicked(questionnaire.questions.indexOf(question))">上移</el-button>
         <el-button @click="onQuestionDownClicked(questionnaire.questions.indexOf(question))">下移</el-button>
@@ -276,11 +275,19 @@
       },
       // 保存问卷
       saveQuestionnaire: function () {
-        // TODO 后台需要准备接扩了
+        if (this.questionnaire.isEmyty()) {
+          this.$message.warning('问卷内容不完整')
+          return
+        }
+        this.questionnaire.saveToServer()
       },
       // 发布问卷
       publishQuestionnaire: function () {
-        // TODO 后台需要准备接口了
+        if (this.questionnaire.isEmyty()) {
+          this.$message.warning('问卷内容不完整')
+          return
+        }
+        this.questionnaire.publishQuestionnaire()
       }
     }
   }
