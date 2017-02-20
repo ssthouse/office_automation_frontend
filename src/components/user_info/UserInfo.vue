@@ -1,8 +1,6 @@
 <template>
   <div>
-    <el-col :span="12">
-      这里是企业公文板块
-    </el-col>
+    这里是个人信息页面
   </div>
 </template>
 
@@ -17,4 +15,5 @@
 </script>
 
 <style>
+
 </style>

@@ -7,18 +7,13 @@
              default-active="/portal"
              mode="horizontal"
              @select="changeMenuItem">
+      <el-input placeholder="请输入关键字"
+                class="input_key_word"
+                style="width: 150px"></el-input>
       <!--最左端图标-->
-      <el-menu-item index="/">AO 系统</el-menu-item>
+      <el-menu-item :index=PATHS.OA_SYSTEM_PATH><i class="el-icon-menu"></i>OA 系统</el-menu-item>
       <!--右边导航菜单-->
-      <el-menu-item index="/portal">门户</el-menu-item>
-      <el-menu-item index="/official_doc">公文</el-menu-item>
-      <el-menu-item index="/knowledge">知识</el-menu-item>
-      <el-submenu index="other">
-        <template slot="title">其他</template>
-        <el-menu-item index="other_one">4-1</el-menu-item>
-        <el-menu-item index="other_two">4-2</el-menu-item>
-        <el-menu-item index="other_three">4-3</el-menu-item>
-      </el-submenu>
+      <el-menu-item :index=PATHS.USER_INFO_PATH><i class="el-icon-setting"></i>个人信息</el-menu-item>
     </el-menu>
 
     <!--下方占据92空间-->
@@ -34,9 +29,15 @@
 
 <script>
   import Hello from './Hello'
+  import {PATHS} from '../router/index'
 
   export default {
     name: 'app',
+    data () {
+      return {
+        PATHS
+      }
+    },
     components: {
       Hello
     },
@@ -56,6 +57,7 @@
 </script>
 
 <style>
+
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -67,4 +69,5 @@
     height: 100%;
     overflow-y: hidden;
   }
+
 </style>

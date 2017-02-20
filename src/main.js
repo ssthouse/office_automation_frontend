@@ -8,7 +8,7 @@ import 'element-ui/lib/theme-default/index.css'
 import VueResource from 'vue-resource'
 
 // import VueQuillEditor from 'vue-quill-editor'
-import router from './router'
+import {router} from './router'
 import store from './store'
 
 Vue.use(ElementUI)
