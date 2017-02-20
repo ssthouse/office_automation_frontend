@@ -14,7 +14,7 @@
 </template>
 
 <script>
-  import PortalMenu from './PortalMenu.vue'
+  import PortalMenu from './OaSystemMenu.vue'
 
   export default{
     name: '',

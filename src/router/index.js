@@ -2,12 +2,15 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 // 门户模块
-import Portal from '../components/portal/Portal.vue'
-import GroupPage from '../components/portal/pages/GroupPage.vue'
-import Personal from '../components/portal/personal/Personal.vue'
+import Portal from '../components/oa_system/OaSystem.vue'
 
 // 个人信息模块
 import UserInfo from '../components/user_info/UserInfo.vue'
+import HomePage from '../components/home_page/HomePage.vue'
+import Workflow from '../components/workflow/Workflow.vue'
+import PublicInfo from '../components/public_info/PublicInfo.vue'
+import OfficlalDoc from '../components/official_doc/OfficialDoc.vue'
+import Tools from '../components/tools/Tools.vue'
 
 // 初始化总路由
 Vue.use(VueRouter)
@@ -20,6 +23,18 @@ const OA_SYSTEM_PATH = ROOT_PATH + OA_SYSTEM
 const OA_TOOLS = 'tools'
 const OA_TOOLS_PATH = OA_SYSTEM_PATH + '/' + OA_TOOLS
 
+const HOME_PAGE = 'home_page'
+const HOME_PAGE_PATH = OA_SYSTEM_PATH + '/' + HOME_PAGE
+
+const WORKFLOW = 'workflow'
+const WORKFLOW_PATH = OA_SYSTEM_PATH + '/' + WORKFLOW
+
+const PUBLIC_INFO = 'public_info'
+const PUBLIC_INFO_PATH = OA_SYSTEM_PATH + '/' + PUBLIC_INFO
+
+const OFFICIAL_DOC = 'official_doc'
+const OFFICIAL_DOC_PATH = OA_SYSTEM_PATH + '/' + OFFICIAL_DOC
+
 const USER_INFO = 'user_info'
 const USER_INFO_PATH = ROOT_PATH + USER_INFO
 
@@ -30,6 +45,23 @@ const PATHS = {
   OA_SYSTEM,
   OA_SYSTEM_PATH,
 
+  // 个人首页
+  HOME_PAGE,
+  HOME_PAGE_PATH,
+
+  // 流程审批
+  WORKFLOW,
+  WORKFLOW_PATH,
+
+  // 信息发布
+  PUBLIC_INFO,
+  PUBLIC_INFO_PATH,
+
+  // 公文处理
+  OFFICIAL_DOC,
+  OFFICIAL_DOC_PATH,
+
+  // 常用工具
   OA_TOOLS,
   OA_TOOLS_PATH,
 
@@ -47,11 +79,11 @@ const routes = [
     path: OA_SYSTEM_PATH,
     component: Portal,
     children: [
-      // TODO: 暂时全部使用 GroupPage 占位
-      {path: 'personal', component: Personal},
-      {path: OA_TOOLS, component: Personal},
-      {path: 'newEmployee', component: GroupPage},
-      {path: 'area', component: GroupPage}
+      {path: HOME_PAGE, component: HomePage},
+      {path: WORKFLOW, component: Workflow},
+      {path: PUBLIC_INFO, component: PublicInfo},
+      {path: OFFICIAL_DOC, component: OfficlalDoc},
+      {path: OA_TOOLS, component: Tools}
     ]
   },
   // 用户信息 模块

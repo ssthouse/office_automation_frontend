@@ -8,7 +8,7 @@
           <el-button size="small"
                      icon="delete"
                      :loading="isDeleting"
-                     @click="onDeleting"/>
+                     @click="onDeleting"></el-button>
           <el-button size="small"
                      icon="plus"
                      @click="onAdd">
@@ -26,11 +26,10 @@
 </template>
 
 <script>
-  import * as types from '../../../../store/mutation-types'
+  import * as types from '../../../store/mutation-types'
   import Questionnaire from './Questionnaire.vue'
 
   export default{
-    name: '',
     data () {
       return {
         // TODO: 测试用数据
