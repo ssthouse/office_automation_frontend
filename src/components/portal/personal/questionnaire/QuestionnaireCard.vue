@@ -27,6 +27,7 @@
 
 <script>
   import * as types from '../../../../store/mutation-types'
+  import Questionnaire from './Questionnaire.vue'
 
   export default{
     name: '',
@@ -61,7 +62,7 @@
         }, 10000)
       },
       onAdd: function () {
-        this.$store.commit(types.ADD_QUESTIONNAIRE_TAB, 'questionnaire')
+        this.$store.commit(types.ADD_QUESTIONNAIRE_TAB, Questionnaire.name)
       }
     },
     props: []

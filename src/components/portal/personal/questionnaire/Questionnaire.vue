@@ -64,7 +64,7 @@
       </el-button>
     </div>
 
-    <!--增加单选题 dialog-->
+    <!--单选题 dialog-->
     <el-dialog title="增加单选题" v-model="showAddRadioDialog">
       <el-input placeholder="标题"
                 v-model="currentRadioQuestion.title"
@@ -75,8 +75,8 @@
                 placeholder="选项, 以回车换行"
                 style="width: 90%;"
                 v-model="currentRadioQuestion.selections"></el-input>
-      <p>预览</p>
-      <div v-text="previewRadioOptions"></div>
+      <p>预览选项:</p>
+      <div v-text="currentRadioQuestion.getSelections()"></div>
       <div style="margin-top: 10px">
         <el-button type="primary"
                    @click="onCancelDialog(QUESTION_TYPES.RADIO)">取消
@@ -87,7 +87,7 @@
       </div>
     </el-dialog>
 
-    <!--增加多选题 dialog-->
+    <!--多选题 dialog-->
     <el-dialog title="增加多选题" v-model="showAddCheckboxDialog">
       <el-input placeholder="标题"
                 v-model="currentCheckboxQuestion.title"
@@ -98,8 +98,8 @@
                 placeholder="选项, 以回车换行"
                 style="width: 90%;"
                 v-model="currentCheckboxQuestion.selections"></el-input>
-      <p>预览</p>
-      <div v-text="previewCheckBoxOptions"></div>
+      <p>预览选项:</p>
+      <div v-text="currentCheckboxQuestion.getSelections()"></div>
       <div style="margin-top: 10px">
         <el-button type="primary"
                    @click="onCancelDialog(QUESTION_TYPES.CHECK_BOX)">取消
@@ -110,7 +110,7 @@
       </div>
     </el-dialog>
 
-    <!--增加文字题 dialog-->
+    <!--文字题 dialog-->
     <el-dialog title="增加文字题" v-model="showAddTextAreaDialog">
       <el-input placeholder="标题"
                 v-model="currentTextAreaQuestion.title"
@@ -140,7 +140,7 @@
   }
 
   export default{
-    name: '',
+    name: 'questionnaire',
     data () {
       return {
         /**
