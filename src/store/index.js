@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import portalModule from './modules/portal'
+
+import toolsModule from './modules/tools_store'
+import workflowModule from './modules/workflow_store'
 
 // 配置 VUEX
 Vue.use(Vuex)
@@ -10,7 +12,8 @@ export default new Vuex.Store({
   debug,
   state: {},
   modules: {
-    portalModule
+    toolsModule,
+    workflowModule
   },
   getter: {}
 })

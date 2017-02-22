@@ -5,20 +5,24 @@
       <!--主标签-->
       <el-tab-pane label="流程审批">
         <el-col :span="12">
+          <el-button @click="testAddTab()">添加 tab</el-button>
         </el-col>
       </el-tab-pane>
 
       <!--动态增减标签-->
-      <el-tabs-pane closable="true"
+      <el-tab-pane closable="true"
                     v-for="tab in tabs"
                     :label="tab.title">
-
-      </el-tabs-pane>
+        <div :is="tab.contentIs"></div>
+      </el-tab-pane>
     </el-tabs>
   </div>
 </template>
 
 <script>
+  import * as types from '../../store/mutation-types'
+  import Questionnaire from '../tools/questionnaire/Questionnaire.vue'
+
   export default{
     name: '',
     data () {
@@ -26,10 +30,19 @@
     },
     computed: {
       tabs () {
-        return ''
+        return this.$store.state.workflowModule.workflow_tabs
       }
     },
-    props: []
+    methods: {
+      testAddTab () {
+        console.error('click add tab')
+        this.$store.commit(types.WORKFLOW_ADD_TAB, Questionnaire.name)
+      }
+    },
+    props: [],
+    components: {
+      'questionnaire': Questionnaire
+    }
   }
 </script>
 

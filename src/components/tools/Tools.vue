@@ -38,7 +38,7 @@
     },
     computed: {
       tabs: function () {
-        return this.$store.state.portalModule.personal_tabs
+        return this.$store.state.toolsModule.personal_tabs
       }
     },
     props: {},

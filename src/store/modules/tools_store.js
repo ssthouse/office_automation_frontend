@@ -8,6 +8,8 @@ const state = {
 const mutations = {
   // 增加调查问卷的 tab
   [types.ADD_QUESTIONNAIRE_TAB] (state, contentIs) {
+    console.error('add a tab!')
+    console.error(contentIs)
     state.personal_tabs.push({
       label: '创建调查问卷',
       contentIs: contentIs
