@@ -20,17 +20,13 @@
 </template>
 
 <script>
-  import QuestionnaireCard from '../tools/questionnaire/QuestionnaireCard.vue'
-
   export default{
     name: 'baseItem',
     data () {
       return {}
     },
     props: ['mainTabName', 'mainTabIs', 'tabs'],
-    components: {
-      'questionnaireCard': QuestionnaireCard
-    }
+    components: {}
   }
 </script>
 

@@ -6,10 +6,10 @@ const state = {
 
 const mutations = {
   [types.WORKFLOW_REMOVE_TAB] (state, tabIndex) {
-    console.error(tabIndex)
+    console.debug(tabIndex)
   },
   [types.WORKFLOW_ADD_TAB] (state, contentIs) {
-    console.error('   ' + contentIs)
+    console.debug('   ' + contentIs)
     state.workflow_tabs.push({
       label: 'testTitle',
       contentIs

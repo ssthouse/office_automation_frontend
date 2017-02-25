@@ -35,7 +35,6 @@
     },
     props: [],
     components: {
-      'questionnaire': Questionnaire,
       'base-item': BaseItem
     }
   }

@@ -18,7 +18,6 @@
     props: [],
     methods: {
       testAddTab () {
-        console.error('click add tab')
         this.$store.commit(types.WORKFLOW_ADD_TAB, Questionnaire.name)
       }
     }
