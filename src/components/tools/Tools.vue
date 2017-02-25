@@ -25,6 +25,9 @@
   import QuestionnaireCard from './questionnaire/QuestionnaireCard.vue'
   import Questionnaire from './questionnaire/Questionnaire.vue'
   import * as types from '../../store/mutation-types.js'
+  import Vue from 'vue'
+
+  Vue.component(Questionnaire.name, Questionnaire)
 
   export default{
     name: '',
@@ -38,7 +41,7 @@
     },
     computed: {
       tabs: function () {
-        return this.$store.state.toolsModule.personal_tabs
+        return this.$store.state.toolsModule.tools_tabs
       }
     },
     props: {},
@@ -46,8 +49,7 @@
      * 需要用到的子组件
      */
     components: {
-      'questionnaireCard': QuestionnaireCard,
-      'questionnaire': Questionnaire
+      'questionnaireCard': QuestionnaireCard
     },
     methods: {
       handleClick: function () {

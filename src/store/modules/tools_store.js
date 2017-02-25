@@ -2,7 +2,7 @@ import * as types from '../mutation-types'
 
 const state = {
   // 个人板块 全局状态
-  personal_tabs: []
+  tools_tabs: []
 }
 
 const mutations = {
@@ -10,7 +10,7 @@ const mutations = {
   [types.ADD_QUESTIONNAIRE_TAB] (state, contentIs) {
     console.error('add a tab!')
     console.error(contentIs)
-    state.personal_tabs.push({
+    state.tools_tabs.push({
       label: '创建调查问卷',
       contentIs: contentIs
     })

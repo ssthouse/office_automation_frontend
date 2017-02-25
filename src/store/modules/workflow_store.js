@@ -11,7 +11,7 @@ const mutations = {
   [types.WORKFLOW_ADD_TAB] (state, contentIs) {
     console.error('   ' + contentIs)
     state.workflow_tabs.push({
-      title: 'testTitle',
+      label: 'testTitle',
       contentIs
     })
   }
