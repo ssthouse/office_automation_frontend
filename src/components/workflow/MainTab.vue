@@ -9,16 +9,17 @@
 <script>
   import * as types from '../../store/mutation-types'
   import Questionnaire from '../tools/questionnaire/Questionnaire.vue'
+  import TabItem from '../base/tab_item'
 
   export default{
-    name: 'main-tab',
+    name: 'workflow-main-tab',
     data () {
       return {}
     },
     props: [],
     methods: {
       testAddTab () {
-        this.$store.commit(types.WORKFLOW_ADD_TAB, Questionnaire.name)
+        this.$store.commit(types.WORKFLOW_ADD_TAB, new TabItem('新标签', Questionnaire.name))
       }
     }
   }

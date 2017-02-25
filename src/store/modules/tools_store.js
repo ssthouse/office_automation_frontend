@@ -7,12 +7,9 @@ const state = {
 
 const mutations = {
   // 增加调查问卷的 tab
-  [types.ADD_QUESTIONNAIRE_TAB] (state, contentIs) {
-    console.debug(contentIs)
-    state.tools_tabs.push({
-      label: '创建调查问卷',
-      contentIs: contentIs
-    })
+  [types.ADD_QUESTIONNAIRE_TAB] (state, tabItem) {
+    console.debug(tabItem.tabIs)
+    state.tools_tabs.push(tabItem)
   },
   // 移除某一个 tab
   [types.PORTAL_REMOVE_TAB] (state, tabIndex) {

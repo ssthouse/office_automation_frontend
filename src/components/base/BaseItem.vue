@@ -11,8 +11,8 @@
       <!--其他动态增加减少的标签-->
       <el-tab-pane v-for="tab in tabs"
                    closable
-                   :label="tab.label">
-        <div :is="tab.contentIs"
+                   :label="tab.tabLabel">
+        <div :is="tab.tabIs"
              class="tab_content"></div>
       </el-tab-pane>
     </el-tabs>
@@ -21,7 +21,7 @@
 
 <script>
   export default{
-    name: 'baseItem',
+    name: 'base-item',
     data () {
       return {}
     },

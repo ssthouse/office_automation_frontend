@@ -8,12 +8,9 @@ const mutations = {
   [types.WORKFLOW_REMOVE_TAB] (state, tabIndex) {
     console.debug(tabIndex)
   },
-  [types.WORKFLOW_ADD_TAB] (state, contentIs) {
-    console.debug('   ' + contentIs)
-    state.workflow_tabs.push({
-      label: 'testTitle',
-      contentIs
-    })
+  [types.WORKFLOW_ADD_TAB] (state, tabItem) {
+    console.debug('   ' + tabItem.tabIs)
+    state.workflow_tabs.push(tabItem)
   }
 }
 

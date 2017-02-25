@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import homePageModel from './modules/homepage_store'
 import toolsModule from './modules/tools_store'
 import workflowModule from './modules/workflow_store'
 
@@ -12,6 +13,7 @@ export default new Vuex.Store({
   debug,
   state: {},
   modules: {
+    homePageModel,
     toolsModule,
     workflowModule
   },
