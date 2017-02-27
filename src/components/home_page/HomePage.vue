@@ -24,7 +24,7 @@
     },
     computed: {
       tabs () {
-        return this.$store.state.homePageModel.all_tabs
+        return this.$store.state.homePageModule.all_tabs
       }
     }
   }

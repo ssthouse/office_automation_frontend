@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import homePageModel from './modules/homepage_store'
-import toolsModule from './modules/tools_store'
+import homePageModule from './modules/homepage_store'
 import workflowModule from './modules/workflow_store'
+import publicInfoModule from './modules/public_info_store'
+import toolsModule from './modules/tools_store'
 
 // 配置 VUEX
 Vue.use(Vuex)
@@ -13,9 +14,10 @@ export default new Vuex.Store({
   debug,
   state: {},
   modules: {
-    homePageModel,
-    toolsModule,
-    workflowModule
+    homePageModule,
+    workflowModule,
+    publicInfoModule,
+    toolsModule
   },
   getter: {}
 })
