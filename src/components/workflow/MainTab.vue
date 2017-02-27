@@ -9,7 +9,7 @@
 <script>
   import * as types from '../../store/mutation-types'
   import Questionnaire from '../tools/questionnaire/Questionnaire.vue'
-  import TabItem from '../base/tab_item'
+  import TabItem from '../base/TabItem'
 
   export default{
     name: 'workflow-main-tab',

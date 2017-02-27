@@ -2,18 +2,13 @@ import * as types from '../mutation-types'
 
 const state = {
   // 个人板块 全局状态
-  tools_tabs: []
+  allTabs: []
 }
 
 const mutations = {
-  // 增加调查问卷的 tab
-  [types.ADD_QUESTIONNAIRE_TAB] (state, tabItem) {
-    console.debug(tabItem.tabIs)
-    state.tools_tabs.push(tabItem)
-  },
-  // 移除某一个 tab
-  [types.PORTAL_REMOVE_TAB] (state, tabIndex) {
-    // TODO 这里没办法对 tab 进行移除  饿了吗没给接口===> 会导致 tab 越来越多 希望不会有问题
+  // 增加tab
+  [types.TOOLS_ADD_TAB] (state, tabItem) {
+    state.allTabs.push(tabItem)
   }
 }
 

@@ -28,6 +28,7 @@
 <script>
   import * as types from '../../../store/mutation-types'
   import Questionnaire from './Questionnaire.vue'
+  import TabItem from '../../base/TabItem'
 
   export default{
     data () {
@@ -61,7 +62,7 @@
         }, 10000)
       },
       onAdd: function () {
-        this.$store.commit(types.ADD_QUESTIONNAIRE_TAB, Questionnaire.name)
+        this.$store.commit(types.TOOLS_ADD_TAB, new TabItem('调查问卷', Questionnaire.name))
       }
     },
     props: []

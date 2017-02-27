@@ -12,6 +12,5 @@ export const PUBLIC_INFO_ADD_TAB = 'public_info/add_tab'
 export const OFFICIAL_DOC_ADD_TAB = 'official_doc/add_tab'
 
 // Tools 模块
-export const ADD_QUESTIONNAIRE_TAB = 'tools/add_questionnaire'
-export const PORTAL_REMOVE_TAB = 'tools/remove_tab'
+export const TOOLS_ADD_TAB = 'tools/add_tab'
 

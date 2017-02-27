@@ -7,7 +7,7 @@
 
 <script>
   import * as types from '../../store/mutation-types'
-  import TabItem from '../base/tab_item'
+  import TabItem from '../base/TabItem'
   import Questionnaire from '../tools/questionnaire/Questionnaire.vue'
 
   export default{

@@ -39,7 +39,7 @@
 <style>
   .el-col {
     height: 100%;
-    background-color: azure;
+    background-color: white;
   }
 
   .content_tab_pane {
