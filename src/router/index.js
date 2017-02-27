@@ -38,12 +38,15 @@ const OFFICIAL_DOC_PATH = OA_SYSTEM_PATH + '/' + OFFICIAL_DOC
 const USER_INFO = 'user_info'
 const USER_INFO_PATH = ROOT_PATH + USER_INFO
 
+// 最外层路由
+const OA_SYSTEM_INDEX = HOME_PAGE_PATH
+
 const PATHS = {
   /**
    * OA 系统名称, 路径
    */
   OA_SYSTEM,
-  OA_SYSTEM_PATH,
+  OA_SYSTEM_INDEX,
 
   // 个人首页
   HOME_PAGE,
