@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 import homePageModule from './modules/homepage_store'
 import workflowModule from './modules/workflow_store'
 import publicInfoModule from './modules/public_info_store'
+import officialDocModule from './modules/official_doc_store'
 import toolsModule from './modules/tools_store'
 
 // 配置 VUEX
@@ -17,6 +18,7 @@ export default new Vuex.Store({
     homePageModule,
     workflowModule,
     publicInfoModule,
+    officialDocModule,
     toolsModule
   },
   getter: {}
