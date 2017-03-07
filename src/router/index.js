@@ -1,11 +1,15 @@
 // 主模块
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-// 门户模块
-import Portal from '../components/oa_system/OaSystem.vue'
+
+// 登录模块
+import Login from '../components/login/Login.vue'
 
 // 个人信息模块
 import UserInfo from '../components/user_info/UserInfo.vue'
+
+// OA 系统模块
+import Portal from '../components/oa_system/OaSystem.vue'
 import HomePage from '../components/home_page/HomePage.vue'
 import Workflow from '../components/workflow/Workflow.vue'
 import PublicInfo from '../components/public_info/PublicInfo.vue'
@@ -19,7 +23,10 @@ const ROOT_PATH = '/'
 const OA_SYSTEM = 'oa_system'
 const OA_SYSTEM_PATH = ROOT_PATH + OA_SYSTEM
 
-// OA 系统子模块
+// 登录模块
+const LOGIN_PATH = '/login'
+
+// OA 系统模块
 const OA_TOOLS = 'tools'
 const OA_TOOLS_PATH = OA_SYSTEM_PATH + '/' + OA_TOOLS
 
@@ -35,6 +42,7 @@ const PUBLIC_INFO_PATH = OA_SYSTEM_PATH + '/' + PUBLIC_INFO
 const OFFICIAL_DOC = 'official_doc'
 const OFFICIAL_DOC_PATH = OA_SYSTEM_PATH + '/' + OFFICIAL_DOC
 
+// 用户模块
 const USER_INFO = 'user_info'
 const USER_INFO_PATH = ROOT_PATH + USER_INFO
 
@@ -42,6 +50,11 @@ const USER_INFO_PATH = ROOT_PATH + USER_INFO
 const OA_SYSTEM_INDEX = HOME_PAGE_PATH
 
 const PATHS = {
+  /**
+   * 登录模块
+   */
+  LOGIN_PATH,
+
   /**
    * OA 系统名称, 路径
    */
@@ -77,6 +90,15 @@ const PATHS = {
 
 // 路由配置
 const routes = [
+  // 登录模块
+  {
+    path: LOGIN_PATH,
+    component: Login
+  },
+  {
+    path: '/',
+    redirect: LOGIN_PATH
+  },
   // OA系统 模块
   {
     path: OA_SYSTEM_PATH,
