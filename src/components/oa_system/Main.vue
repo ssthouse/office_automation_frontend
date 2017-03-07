@@ -1,25 +1,26 @@
-<template style="height: 100%">
+<template>
   <div id="main">
     <!--上方顶栏 固定不变的-->
-    <el-menu theme="dark"
-             :router=true
-             style="height: 8%;"
-             default-active="/portal"
-             mode="horizontal"
-             @select="changeMenuItem">
-      <el-input placeholder="请输入关键字"
-                class="input_key_word"
-                style="width: 150px"></el-input>
-      <!--最左端图标-->
-      <el-menu-item :index=PATHS.OA_SYSTEM_INDEX><i class="el-icon-menu"></i>OA 系统</el-menu-item>
-      <!--右边导航菜单-->
-      <el-menu-item :index=PATHS.USER_INFO_PATH><i class="el-icon-setting"></i>个人信息</el-menu-item>
-    </el-menu>
+    <el-row style="margin-top: 0px; margin-bottom: 0px; height: 8%">
+      <el-menu theme="dark"
+               :router=true
+               style="margin-left: 0px; margin-top: 0px;"
+               default-active="/portal"
+               mode="horizontal"
+               @select="changeMenuItem">
+        <!--<el-input placeholder="请输入关键字"-->
+        <!--class="input_key_word"-->
+        <!--style="width: 150px"></el-input>-->
+        <!--最左端图标-->
+        <el-menu-item :index=PATHS.OA_SYSTEM_INDEX><i class="el-icon-menu"></i>OA 系统</el-menu-item>
+        <!--右边导航菜单-->
+        <el-menu-item :index=PATHS.USER_INFO_PATH><i class="el-icon-setting"></i>个人信息</el-menu-item>
+      </el-menu>
+    </el-row>
 
-    <el-row>
-
+    <el-row style="height: 92%; overflow-y: hidden; margin-top: 8px; margin-bottom: 0px; background-color: white">
       <!--承载 menu-->
-      <el-col :span="4">
+      <el-col :span="4" style="height: 100%;">
         <oa-system-menu></oa-system-menu>
       </el-col>
       <!--承载右边内容==>会随着左边菜单改变而改变-->
@@ -74,4 +75,10 @@
     height: 100%;
   }
 
+  /*用于显示 scroll bar */
+  .content_tab_pane {
+    height: 100%;
+    overflow-y: scroll;
+    margin: 0 auto;
+  }
 </style>

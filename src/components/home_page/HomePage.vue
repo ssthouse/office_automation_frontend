@@ -1,5 +1,6 @@
 <template>
   <base-item :tabs="tabs"
+             style="overflow-y: scroll"
              mainTabName="个人主页"
              :mainTabIs="MainTab.name"></base-item>
 </template>
