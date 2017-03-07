@@ -9,7 +9,8 @@ import Login from '../components/login/Login.vue'
 import UserInfo from '../components/user_info/UserInfo.vue'
 
 // OA 系统模块
-import Portal from '../components/oa_system/OaSystem.vue'
+import Main from '../components/oa_system/Main.vue'
+// import Portal from '../components/oa_system/OaSystem.vue'
 import HomePage from '../components/home_page/HomePage.vue'
 import Workflow from '../components/workflow/Workflow.vue'
 import PublicInfo from '../components/public_info/PublicInfo.vue'
@@ -102,7 +103,7 @@ const routes = [
   // OA系统 模块
   {
     path: OA_SYSTEM_PATH,
-    component: Portal,
+    component: Main,
     children: [
       {path: HOME_PAGE, component: HomePage},
       {path: WORKFLOW, component: Workflow},

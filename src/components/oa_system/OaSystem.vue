@@ -2,7 +2,7 @@
   <div style="height: 100%;">
     <!--承载 menu-->
     <el-col :span="4">
-      <portal-menu></portal-menu>
+      <oa-system-menu></oa-system-menu>
     </el-col>
     <!--承载右边内容==>会随着左边菜单改变而改变-->
     <el-col :span="20" class="content_tab_pane">
@@ -14,7 +14,7 @@
 </template>
 
 <script>
-  import PortalMenu from './OaSystemMenu.vue'
+  import OaSystemMenu from './OaSystemMenu.vue'
 
   export default{
     name: '',
@@ -31,7 +31,7 @@
     },
     props: [],
     components: {
-      'portal-menu': PortalMenu
+      'oa-system-menu': OaSystemMenu
     }
   }
 </script>
@@ -42,8 +42,7 @@
     background-color: white;
   }
 
-  .content_tab_pane {
-    height: 100%;
-    overflow-y: hidden;
-  }
+  /*.content_tab_pane {*/
+    /*height: 100%;*/
+  /*}*/
 </style>
