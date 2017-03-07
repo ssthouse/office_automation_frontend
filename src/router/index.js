@@ -105,6 +105,7 @@ const routes = [
     path: OA_SYSTEM_PATH,
     component: Main,
     children: [
+      {path: '/', component: HomePage},
       {path: HOME_PAGE, component: HomePage},
       {path: WORKFLOW, component: Workflow},
       {path: PUBLIC_INFO, component: PublicInfo},
