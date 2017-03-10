@@ -39,16 +39,44 @@
     },
     methods: {
       submitForm (formName) {
-        const self = this
-        self.$refs[formName].validate((valid) => {
-          if (valid) {
-            // localStorage.setItem('ms_username', self.ruleForm.username);
-            self.$router.push('/oa_system')
-          } else {
-            console.log('error submit!!')
-            return false
-          }
+        console.log(JSON.stringify({
+          username: 'ssthouse',
+          password: 'ssthouse'
+        }))
+        this.$http.post('http://127.0.0.1:8080/office_automation_backend/login/admin', JSON.stringify({
+          'username': this.username,
+          'password': this.password
+        })).then(response => {
+          console.error(response)
+          console.log(response.body.result + '  is the result')
+        }, response => {
+          console.error(response)
         })
+
+//        self.$refs[formName].validate((valid) => {
+//          if (valid) {
+            // localStorage.setItem('ms_username', self.ruleForm.username);
+            // self.$router.push('/oa_system')
+//
+//            // response
+//            {
+//              username: this.username,
+//                password: this.password
+//            }
+//            this.$http.post('http://127.0.0.1:8080/office_automation_backend/login/admin', {
+//              'username': this.username,
+//              'password': this.password
+//            }).then(response => {
+//              console.error(response)
+//              console.log(response.body.result + '  is the result')
+//            }, response => {
+//              console.error(response)
+//            })
+//          } else {
+//            console.log('error submit!!')
+//            return false
+//          }
+//        })
       }
     }
   }
@@ -59,6 +87,7 @@
     position: relative;
     width: 100%;
     height: 100%;
+    background-color: #2c3e50;
   }
 
   .ms-title {
@@ -85,6 +114,7 @@
   }
 
   .login-btn {
+    margin-top: 20px;
     text-align: center;
   }
 

@@ -11,6 +11,7 @@
         <!--<el-input placeholder="请输入关键字"-->
         <!--class="input_key_word"-->
         <!--style="width: 150px"></el-input>-->
+        <el-button @click="connectServer()"></el-button>
         <!--最左端图标-->
         <el-menu-item :index=PATHS.OA_SYSTEM_INDEX><i class="el-icon-menu"></i>OA 系统</el-menu-item>
         <!--右边导航菜单-->
@@ -49,10 +50,12 @@
     },
     methods: {
       connectServer: function () {
-        this.$http.get('http://127.0.0.1:8081/user/ssthouse').then(response => {
+        this.$http.get('http://127.0.0.1:8080/office_automation_backend/user/ssthouse').then(response => {
           let userinfo = response.body
           console.log(userinfo.username)
           console.log(userinfo.age)
+        }, resonse => {
+          this.$message('something is wrong!')
         })
       },
       changeMenuItem: function (key, keyPath) {
