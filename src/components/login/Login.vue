@@ -1,6 +1,6 @@
 <template>
   <div class="login-wrap">
-    <div class="ms-title">后台管理系统</div>
+    <div class="ms-title">AO System Login</div>
     <div class="ms-login">
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="0px" class="demo-ruleForm">
         <el-form-item prop="username">
@@ -8,12 +8,12 @@
         </el-form-item>
         <el-form-item prop="password">
           <el-input type="password" placeholder="password" v-model="ruleForm.password"
-                    @keyup.enter.native="submitForm('ruleForm')"></el-input>
+                    @keyup.enter.native="submitForm()"></el-input>
         </el-form-item>
         <div class="login-btn">
           <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
         </div>
-        <p style="font-size:12px;line-height:30px;color:#999;">Tips : 用户名和密码随便填。</p>
+        <p style="font-size:12px;line-height:30px;color:#999;">Tips : 如果希望进入管理员页面, 请输入管理员账号</p>
       </el-form>
     </div>
   </div>
@@ -38,45 +38,27 @@
       }
     },
     methods: {
-      submitForm (formName) {
+      submitForm () {
         console.log(JSON.stringify({
           username: 'ssthouse',
           password: 'ssthouse'
         }))
         this.$http.post('http://127.0.0.1:8080/office_automation_backend/login/admin', JSON.stringify({
-          'username': this.username,
-          'password': this.password
+          username: this.ruleForm.username,
+          password: this.ruleForm.password
         })).then(response => {
-          console.error(response)
-          console.log(response.body.result + '  is the result')
+          console.log(response)
+          let responseBody = response.body
+          if (responseBody.success) {
+            this.$message('登录成功, 跳转主页')
+            this.$router.push('/oa_system')
+          } else {
+            this.$message.error('用户名或密码错误')
+          }
+          // 登录成功后
         }, response => {
-          console.error(response)
+          console.log(response)
         })
-
-//        self.$refs[formName].validate((valid) => {
-//          if (valid) {
-            // localStorage.setItem('ms_username', self.ruleForm.username);
-            // self.$router.push('/oa_system')
-//
-//            // response
-//            {
-//              username: this.username,
-//                password: this.password
-//            }
-//            this.$http.post('http://127.0.0.1:8080/office_automation_backend/login/admin', {
-//              'username': this.username,
-//              'password': this.password
-//            }).then(response => {
-//              console.error(response)
-//              console.log(response.body.result + '  is the result')
-//            }, response => {
-//              console.error(response)
-//            })
-//          } else {
-//            console.log('error submit!!')
-//            return false
-//          }
-//        })
       }
     }
   }
