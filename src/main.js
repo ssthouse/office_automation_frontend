@@ -10,6 +10,9 @@ import VueResource from 'vue-resource'
 // import VueQuillEditor from 'vue-quill-editor'
 import {router} from './router'
 import store from './store'
+// 注册一些全局的组件
+import UserInfo from './components/home_page/UserInfo.vue'
+Vue.component(UserInfo.name, UserInfo)
 
 Vue.use(ElementUI)
 Vue.use(VueResource)
