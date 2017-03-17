@@ -10,8 +10,11 @@
           <el-input type="password" placeholder="password" v-model="ruleForm.password"
                     @keyup.enter.native="submitForm()"></el-input>
         </el-form-item>
+        <el-form-item>
+          <el-checkbox v-model="ruleForm.isAdmin">以管理员身份登录</el-checkbox>
+        </el-form-item>
         <div class="login-btn">
-          <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
+          <el-button type="primary" @click="getToken()">登录</el-button>
         </div>
         <p style="font-size:12px;line-height:30px;color:#999;">Tips : 如果希望进入管理员页面, 请输入管理员账号</p>
       </el-form>
@@ -20,12 +23,15 @@
 </template>
 
 <script>
+  import Vue from 'vue'
+
   export default {
     data: function () {
       return {
         ruleForm: {
           username: '',
-          password: ''
+          password: '',
+          isAdmin: false
         },
         rules: {
           username: [
@@ -38,27 +44,33 @@
       }
     },
     methods: {
-      submitForm () {
-        console.log(JSON.stringify({
-          username: 'ssthouse',
-          password: 'ssthouse'
-        }))
-        this.$http.post('http://127.0.0.1:8080/office_automation_backend/login/admin', JSON.stringify({
+      getToken () {
+        let requestBody = JSON.stringify({
           username: this.ruleForm.username,
-          password: this.ruleForm.password
-        })).then(response => {
-          console.log(response)
-          let responseBody = response.body
-          if (responseBody.success) {
-            this.$message('登录成功, 跳转主页')
-            this.$router.push('/oa_system')
-          } else {
-            this.$message.error('用户名或密码错误')
-          }
-          // 登录成功后
-        }, response => {
-          console.log(response)
+          password: this.ruleForm.password,
+          isAdmin: this.ruleForm.isAdmin
         })
+        this.$http.post('http://127.0.0.1:8080/office_automation_backend/token', requestBody)
+          .then(response => {
+            console.log(response)
+            let component = this
+            let responseBody = response.body
+            if (responseBody.ok) {
+              this.$message('登录成功, 正在跳转主页')
+              // 设置默认 token 为 header
+              Vue.http.headers.common['token'] = responseBody.token
+              // 直接跳转主页
+              setTimeout(function () {
+                component.$router.push('oa_system')
+              }, 1000)
+            } else {
+              this.$message.error('用户名或密码错误!')
+            }
+            // 登录成功后
+          }, response => {
+            console.log(response)
+            this.$message.error('登录失败!')
+          })
       }
     }
   }
@@ -88,7 +100,7 @@
     left: 50%;
     top: 50%;
     width: 300px;
-    height: 160px;
+    height: 200px;
     margin: -150px 0 0 -190px;
     padding: 40px;
     border-radius: 5px;
