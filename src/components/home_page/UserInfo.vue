@@ -66,7 +66,7 @@
           </div>
           <!--电话-->
           <div style="float: left; margin-top: -20px; margin-right: 30px; clear: both">
-            <el-input v-model="userInfoDetail.phone_number"
+            <el-input v-model="userInfoDetail.phoneNumber"
                       placeholder="请输入您的电话号码">
               <template slot="prepend">电话:</template>
             </el-input>
@@ -126,7 +126,7 @@
           gender: GENDER_STR.MALE,
           name: '',
           department: '',
-          phone_number: ''
+          phoneNumber: ''
         },
         // 页面时候加载
         loading: true,
@@ -137,17 +137,33 @@
     props: [],
     methods: {
       submitUserInfo () {
-        // TODO 提交userInfo到后台
         console.log(this.userInfo)
+        this.$http.post('http://127.0.0.1:8080/office_automation_backend/user/info', JSON.stringify(this.userInfo))
+          .then(response => {
+            console.log(response)
+            if (response.ok === true) {
+              this.$message('修改成功')
+            } else {
+              this.$message.error('修改失败')
+            }
+          }, response => {
+            console.log(response)
+            this.$message.error('修改失败')
+          })
       },
       submitUserInfoDetail () {
-        // TODO 提交userInfoDetail到后台
+        console.log(JSON.stringify(this.userInfoDetail))
+        this.$http.post('http://127.0.0.1:8080/office_automation_backend/user/info', JSON.stringify(this.userInfoDetail))
+          .then(response => {
+            console.log(response)
+          }, response => {
+            console.log(response)
+          })
       }
     },
     created: function () {
-      // TODO 从后台获取用户数据 ==> 加载到页面后, 清楚加载进度条
       let component = this
-      this.$http.post('http://127.0.0.1:8080/office_automation_backend/user/info')
+      this.$http.get('http://127.0.0.1:8080/office_automation_backend/user/info')
         .then(response => {
           if (response.body.ok !== true) {
             this.$message.error('用户数据获取失败')
@@ -163,7 +179,7 @@
           // 填充UserInfoDetail
           component.userInfoDetail.name = userEntity.name
           component.userInfoDetail.gender = userEntity.gender
-          component.userInfoDetail.phone_number = userEntity.phone_number
+          component.userInfoDetail.phoneNumber = userEntity.phoneNumber
           component.userInfoDetail.department = userEntity.department
         }, response => {
           component.$message.error('用户数据获取失败: ' + response.body.msg)
