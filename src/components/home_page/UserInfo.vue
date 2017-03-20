@@ -140,8 +140,7 @@
         console.log(this.userInfo)
         this.$http.post('http://127.0.0.1:8080/office_automation_backend/user/info', JSON.stringify(this.userInfo))
           .then(response => {
-            console.log(response)
-            if (response.ok === true) {
+            if (response.body.ok === true) {
               this.$message('修改成功')
             } else {
               this.$message.error('修改失败')
@@ -155,9 +154,14 @@
         console.log(JSON.stringify(this.userInfoDetail))
         this.$http.post('http://127.0.0.1:8080/office_automation_backend/user/info', JSON.stringify(this.userInfoDetail))
           .then(response => {
-            console.log(response)
+            if (response.body.ok === true) {
+              this.$message('修改成功')
+            } else {
+              this.$message.error('修改失败')
+            }
           }, response => {
             console.log(response)
+            this.$message.error('修改失败')
           })
       }
     },
@@ -166,7 +170,7 @@
       this.$http.get('http://127.0.0.1:8080/office_automation_backend/user/info')
         .then(response => {
           if (response.body.ok !== true) {
-            this.$message.error('用户数据获取失败')
+            this.$message.error('用户数据获取失败: ' + response.body.msg)
             return
           }
           component.loading = false

@@ -8,7 +8,7 @@
         </el-form-item>
         <el-form-item prop="password">
           <el-input type="password" placeholder="password" v-model="ruleForm.password"
-                    @keyup.enter.native="submitForm()"></el-input>
+                    @keyup.enter.native="getToken()"></el-input>
         </el-form-item>
         <el-form-item>
           <el-checkbox v-model="ruleForm.isAdmin">以管理员身份登录</el-checkbox>
