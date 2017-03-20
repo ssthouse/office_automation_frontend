@@ -1,6 +1,7 @@
 <template>
   <base-item :tabs="tabs"
              mainTabName="工具集"
+             v-on:remove-tab="handleRemoveTab"
              :mainTabIs="MainTab.name">
   </base-item>
 </template>
@@ -10,6 +11,7 @@
   import MainTab from './MainTab.vue'
   import Vue from 'vue'
   import Questionnaire from './questionnaire/Questionnaire.vue'
+  import * as types from '../../store/mutation-types'
 
   Vue.component(MainTab.name, MainTab)
   Vue.component(Questionnaire.name, Questionnaire)
@@ -28,6 +30,11 @@
     computed: {
       tabs () {
         return this.$store.state.toolsModule.allTabs
+      }
+    },
+    methods: {
+      handleRemoveTab (tabIs) {
+        this.$store.commit(types.TOOLS_REMOVE_TAB, tabIs)
       }
     }
   }

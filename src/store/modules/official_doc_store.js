@@ -4,11 +4,20 @@ const state = {
   allTabs: []
 }
 
+const tabIsSet = new Set()
+
 const mutations = {
   [types.OFFICIAL_DOC_ADD_TAB]: function (state, tabItem) {
-    console.debug('what i wrong!')
+    if (tabIsSet.has(tabItem.tabIs)) {
+      return
+    }
+    tabIsSet.add(tabItem.tabIs)
     state.allTabs.push(tabItem)
-    console.debug(state.allTabs.length + '   ....')
+  },
+  [types.OFFICIAL_DOC_REMOVE_TAB] (state, tabIs) {
+    if (tabIsSet.has(tabIs)) {
+      tabIsSet.delete(tabIs)
+    }
   }
 }
 

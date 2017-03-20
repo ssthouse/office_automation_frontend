@@ -1,6 +1,7 @@
 <template>
   <div class="main_div">
     <el-tabs type="card"
+             @tab-remove="handleTabRemove"
              class="content_tabs">
 
       <!--主标签: 用于包含卡片 ===> 用于触发其他tab   本tab不可关闭-->
@@ -11,6 +12,7 @@
       <!--其他动态增加减少的标签-->
       <el-tab-pane v-for="tab in tabs"
                    closable
+                   :name="tab.tabIs"
                    :label="tab.tabLabel">
         <div :is="tab.tabIs"
              class="tab_content"></div>
@@ -26,7 +28,13 @@
       return {}
     },
     props: ['mainTabName', 'mainTabIs', 'tabs'],
-    components: {}
+    components: {},
+    methods: {
+      handleTabRemove (tabIs) {
+        console.log(tabIs)
+        this.$emit('remove-tab', tabIs.name)
+      }
+    }
   }
 </script>
 

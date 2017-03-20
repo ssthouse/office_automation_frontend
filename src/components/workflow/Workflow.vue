@@ -1,6 +1,7 @@
 <template>
   <base-item
     :tabs="tabs"
+    v-on:remove-tab="handleRemoveTab"
     mainTabName="流程审批"
     :mainTabIs="MainTab.name"></base-item>
 </template>
@@ -31,6 +32,9 @@
       testAddTab () {
         console.error('click add tab')
         this.$store.commit(types.WORKFLOW_ADD_TAB, Questionnaire.name)
+      },
+      handleRemoveTab (tabIs) {
+        this.$store.commit(types.WORKFLOW_REMOVE_TAB, tabIs)
       }
     },
     props: [],
