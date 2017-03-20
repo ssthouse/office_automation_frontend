@@ -19,7 +19,7 @@
       <el-col :span="4">
         <div @click="clickUserInfo()">
           <img id="avatar" src="../../assets/logo.png"/>
-          <p id="textUsername">用户名</p>
+          <p id="textUsername">{{username}}</p>
         </div>
       </el-col>
     </el-row>
@@ -53,7 +53,8 @@
         PATHS,
         MUTATION_TYPES,
         userInfoVisible: 'hidden',
-        oaSystemVisible: 'hidden'
+        oaSystemVisible: 'hidden',
+        username: '员工姓名'
       }
     },
     components: {
@@ -82,6 +83,15 @@
     created: function () {
       // 从后台获取用户数据
       this.$http.get('http://127.0.0.1:8080/office_automation_backend/user/info')
+        .then(response => {
+          if (response.body.ok !== true) {
+            this.$message('获取用户信息失败')
+            return
+          }
+          this.username = response.body.user.name
+        }, response => {
+          this.$message('获取用户信息失败: ' + response.body.msg)
+        })
     }
   }
 </script>
