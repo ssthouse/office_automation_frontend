@@ -6,6 +6,8 @@ import workflowModule from './modules/workflow_store'
 import publicInfoModule from './modules/public_info_store'
 import officialDocModule from './modules/official_doc_store'
 import toolsModule from './modules/tools_store'
+// main store
+import mainModule from './modules/main_store'
 
 // 配置 VUEX
 Vue.use(Vuex)
@@ -19,7 +21,9 @@ export default new Vuex.Store({
     workflowModule,
     publicInfoModule,
     officialDocModule,
-    toolsModule
+    toolsModule,
+    // main module
+    mainModule
   },
   getter: {}
 })

@@ -1,7 +1,6 @@
 <template>
   <div>
     <el-col :span="24"
-            v-loading="loading"
             element-loading-text="拼命加载中">
 
       <!--编辑 基本用户信息-->
@@ -127,11 +126,7 @@
           name: '',
           department: '',
           phoneNumber: ''
-        },
-        // 页面时候加载
-        loading: true,
-        // 从服务器获取的UserEntity
-        userEntity: {}
+        }
       }
     },
     props: [],
@@ -165,29 +160,43 @@
           })
       }
     },
+    computed: {
+      // 从服务器获取的UserEntity
+      userEntity () {
+        return this.$store.state.mainModule.user
+      }
+    },
     created: function () {
-      let component = this
-      this.$http.get('http://127.0.0.1:8080/office_automation_backend/user/info')
-        .then(response => {
-          if (response.body.ok !== true) {
-            this.$message.error('用户数据获取失败: ' + response.body.msg)
-            return
-          }
-          component.loading = false
-          component.userEntity = response.body.user
-          console.log(component.userEntity)
-          let userEntity = component.userEntity
-          // 填充UserInfo
-          component.userInfo.username = userEntity.username
-          component.userInfo.description = userEntity.description
-          // 填充UserInfoDetail
-          component.userInfoDetail.name = userEntity.name
-          component.userInfoDetail.gender = userEntity.gender
-          component.userInfoDetail.phoneNumber = userEntity.phoneNumber
-          component.userInfoDetail.department = userEntity.department
-        }, response => {
-          component.$message.error('用户数据获取失败: ' + response.body.msg)
-        })
+      // 填充UserInfo
+      this.userInfo.username = this.userEntity.username
+      this.userInfo.description = this.userEntity.description
+      // 填充UserInfoDetail
+      this.userInfoDetail.name = this.userEntity.name
+      this.userInfoDetail.gender = this.userEntity.gender
+      this.userInfoDetail.phoneNumber = this.userEntity.phoneNumber
+      this.userInfoDetail.department = this.userEntity.department
+//      let component = this
+//      this.$http.get('http://127.0.0.1:8080/office_automation_backend/user/info')
+//        .then(response => {
+//          if (response.body.ok !== true) {
+//            this.$message.error('用户数据获取失败: ' + response.body.msg)
+//            return
+//          }
+//          component.loading = false
+//          component.userEntity = response.body.user
+//          console.log(component.userEntity)
+//          let userEntity = component.userEntity
+//          // 填充UserInfo
+//          component.userInfo.username = userEntity.username
+//          component.userInfo.description = userEntity.description
+//          // 填充UserInfoDetail
+//          component.userInfoDetail.name = userEntity.name
+//          component.userInfoDetail.gender = userEntity.gender
+//          component.userInfoDetail.phoneNumber = userEntity.phoneNumber
+//          component.userInfoDetail.department = userEntity.department
+//        }, response => {
+//          component.$message.error('用户数据获取失败: ' + response.body.msg)
+//        })
     }
   }
 </script>
