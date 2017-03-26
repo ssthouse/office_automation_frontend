@@ -53,8 +53,7 @@
         PATHS,
         MUTATION_TYPES,
         userInfoVisible: 'hidden',
-        oaSystemVisible: 'hidden',
-        username: '员工姓名'
+        oaSystemVisible: 'hidden'
       }
     },
     components: {
@@ -80,18 +79,19 @@
         this.$store.commit(MUTATION_TYPES.HOMEPAGE_ADD_TAB, new TabItem('个人信息', UserInfo.name))
       }
     },
+    computed: {
+      username () {
+        return this.$store.state.mainModule.user.name
+      }
+    },
     created: function () {
       // 从后台获取用户数据
-      this.$http.get('http://127.0.0.1:8080/office_automation_backend/user/info')
-        .then(response => {
-          if (response.body.ok !== true) {
-            this.$message('获取用户信息失败')
-            return
-          }
-          this.username = response.body.user.name
-        }, response => {
-          this.$message('获取用户信息失败: ' + response.body.msg)
-        })
+      this.$store.dispatch(this.MUTATION_TYPES.ACTION_GET_USERINFO).then((success) => {
+        console.log('成功获取用户数据')
+      }, errorMsg => {
+        this.$message(errorMsg)
+        console.log('获取用户数据失败')
+      })
     }
   }
 </script>
