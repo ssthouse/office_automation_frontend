@@ -5,12 +5,8 @@ import VueRouter from 'vue-router'
 // 登录模块
 import Login from '../components/login/Login.vue'
 
-// 个人信息模块
-import UserInfo from '../components/user_info/UserInfo.vue'
-
 // OA 系统模块
 import Main from '../components/oa_system/Main.vue'
-// import Portal from '../components/oa_system/OaSystem.vue'
 import HomePage from '../components/home_page/HomePage.vue'
 import Workflow from '../components/workflow/Workflow.vue'
 import PublicInfo from '../components/public_info/PublicInfo.vue'
@@ -43,13 +39,7 @@ const PUBLIC_INFO_PATH = OA_SYSTEM_PATH + '/' + PUBLIC_INFO
 const OFFICIAL_DOC = 'official_doc'
 const OFFICIAL_DOC_PATH = OA_SYSTEM_PATH + '/' + OFFICIAL_DOC
 
-// 用户模块
-const USER_INFO = 'user_info'
-const USER_INFO_PATH = ROOT_PATH + USER_INFO
-
 // 最外层路由
-const OA_SYSTEM_INDEX = HOME_PAGE_PATH
-
 const PATHS = {
   /**
    * 登录模块
@@ -60,7 +50,7 @@ const PATHS = {
    * OA 系统名称, 路径
    */
   OA_SYSTEM,
-  OA_SYSTEM_INDEX,
+  OA_SYSTEM_INDEX: HOME_PAGE_PATH,
 
   // 个人首页
   HOME_PAGE,
@@ -80,13 +70,7 @@ const PATHS = {
 
   // 常用工具
   OA_TOOLS,
-  OA_TOOLS_PATH,
-
-  /**
-   * 用户信息 名称, 路径
-   */
-  USER_INFO,
-  USER_INFO_PATH
+  OA_TOOLS_PATH
 }
 
 // 路由配置
@@ -112,11 +96,6 @@ const routes = [
       {path: OFFICIAL_DOC, component: OfficlalDoc},
       {path: OA_TOOLS, component: Tools}
     ]
-  },
-  // 用户信息 模块
-  {
-    path: USER_INFO_PATH,
-    component: UserInfo
   }
 ]
 
