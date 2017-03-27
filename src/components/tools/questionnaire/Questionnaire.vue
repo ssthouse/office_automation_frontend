@@ -275,15 +275,19 @@
       },
       // 保存问卷
       saveQuestionnaire: function () {
-        if (this.questionnaire.isEmyty()) {
+        if (this.questionnaire.isEmpty()) {
           this.$message.warning('问卷内容不完整')
           return
         }
-        this.questionnaire.saveToServer()
+        this.questionnaire.saveToServer().then(function (success) {
+          console.log(success)
+        }, function (error) {
+          console.log(error)
+        })
       },
       // 发布问卷
       publishQuestionnaire: function () {
-        if (this.questionnaire.isEmyty()) {
+        if (this.questionnaire.isEmpty()) {
           this.$message.warning('问卷内容不完整')
           return
         }
