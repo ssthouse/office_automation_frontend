@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import mainStore from '../../../store/modules/main_store'
 
 class Questionnaire {
 
@@ -12,6 +13,7 @@ class Questionnaire {
     this.title = title
     this.questions = questions
     this.deadline = deadline
+    this.createrId = ''
   }
 
   /**
@@ -76,12 +78,14 @@ class Questionnaire {
     let questionnaire = this
     console.log(questionnaire)
     questionnaire.deadline = 'date str'
+    questionnaire.createrId = mainStore.state.user.username
     return new Promise((resolve, reject) => {
       console.log(JSON.stringify(questionnaire))
-      Vue.http.post('http://127.0.0.1:8080/office_automation_backend/questionnaire/detail', null)
+      Vue.http.post('http://127.0.0.1:8080/office_automation_backend/questionnaire/detail', JSON.stringify(questionnaire))
         .then(response => {
-          if (response.ok !== true) {
-            reject(response.body)
+          console.log(response)
+          if (response.body.ok !== true) {
+            reject(response.body.msg)
           } else {
             resolve('save questionnaire successfully')
           }

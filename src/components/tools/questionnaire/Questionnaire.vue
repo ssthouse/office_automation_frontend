@@ -44,8 +44,6 @@
       增加问题
     </el-button>
 
-    <el-button @click="testQuestionnaire">测试获取Questionanire</el-button>
-
     <!--截止日期 & 发布 或者 保存 问卷-->
     <div style="margin-top: 20px; margin-bottom: 20px; width: 90%;">
       <el-date-picker
@@ -278,13 +276,16 @@
       },
       // 保存问卷
       saveQuestionnaire: function () {
+        let component = this
         if (this.questionnaire.isEmpty()) {
           this.$message.warning('问卷内容不完整')
           return
         }
         this.questionnaire.saveToServer().then(function (success) {
+          component.$message(success)
           console.log(success)
         }, function (error) {
+          component.$message(error)
           console.log(error)
         })
       },
@@ -295,15 +296,6 @@
           return
         }
         this.questionnaire.publishQuestionnaire()
-      },
-      // TODO:
-      testQuestionnaire () {
-        this.$http.get('http://127.0.0.1:8080/office_automation_backend/questionnaire/detail')
-          .then(function (response) {
-            console.log(response)
-          }, function (response) {
-            console.log(response)
-          })
       }
     }
   }
