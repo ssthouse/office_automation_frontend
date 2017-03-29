@@ -75,8 +75,10 @@ class Questionnaire {
   saveToServer () {
     let questionnaire = this
     console.log(questionnaire)
+    questionnaire.deadline = 'date str'
     return new Promise((resolve, reject) => {
-      Vue.http.post('http://127.0.0.1:8080/questionnaire', questionnaire)
+      console.log(JSON.stringify(questionnaire))
+      Vue.http.post('http://127.0.0.1:8080/office_automation_backend/questionnaire/detail', null)
         .then(response => {
           if (response.ok !== true) {
             reject(response.body)

@@ -44,12 +44,15 @@
       增加问题
     </el-button>
 
+    <el-button @click="testQuestionnaire">测试获取Questionanire</el-button>
+
     <!--截止日期 & 发布 或者 保存 问卷-->
     <div style="margin-top: 20px; margin-bottom: 20px; width: 90%;">
       <el-date-picker
         style="margin-left: 30px"
+        format="yyyy-MM-dd HH-mm-ss"
         v-model="questionnaire.deadline"
-        type="date"
+        type="datetime"
         placeholder="截止日期"
         :picker-options="pickerOptions0">
       </el-date-picker>
@@ -292,6 +295,15 @@
           return
         }
         this.questionnaire.publishQuestionnaire()
+      },
+      // TODO:
+      testQuestionnaire () {
+        this.$http.get('http://127.0.0.1:8080/office_automation_backend/questionnaire/detail')
+          .then(function (response) {
+            console.log(response)
+          }, function (response) {
+            console.log(response)
+          })
       }
     }
   }
