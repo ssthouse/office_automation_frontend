@@ -12,6 +12,11 @@
           <el-button size="small"
                      icon="plus"
                      @click="onAdd">
+
+          </el-button>
+          <el-button size="small"
+                     @click="refreshData">
+            刷新
           </el-button>
         </el-button-group>
       </div>
@@ -63,7 +68,25 @@
       },
       onAdd: function () {
         this.$store.commit(types.TOOLS_ADD_TAB, new TabItem('调查问卷', Questionnaire.name))
+      },
+      refreshData: function () {
+        let component = this
+        this.$store.dispatch(types.ACTION_FETCH_QUESTIONNAIRE)
+          .then(function (success) {
+            component.$message(success)
+          }, function (fail) {
+            component.$message(fail)
+          })
       }
+    },
+    created: function () {
+      let component = this
+      this.$store.dispatch(types.ACTION_FETCH_QUESTIONNAIRE)
+        .then(function (success) {
+          component.$message(success)
+        }, function (fail) {
+          component.$message(fail)
+        })
     },
     props: []
   }

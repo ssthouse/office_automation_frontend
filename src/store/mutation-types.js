@@ -23,3 +23,11 @@ export const OFFICIAL_DOC_REMOVE_TAB = 'official_doc/remove_tab'
 export const TOOLS_ADD_TAB = 'tools/add_tab'
 export const TOOLS_REMOVE_TAB = 'tools/remove_tab'
 
+export const TOOLS_SET_OPEN_QUESTIONNAIRE_LIST = 'tool/set_open_questionnaire'
+export const TOOLS_SET_OWNED_QUESTIONNAIRE_LIST = 'tool/set_owned_questionnaire'
+
+// 获取用户相关的questionnaire到store
+export const ACTION_FETCH_QUESTIONNAIRE = 'tool/action/fetch_questionnaire'
+// 更新questionnaire到后台
+export const ACTION_UPDATE_QUESTIONNAIRE_TO_DATABASE = 'tool/action/update_questionnaire_to_database'
+
