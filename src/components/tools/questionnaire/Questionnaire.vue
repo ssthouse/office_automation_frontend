@@ -48,8 +48,9 @@
     <div style="margin-top: 20px; margin-bottom: 20px; width: 90%;">
       <el-date-picker
         style="margin-left: 30px"
+        format="yyyy-MM-dd HH-mm-ss"
         v-model="questionnaire.deadline"
-        type="date"
+        type="datetime"
         placeholder="截止日期"
         :picker-options="pickerOptions0">
       </el-date-picker>
@@ -275,15 +276,22 @@
       },
       // 保存问卷
       saveQuestionnaire: function () {
-        if (this.questionnaire.isEmyty()) {
+        let component = this
+        if (this.questionnaire.isEmpty()) {
           this.$message.warning('问卷内容不完整')
           return
         }
-        this.questionnaire.saveToServer()
+        this.questionnaire.saveToServer().then(function (success) {
+          component.$message(success)
+          console.log(success)
+        }, function (error) {
+          component.$message(error)
+          console.log(error)
+        })
       },
       // 发布问卷
       publishQuestionnaire: function () {
-        if (this.questionnaire.isEmyty()) {
+        if (this.questionnaire.isEmpty()) {
           this.$message.warning('问卷内容不完整')
           return
         }

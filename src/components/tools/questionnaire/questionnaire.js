@@ -1,3 +1,6 @@
+import Vue from 'vue'
+import mainStore from '../../../store/modules/main_store'
+
 class Questionnaire {
 
   /**
@@ -10,13 +13,14 @@ class Questionnaire {
     this.title = title
     this.questions = questions
     this.deadline = deadline
+    this.createrId = ''
   }
 
   /**
    * 判空
    * @returns {boolean}
    */
-  isEmyty () {
+  isEmpty () {
     if (this.title.length === 0) {
       return true
     }
@@ -71,6 +75,24 @@ class Questionnaire {
 
 // TODO 保存问卷到服务器
   saveToServer () {
+    let questionnaire = this
+    console.log(questionnaire)
+    questionnaire.deadline = 'date str'
+    questionnaire.createrId = mainStore.state.user.username
+    return new Promise((resolve, reject) => {
+      console.log(JSON.stringify(questionnaire))
+      Vue.http.post('http://127.0.0.1:8080/office_automation_backend/questionnaire/detail', JSON.stringify(questionnaire))
+        .then(response => {
+          console.log(response)
+          if (response.body.ok !== true) {
+            reject(response.body.msg)
+          } else {
+            resolve('save questionnaire successfully')
+          }
+        }, response => {
+          reject('save questionnaire to backend fail')
+        })
+    })
   }
 
 // TODO 发布问卷,
