@@ -1,6 +1,9 @@
 import * as types from '../mutation-types'
 import Vue from 'vue'
 
+import QuestionnaireFill from '../../components/tools/questionnaire/QuestionnaireFill.vue'
+import Questionnaire from '../../components/tools/questionnaire/Questionnaire.vue'
+
 const state = {
   // 个人板块 全局状态
   allTabs: [],
@@ -11,6 +14,7 @@ const state = {
 }
 
 const tabIsSet = new Set()
+const tabExcludedSet = new Set([Questionnaire.name, QuestionnaireFill.name])
 
 const mutations = {
   // 增加tab
@@ -18,7 +22,10 @@ const mutations = {
     if (tabIsSet.has(tabItem.tabIs)) {
       return
     }
-    tabIsSet.add(tabItem.tabIs)
+    // the tab in excluded set can have more than one instance
+    if (!tabExcludedSet.has(tabItem.tabIs)) {
+      tabIsSet.add(tabItem.tabIs)
+    }
     state.allTabs.push(tabItem)
   },
   // 移除tab

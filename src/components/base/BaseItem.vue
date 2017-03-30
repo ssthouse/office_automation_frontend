@@ -12,11 +12,11 @@
       <!--其他动态增加减少的标签-->
       <el-tab-pane v-for="tab in tabs"
                    closable
-                   :name="tab.tabIs"
+                   :name="tabs.indexOf(tab).toString()"
                    :label="tab.tabLabel">
-        <component v-bind:is="tab.tabIs"
-                   :data="tab.data"
-                   class="tab_content"></component>
+        <div v-bind:is="tab.tabIs"
+             :data="tab.data"
+             class="tab_content"></div>
       </el-tab-pane>
     </el-tabs>
   </div>
