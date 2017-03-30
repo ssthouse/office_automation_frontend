@@ -65,17 +65,6 @@ const actions = {
           reject(error.msg)
         })
     })
-  },
-  /**
-   * 更新questionnaire到数据库
-   * @param context
-   * @param questionnaire 需要更新的questionnaire
-   * @returns {Promise}
-   */
-  [types.ACTION_UPDATE_QUESTIONNAIRE_TO_DATABASE]: function (context, questionnaire) {
-    return new Promise((resolve, reject) => {
-      // TODO save
-    })
   }
 }
 

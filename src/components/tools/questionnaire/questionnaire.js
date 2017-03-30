@@ -95,7 +95,6 @@ class Questionnaire {
     })
   }
 
-  // TODO 发布问卷
   publishQuestionnaire () {
     let questionnaire = this
     return new Promise((resolve, reject) => {
