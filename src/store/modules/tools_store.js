@@ -72,8 +72,18 @@ const actions = {
   }
 }
 
+const getters = {
+  getQuestionnaireList: (state) => {
+    return state.questionnaireList == null ? [] : state.questionnaireList
+  },
+  getOwnedQuestionnaireList: (state) => {
+    return state.ownedQuestionnaireList == null ? [] : state.ownedQuestionnaireList
+  }
+}
+
 export default {
   state,
   mutations,
-  actions
+  actions,
+  getters
 }

@@ -20,7 +20,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       Vue.http.get('http://127.0.0.1:8080/office_automation_backend/user/info')
         .then(response => {
-          console.error(response.body.user)
+          // console.error(response.body.user)
           if (response.body.ok !== true) {
             reject(response.body.msg)
           } else {

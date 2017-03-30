@@ -39,19 +39,19 @@
     data () {
       return {
         // TODO: 测试用数据
-        questionnaireList: [{
-          title: 'this is the title',
-          // 用于在后台找到问卷列表的 id
-          questionnaireId: 1
-        }, {
-          title: 'this is the title',
-          // 用于在后台找到问卷列表的 id
-          questionnaireId: 1
-        }, {
-          title: 'this is the title',
-          // 用于在后台找到问卷列表的 id
-          questionnaireId: 1
-        }],
+//        questionnaireList: [{
+//          title: 'this is the title',
+//          // 用于在后台找到问卷列表的 id
+//          questionnaireId: 1
+//        }, {
+//          title: 'this is the title',
+//          // 用于在后台找到问卷列表的 id
+//          questionnaireId: 1
+//        }, {
+//          title: 'this is the title',
+//          // 用于在后台找到问卷列表的 id
+//          questionnaireId: 1
+//        }],
         isLoading: false,
         isDeleting: false
       }
@@ -79,7 +79,16 @@
           })
       }
     },
+    computed: {
+      questionnaireList: function () {
+        return this.$store.getters.getQuestionnaireList
+      },
+      ownedQuestionnaireList: function () {
+        return this.$store.getters.getOwnedQuestionnaireList
+      }
+    },
     created: function () {
+      // 加载问卷数据
       let component = this
       this.$store.dispatch(types.ACTION_FETCH_QUESTIONNAIRE)
         .then(function (success) {
