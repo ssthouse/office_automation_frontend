@@ -283,13 +283,16 @@
           this.$message.warning('问卷内容不完整')
           return
         }
+        this.questionnaire.published = true
         this.questionnaire.publishQuestionnaire()
+          .then(success => {
+            this.$message(success)
+          }, fail => {
+            this.$message(fail)
+          })
       }
     },
     created () {
-      console.log('creater************************')
-      console.log(this.questionnaire)
-      console.log('reater************************')
     }
   }
 
