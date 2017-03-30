@@ -1,15 +1,10 @@
 <template>
   <div>
-    <el-card>
+    <el-card style="margin-left: 10px; margin-right: 10px;">
       <!--标题-->
       <div slot="header" style="height: 20px">
-        <span class="span">调查问卷</span>
+        <span class="span">待填问卷</span>
         <el-button-group style="float: right;">
-          <el-button size="small"
-                     icon="plus"
-                     @click="onAdd">
-
-          </el-button>
           <el-button size="small"
                      @click="refreshData">
             刷新
@@ -30,7 +25,6 @@
 
 <script>
   import * as types from '../../../store/mutation-types'
-  import Questionnaire from './Questionnaire.vue'
   import QuestionnaireFill from './QuestionnaireFill.vue'
   import TabItem from '../../base/TabItem'
 
@@ -42,9 +36,6 @@
       }
     },
     methods: {
-      onAdd: function () {
-        this.$store.commit(types.TOOLS_ADD_TAB, new TabItem('调查问卷', Questionnaire.name))
-      },
       refreshData: function () {
         let component = this
         this.$store.dispatch(types.ACTION_FETCH_QUESTIONNAIRE)
@@ -63,9 +54,6 @@
     computed: {
       questionnaireList: function () {
         return this.$store.getters.getQuestionnaireList
-      },
-      ownedQuestionnaireList: function () {
-        return this.$store.getters.getOwnedQuestionnaireList
       }
     },
     created: function () {

@@ -11,7 +11,7 @@
         <span>{{questionnaire.questions.indexOf(question) + 1}}.{{question.title}}</span>
       </p>
       <!--单选和多选-->
-      <div v-for="selection in question.getSelections()"
+      <div v-for="selection in question.selections.split('\n')"
            v-if="question.type === QUESTION_TYPES.RADIO || question.type === QUESTION_TYPES.CHECK_BOX"
            style="text-align: left; padding-left: 20px">
         <input
@@ -77,7 +77,7 @@
                 style="width: 90%;"
                 v-model="currentRadioQuestion.selections"></el-input>
       <p>预览选项:</p>
-      <div v-text="currentRadioQuestion.getSelections()"></div>
+      <div v-text="currentRadioQuestion.selections.split('/n')"></div>
       <div style="margin-top: 10px">
         <el-button type="primary"
                    @click="onCancelDialog(QUESTION_TYPES.RADIO)">取消
@@ -100,7 +100,7 @@
                 style="width: 90%;"
                 v-model="currentCheckboxQuestion.selections"></el-input>
       <p>预览选项:</p>
-      <div v-text="currentCheckboxQuestion.getSelections()"></div>
+      <div v-text="currentCheckboxQuestion.selections.split('/n')"></div>
       <div style="margin-top: 10px">
         <el-button type="primary"
                    @click="onCancelDialog(QUESTION_TYPES.CHECK_BOX)">取消
@@ -126,7 +126,6 @@
 
 <script>
   import {QUESTION_TYPES, Question} from './question'
-  import Questionnaire from './questionnaire'
 
   // check is
   var checkNewQuestionInput = function (data, questionType) {
@@ -149,6 +148,7 @@
          */
         QUESTION_TYPES: QUESTION_TYPES,
         showQuestions: false,
+        // 控制日期选择
         pickerOptions0: {
           disabledDate (time) {
             return time.getTime() < Date.now() - 8.64e7
@@ -157,10 +157,7 @@
         /**
          * 当前调查问卷的数据
          */
-        questionnaire: new Questionnaire('', [
-          new Question('questionOne', QUESTION_TYPES.RADIO, 'options1\noptions2'),
-          new Question('questionTwo', QUESTION_TYPES.CHECK_BOX, 'hahahah1\nhahahah2')
-        ], ''),
+        questionnaire: this.data,
         /**
          * 三种题目的数据 单选题 多选题 文字题
          */
@@ -183,24 +180,16 @@
         if (this.currentRadioQuestion.isEmpty()) {
           return ''
         }
-        return '选项为:' + this.currentRadioQuestion.getSelections()
+        return '选项为:' + this.currentRadioQuestion.selections.split('/n')
       },
       previewCheckBoxOptions: function () {
-        return '选项为:' + this.currentCheckboxQuestion.getSelections()
-      }
-    },
-    /**
-     * placeholder
-     */
-    watch: {
-      radioQuestionContent: function (val) {
-        console.log(val.split('\n'))
+        return '选项为:' + this.currentCheckboxQuestion.selections.split('/n')
       }
     },
     /**
      * 需要出入的 props
      */
-    props: [],
+    props: ['data'],
     /**
      * 本地的方法
      */
