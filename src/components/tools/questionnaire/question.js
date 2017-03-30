@@ -1,15 +1,11 @@
 class Question {
 
   /**
-   *
-   * @param title
-   * @param questionType
-   * @param selections 各个选项之间  用换行符隔开
+   * 传入Json的存数据对象
+   * @param questionData
    */
-  constructor (title, questionType, selections) {
-    this.title = title
-    this.type = questionType
-    this.selections = selections
+  constructor (questionData) {
+    Object.assign(this, questionData)
   }
 
   isEmpty () {
@@ -49,8 +45,15 @@ class Question {
   }
 
   getCopy () {
-    console.log(this.selections)
-    return new Question(this.title, this.type, this.selections)
+    return Object.assign(new Question(), this)
+  }
+
+  static getQuestion (type) {
+    let question = new Question()
+    question.title = ''
+    question.type = type
+    question.selections = ''
+    return question
   }
 }
 

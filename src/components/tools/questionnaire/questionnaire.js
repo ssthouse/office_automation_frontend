@@ -1,19 +1,22 @@
 import Vue from 'vue'
 import mainStore from '../../../store/modules/main_store'
+import {Question} from './question'
 
 class Questionnaire {
 
   /**
-   * 构造方法
-   * @param title 问卷标题
-   * @param questions 问卷的所有问题
-   * @param deadline 问卷的截止日期
+   *
+   * @param questionnaireData
    */
-  constructor (title, questions, deadline) {
-    this.title = title
+  constructor (questionnaireData) {
+    Object.assign(this, questionnaireData)
+    let questions = []
+    console.log('--------------' + questionnaireData.questions)
+    questionnaireData.questions.forEach(question => {
+      questions.push(new Question(question))
+      console.log(question + '**********************')
+    })
     this.questions = questions
-    this.deadline = deadline
-    this.createrId = ''
   }
 
   /**
@@ -25,11 +28,12 @@ class Questionnaire {
       return true
     }
     if (this.questions.length === 0) {
-      return false
+      return true
     }
     if (this.deadline.length === 0) {
-      return false
+      return true
     }
+    return false
   }
 
   /**
@@ -45,7 +49,7 @@ class Questionnaire {
    */
 
   duplicateQuestion (questionIndex) {
-    var newQuestion = this.questions[questionIndex].getCopy()
+    let newQuestion = this.questions[questionIndex].getCopy()
     this.questions.splice(questionIndex + 1, 0, newQuestion)
   }
 

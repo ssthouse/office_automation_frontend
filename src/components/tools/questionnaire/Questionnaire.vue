@@ -11,7 +11,7 @@
         <span>{{questionnaire.questions.indexOf(question) + 1}}.{{question.title}}</span>
       </p>
       <!--单选和多选-->
-      <div v-for="selection in question.selections.split('\n')"
+      <div v-for="selection in question.getSelections()"
            v-if="question.type === QUESTION_TYPES.RADIO || question.type === QUESTION_TYPES.CHECK_BOX"
            style="text-align: left; padding-left: 20px">
         <input
@@ -126,6 +126,7 @@
 
 <script>
   import {QUESTION_TYPES, Question} from './question'
+  import Questionnaire from './questionnaire'
 
   // check is
   var checkNewQuestionInput = function (data, questionType) {
@@ -157,13 +158,13 @@
         /**
          * 当前调查问卷的数据
          */
-        questionnaire: this.data,
+        questionnaire: new Questionnaire(this.data),
         /**
          * 三种题目的数据 单选题 多选题 文字题
          */
-        currentRadioQuestion: new Question('', QUESTION_TYPES.RADIO, ''),
-        currentCheckboxQuestion: new Question('', QUESTION_TYPES.CHECK_BOX, ''),
-        currentTextAreaQuestion: new Question('', QUESTION_TYPES.TEXT_AREA, ''),
+        currentRadioQuestion: Question.getQuestion(QUESTION_TYPES.RADIO),
+        currentCheckboxQuestion: Question.getQuestion(QUESTION_TYPES.CHECK_BOX),
+        currentTextAreaQuestion: Question.getQuestion(QUESTION_TYPES.TEXT_AREA),
         /**
          * dialog显示标志位
          */
@@ -272,10 +273,8 @@
         }
         this.questionnaire.saveToServer().then(function (success) {
           component.$message(success)
-          console.log(success)
         }, function (error) {
           component.$message(error)
-          console.log(error)
         })
       },
       // 发布问卷
@@ -286,6 +285,11 @@
         }
         this.questionnaire.publishQuestionnaire()
       }
+    },
+    created () {
+      console.log('creater************************')
+      console.log(this.questionnaire)
+      console.log('reater************************')
     }
   }
 
