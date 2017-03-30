@@ -6,10 +6,6 @@
         <span class="span">调查问卷</span>
         <el-button-group style="float: right;">
           <el-button size="small"
-                     icon="delete"
-                     :loading="isDeleting"
-                     @click="onDeleting"></el-button>
-          <el-button size="small"
                      icon="plus"
                      @click="onAdd">
 
@@ -21,9 +17,11 @@
         </el-button-group>
       </div>
       <!--问卷列表-->
-      <div v-loading.body=isLoading>
-        <div v-for="questionnaire in questionnaireList">
-          {{questionnaire.title}}
+      <div v-loading.body=isLoading style="height: 200px; overflow-y: scroll;">
+        <div v-for="questionnaire in questionnaireList" style="margin-top: 5px; margin-bottom: 5px">
+          <a style="text-align: left; color: black;"
+             href="javascript:void(0);"
+             @click="clickQuestionnaire(questionnaire)">{{questionnaire.title}} </a>
         </div>
       </div>
     </el-card>
@@ -33,39 +31,17 @@
 <script>
   import * as types from '../../../store/mutation-types'
   import Questionnaire from './Questionnaire.vue'
+  import QuestionnaireFill from './QuestionnaireFill.vue'
   import TabItem from '../../base/TabItem'
 
   export default{
     data () {
       return {
-        // TODO: 测试用数据
-//        questionnaireList: [{
-//          title: 'this is the title',
-//          // 用于在后台找到问卷列表的 id
-//          questionnaireId: 1
-//        }, {
-//          title: 'this is the title',
-//          // 用于在后台找到问卷列表的 id
-//          questionnaireId: 1
-//        }, {
-//          title: 'this is the title',
-//          // 用于在后台找到问卷列表的 id
-//          questionnaireId: 1
-//        }],
         isLoading: false,
         isDeleting: false
       }
     },
     methods: {
-      onDeleting: function () {
-        this.isDeleting = true
-        var vue = this
-        window.setTimeout(function () {
-          vue.questionnaireList = []
-          vue.isDeleting = false
-          vue.isLoading = false
-        }, 10000)
-      },
       onAdd: function () {
         this.$store.commit(types.TOOLS_ADD_TAB, new TabItem('调查问卷', Questionnaire.name))
       },
@@ -77,6 +53,11 @@
           }, function (fail) {
             component.$message(fail)
           })
+      },
+      // 打开填写问卷的tab
+      clickQuestionnaire: function (questionnaire) {
+        console.log(questionnaire.title)
+        this.$store.commit(types.TOOLS_ADD_TAB, new TabItem(questionnaire.title, QuestionnaireFill.name, questionnaire))
       }
     },
     computed: {

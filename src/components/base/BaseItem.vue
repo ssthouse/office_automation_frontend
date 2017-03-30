@@ -14,8 +14,9 @@
                    closable
                    :name="tab.tabIs"
                    :label="tab.tabLabel">
-        <div :is="tab.tabIs"
-             class="tab_content"></div>
+        <component v-bind:is="tab.tabIs"
+                   :data="tab.data"
+                   class="tab_content"></component>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -31,7 +32,6 @@
     components: {},
     methods: {
       handleTabRemove (tabIs) {
-        console.log(tabIs)
         this.$emit('remove-tab', tabIs.name)
       }
     }

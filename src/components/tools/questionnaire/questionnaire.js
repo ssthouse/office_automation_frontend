@@ -73,7 +73,7 @@ class Questionnaire {
     this.questions.splice(newIndex, 0, currentQuestion)
   }
 
-// TODO 保存问卷到服务器
+  // 保存问卷到服务器
   saveToServer () {
     let questionnaire = this
     console.log(questionnaire)

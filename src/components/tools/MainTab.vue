@@ -12,11 +12,13 @@
     data () {
       return {}
     },
-    props: [],
+    props: ['is'],
     components: {
       'questionnaire-card': QuestionnaireCard
     },
-    computed: {}
+    computed: {},
+    created: function () {
+    }
   }
 </script>
 
