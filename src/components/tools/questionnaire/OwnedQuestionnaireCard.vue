@@ -35,6 +35,7 @@
 
 <script>
   import Questionnaire from './Questionnaire.vue'
+  import QuestionnaireBean from './questionnaire'
   import TabItem from '../../base/TabItem'
   import * as types from '../../../store/mutation-types'
 
@@ -49,7 +50,10 @@
     props: [],
     methods: {
       onAdd: function () {
-        this.$store.commit(types.TOOLS_ADD_TAB, new TabItem('新建调查问卷', Questionnaire.name))
+        let questionnaire = QuestionnaireBean.getEmptyQuestionnaire()
+        console.log('888888888888888888888888888')
+        console.log(questionnaire)
+        this.$store.commit(types.TOOLS_ADD_TAB, new TabItem('新建调查问卷', Questionnaire.name, questionnaire))
       },
       clickQuestionnaire (questionnaire) {
         console.log(questionnaire)

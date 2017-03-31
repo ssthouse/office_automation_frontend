@@ -2,6 +2,27 @@ import Vue from 'vue'
 import mainStore from '../../../store/modules/main_store'
 import {Question} from './question'
 
+/**
+ {
+   "questionnaireId":10,
+   "title":"最后一个问卷",
+   "deadline":"date str",
+   "createrId":"ssthouse",
+   "published":false,
+   "questions":[
+      {
+         "title":"第一题",
+         "type":"radio",
+         "selections":"安慰人或\nw'e'ga'j娃儿感觉"
+      },
+      {
+         "title":"第二题",
+         "type":"radio",
+         "selections":"哈哈哈, 这是第二题的选项"
+      }
+   ]
+ }
+ */
 class Questionnaire {
 
   /**
@@ -9,12 +30,17 @@ class Questionnaire {
    * @param questionnaireData
    */
   constructor (questionnaireData) {
+    if (questionnaireData === undefined) {
+      return
+    }
     Object.assign(this, questionnaireData)
-    let questions = []
-    questionnaireData.questions.forEach(question => {
-      questions.push(new Question(question))
-    })
-    this.questions = questions
+    if (questionnaireData.questions !== null) {
+      let questions = []
+      questionnaireData.questions.forEach(question => {
+        questions.push(new Question(question))
+      })
+      this.questions = questions
+    }
   }
 
   /**
@@ -109,6 +135,14 @@ class Questionnaire {
           reject('发布失败')
         })
     })
+  }
+
+  static getEmptyQuestionnaire () {
+    let questionnaire = new Questionnaire()
+    questionnaire.title = ''
+    questionnaire.deadline = ''
+    questionnaire.questions = []
+    return questionnaire
   }
 }
 
