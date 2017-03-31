@@ -13,15 +13,29 @@
       </p>
       <!--单选和多选-->
       <div v-for="selection in question.selections.split('\n')"
-           v-if="question.type === QUESTION_TYPES.RADIO || question.type === QUESTION_TYPES.CHECK_BOX"
+           v-if="question.type === QUESTION_TYPES.RADIO"
            style="text-align: left; padding-left: 20px">
-        <input
-          :type="question.type"
-          style="padding-left: 10px"
-          v-text="selection">{{selection}}</input>
+        <el-radio
+          v-model="answers[questionnaire.questions.indexOf(question)].selections[0]"
+          :label="selection">{{selection}}
+        </el-radio>
+
       </div>
+
+      <el-checkbox-group
+        style="text-align: left; padding-left: 20px"
+        v-for="selection in question.selections.split('\n')"
+        v-model="answers[questionnaire.questions.indexOf(question)].selections"
+        v-if="question.type === QUESTION_TYPES.CHECK_BOX">
+        <el-checkbox
+          :label="selection">{{selection}}
+        </el-checkbox>
+
+      </el-checkbox-group>
+
       <!--文字输入-->
-      <el-input type="textarea" autosize placeholder="请输入内容"
+      <el-input type="textArea" autosize placeholder="请输入内容"
+                v-model="answers[questionnaire.questions.indexOf(question)].answer"
                 v-if="question.type === QUESTION_TYPES.TEXT_AREA"></el-input>
     </el-card>
 
@@ -35,22 +49,31 @@
 
 <script>
   import {QUESTION_TYPES} from './question'
+  import Answer from './answer'
 
   export default{
     name: 'questionnaire-fill',
     data () {
       return {
         questionnaire: this.data,
-        QUESTION_TYPES
+        QUESTION_TYPES,
+        answers: []
       }
     },
     props: ['data'],
     created: function () {
+      console.log(JSON.stringify(this.data))
+      for (let i = 0; i < this.questionnaire.questions.length; i++) {
+        let type = this.questionnaire.questions[i].type
+        this.answers.push(Answer.getAnswer(i, type))
+      }
+      console.log(JSON.stringify(this.answers))
     },
     computed: {},
     methods: {
       submit () {
         console.log('submit')
+        console.log(JSON.stringify(this.answers))
       }
     }
   }
