@@ -19,9 +19,10 @@
       <!--问卷列表-->
       <div style="height: 200px; overflow-y: scroll;">
         <div v-for="questionnaire in ownedQuestionnaireList" style="margin-top: 5px; margin-bottom: 5px">
-          <a style="text-align: left; color: black;"
+          <a @click="clickQuestionnaire(questionnaire)"
+             style="text-align: left; color: black;"
              href="javascript:void(0);">{{questionnaire.title}} </a>
-          <el-button @click="clickQuestionnaire(questionnaire)"
+          <el-button @click="clickEditQuestionnaire(questionnaire)"
                      type="text"
                      :disabled="questionnaire.published"
                      style="margin-left: 20px;">
@@ -35,6 +36,7 @@
 
 <script>
   import Questionnaire from './Questionnaire.vue'
+  import AnswerReport from './AnswerReport.vue'
   import QuestionnaireBean from './questionnaire'
   import TabItem from '../../base/TabItem'
   import * as types from '../../../store/mutation-types'
@@ -55,6 +57,10 @@
         this.$store.commit(types.TOOLS_ADD_TAB, new TabItem('新建调查问卷', Questionnaire.name, questionnaire))
       },
       clickQuestionnaire (questionnaire) {
+        let tabItem = new TabItem(questionnaire.title, AnswerReport.name, questionnaire)
+        this.$store.commit(types.TOOLS_ADD_TAB, tabItem)
+      },
+      clickEditQuestionnaire (questionnaire) {
         console.log(questionnaire)
         let tabItem = new TabItem(questionnaire.title, Questionnaire.name, questionnaire)
         this.$store.commit(types.TOOLS_ADD_TAB, tabItem)

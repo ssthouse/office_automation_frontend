@@ -12,11 +12,13 @@
   import Vue from 'vue'
   import Questionnaire from './questionnaire/Questionnaire.vue'
   import QuestionnaireFill from './questionnaire/QuestionnaireFill.vue'
+  import AnswerReport from './questionnaire/AnswerReport.vue'
   import * as types from '../../store/mutation-types'
 
   Vue.component(MainTab.name, MainTab)
   Vue.component(Questionnaire.name, Questionnaire)
   Vue.component(QuestionnaireFill.name, QuestionnaireFill)
+  Vue.component(AnswerReport.name, AnswerReport)
 
   export default{
     name: '',

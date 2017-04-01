@@ -51,6 +51,8 @@
   import {QUESTION_TYPES} from './question'
   import Answer from './answer'
 
+  const URL_POST_QUESTIONNAIRE_ANSWER = 'http://127.0.0.1:8080/office_automation_backend/questionnaire/answer'
+
   export default{
     name: 'questionnaire-fill',
     data () {
@@ -71,9 +73,30 @@
     },
     computed: {},
     methods: {
+      /**
+       * 提交的数据格式为:
+       * {
+       *  questionnaire_id: 10,
+       *  answers: []
+       * }
+       */
       submit () {
         console.log('submit')
         console.log(JSON.stringify(this.answers))
+        let postBean = {
+          questionnaireId: this.questionnaire.questionnaireId,
+          'answers': this.answers
+        }
+        console.log(JSON.stringify(postBean))
+        this.$http.post(URL_POST_QUESTIONNAIRE_ANSWER, JSON.stringify(postBean))
+          .then(response => {
+            if (response.body.ok !== true) {
+              this.$message(response.body.msg)
+            }
+            this.$message('问卷提交成功')
+          }, response => {
+            this.$message('问卷提交失败')
+          })
       }
     }
   }
