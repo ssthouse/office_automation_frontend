@@ -3,6 +3,9 @@
     <h3>问卷名称: {{questionnaire.title}}</h3>
     <hr/>
 
+    <canvas id="myChart" ref="myChart"
+            style="width: 400px; height: 400px; margin-left: 20px"></canvas>
+
     <!--问卷总体数据-->
     <el-card class="box-card">
       <div slot="header">
@@ -33,10 +36,10 @@
       </div>
 
       <!--如果是文字题, 给一个下拉面板-->
-      <el-collapse v-model="name"
+      <el-collapse v-model="nameModel[questionnaire.questions.indexOf(question)]"
                    style="margin-top: 20px; text-align: left">
         <el-collapse-item title="所有回答:"
-                          name="1"
+                          name="questionnaire.questions.indexOf(question)"
                           style="text-align: left"
                           v-if="question.type === QUESTION_TYPES.TEXT_AREA">
           <div v-for="answer in answerBeanList[questionnaire.questions.indexOf(question)].answers">
@@ -45,6 +48,10 @@
         </el-collapse-item>
       </el-collapse>
     </el-card>
+
+    <e-button @click="showChart()">
+      点我显示Chart
+    </e-button>
   </div>
 </template>
 
@@ -52,6 +59,7 @@
   /**
    * 传入数据为: data: questionnaire
    */
+  import Chart from 'chart.js'
   import AnswerAnalysis from './bean/answerAnalysis'
   import {QUESTION_TYPES} from './bean/question'
   const URL_GET_ANSWER_ANALYSIS = 'http://127.0.0.1:8080/office_automation_backend/questionnaire/answer_analysis'
@@ -63,7 +71,8 @@
         questionnaire: this.data,
         answerAnalysis: new AnswerAnalysis(this.data),
         QUESTION_TYPES,
-        name: '1'
+        name: '1',
+        nameModel: []
       }
     },
     props: ['data'],
@@ -76,6 +85,46 @@
       getAnswerBean (question) {
         let index = this.questionnaire.questions.indexOf(question)
         return this.answerAnalysis.answerBeans[index]
+      },
+      showChart () {
+        let ctx = this.$refs.myChart
+        let myChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            datasets: [{
+              label: '# of Votes',
+              data: [12, 19, 3, 5, 2, 3],
+              backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+              ],
+              borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+              ],
+              borderWidth: 1
+            }]
+          },
+          options: {
+            scales: {
+              yAxes: [{
+                ticks: {
+                  beginAtZero: true
+                }
+              }]
+            }
+          }
+        })
+        console.log(myChart)
       }
     },
     created: function () {
