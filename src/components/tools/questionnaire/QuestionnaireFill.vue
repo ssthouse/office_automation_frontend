@@ -48,8 +48,8 @@
 </template>
 
 <script>
-  import {QUESTION_TYPES} from './question'
-  import Answer from './answer'
+  import {QUESTION_TYPES} from './bean/question'
+  import Answer from './bean/answer'
 
   const URL_POST_QUESTIONNAIRE_ANSWER = 'http://127.0.0.1:8080/office_automation_backend/questionnaire/answer'
 

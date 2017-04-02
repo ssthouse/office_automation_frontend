@@ -10,8 +10,11 @@
     "lint": "eslint --ext .js,.vue src"
   },
   "dependencies": {
+    "echarts": "^3.5.1",
     "element-ui": "^1.1.6",
+    "keen-ui": "^1.0.0",
     "vue": "^2.1.0",
+    "vue-echarts-v3": "^1.0.3",
     "vue-quill-editor": "^1.1.0"
   },
   "devDependencies": {

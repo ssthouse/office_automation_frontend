@@ -3,6 +3,7 @@ import Vue from 'vue'
 
 import QuestionnaireFill from '../../components/tools/questionnaire/QuestionnaireFill.vue'
 import Questionnaire from '../../components/tools/questionnaire/Questionnaire.vue'
+import AnswerReport from '../../components/tools/questionnaire/AnswerReport.vue'
 
 const state = {
   // 个人板块 全局状态
@@ -14,7 +15,7 @@ const state = {
 }
 
 const tabIsSet = new Set()
-const tabExcludedSet = new Set([Questionnaire.name, QuestionnaireFill.name])
+const tabExcludedSet = new Set([Questionnaire.name, QuestionnaireFill.name, AnswerReport.name])
 
 const mutations = {
   // 增加tab

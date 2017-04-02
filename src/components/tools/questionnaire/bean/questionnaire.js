@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import mainStore from '../../../store/modules/main_store'
+import mainStore from '../../../../store/modules/main_store'
 import {Question} from './question'
 
 /**

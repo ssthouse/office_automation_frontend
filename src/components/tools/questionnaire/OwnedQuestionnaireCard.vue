@@ -37,7 +37,7 @@
 <script>
   import Questionnaire from './Questionnaire.vue'
   import AnswerReport from './AnswerReport.vue'
-  import QuestionnaireBean from './questionnaire'
+  import QuestionnaireBean from './bean/questionnaire'
   import TabItem from '../../base/TabItem'
   import * as types from '../../../store/mutation-types'
 

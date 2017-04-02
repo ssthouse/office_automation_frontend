@@ -125,8 +125,8 @@
 </template>
 
 <script>
-  import {QUESTION_TYPES, Question} from './question'
-  import Questionnaire from './questionnaire'
+  import {QUESTION_TYPES, Question} from './bean/question'
+  import Questionnaire from './bean/questionnaire'
 
   // check is
   var checkNewQuestionInput = function (data, questionType) {
