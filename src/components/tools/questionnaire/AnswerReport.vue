@@ -3,9 +3,6 @@
     <h3>问卷名称: {{questionnaire.title}}</h3>
     <hr/>
 
-    <canvas id="myChart" ref="myChart"
-            style="width: 400px; height: 400px; margin-left: 20px"></canvas>
-
     <!--问卷总体数据-->
     <el-card class="box-card">
       <div slot="header">
@@ -32,16 +29,18 @@
       <!--如果是选择题, 画一幅扇形图-->
       <div v-if="question.type === QUESTION_TYPES.RADIO || question.type === QUESTION_TYPES.CHECK_BOX"
            style="margin-top: 20px">
-        {{answerBeanList[questionnaire.questions.indexOf(question)].answers}}
+        <canvas :ref="questionnaire.questions.indexOf(question).toString() + 'chart'"
+                :id="questionnaire.questions.indexOf(question).toString() + 'chart'"
+                style="width: 300px; height: 300px;"></canvas>
       </div>
 
       <!--如果是文字题, 给一个下拉面板-->
       <el-collapse v-model="nameModel[questionnaire.questions.indexOf(question)]"
+                   v-if="question.type === QUESTION_TYPES.TEXT_AREA"
                    style="margin-top: 20px; text-align: left">
         <el-collapse-item title="所有回答:"
                           name="questionnaire.questions.indexOf(question)"
-                          style="text-align: left"
-                          v-if="question.type === QUESTION_TYPES.TEXT_AREA">
+                          style="text-align: left">
           <div v-for="answer in answerBeanList[questionnaire.questions.indexOf(question)].answers">
             {{answer}}
           </div>
@@ -49,9 +48,6 @@
       </el-collapse>
     </el-card>
 
-    <e-button @click="showChart()">
-      点我显示Chart
-    </e-button>
   </div>
 </template>
 
@@ -86,45 +82,51 @@
         let index = this.questionnaire.questions.indexOf(question)
         return this.answerAnalysis.answerBeans[index]
       },
+      // 填充所有选择题的数据到表格中
       showChart () {
-        let ctx = this.$refs.myChart
-        let myChart = new Chart(ctx, {
-          type: 'bar',
-          data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-            datasets: [{
-              label: '# of Votes',
-              data: [12, 19, 3, 5, 2, 3],
-              backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-              ],
-              borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-              ],
-              borderWidth: 1
-            }]
-          },
-          options: {
-            scales: {
-              yAxes: [{
-                ticks: {
-                  beginAtZero: true
-                }
-              }]
-            }
+        let component = this
+        this.answerAnalysis.answerBeans.forEach(answerBean => {
+          // 如果是问答题 就不管
+          let questionIndex = this.answerAnalysis.answerBeans.indexOf(answerBean)
+          if (this.questionnaire.questions[questionIndex].type === QUESTION_TYPES.TEXT_AREA) {
+            return
           }
+          // 创建用于chart使用的数据
+          let labels = []
+          let data = []
+          // 填充dict中空余项
+          for (let option in answerBean.dict) {
+            labels.push(option)
+            data.push(answerBean.dict[option])
+          }
+          console.log('this is the data')
+          console.log(data)
+          console.log(labels)
+          let name = component.answerAnalysis.answerBeans.indexOf(answerBean).toString() + 'chart'
+          let ctx = component.$refs[name]
+          let chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+              labels: labels,
+              datasets: [{
+                label: '选项分布',
+                data: data,
+                backgroundColor: 'rgba(54, 162, 235, 0.2)'
+              }]
+            },
+            options: {
+              responsive: true,
+              scales: {
+                yAxes: [{
+                  ticks: {
+                    beginAtZero: true
+                  }
+                }]
+              }
+            }
+          })
+          console.log(chart)
         })
-        console.log(myChart)
       }
     },
     created: function () {
@@ -133,6 +135,7 @@
         .then(response => {
           this.answerAnalysis = new AnswerAnalysis(this.data)
           this.answerAnalysis.addJsonData(response.body)
+          this.showChart()
         }, response => {
           console.log(response)
         })

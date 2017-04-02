@@ -69,7 +69,6 @@
         let type = this.questionnaire.questions[i].type
         this.answers.push(Answer.getAnswer(i, type))
       }
-      console.log(JSON.stringify(this.answers))
     },
     computed: {},
     methods: {
@@ -87,6 +86,7 @@
           questionnaireId: this.questionnaire.questionnaireId,
           'answers': this.answers
         }
+        console.log('发出请求: 保存我的问卷回答')
         console.log(JSON.stringify(postBean))
         this.$http.post(URL_POST_QUESTIONNAIRE_ANSWER, JSON.stringify(postBean))
           .then(response => {

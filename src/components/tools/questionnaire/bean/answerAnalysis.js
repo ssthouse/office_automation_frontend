@@ -33,13 +33,37 @@ class AnswerAnalysis {
    * @param questionnaire
    */
   constructor (questionnaire) {
+    console.log(questionnaire)
     // 问卷数总量
     this.sum = 0
     // 填充对应数量的questionnaireBean
     this.answerBeans = []
-    for (let i = 0; i < questionnaire.questions.length; i++) {
-      this.answerBeans.push(new AnswerBean())
-    }
+    questionnaire.questions.forEach(question => {
+      let answerBean = new AnswerBean()
+      if (question.type !== 'textArea') {
+        console.log('selection:')
+        console.log(question.selections)
+        let selection = question.selections.split('\n')
+        console.log(selection)
+        for (let index in selection) {
+          answerBean.dict[selection[index]] = 0
+        }
+      }
+      this.answerBeans.push(answerBean)
+    })
+    // for (let i = 0; i < questionnaire.questions.length; i++) {
+    //   // 初始化每一个选项的默认值
+    //   let answerBean = new AnswerBean()
+    //   let selections = questionnaire.questions[i].selections.split('\n')
+    //   console.log(selections)
+    //   for (let index in selections) {
+    //     let selection = selections[index]
+    //     console.log('this is the selection:')
+    //     console.log(selection)
+    //     answerBean.dict[questionnaire.questions.selections[index]] = 0
+    //   }
+    //   this.answerBeans.push(answerBean)
+    // }
   }
 
   addJsonData (jsonData) {
