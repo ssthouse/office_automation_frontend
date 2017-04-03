@@ -16,11 +16,13 @@
   import AnswerReport from './questionnaire/AnswerReport.vue'
   import * as types from '../../store/mutation-types'
   // 投票模块
+  import Voting from './voting/Voting.vue'
 
   Vue.component(MainTab.name, MainTab)
   Vue.component(Questionnaire.name, Questionnaire)
   Vue.component(QuestionnaireFill.name, QuestionnaireFill)
   Vue.component(AnswerReport.name, AnswerReport)
+  Vue.component(Voting.name, Voting)
 
   export default{
     name: '',

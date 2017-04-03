@@ -19,6 +19,8 @@
 </template>
 
 <script>
+  const URL_POST_NEW_VOTING = 'http://127.0.0.1:8080/office_automation_backend/voting/new'
+
   export default{
     name: '',
     data () {
@@ -27,7 +29,12 @@
     props: [],
     methods: {
       refreshData () {
+        this.$http.post(URL_POST_NEW_VOTING, '')
+          .then(response => {
 
+          }, response => {
+
+          })
       }
     },
     computed: {},
