@@ -8,10 +8,13 @@ import AnswerReport from '../../components/tools/questionnaire/AnswerReport.vue'
 const state = {
   // 个人板块 全局状态
   allTabs: [],
-  // 用户可以参加的questionnaire
+  // open questionnaire
   questionnaireList: [],
-  // 用户创建的questionnaire
-  ownedQuestionnaireList: []
+  // owned questionnaire
+  ownedQuestionnaireList: [],
+  // voting
+  openVotingList: [],
+  ownedVotingList: []
 }
 
 const tabIsSet = new Set()
@@ -35,12 +38,19 @@ const mutations = {
       tabIsSet.delete(tabIs)
     }
   },
-  // set questionnaire list
+  // set questionnaire
   [types.TOOLS_SET_OPEN_QUESTIONNAIRE_LIST] (state, openList) {
     state.questionnaireList = openList
   },
   [types.TOOLS_SET_OWNED_QUESTIONNAIRE_LIST] (state, ownedList) {
     state.ownedQuestionnaireList = ownedList
+  },
+  // set voting
+  [types.TOOLS_SET_VOTING_OPEN_LIST] (state, openList) {
+    state.openVotingList = openList
+  },
+  [types.TOOLS_SET_VOTING_OWNED_LIST] (state, ownedList) {
+    state.ownedVotingList = ownedList
   }
 }
 
@@ -66,6 +76,47 @@ const actions = {
           reject(error.msg)
         })
     })
+  },
+  /**
+   * 获取公开voting数据
+   * @param context
+   * @returns {Promise}
+   */
+  [types.ACTION_FETCH_OPEN_VOTING]: function (context) {
+    return new Promise((resolve, reject) => {
+      Vue.http.get('http://127.0.0.1:8080/office_automation_backend/voting/open')
+        .then(success => {
+          if (success.body.ok !== true) {
+            reject('获取投票数据出错')
+            return
+          }
+          console.log(success.body.openVotingList)
+          context.commit(types.TOOLS_SET_VOTING_OPEN_LIST, success.body.openVotingList)
+          resolve('获取投票模块数据成功')
+        }, fail => {
+          reject('获取投票数据出错')
+        })
+    })
+  },
+  /**
+   * 获取管理者voting数据
+   * @param context
+   * @returns {Promise}
+   */
+  [types.ACTION_FETCH_OWNED_VOTING]: function (context) {
+    return new Promise((resolve, reject) => {
+      Vue.http.get('http://127.0.0.1:8080/office_automation_backend/voting/owned')
+        .then(success => {
+          if (success.body.ok !== true) {
+            reject('获取管理者voting数据失败')
+            return
+          }
+          context.commit(types.TOOLS_SET_VOTING_OWNED_LIST, success.body.ownedVotingList)
+          resolve('获取管理者voting数据成功')
+        }, fail => {
+          reject('获取管理者voting数据失败')
+        })
+    })
   }
 }
 
@@ -75,6 +126,12 @@ const getters = {
   },
   getOwnedQuestionnaireList: (state) => {
     return state.ownedQuestionnaireList == null ? [] : state.ownedQuestionnaireList
+  },
+  getOpenVotingList: (state) => {
+    return state.openVotingList == null ? [] : state.openVotingList
+  },
+  getOwnedVotingList: (state) => {
+    return state.ownedVotingList == null ? [] : state.ownedVotingList
   }
 }
 

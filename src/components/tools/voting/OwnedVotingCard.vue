@@ -15,9 +15,11 @@
           </el-button>
         </el-button-group>
       </div>
-
       <div class="card-body">
-        这里是列表
+        <div v-for="voting in ownedVotingList">
+          <a class="card-link"
+             href="javascript:void(0);">{{voting.title}}</a>
+        </div>
       </div>
     </el-card>
   </div>
@@ -38,15 +40,24 @@
     props: [],
     methods: {
       refreshData () {
-
+        this.$store.dispatch(MUTATION_TYPES.ACTION_FETCH_OWNED_VOTING)
+          .then(success => {
+            console.log(success)
+          }, fail => {
+            console.log(fail)
+          })
       },
       onAdd () {
         this.$store.commit(MUTATION_TYPES.TOOLS_ADD_TAB, new TabItem('新建投票', Voting.name, ''))
       }
     },
-    computed: {},
+    computed: {
+      ownedVotingList () {
+        return this.$store.getters.getOwnedVotingList
+      }
+    },
     created: function () {
-
+      this.refreshData()
     }
   }
 </script>

@@ -12,31 +12,61 @@
       </div>
 
       <div class="card-body">
-        这里是列表
+        <div v-for="voting in openVotingList"
+             style="margin-top: 5px; margin-bottom: 5px">
+          <a @click="onClickVoting(voting)"
+             class="card-link"
+             href="javascript:void(0);">
+            {{voting.title}}
+          </a>
+        </div>
       </div>
     </el-card>
   </div>
 </template>
 <script>
+  import * as MUTATION_TYPES from '../../../store/mutation-types'
+
   export default{
     name: '',
     data () {
-      return {}
+      return {
+        MUTATION_TYPES
+      }
     },
     props: [],
     methods: {
       refreshData () {
+        this.$store.dispatch(MUTATION_TYPES.ACTION_FETCH_OPEN_VOTING)
+          .then(success => {
+            console.log(success)
+          }, fail => {
+            console.log(fail)
+          })
+      },
+      onClickVoting (voting) {
+
       }
     },
-    computed: {},
+    computed: {
+      openVotingList () {
+        return this.$store.getters.getOpenVotingList
+      }
+    },
     created: function () {
-
+      this.refreshData()
     }
   }
 </script>
 
 <style>
   .card-title {
+    float: left;
+  }
+
+  .card-link {
+    text-align: left;
+    color: black;
     float: left;
   }
 </style>

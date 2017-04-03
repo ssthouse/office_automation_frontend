@@ -13,10 +13,12 @@
       </div>
       <!--问卷列表-->
       <div v-loading.body=isLoading class="card-body">
-        <div v-for="questionnaire in questionnaireList" style="margin-top: 5px; margin-bottom: 5px">
-          <a style="text-align: left; color: black;"
+        <div v-for="questionnaire in questionnaireList"
+             style="margin-top: 5px; margin-bottom: 5px">
+          <a class="card-link"
              href="javascript:void(0);"
-             @click="clickQuestionnaire(questionnaire)">{{questionnaire.title}} </a>
+             @click="clickQuestionnaire(questionnaire)">
+            {{questionnaire.title}} </a>
         </div>
       </div>
     </el-card>
@@ -47,7 +49,6 @@
       },
       // 打开填写问卷的tab
       clickQuestionnaire: function (questionnaire) {
-        console.log(questionnaire.title)
         this.$store.commit(types.TOOLS_ADD_TAB, new TabItem(questionnaire.title, QuestionnaireFill.name, questionnaire))
       }
     },
@@ -61,7 +62,7 @@
       let component = this
       this.$store.dispatch(types.ACTION_FETCH_QUESTIONNAIRE)
         .then(function (success) {
-          component.$message(success)
+          // component.$message(success)
         }, function (fail) {
           component.$message(fail)
         })

@@ -18,9 +18,10 @@
       </div>
       <!--问卷列表-->
       <div style="height: 200px; overflow-y: scroll;">
-        <div v-for="questionnaire in ownedQuestionnaireList" style="margin-top: 5px; margin-bottom: 5px">
+        <div v-for="questionnaire in ownedQuestionnaireList"
+             style="margin-top: 5px; margin-bottom: 5px">
           <a @click="clickQuestionnaire(questionnaire)"
-             style="text-align: left; color: black;"
+             class="card-link"
              href="javascript:void(0);">{{questionnaire.title}} </a>
           <el-button @click="clickEditQuestionnaire(questionnaire)"
                      type="text"
