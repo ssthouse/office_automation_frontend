@@ -14,12 +14,13 @@
       <div class="card-header">
         <h4 style="float: left; margin-left: 20px;">请填写关于投票的详细描述::</h4>
       </div>
-      <el-input type="textarea"
-                style="margin-left: 20px; margin-right: 20px;"
-                :rows="4"
-                placeholder="please input the details"
-                v-model="voting.description">
-      </el-input>
+      <div style="margin-right: 20px; margin-left: 20px;">
+        <el-input type="textarea"
+                  :rows="4"
+                  placeholder="please input the details"
+                  v-model="voting.description">
+        </el-input>
+      </div>
     </el-card>
 
     <h3>投票选项:</h3>
@@ -34,11 +35,17 @@
       </div>
       <div style="margin-top: -30px; margin-bottom: -20px;">
         <el-input v-model="voteOption.title"></el-input>
-        <el-button type="small" style="margin-left: 20px;"
+      </div>
+      <div style="margin-top: 20px">
+        <el-button type="primary" style="margin-right: 40px; float: right"
                    @click="removeOption(voteOption)">删除
         </el-button>
       </div>
     </el-card>
+
+    <el-button @click="addOption()" type="primary" style="margin-bottom: 20px; margin-top: 20px;">增加选项</el-button>
+
+    <hr/>
 
     <div style="margin-top: 40px; margin-bottom: 60px;">
       <el-date-picker
@@ -50,14 +57,19 @@
         :picker-options="pickerOptions0">
       </el-date-picker>
 
-      <el-button @click="addOption()" type="primary" style="margin-left: 100px;">增加选项</el-button>
-      <el-button @click="publishVoting()" type="primary" style="margin-left: 100px;">发布投票</el-button>
+      <el-button @click="publishVoting()"
+                 :disabled="published"
+                 type="primary"
+                 style="margin-left: 100px;">发布投票
+      </el-button>
     </div>
   </div>
 </template>
 
 <script>
   import Voting from './bean/voting'
+
+  const URL_POST_NEW_VOTING = 'http://127.0.0.1:8080/office_automation_backend/voting/new'
 
   export default{
     name: 'new-voting',
@@ -69,7 +81,8 @@
           disabledDate (time) {
             return time.getTime() < Date.now() - 8.64e7
           }
-        }
+        },
+        published: false
       }
     },
     props: ['data'],
@@ -78,11 +91,26 @@
         this.voting.addEmptyOption()
       },
       publishVoting () {
+        // 填充创建者
+        this.voting.createrId = this.$store.state.mainModule.user.username
         if (!this.voting.isValid()) {
           this.$message('投票数据不完整')
           return
         }
-        console.log('发布投票')
+        let requestBody = JSON.stringify(this.voting)
+        console.log('this is the request body to save a new voting***************************************')
+        console.log(requestBody)
+        this.$http.post(URL_POST_NEW_VOTING, requestBody)
+          .then(response => {
+            if (response.body.ok !== true) {
+              this.$message('投票保存失败: ' + response.body.msg)
+              return
+            }
+            this.$message(response.body.msg)
+            this.published = true
+          }, response => {
+            this.$message('投票保持失败')
+          })
       },
       removeOption (voteOption) {
         console.log(voteOption)

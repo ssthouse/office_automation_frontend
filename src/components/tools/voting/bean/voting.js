@@ -26,7 +26,8 @@ class Voting {
 
   isValid () {
     if (this.title.length === 0 ||
-      this.deadline.length === 0) {
+      this.deadline.length === 0 ||
+      this.createrId.length === 0) {
       return false
     }
     if (this.voteOptions.length === 0) {
