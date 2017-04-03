@@ -1,9 +1,9 @@
 <template>
   <div>
-    <el-card style="margin-left: 10px; margin-right: 10px;">
+    <el-card class="card-panel">
       <!--标题-->
-      <div slot="header" style="height: 20px">
-        <span class="span">待填问卷</span>
+      <div slot="header" class="card-header">
+        <span class="card-title">待填问卷</span>
         <el-button-group style="float: right;">
           <el-button size="small"
                      @click="refreshData">
@@ -12,7 +12,7 @@
         </el-button-group>
       </div>
       <!--问卷列表-->
-      <div v-loading.body=isLoading style="height: 200px; overflow-y: scroll;">
+      <div v-loading.body=isLoading class="card-body">
         <div v-for="questionnaire in questionnaireList" style="margin-top: 5px; margin-bottom: 5px">
           <a style="text-align: left; color: black;"
              href="javascript:void(0);"
@@ -73,5 +73,19 @@
 <style>
   .span {
     line-height: 28px;
+  }
+
+  .card-panel {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  .card-header {
+    height: 20px;
+  }
+
+  .card-body {
+    height: 200px;
+    overflow-y: scroll;
   }
 </style>

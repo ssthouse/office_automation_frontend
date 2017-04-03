@@ -10,10 +10,12 @@
   import BaseItem from '../base/BaseItem.vue'
   import MainTab from './MainTab.vue'
   import Vue from 'vue'
+  // 问卷模块
   import Questionnaire from './questionnaire/Questionnaire.vue'
   import QuestionnaireFill from './questionnaire/QuestionnaireFill.vue'
   import AnswerReport from './questionnaire/AnswerReport.vue'
   import * as types from '../../store/mutation-types'
+  // 投票模块
 
   Vue.component(MainTab.name, MainTab)
   Vue.component(Questionnaire.name, Questionnaire)
