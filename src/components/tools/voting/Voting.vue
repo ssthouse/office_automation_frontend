@@ -24,6 +24,7 @@
 
     <h3>投票选项:</h3>
 
+    <!--所有选项-->
     <el-card class="box-card"
              v-for="voteOption in voting.voteOptions">
       <div style="margin-left: 20px; margin-top: -10px;">
@@ -33,10 +34,13 @@
       </div>
       <div style="margin-top: -30px; margin-bottom: -20px;">
         <el-input v-model="voteOption.title"></el-input>
+        <el-button type="small" style="margin-left: 20px;"
+                   @click="removeOption(voteOption)">删除
+        </el-button>
       </div>
     </el-card>
 
-    <div style="margin-top: 40px;">
+    <div style="margin-top: 40px; margin-bottom: 60px;">
       <el-date-picker
         style="margin-left: 30px"
         format="yyyy-MM-dd HH-mm-ss"
@@ -79,6 +83,11 @@
           return
         }
         console.log('发布投票')
+      },
+      removeOption (voteOption) {
+        console.log(voteOption)
+        let index = this.voting.voteOptions.indexOf(voteOption)
+        this.voting.voteOptions.splice(index, 1)
       }
     },
     computed: {},
