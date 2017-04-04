@@ -1,0 +1,79 @@
+<template>
+  <div>
+    <!--投票标题-->
+    <h3>标题: {{voting.title}}</h3>
+
+    <el-card class="box-card">
+      <h4 style="text-align: left; margin-left: 20px">投票详情:</h4>
+      <p style="text-align: left; margin-left: 20px">{{voting.description}}</p>
+      <hr style="margin-top: 40px;"/>
+
+      <el-checkbox-group v-model="chosenVoteIndexList"
+                         style="margin-top: 40px;">
+        <div v-for="voteOption in voting.voteOptions"
+             style="text-align: left; margin-left: 20px; margin-top: 20px;">
+          <el-checkbox
+            :label="voting.voteOptions.indexOf(voteOption)">
+            {{voteOption.title}}
+          </el-checkbox>
+        </div>
+      </el-checkbox-group>
+
+      <el-button type="primary"
+                 :disabled="isPublished"
+                 @click="onSubmitClick()"
+                 style="margin-top: 30px; float: right; margin-right: 30px; margin-bottom: 20px;">提交投票
+      </el-button>
+    </el-card>
+  </div>
+</template>
+
+<script>
+  const URL_POST_NEW_VOTING = 'http://127.0.0.1:8080/office_automation_backend/voting/vote'
+
+  export default{
+    name: 'voting-fill',
+    data () {
+      return {
+        voting: this.data,
+        chosenVoteIndexList: [],
+        isPublished: false
+      }
+    },
+    props: ['data'],
+    methods: {
+      onSubmitClick () {
+        if (this.chosenVoteIndexList.length === 0) {
+          this.$message('请选择至少一个选项')
+          return
+        }
+        // 填充需要发起请求的数据
+        let voteOptions = []
+        for (let index in this.chosenVoteIndexList) {
+          let voteIndex = parseInt(this.chosenVoteIndexList[index])
+          voteOptions.push(this.voting.voteOptions[voteIndex])
+        }
+        // 发起增加投票请求
+        this.$http.post(URL_POST_NEW_VOTING, JSON.stringify(voteOptions))
+          .then(success => {
+            if (success.body.ok !== true) {
+              this.$message('投票提交失败')
+              return
+            }
+            this.$message('投票提交成功')
+            this.isPublished = true
+          }, fail => {
+            this.$message('投票提交失败')
+          })
+        this.$message('投票提交成功')
+      }
+    },
+    computed: {},
+    created: function () {
+    }
+  }
+</script>
+
+<style>
+
+</style>

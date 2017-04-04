@@ -18,16 +18,19 @@
       </div>
       <!--问卷列表-->
       <div style="height: 200px; overflow-y: scroll;">
-        <div v-for="questionnaire in ownedQuestionnaireList" style="margin-top: 5px; margin-bottom: 5px">
-          <a @click="clickQuestionnaire(questionnaire)"
-             style="text-align: left; color: black;"
-             href="javascript:void(0);">{{questionnaire.title}} </a>
-          <el-button @click="clickEditQuestionnaire(questionnaire)"
-                     type="text"
-                     :disabled="questionnaire.published"
-                     style="margin-left: 20px;">
-            编辑
-          </el-button>
+        <div v-for="questionnaire in ownedQuestionnaireList"
+             style="margin-top: 5px; margin-bottom: 5px">
+          <div style="clear: both; margin-top: 5px; margin-bottom: 5px;">
+            <a @click="clickQuestionnaire(questionnaire)"
+               class="card-link"
+               href="javascript:void(0);">{{questionnaire.title}} </a>
+            <el-button @click="clickEditQuestionnaire(questionnaire)"
+                       type="text"
+                       :disabled="questionnaire.published"
+                       style="margin-left: 20px;">
+              编辑
+            </el-button>
+          </div>
         </div>
       </div>
     </el-card>
@@ -36,7 +39,7 @@
 
 <script>
   import Questionnaire from './Questionnaire.vue'
-  import AnswerReport from './AnswerReport.vue'
+  import AnswerReport from './QuestionnaireReport.vue'
   import QuestionnaireBean from './bean/questionnaire'
   import TabItem from '../../base/TabItem'
   import * as types from '../../../store/mutation-types'

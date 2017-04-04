@@ -15,32 +15,56 @@
           </el-button>
         </el-button-group>
       </div>
-
       <div class="card-body">
-        这里是列表
+        <div v-for="voting in ownedVotingList">
+          <div style="clear: both; margin-top: 5px; margin-bottom: 5px;">
+            <a class="card-link"
+               @click="onClickVoting(voting)"
+               href="javascript:void(0);">{{voting.title}}</a>
+          </div>
+        </div>
       </div>
     </el-card>
   </div>
 </template>
 
 <script>
+  import * as MUTATION_TYPES from '../../../store/mutation-types'
+  import TabItem from '../../base/TabItem'
+  import Voting from './Voting.vue'
+  import VotingReport from './VotingReport.vue'
+
   export default{
     name: '',
     data () {
-      return {}
+      return {
+        MUTATION_TYPES
+      }
     },
     props: [],
     methods: {
       refreshData () {
-
+        this.$store.dispatch(MUTATION_TYPES.ACTION_FETCH_OWNED_VOTING)
+          .then(success => {
+            console.log(success)
+          }, fail => {
+            console.log(fail)
+          })
       },
       onAdd () {
-
+        this.$store.commit(MUTATION_TYPES.TOOLS_ADD_TAB, new TabItem('新建投票', Voting.name, ''))
+      },
+      onClickVoting (voting) {
+        this.$store.commit(MUTATION_TYPES.TOOLS_ADD_TAB, new TabItem(voting.title + '-统计数据', VotingReport.name, voting))
       }
     },
-    computed: {},
+    computed: {
+      ownedVotingList () {
+        return this.$store.getters.getOwnedVotingList
+      }
+    },
     created: function () {
-
+      this.refreshData()
     }
   }
 </script>

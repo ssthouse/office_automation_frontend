@@ -23,9 +23,17 @@ export const OFFICIAL_DOC_REMOVE_TAB = 'official_doc/remove_tab'
 export const TOOLS_ADD_TAB = 'tools/add_tab'
 export const TOOLS_REMOVE_TAB = 'tools/remove_tab'
 
+// Tools => questionnaire
 export const TOOLS_SET_OPEN_QUESTIONNAIRE_LIST = 'tool/set_open_questionnaire'
 export const TOOLS_SET_OWNED_QUESTIONNAIRE_LIST = 'tool/set_owned_questionnaire'
 
+// Tools => voting
+export const TOOLS_SET_VOTING_OPEN_LIST = 'tool/set_voting_open_list'
+export const TOOLS_SET_VOTING_OWNED_LIST = 'tool/set_voting_owned_list'
+
 // 获取用户相关的questionnaire到store
 export const ACTION_FETCH_QUESTIONNAIRE = 'tool/action/fetch_questionnaire'
+// 获取关于voting 的数据
+export const ACTION_FETCH_OPEN_VOTING = 'tool/action/fetch_open_voting'
+export const ACTION_FETCH_OWNED_VOTING = 'tool/action/fetch_owned_voting'
 
