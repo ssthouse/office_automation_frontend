@@ -17,8 +17,10 @@
       </div>
       <div class="card-body">
         <div v-for="voting in ownedVotingList">
-          <a class="card-link"
-             href="javascript:void(0);">{{voting.title}}</a>
+          <div style="clear: both; margin-top: 5px; margin-bottom: 5px;">
+            <a class="card-link"
+               href="javascript:void(0);">{{voting.title}}</a>
+          </div>
         </div>
       </div>
     </el-card>

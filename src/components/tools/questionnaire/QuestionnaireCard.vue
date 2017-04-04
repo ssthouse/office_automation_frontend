@@ -15,10 +15,12 @@
       <div v-loading.body=isLoading class="card-body">
         <div v-for="questionnaire in questionnaireList"
              style="margin-top: 5px; margin-bottom: 5px">
-          <a class="card-link"
-             href="javascript:void(0);"
-             @click="clickQuestionnaire(questionnaire)">
-            {{questionnaire.title}} </a>
+          <div style="clear: both; margin-top: 5px; margin-bottom: 5px;">
+            <a class="card-link"
+               href="javascript:void(0);"
+               @click="clickQuestionnaire(questionnaire)">
+              {{questionnaire.title}} </a>
+          </div>
         </div>
       </div>
     </el-card>

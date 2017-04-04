@@ -20,15 +20,17 @@
       <div style="height: 200px; overflow-y: scroll;">
         <div v-for="questionnaire in ownedQuestionnaireList"
              style="margin-top: 5px; margin-bottom: 5px">
-          <a @click="clickQuestionnaire(questionnaire)"
-             class="card-link"
-             href="javascript:void(0);">{{questionnaire.title}} </a>
-          <el-button @click="clickEditQuestionnaire(questionnaire)"
-                     type="text"
-                     :disabled="questionnaire.published"
-                     style="margin-left: 20px;">
-            编辑
-          </el-button>
+          <div style="clear: both; margin-top: 5px; margin-bottom: 5px;">
+            <a @click="clickQuestionnaire(questionnaire)"
+               class="card-link"
+               href="javascript:void(0);">{{questionnaire.title}} </a>
+            <el-button @click="clickEditQuestionnaire(questionnaire)"
+                       type="text"
+                       :disabled="questionnaire.published"
+                       style="margin-left: 20px;">
+              编辑
+            </el-button>
+          </div>
         </div>
       </div>
     </el-card>
