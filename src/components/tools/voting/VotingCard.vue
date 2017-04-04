@@ -27,6 +27,8 @@
 </template>
 <script>
   import * as MUTATION_TYPES from '../../../store/mutation-types'
+  import TabItem from '../../base/TabItem'
+  import VotingFill from './VotingFill.vue'
 
   export default{
     name: '',
@@ -46,7 +48,7 @@
           })
       },
       onClickVoting (voting) {
-
+        this.$store.commit(MUTATION_TYPES.TOOLS_ADD_TAB, new TabItem(voting.title, VotingFill.name, voting))
       }
     },
     computed: {

@@ -1,18 +1,12 @@
 <template>
   <div>
-    <!--投票标题-->
-    <h3>{{voting.title}}</h3>
-    <hr/>
-
-    <el-card class="box-card">
-
-    </el-card>
+    这里是voting report
   </div>
 </template>
 
 <script>
   export default{
-    name: 'voting-fill',
+    name: 'voting-report',
     data () {
       return {
         voting: this.data
@@ -22,6 +16,7 @@
     methods: {},
     computed: {},
     created: function () {
+
     }
   }
 </script>

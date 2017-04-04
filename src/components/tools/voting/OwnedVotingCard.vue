@@ -19,6 +19,7 @@
         <div v-for="voting in ownedVotingList">
           <div style="clear: both; margin-top: 5px; margin-bottom: 5px;">
             <a class="card-link"
+               @click="onClickVoting(voting)"
                href="javascript:void(0);">{{voting.title}}</a>
           </div>
         </div>
@@ -31,6 +32,7 @@
   import * as MUTATION_TYPES from '../../../store/mutation-types'
   import TabItem from '../../base/TabItem'
   import Voting from './Voting.vue'
+  import VotingFill from './VotingFill.vue'
 
   export default{
     name: '',
@@ -51,6 +53,9 @@
       },
       onAdd () {
         this.$store.commit(MUTATION_TYPES.TOOLS_ADD_TAB, new TabItem('新建投票', Voting.name, ''))
+      },
+      onClickVoting (voting) {
+        this.$store.commit(MUTATION_TYPES.TOOLS_ADD_TAB, new TabItem(voting.title + '-统计数据', VotingFill.name, voting))
       }
     },
     computed: {

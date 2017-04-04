@@ -1,9 +1,14 @@
 import * as types from '../mutation-types'
 import Vue from 'vue'
 
+// questionnaire
 import QuestionnaireFill from '../../components/tools/questionnaire/QuestionnaireFill.vue'
 import Questionnaire from '../../components/tools/questionnaire/Questionnaire.vue'
 import AnswerReport from '../../components/tools/questionnaire/AnswerReport.vue'
+// voting
+import Voting from '../../components/tools/voting/Voting.vue'
+import VotingFill from '../../components/tools/voting/VotingFill.vue'
+import VotingReport from '../../components/tools/voting/VotingReport.vue'
 
 const state = {
   // 个人板块 全局状态
@@ -18,7 +23,8 @@ const state = {
 }
 
 const tabIsSet = new Set()
-const tabExcludedSet = new Set([Questionnaire.name, QuestionnaireFill.name, AnswerReport.name])
+const tabExcludedSet = new Set([Questionnaire.name, QuestionnaireFill.name, AnswerReport.name,
+  Voting.name, VotingFill.name, VotingReport.name])
 
 const mutations = {
   // 增加tab
