@@ -4,7 +4,7 @@ import Vue from 'vue'
 // questionnaire
 import QuestionnaireFill from '../../components/tools/questionnaire/QuestionnaireFill.vue'
 import Questionnaire from '../../components/tools/questionnaire/Questionnaire.vue'
-import AnswerReport from '../../components/tools/questionnaire/AnswerReport.vue'
+import AnswerReport from '../../components/tools/questionnaire/QuestionnaireReport.vue'
 // voting
 import Voting from '../../components/tools/voting/Voting.vue'
 import VotingFill from '../../components/tools/voting/VotingFill.vue'

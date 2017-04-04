@@ -32,7 +32,7 @@
   import * as MUTATION_TYPES from '../../../store/mutation-types'
   import TabItem from '../../base/TabItem'
   import Voting from './Voting.vue'
-  import VotingFill from './VotingFill.vue'
+  import VotingReport from './VotingReport.vue'
 
   export default{
     name: '',
@@ -55,7 +55,7 @@
         this.$store.commit(MUTATION_TYPES.TOOLS_ADD_TAB, new TabItem('新建投票', Voting.name, ''))
       },
       onClickVoting (voting) {
-        this.$store.commit(MUTATION_TYPES.TOOLS_ADD_TAB, new TabItem(voting.title + '-统计数据', VotingFill.name, voting))
+        this.$store.commit(MUTATION_TYPES.TOOLS_ADD_TAB, new TabItem(voting.title + '-统计数据', VotingReport.name, voting))
       }
     },
     computed: {

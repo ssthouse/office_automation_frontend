@@ -31,7 +31,7 @@
            style="margin-top: 20px">
         <canvas :ref="questionnaire.questions.indexOf(question).toString() + 'chart'"
                 :id="questionnaire.questions.indexOf(question).toString() + 'chart'"
-                style="width: 300px; height: 300px;"></canvas>
+                style="height: 500px;"></canvas>
       </div>
 
       <!--如果是文字题, 给一个下拉面板-->
@@ -85,10 +85,10 @@
       // 填充所有选择题的数据到表格中
       showChart () {
         let component = this
-        this.answerAnalysis.answerBeans.forEach(answerBean => {
+        this.answerAnalysis.answerBeans.forEach(function (answerBean) {
           // 如果是问答题 就不管
-          let questionIndex = this.answerAnalysis.answerBeans.indexOf(answerBean)
-          if (this.questionnaire.questions[questionIndex].type === QUESTION_TYPES.TEXT_AREA) {
+          let questionIndex = component.answerAnalysis.answerBeans.indexOf(answerBean)
+          if (component.questionnaire.questions[questionIndex].type === QUESTION_TYPES.TEXT_AREA) {
             return
           }
           // 创建用于chart使用的数据
@@ -99,9 +99,6 @@
             labels.push(option)
             data.push(answerBean.dict[option])
           }
-          console.log('this is the data')
-          console.log(data)
-          console.log(labels)
           let name = component.answerAnalysis.answerBeans.indexOf(answerBean).toString() + 'chart'
           let ctx = component.$refs[name]
           let chart = new Chart(ctx, {
@@ -115,7 +112,7 @@
               }]
             },
             options: {
-              responsive: true,
+              responsive: false,
               scales: {
                 yAxes: [{
                   ticks: {

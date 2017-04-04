@@ -13,7 +13,7 @@
   // 问卷模块
   import Questionnaire from './questionnaire/Questionnaire.vue'
   import QuestionnaireFill from './questionnaire/QuestionnaireFill.vue'
-  import AnswerReport from './questionnaire/AnswerReport.vue'
+  import AnswerReport from './questionnaire/QuestionnaireReport.vue'
   import * as types from '../../store/mutation-types'
   // 投票模块
   import Voting from './voting/Voting.vue'
