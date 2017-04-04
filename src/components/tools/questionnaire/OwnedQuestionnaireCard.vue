@@ -56,17 +56,13 @@
     methods: {
       onAdd: function () {
         let questionnaire = QuestionnaireBean.getEmptyQuestionnaire()
-        console.log(questionnaire)
         this.$store.commit(types.TOOLS_ADD_TAB, new TabItem('新建调查问卷', Questionnaire.name, questionnaire))
       },
       clickQuestionnaire (questionnaire) {
-        console.log('this is the questionaire')
-        console.log(questionnaire)
         let tabItem = new TabItem(questionnaire.title, AnswerReport.name, questionnaire)
         this.$store.commit(types.TOOLS_ADD_TAB, tabItem)
       },
       clickEditQuestionnaire (questionnaire) {
-        console.log(questionnaire)
         let tabItem = new TabItem(questionnaire.title, Questionnaire.name, questionnaire)
         this.$store.commit(types.TOOLS_ADD_TAB, tabItem)
       },

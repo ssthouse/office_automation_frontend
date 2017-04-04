@@ -36,14 +36,14 @@
     name: 'voting-report',
     data () {
       return {
-        voting: this.data
+        voting: this.data,
+        none: ''
       }
     },
     props: ['data'],
     methods: {},
     computed: {},
     mounted: function () {
-      console.log(JSON.stringify(this.voting))
       // 获取ref
       let barCtx = this.$refs.barChart
       let pieCtx = this.$refs.pieChart
@@ -54,7 +54,6 @@
         data.push(voteOption.sum)
         labels.push(voteOption.title)
       })
-      console.log(data)
       let barChart = new Chart(barCtx, {
         type: 'bar',
         data: {
@@ -97,8 +96,8 @@
           responsive: true
         }
       })
-      console.log(barChart)
-      console.log(pieChart)
+      this.none = barChart
+      this.none = pieChart
     }
   }
 </script>

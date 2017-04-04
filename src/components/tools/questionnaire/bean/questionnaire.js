@@ -93,7 +93,6 @@ class Questionnaire {
 
   downQuestion (questionIndex) {
     let currentQuestion = this.questions.splice(questionIndex, 1)[0]
-    console.log(currentQuestion)
     let newIndex = questionIndex + 1
     if (questionIndex === this.questions.length) {
       newIndex = 0
@@ -109,7 +108,6 @@ class Questionnaire {
     return new Promise((resolve, reject) => {
       Vue.http.post('http://127.0.0.1:8080/office_automation_backend/questionnaire/detail', JSON.stringify(questionnaire))
         .then(response => {
-          console.log(response)
           if (response.body.ok !== true) {
             reject(response.body.msg)
           } else {

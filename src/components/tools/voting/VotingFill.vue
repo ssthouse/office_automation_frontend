@@ -65,7 +65,6 @@
           }, fail => {
             this.$message('投票提交失败')
           })
-        this.$message('投票提交成功')
       }
     },
     computed: {},

@@ -96,7 +96,6 @@ const actions = {
             reject('获取投票数据出错')
             return
           }
-          console.log(success.body.openVotingList)
           context.commit(types.TOOLS_SET_VOTING_OPEN_LIST, success.body.openVotingList)
           resolve('获取投票模块数据成功')
         }, fail => {

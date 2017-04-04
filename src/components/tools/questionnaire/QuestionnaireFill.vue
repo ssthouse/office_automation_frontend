@@ -64,7 +64,6 @@
     },
     props: ['data'],
     created: function () {
-      console.log(JSON.stringify(this.data))
       for (let i = 0; i < this.questionnaire.questions.length; i++) {
         let type = this.questionnaire.questions[i].type
         this.answers.push(Answer.getAnswer(i, type))
@@ -80,14 +79,10 @@
        * }
        */
       submit () {
-        console.log('submit')
-        console.log(JSON.stringify(this.answers))
         let postBean = {
           questionnaireId: this.questionnaire.questionnaireId,
           'answers': this.answers
         }
-        console.log('发出请求: 保存我的问卷回答')
-        console.log(JSON.stringify(postBean))
         this.$http.post(URL_POST_QUESTIONNAIRE_ANSWER, JSON.stringify(postBean))
           .then(response => {
             if (response.body.ok !== true) {

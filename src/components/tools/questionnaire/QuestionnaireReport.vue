@@ -31,7 +31,7 @@
            style="margin-top: 20px">
         <canvas :ref="questionnaire.questions.indexOf(question).toString() + 'chart'"
                 :id="questionnaire.questions.indexOf(question).toString() + 'chart'"
-                style="height: 500px;"></canvas>
+                style="height: 300px;"></canvas>
       </div>
 
       <!--如果是文字题, 给一个下拉面板-->
@@ -68,7 +68,8 @@
         answerAnalysis: new AnswerAnalysis(this.data),
         QUESTION_TYPES,
         name: '1',
-        nameModel: []
+        nameModel: [],
+        none: ''
       }
     },
     props: ['data'],
@@ -112,7 +113,7 @@
               }]
             },
             options: {
-              responsive: false,
+              responsive: true,
               scales: {
                 yAxes: [{
                   ticks: {
@@ -122,12 +123,11 @@
               }
             }
           })
-          console.log(chart)
+          component.none = chart
         })
       }
     },
     created: function () {
-      console.log(this.questionnaire)
       this.$http.get(URL_GET_ANSWER_ANALYSIS, {params: {questionnaireId: this.data.questionnaireId}})
         .then(response => {
           this.answerAnalysis = new AnswerAnalysis(this.data)
