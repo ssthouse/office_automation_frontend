@@ -10,8 +10,6 @@
                  mode="horizontal"
                  @select="changeMenuItem">
           <el-menu-item :index=paths.OA_SYSTEM_INDEX><i class="el-icon-menu"></i>OA 系统</el-menu-item>
-          <!--右边导航菜单-->
-          <el-menu-item :index=paths.USER_INFO_PATH><i class="el-icon-setting"></i>个人信息</el-menu-item>
         </el-menu>
       </el-col>
 

@@ -2,7 +2,7 @@
   <base-item
     :tabs="tabs"
     v-on:remove-tab="handleRemoveTab"
-    mainTabName="流程审批"
+    mainTabName="审批管理"
     :mainTabIs="MainTab.name"></base-item>
 </template>
 
