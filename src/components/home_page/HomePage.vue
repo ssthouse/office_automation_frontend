@@ -11,11 +11,13 @@
   import BaseItem from '../base/BaseItem.vue'
   import Vue from 'vue'
   import * as types from '../../store/mutation-types'
+  import UserInfo from './UserInfo.vue'
 
   Vue.component(MainTab.name, MainTab)
+  Vue.component(UserInfo.name, UserInfo)
 
   export default{
-    name: '',
+    name: 'home-page',
     data () {
       return {
         MainTab
@@ -27,7 +29,7 @@
     },
     computed: {
       tabs () {
-        return this.$store.state.homePageModule.all_tabs
+        return this.$store.state.homePageModule.allTabs
       }
     },
     methods: {

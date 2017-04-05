@@ -18,7 +18,7 @@
     props: [],
     methods: {
       addTab () {
-        this.$store.commit(types.HOMEPAGE_ADD_TAB, new TabItem('新建问卷调查', Questionnaire.name))
+        this.$store.commit(types.HOMEPAGE_ADD_TAB, new TabItem('新建问卷调查', Questionnaire.name, ''))
       }
     }
   }

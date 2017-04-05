@@ -11,7 +11,7 @@
         </div>
         <div>
           <!--用户名-->
-          <div style="margin-top: -20px">
+          <div style="margin-top: 20px">
             <el-input v-model="userInfo.username"
                       :disabled="true"
                       placeholder="请输入内容">
@@ -19,7 +19,7 @@
             </el-input>
           </div>
           <!--密码 默认不可编辑-->
-          <div style="margin-top: -20px;">
+          <div style="margin-top: 20px;">
             <el-input v-model="userInfo.password"
                       placeholder="请输入内容"
                       :disabled="true">
@@ -27,13 +27,13 @@
             </el-input>
           </div>
           <!--个人简介-->
-          <div style="margin-top: -20px;">
+          <div style="margin-top: 20px;">
             <el-input v-model="userInfo.description"
                       placeholder="请输入内容">
               <template slot="prepend">个人简介:</template>
             </el-input>
           </div>
-          <div style="float: right">
+          <div style="float: right; margin-top: 10px;">
             <el-button type="primary" @click="submitUserInfo()">提交修改</el-button>
           </div>
         </div>
@@ -57,27 +57,27 @@
             </el-select>
           </div>
           <!--真实姓名-->
-          <div style="margin-top: -20px; float: left; margin-right: 30px;">
+          <div class="input-item">
             <el-input v-model="userInfoDetail.name"
                       placeholder="请输入内容">
               <template slot="prepend">真实姓名:</template>
             </el-input>
           </div>
           <!--电话-->
-          <div style="float: left; margin-top: -20px; margin-right: 30px; clear: both">
+          <div class="input-item">
             <el-input v-model="userInfoDetail.phoneNumber"
                       placeholder="请输入您的电话号码">
               <template slot="prepend">电话:</template>
             </el-input>
           </div>
           <!--部门-->
-          <div style="float: left; margin-top: -20px; margin-right: 30px; clear: both;">
+          <div class="input-item">
             <el-input v-model="userInfoDetail.department"
                       placeholder="请输入您的部门">
               <template slot="prepend">部门:</template>
             </el-input>
           </div>
-          <div style="float: right">
+          <div style="float: right; margin-top: 10px;">
             <el-button @click="submitUserInfoDetail()"
                        type="primary">提交修改
             </el-button>
@@ -108,7 +108,7 @@
   ]
 
   export default{
-    name: 'userinfo',
+    name: 'user-info',
     data () {
       return {
         // 本地定义的一些常量
@@ -175,28 +175,28 @@
       this.userInfoDetail.gender = this.userEntity.gender
       this.userInfoDetail.phoneNumber = this.userEntity.phoneNumber
       this.userInfoDetail.department = this.userEntity.department
-//      let component = this
-//      this.$http.get('http://127.0.0.1:8080/office_automation_backend/user/info')
-//        .then(response => {
-//          if (response.body.ok !== true) {
-//            this.$message.error('用户数据获取失败: ' + response.body.msg)
-//            return
-//          }
-//          component.loading = false
-//          component.userEntity = response.body.user
-//          console.log(component.userEntity)
-//          let userEntity = component.userEntity
-//          // 填充UserInfo
-//          component.userInfo.username = userEntity.username
-//          component.userInfo.description = userEntity.description
-//          // 填充UserInfoDetail
-//          component.userInfoDetail.name = userEntity.name
-//          component.userInfoDetail.gender = userEntity.gender
-//          component.userInfoDetail.phoneNumber = userEntity.phoneNumber
-//          component.userInfoDetail.department = userEntity.department
-//        }, response => {
-//          component.$message.error('用户数据获取失败: ' + response.body.msg)
-//        })
+      let component = this
+      this.$http.get('http://127.0.0.1:8080/office_automation_backend/user/info')
+        .then(response => {
+          if (response.body.ok !== true) {
+            this.$message.error('用户数据获取失败: ' + response.body.msg)
+            return
+          }
+          component.loading = false
+          component.userEntity = response.body.user
+          console.log(component.userEntity)
+          let userEntity = component.userEntity
+          // 填充UserInfo
+          component.userInfo.username = userEntity.username
+          component.userInfo.description = userEntity.description
+          // 填充UserInfoDetail
+          component.userInfoDetail.name = userEntity.name
+          component.userInfoDetail.gender = userEntity.gender
+          component.userInfoDetail.phoneNumber = userEntity.phoneNumber
+          component.userInfoDetail.department = userEntity.department
+        }, response => {
+          component.$message.error('用户数据获取失败')
+        })
     }
   }
 </script>
@@ -206,5 +206,11 @@
     display: table;
     clear: both;
     content: "";
+  }
+
+  .input-item {
+    float: left;
+    margin-top: 20px;
+    clear: both;
   }
 </style>

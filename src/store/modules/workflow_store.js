@@ -5,6 +5,7 @@ const state = {
 }
 
 const tabIsSet = new Set()
+// const tabExcludedSet = new Set()
 
 const mutations = {
   [types.WORKFLOW_ADD_TAB] (state, tabItem) {

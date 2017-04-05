@@ -2,7 +2,7 @@ import * as types from '../mutation-types'
 
 // 所有的数据
 const state = {
-  all_tabs: []
+  allTabs: []
 }
 
 const tabIsSet = new Set()
@@ -14,11 +14,10 @@ const mutations = {
       return
     }
     tabIsSet.add(tabItem.tabIs)
-    state.all_tabs.push(tabItem)
+    state.allTabs.push(tabItem)
   },
   // 移除tab
   [types.HOMEPAGE_REMOVE_TAB] (state, tabIs) {
-    console.log(tabIs)
     if (tabIsSet.has(tabIs)) {
       tabIsSet.delete(tabIs)
     }

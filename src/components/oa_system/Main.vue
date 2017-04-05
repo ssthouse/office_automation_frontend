@@ -58,23 +58,14 @@
       'oa-system-menu': OaSystemMenu
     },
     methods: {
-      connectServer: function () {
-        this.$http.get('http://127.0.0.1:8080/office_automation_backend/user/ssthouse').then(response => {
-          let userinfo = response.body
-          console.log(userinfo.username)
-          console.log(userinfo.age)
-        }, resonse => {
-          this.$message('something is wrong!')
-        })
-      },
       changeMenuItem: function (key, keyPath) {
-        console.log(key + ' ' + keyPath)
+        // console.log(key + ' ' + keyPath)
       },
       /**
        * 用户信息点击事件
        */
       clickUserInfo: function () {
-        this.$store.commit(MUTATION_TYPES.HOMEPAGE_ADD_TAB, new TabItem('个人信息', UserInfo.name))
+        this.$store.commit(MUTATION_TYPES.HOMEPAGE_ADD_TAB, new TabItem('个人信息', UserInfo.name, ''))
       }
     },
     computed: {
