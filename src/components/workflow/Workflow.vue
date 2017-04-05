@@ -8,13 +8,15 @@
 
 <script>
   import * as types from '../../store/mutation-types'
-  import Questionnaire from '../tools/questionnaire/Questionnaire.vue'
   import BaseItem from '../base/BaseItem.vue'
   import MainTab from './MainTab.vue'
+  // the dynamic tab panel component
+  import NewAskLeave from './ask_leave/NewAskLeave.vue'
 
   import Vue from 'vue'
 
   Vue.component(MainTab.name, MainTab)
+  Vue.component(NewAskLeave.name, NewAskLeave)
 
   export default{
     name: '',
@@ -29,10 +31,6 @@
       }
     },
     methods: {
-      testAddTab () {
-        console.error('click add tab')
-        this.$store.commit(types.WORKFLOW_ADD_TAB, Questionnaire.name)
-      },
       handleRemoveTab (tabIs) {
         this.$store.commit(types.WORKFLOW_REMOVE_TAB, tabIs)
       }
