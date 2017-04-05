@@ -1,8 +1,12 @@
 <template>
   <div class="outter_div">
     <!--标题-->
-    <el-input placeholder="问卷标题"
-              v-model="questionnaire.title"></el-input>
+    <div class="questionnaire_title">
+      <span style="margin-bottom: 40px;">问卷标题: </span>
+      <el-input placeholder="请输入问卷标题"
+                style="margin-top: 20px;"
+                v-model="questionnaire.title"></el-input>
+    </div>
 
     <!--所有题目-->
     <el-card class="box-card" v-for="question in questionnaire.questions">
@@ -40,6 +44,7 @@
       <el-button @click="addTextAreaQues">文字题</el-button>
     </el-row>
     <el-button style="width: 90%"
+               type="primary"
                @click="toggleShowQuestions">
       增加问题
     </el-button>
@@ -299,11 +304,6 @@
 </script>
 
 <style>
-  .el-input {
-    width: 90%;
-    margin-top: 20px;
-    margin-bottom: 20px;
-  }
 
   .box-card {
     margin-left: auto;
@@ -330,5 +330,11 @@
     float: right;
     margin-right: 10px;
     margin-top: 10px;
+  }
+
+  .questionnaire_title {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 30px;
   }
 </style>
