@@ -62,7 +62,7 @@
         </el-form-item>
         <el-form-item label="审批人">
           <div style="margin-left: 20px;">
-            <el-input v-model="askLeave.approver"
+            <el-input v-model="askLeave.approverUsername"
                       placeholder="请输入审批人id"
                       style="float: left;"></el-input>
             <el-button style="float: right; margin-top: 5px;">查找审批人</el-button>
@@ -70,6 +70,7 @@
         </el-form-item>
 
         <el-button type="primary"
+                   :disabled="isFinished"
                    @click="submit()">提交申请
         </el-button>
       </el-form>
@@ -81,6 +82,8 @@
 
 <script>
   import AskLeave from './bean/askLeave'
+
+  const URL_POST_NEW_ASK_LEAVE = 'http://127.0.0.1:8080/office_automation_backend/ask_leave/new'
 
   export default{
     name: 'new-ask-leave',
@@ -112,7 +115,8 @@
           disabledDate (time) {
             return time.getTime() < Date.now() - 8.64e7
           }
-        }
+        },
+        isFinished: false
       }
     },
     props: [],
@@ -130,11 +134,27 @@
         // 格式化时间字符串
         this.askLeave.beginDate = this.getFormatDateStr(this.beginDate)
         this.askLeave.endDate = this.getFormatDateStr(this.endDate)
+        // 填充username
+        this.askLeave.username = this.$store.state.mainModule.user.username
         if (this.askLeave.isValid() !== true) {
           this.$message('表单信息不完整')
           return
         }
-        console.log(this.askLeave)
+        this.postNewAskLeave()
+      },
+      postNewAskLeave () {
+        // console.log(JSON.stringify(this.askLeave))
+        this.$http.post(URL_POST_NEW_ASK_LEAVE, JSON.stringify(this.askLeave))
+          .then(response => {
+            if (response.body.ok !== true) {
+              this.$message('提交失败: ' + response.body.msg)
+              return
+            }
+            this.$message('提交成功')
+            this.isFinished = true
+          }, response => {
+            this.$message('提交失败: 请稍后重试')
+          })
       }
     },
     computed: {},
