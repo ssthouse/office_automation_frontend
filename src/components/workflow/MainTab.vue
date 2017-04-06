@@ -98,7 +98,7 @@
       },
       onClickRefreshWorkflowData () {
         // 触发刷新所有的数据的 event
-        EventBus.$emit(Cons.EVENT_WORKFLOW_DATA_UPDATE)
+        EventBus.$emit(Cons.EVENT_WORKFLOW_UPDATE_ALL)
       }
     },
     components: {

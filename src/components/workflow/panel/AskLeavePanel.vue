@@ -133,9 +133,13 @@
     computed: {},
     created: function () {
       this.getAskLeaveList()
-      EventBus.$on(Cons.EVENT_WORKFLOW_DATA_UPDATE, () => {
+      // 全局数据刷新
+      EventBus.$on(Cons.EVENT_WORKFLOW_UPDATE_ALL, () => {
         this.getAskLeaveList()
-        console.log('get event update askLeaveList')
+      })
+      // 请假审批数据刷新
+      EventBus.$on(Cons.EVENT_WORKFLOW_UPDATE_ASK_LEAVE, () => {
+        this.getAskLeaveList()
       })
     }
   }
