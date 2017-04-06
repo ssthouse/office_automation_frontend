@@ -146,7 +146,7 @@
       },
       postAskLeave () {
         let url = ''
-        if (this.askLeave.id !== null) {
+        if (this.askLeave.id !== undefined || this.askLeave.id <= 0) {
           url = URL_POST_UPDATE_ASK_LEAVE
         } else {
           url = URL_POST_NEW_ASK_LEAVE

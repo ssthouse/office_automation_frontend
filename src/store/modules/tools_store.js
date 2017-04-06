@@ -13,9 +13,8 @@ import VotingReport from '../../components/tools/voting/VotingReport.vue'
 const state = {
   // 个人板块 全局状态
   allTabs: [],
-  // open questionnaire
+  // questionnaire
   questionnaireList: [],
-  // owned questionnaire
   ownedQuestionnaireList: [],
   // voting
   openVotingList: [],

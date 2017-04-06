@@ -33,9 +33,17 @@
     </el-row>
 
     <!--展示所有数据的折叠面板-->
-    <el-row>
-      <el-collapse accordion
-                   style="margin-left: 20px; margin-right: 20px;">
+
+    <el-card type="box-card"
+             style="margin-left: 20px; margin-right: 20px;">
+      <div slot="header">
+        <span>我的审批:</span>
+        <el-button style="margin-left: 40px;"
+                   @click="onClickRefreshWorkflowData()">刷新
+        </el-button>
+      </div>
+
+      <el-collapse accordion>
         <el-collapse-item title="请假" name="1"
                           class="panel-title">
           <ask-leave-panel></ask-leave-panel>
@@ -49,7 +57,7 @@
         <el-collapse-item title="报销" name="5"
                           class="panel-title"></el-collapse-item>
       </el-collapse>
-    </el-row>
+    </el-card>
 
   </div>
 </template>
@@ -60,6 +68,9 @@
   import TabItem from '../base/TabItem'
   import Vue from 'vue'
   import AskLeavePanel from './panel/AskLeavePanel.vue'
+  // 事件总线
+  import {EventBus} from '../base/EventBus'
+  import * as Cons from '../base/Constant'
 
   Vue.component(AskLeavePanel.name, AskLeavePanel)
 
@@ -84,6 +95,10 @@
       },
       onClickReimburse () {
 
+      },
+      onClickRefreshWorkflowData () {
+        // 触发刷新所有的数据的 event
+        EventBus.$emit(Cons.EVENT_WORKFLOW_DATA_UPDATE)
       }
     },
     components: {

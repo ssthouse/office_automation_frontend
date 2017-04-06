@@ -53,12 +53,15 @@
 </template>
 
 <script>
-  import {BASE_URL} from '../../base/Constant'
+  import * as Cons from '../../base/Constant'
   import * as MUTATION_TYPES from '../../../store/mutation-types'
-  const URL_GET_USER_ASK_LEAVE = BASE_URL + '/ask_leave/user'
   import AskLeave from '../ask_leave/bean/askLeave'
   import AskLeaveComponent from '../ask_leave/AskLeave.vue'
   import TabItem from '../../base/TabItem'
+  // eventbus
+  import {EventBus} from '../../base/EventBus'
+
+  const URL_GET_OPEN_ASK_LEAVE = Cons.BASE_URL + '/ask_leave/open'
 
   export default{
     name: 'ask-leave-panel',
@@ -98,7 +101,7 @@
         })
       },
       deleteAskLeave (index) {
-        this.$http.get(BASE_URL + '/ask_leave/delete', {
+        this.$http.get(Cons.BASE_URL + '/ask_leave/delete', {
           params: {
             id: this.askLeaveList[index].id
           }
@@ -114,7 +117,7 @@
         })
       },
       getAskLeaveList () {
-        this.$http.get(URL_GET_USER_ASK_LEAVE)
+        this.$http.get(URL_GET_OPEN_ASK_LEAVE)
           .then(response => {
             if (response.body.ok !== true) {
               this.$message(response.body.msg)
@@ -130,6 +133,10 @@
     computed: {},
     created: function () {
       this.getAskLeaveList()
+      EventBus.$on(Cons.EVENT_WORKFLOW_DATA_UPDATE, () => {
+        this.getAskLeaveList()
+        console.log('get event update askLeaveList')
+      })
     }
   }
 </script>
