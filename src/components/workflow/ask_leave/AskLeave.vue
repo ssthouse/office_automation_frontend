@@ -168,7 +168,7 @@
     computed: {},
     created: function () {
       // means to create a new askLeave
-      if (this.data === undefined) {
+      if (this.data === null) {
         return
       }
       this.askLeave = this.data

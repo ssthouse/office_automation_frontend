@@ -98,8 +98,6 @@
           return
         }
         let requestBody = JSON.stringify(this.voting)
-        console.log('this is the request body to save a new voting***************************************')
-        console.log(requestBody)
         this.$http.post(URL_POST_NEW_VOTING, requestBody)
           .then(response => {
             if (response.body.ok !== true) {

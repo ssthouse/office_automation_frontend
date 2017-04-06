@@ -87,26 +87,49 @@
     props: [],
     methods: {
       handleEdit (index, data) {
-        console.log(index + ' ****' + JSON.stringify(data))
         this.$store.commit(MUTATION_TYPES.WORKFLOW_ADD_TAB, new TabItem('请假', AskLeaveComponent.name, data))
       },
       handleDelete (index, data) {
-        console.log(index + ' ****' + data)
-      }
-    },
-    computed: {},
-    created: function () {
-      this.$http.get(URL_GET_USER_ASK_LEAVE)
-        .then(response => {
+        this.$alert('确认删除? 此操作不可逆.', '确认操作', {
+          confirmButtonText: '确定',
+          callback: action => {
+            this.deleteAskLeave(index)
+          }
+        })
+      },
+      deleteAskLeave (index) {
+        this.$http.get(BASE_URL + '/ask_leave/delete', {
+          params: {
+            id: this.askLeaveList[index].id
+          }
+        }).then(response => {
           if (response.body.ok !== true) {
             this.$message(response.body.msg)
             return
           }
-          // 请求成功
-          this.askLeaveList = AskLeave.parseAskLeaveList(response.body.askLeaveList)
+          this.$message('删除成功')
+          this.getAskLeaveList()
         }, response => {
-          this.$message('请假审批列表获取失败')
+          this.$message('删除失败')
         })
+      },
+      getAskLeaveList () {
+        this.$http.get(URL_GET_USER_ASK_LEAVE)
+          .then(response => {
+            if (response.body.ok !== true) {
+              this.$message(response.body.msg)
+              return
+            }
+            // 请求成功
+            this.askLeaveList = AskLeave.parseAskLeaveList(response.body.askLeaveList)
+          }, response => {
+            this.$message('请假审批列表获取失败')
+          })
+      }
+    },
+    computed: {},
+    created: function () {
+      this.getAskLeaveList()
     }
   }
 </script>
