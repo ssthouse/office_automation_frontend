@@ -1,11 +1,11 @@
 <template>
   <div>
     <!--上方 新增的一排按钮-->
-    <el-row>
-      <el-col :span="24">
-        <el-card class="box-card">
-          <div style="margin-bottom: -10px;">
-            <span style="font-size: large; float: left; margin-left: 20px;">新建审批事项:</span>
+    <el-col :span="24">
+      <el-card class="box-card">
+        <div style="margin-bottom: -10px;">
+          <span style="font-size: large; float: left; margin-left: 20px;">新建审批事项:</span>
+          <el-button-group>
             <el-button type="primary"
                        class="workflow-tag"
                        @click="onClickAskLeave()">请假
@@ -26,23 +26,19 @@
                        class="workflow-tag"
                        @click="onClickReimburse()">报销
             </el-button>
-          </div>
-        </el-card>
-      </el-col>
-
-    </el-row>
+          </el-button-group>
+        </div>
+      </el-card>
+    </el-col>
 
     <!--展示所有数据的折叠面板-->
-
-    <el-card type="box-card"
-             style="margin-left: 20px; margin-right: 20px;">
+    <el-card style="margin-left: 20px; margin-right: 20px; margin-top: 40px;">
       <div slot="header">
-        <span>我的审批:</span>
+        <span>我发起的审批:</span>
         <el-button style="margin-left: 40px;"
                    @click="onClickRefreshWorkflowData()">刷新
         </el-button>
       </div>
-
       <el-collapse accordion>
         <el-collapse-item title="请假" name="1"
                           class="panel-title">
@@ -59,6 +55,29 @@
       </el-collapse>
     </el-card>
 
+    <!--展示管理者数据的面板-->
+    <el-card style="margin-left: 20px; margin-right: 20px; margin-top: 40px;">
+      <div slot="header">
+        <span>我管理的审批:</span>
+        <el-button style="margin-left: 40px;"
+                   @click="onClickRefreshWorkflowData()">刷新
+        </el-button>
+      </div>
+      <el-collapse accordion>
+        <el-collapse-item title="请假" name="1"
+                          class="panel-title">
+          <ask-leave-panel></ask-leave-panel>
+        </el-collapse-item>
+        <el-collapse-item title="加班" name="2"
+                          class="panel-title"></el-collapse-item>
+        <el-collapse-item title="出差" name="3"
+                          class="panel-title"></el-collapse-item>
+        <el-collapse-item title="外出" name="4"
+                          class="panel-title"></el-collapse-item>
+        <el-collapse-item title="报销" name="5"
+                          class="panel-title"></el-collapse-item>
+      </el-collapse>
+    </el-card>
   </div>
 </template>
 

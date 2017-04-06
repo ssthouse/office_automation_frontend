@@ -96,7 +96,9 @@
         this.$alert('确认删除? 此操作不可逆.', '确认操作', {
           confirmButtonText: '确定',
           callback: action => {
-            this.deleteAskLeave(index)
+            if (action === 'confirm') {
+              this.deleteAskLeave(index)
+            }
           }
         })
       },
