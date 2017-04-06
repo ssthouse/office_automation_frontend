@@ -46,6 +46,20 @@ class AskLeave {
     }
     return true
   }
+
+  static parseAskLeave (askLeaveJson) {
+    let askLeave = new AskLeave()
+    Object.assign(askLeave, askLeaveJson)
+    return askLeave
+  }
+
+  static parseAskLeaveList (askLeaveListJson) {
+    let askLeaveList = []
+    askLeaveListJson.forEach(function (askLeaveJson) {
+      askLeaveList.push(AskLeave.parseAskLeave(askLeaveJson))
+    })
+    return askLeaveList
+  }
 }
 
 export default AskLeave

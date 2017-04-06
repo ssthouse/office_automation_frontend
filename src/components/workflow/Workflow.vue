@@ -11,7 +11,7 @@
   import BaseItem from '../base/BaseItem.vue'
   import MainTab from './MainTab.vue'
   // the dynamic tab panel component
-  import NewAskLeave from './ask_leave/NewAskLeave.vue'
+  import NewAskLeave from './ask_leave/AskLeave.vue'
 
   import Vue from 'vue'
 

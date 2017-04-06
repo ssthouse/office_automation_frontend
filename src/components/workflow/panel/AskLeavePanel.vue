@@ -1,0 +1,116 @@
+<template>
+  <div>
+    <!--需要展示的数据:-->
+    <!--{-->
+    <!--"id": 1,-->
+    <!--"leaveType": "sick",-->
+    <!--"beginDate": "2017-11-11",-->
+    <!--"endDate": "2017-11-11",-->
+    <!--"dayNum": 1,-->
+    <!--"description": "des",-->
+    <!--"username": "ssthouse",-->
+    <!--"approverUsername": "ssthouse",-->
+    <!--"state": "begin"-->
+    <!--}-->
+    <el-table
+      :data="askLeaveList"
+      stripe
+      style="width: 100%">
+      <el-table-column prop="leaveType"
+                       label="类型"
+                       width="100"></el-table-column>
+      <el-table-column label="时间区间"
+                       width="220">
+        <template scope="scope">
+          <span>{{scope.row.beginDate}} 至 {{scope.row.endDate}}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="天数"
+                       width="100"
+                       prop="dayNum"></el-table-column>
+      <el-table-column label="状态"
+                       width="100"
+                       prop="state"></el-table-column>
+      <el-table-column label="审批人"
+                       width="120"
+                       prop="approverUsername"></el-table-column>
+      <el-table-column label="操作"
+                       width="200">
+        <template scope="scope">
+          <el-button
+            size="small"
+            @click="handleEdit(scope.$index, scope.row)">编辑
+          </el-button>
+          <el-button
+            size="small"
+            type="danger"
+            @click="handleDelete(scope.$index, scope.row)">删除
+          </el-button>
+        </template>
+      </el-table-column>
+    </el-table>
+  </div>
+</template>
+
+<script>
+  import {BASE_URL} from '../../base/Constant'
+  import * as MUTATION_TYPES from '../../../store/mutation-types'
+  const URL_GET_USER_ASK_LEAVE = BASE_URL + '/ask_leave/user'
+  import AskLeave from '../ask_leave/bean/askLeave'
+  import AskLeaveComponent from '../ask_leave/AskLeave.vue'
+  import TabItem from '../../base/TabItem'
+
+  export default{
+    name: 'ask-leave-panel',
+    data () {
+      return {
+        askLeaveList: [],
+        tableData: [{
+          date: '2016-05-02',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }, {
+          date: '2016-05-04',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1517 弄'
+        }, {
+          date: '2016-05-01',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1519 弄'
+        }, {
+          date: '2016-05-03',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1516 弄'
+        }]
+      }
+    },
+    props: [],
+    methods: {
+      handleEdit (index, data) {
+        console.log(index + ' ****' + JSON.stringify(data))
+        this.$store.commit(MUTATION_TYPES.WORKFLOW_ADD_TAB, new TabItem('请假', AskLeaveComponent.name, data))
+      },
+      handleDelete (index, data) {
+        console.log(index + ' ****' + data)
+      }
+    },
+    computed: {},
+    created: function () {
+      this.$http.get(URL_GET_USER_ASK_LEAVE)
+        .then(response => {
+          if (response.body.ok !== true) {
+            this.$message(response.body.msg)
+            return
+          }
+          // 请求成功
+          this.askLeaveList = AskLeave.parseAskLeaveList(response.body.askLeaveList)
+        }, response => {
+          this.$message('请假审批列表获取失败')
+        })
+    }
+  }
+</script>
+
+<style>
+
+</style>

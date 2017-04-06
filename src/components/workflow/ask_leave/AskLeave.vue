@@ -82,11 +82,13 @@
 
 <script>
   import AskLeave from './bean/askLeave'
+  import {BASE_URL} from '../../base/Constant'
 
-  const URL_POST_NEW_ASK_LEAVE = 'http://127.0.0.1:8080/office_automation_backend/ask_leave/new'
+  const URL_POST_NEW_ASK_LEAVE = BASE_URL + '/ask_leave/new'
+  const URL_POST_UPDATE_ASK_LEAVE = BASE_URL + '/ask_leave/update'
 
   export default{
-    name: 'new-ask-leave',
+    name: 'ask-leave',
     data () {
       return {
         askLeave: new AskLeave(),
@@ -119,10 +121,10 @@
         isFinished: false
       }
     },
-    props: [],
+    props: ['data'],
     methods: {
       getFormatDateStr (date) {
-        if (date === null) {
+        if (date === undefined || date === null) {
           return ''
         }
         if (!(date instanceof Date)) {
@@ -140,11 +142,17 @@
           this.$message('表单信息不完整')
           return
         }
-        this.postNewAskLeave()
+        this.postAskLeave()
       },
-      postNewAskLeave () {
-        // console.log(JSON.stringify(this.askLeave))
-        this.$http.post(URL_POST_NEW_ASK_LEAVE, JSON.stringify(this.askLeave))
+      postAskLeave () {
+        let url = ''
+        if (this.askLeave.id !== null) {
+          url = URL_POST_UPDATE_ASK_LEAVE
+        } else {
+          url = URL_POST_NEW_ASK_LEAVE
+        }
+        console.log(url)
+        this.$http.post(url, JSON.stringify(this.askLeave))
           .then(response => {
             if (response.body.ok !== true) {
               this.$message('提交失败: ' + response.body.msg)
@@ -159,7 +167,14 @@
     },
     computed: {},
     created: function () {
-
+      // means to create a new askLeave
+      if (this.data === undefined) {
+        return
+      }
+      this.askLeave = this.data
+      // 将日期解析到UI
+      this.beginDate = new Date(this.askLeave.beginDate)
+      this.endDate = new Date(this.askLeave.endDate)
     }
   }
 </script>
