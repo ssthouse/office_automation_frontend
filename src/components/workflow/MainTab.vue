@@ -2,9 +2,9 @@
   <div>
     <!--上方 新增的一排按钮-->
     <el-col :span="24">
-      <el-card class="box-card">
+      <el-card style="margin: 20px;">
         <div style="margin-bottom: -10px;">
-          <span style="font-size: large; float: left; margin-left: 20px;">新建审批事项:</span>
+          <span style="font-size: large; margin-right: 20px;">新建审批事项:</span>
           <el-button-group>
             <el-button type="primary"
                        class="workflow-tag"

@@ -69,12 +69,18 @@
           </div>
         </el-form-item>
 
-        <el-button type="primary"
-                   :disabled="isFinished"
-                   @click="submit()">提交申请
-        </el-button>
+        <div>
+          <el-button type="primary"
+                     :disabled="isFinished"
+                     @click="saveAsDraft()">保存草稿
+          </el-button>
+          <el-button type="primary"
+                     style="margin-left: 60px;"
+                     :disabled="isFinished"
+                     @click="saveAsUnapproved()">提交申请
+          </el-button>
+        </div>
       </el-form>
-
     </el-card>
 
   </div>
@@ -135,16 +141,31 @@
         }
         return date.toISOString().slice(0, 10)
       },
-      submit () {
+      fillInAskLeaveData () {
         // 格式化时间字符串
         this.askLeave.beginDate = this.getFormatDateStr(this.beginDate)
         this.askLeave.endDate = this.getFormatDateStr(this.endDate)
         // 填充username
         this.askLeave.username = this.$store.state.mainModule.user.username
+      },
+      // 直接提交为待审核
+      saveAsUnapproved () {
+        this.fillInAskLeaveData()
         if (this.askLeave.isValid() !== true) {
           this.$message('表单信息不完整')
           return
         }
+        this.askLeave.state = AskLeave.LEAVE_STATE_UNAPPROVED
+        this.postAskLeave()
+      },
+      // 保存为草稿
+      saveAsDraft () {
+        this.fillInAskLeaveData()
+        if (this.askLeave.isValid() !== true) {
+          this.$message('表单信息不完整')
+          return
+        }
+        this.askLeave.state = AskLeave.LEAVE_STATE_DRAFT
         this.postAskLeave()
       },
       postAskLeave () {
@@ -154,7 +175,6 @@
         } else {
           url = URL_POST_NEW_ASK_LEAVE
         }
-        console.log(url)
         this.$http.post(url, JSON.stringify(this.askLeave))
           .then(response => {
             if (response.body.ok !== true) {

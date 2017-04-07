@@ -29,7 +29,7 @@
                        width="100"
                        prop="dayNum"></el-table-column>
       <el-table-column label="状态"
-                       width="100"
+                       width="120"
                        prop="state"></el-table-column>
       <el-table-column label="审批人"
                        width="120"
