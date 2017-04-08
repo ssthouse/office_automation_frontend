@@ -18,6 +18,8 @@ Vue.use(ElementUI)
 Vue.use(VueResource)
 // Vue.use(VueQuillEditor)
 
+require('!style!css!bootstrap/dist/css/bootstrap.css')
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

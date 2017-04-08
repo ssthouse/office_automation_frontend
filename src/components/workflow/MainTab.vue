@@ -87,11 +87,13 @@
   import TabItem from '../base/TabItem'
   import Vue from 'vue'
   import AskLeavePanel from './panel/AskLeavePanel.vue'
+  import AskLeaveDetail from './ask_leave/AskLeaveDetail.vue'
   // 事件总线
   import {EventBus} from '../base/EventBus'
   import * as Cons from '../base/Constant'
 
   Vue.component(AskLeavePanel.name, AskLeavePanel)
+  Vue.component(AskLeaveDetail.name, AskLeaveDetail)
 
   export default{
     name: 'workflow-main-tab',

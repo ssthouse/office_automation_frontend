@@ -3,7 +3,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 // 登录模块
-import Login from '../components/login/Login.vue'
+import Login from '../components/oa_system/login/Login.vue'
 
 // OA 系统模块
 import Main from '../components/oa_system/Main.vue'
