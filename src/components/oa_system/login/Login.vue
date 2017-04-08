@@ -2,7 +2,7 @@
   <div class="login-wrap">
     <div class="ms-title">AO System Login</div>
     <div class="ms-login">
-      <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="0px" class="demo-ruleForm">
+      <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="0px">
         <el-form-item prop="username">
           <el-input v-model="ruleForm.username" placeholder="username"></el-input>
         </el-form-item>
@@ -16,7 +16,7 @@
         <div class="login-btn">
           <el-button type="primary" @click="getToken()">登录</el-button>
         </div>
-        <p style="font-size:12px;line-height:30px;color:#999;">Tips : 如果希望进入管理员页面, 请输入管理员账号</p>
+        <p style="font-size:12px;line-height:30px;color:#999; margin-top: 30px;">Tips : 如果希望进入管理员页面, 请输入管理员账号</p>
       </el-form>
     </div>
   </div>
@@ -52,7 +52,6 @@
         })
         this.$http.post('http://127.0.0.1:8080/office_automation_backend/token', requestBody)
           .then(response => {
-            console.log(response)
             let component = this
             let responseBody = response.body
             if (responseBody.ok) {
@@ -68,7 +67,6 @@
             }
             // 登录成功后
           }, response => {
-            console.log(response)
             this.$message.error('登录失败!')
           })
       }
@@ -79,30 +77,25 @@
 <style scoped>
   .login-wrap {
     position: relative;
+    text-align: center;
     width: 100%;
     height: 100%;
     background-color: #2c3e50;
   }
 
   .ms-title {
-    position: absolute;
-    top: 50%;
-    width: 100%;
-    margin-top: -230px;
+    padding-top: 100px;
     text-align: center;
     font-size: 30px;
     color: #fff;
-
   }
 
   .ms-login {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 300px;
+    text-align: center;
+    width: 360px;
     height: 200px;
-    margin: -150px 0 0 -190px;
     padding: 40px;
+    margin: 40px auto 0 auto;
     border-radius: 5px;
     background: #fff;
   }

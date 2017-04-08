@@ -37,11 +37,18 @@
       <el-table-column label="操作"
                        width="200">
         <template scope="scope">
+          <!--the two button can is able only when in unapproved || approved state-->
           <el-button
+            size="small"
+            @click="handleDetail(scope.$index, scope.row)">详情
+          </el-button>
+          <el-button
+            :disabled="scope.row.state !== 'draft'"
             size="small"
             @click="handleEdit(scope.$index, scope.row)">编辑
           </el-button>
           <el-button
+            :disabled="scope.row.state !== 'draft'"
             size="small"
             type="danger"
             @click="handleDelete(scope.$index, scope.row)">删除
@@ -56,6 +63,7 @@
   import * as Cons from '../../base/Constant'
   import * as MUTATION_TYPES from '../../../store/mutation-types'
   import AskLeave from '../ask_leave/bean/askLeave'
+  import AskLeaveDetail from '../ask_leave/AskLeaveDetail.vue'
   import AskLeaveComponent from '../ask_leave/AskLeave.vue'
   import TabItem from '../../base/TabItem'
   // eventbus
@@ -67,28 +75,15 @@
     name: 'ask-leave-panel',
     data () {
       return {
-        askLeaveList: [],
-        tableData: [{
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1517 弄'
-        }, {
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1519 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
-        }]
+        askLeaveList: []
       }
     },
     props: [],
     methods: {
+      handleDetail (index, data) {
+        // TODO open new tab for datail
+        this.$store.commit(MUTATION_TYPES.WORKFLOW_ADD_TAB, new TabItem('请假详情', AskLeaveDetail.name, data))
+      },
       handleEdit (index, data) {
         this.$store.commit(MUTATION_TYPES.WORKFLOW_ADD_TAB, new TabItem('请假', AskLeaveComponent.name, data))
       },
