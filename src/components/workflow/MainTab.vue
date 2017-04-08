@@ -66,7 +66,7 @@
       <el-collapse accordion>
         <el-collapse-item title="请假" name="1"
                           class="panel-title">
-          <ask-leave-panel></ask-leave-panel>
+          <ask-leave-admin-panel></ask-leave-admin-panel>
         </el-collapse-item>
         <el-collapse-item title="加班" name="2"
                           class="panel-title"></el-collapse-item>
@@ -87,13 +87,17 @@
   import TabItem from '../base/TabItem'
   import Vue from 'vue'
   import AskLeavePanel from './panel/AskLeavePanel.vue'
+  import AskLeaveAdminPanel from './panel/AskLeaveAdminPanel.vue'
   import AskLeaveDetail from './ask_leave/AskLeaveDetail.vue'
+  import AskLeaveAdminDetail from './ask_leave/AskLeaveAdminDetail.vue'
   // 事件总线
   import {EventBus} from '../base/EventBus'
   import * as Cons from '../base/Constant'
 
   Vue.component(AskLeavePanel.name, AskLeavePanel)
+  Vue.component(AskLeaveAdminPanel.name, AskLeaveAdminPanel)
   Vue.component(AskLeaveDetail.name, AskLeaveDetail)
+  Vue.component(AskLeaveAdminDetail.name, AskLeaveAdminDetail)
 
   export default{
     name: 'workflow-main-tab',

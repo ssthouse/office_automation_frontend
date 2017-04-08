@@ -40,18 +40,18 @@
           <!--the two button can is able only when in unapproved || approved state-->
           <el-button
             size="small"
-            @click="handleDetail(scope.$index, scope.row)">详情
+            @click="onClickHandleDetail(scope.$index, scope.row)">详情
           </el-button>
           <el-button
             :disabled="scope.row.state !== 'draft'"
             size="small"
-            @click="handleEdit(scope.$index, scope.row)">编辑
+            @click="onClickHandleEdit(scope.$index, scope.row)">编辑
           </el-button>
           <el-button
             :disabled="scope.row.state !== 'draft'"
             size="small"
             type="danger"
-            @click="handleDelete(scope.$index, scope.row)">删除
+            @click="onClickHandleDelete(scope.$index, scope.row)">删除
           </el-button>
         </template>
       </el-table-column>
@@ -80,14 +80,13 @@
     },
     props: [],
     methods: {
-      handleDetail (index, data) {
-        // TODO open new tab for datail
+      onClickHandleDetail (index, data) {
         this.$store.commit(MUTATION_TYPES.WORKFLOW_ADD_TAB, new TabItem('请假详情', AskLeaveDetail.name, data))
       },
-      handleEdit (index, data) {
+      onClickHandleEdit (index, data) {
         this.$store.commit(MUTATION_TYPES.WORKFLOW_ADD_TAB, new TabItem('请假', AskLeaveComponent.name, data))
       },
-      handleDelete (index, data) {
+      onClickHandleDelete (index, data) {
         this.$alert('确认删除? 此操作不可逆.', '确认操作', {
           confirmButtonText: '确定',
           callback: action => {
