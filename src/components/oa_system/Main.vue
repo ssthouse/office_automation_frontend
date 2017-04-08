@@ -15,9 +15,10 @@
 
       <!--右上角用户名-->
       <el-col :span="4">
-        <div @click="clickUserInfo()">
+        <div @click="clickUserInfo()" style="text-align: center;">
           <img id="avatar" src="../../assets/logo.png"/>
-          <p id="textUsername">{{username}}</p>
+          <span id="textUsername"
+                style="">{{username}}</span>
         </div>
       </el-col>
     </el-row>
@@ -113,9 +114,10 @@
   }
 
   #textUsername {
-    float: right;
-    margin-right: 10px;
     color: white;
+    vertical-align: middle;
+    height: 100%;
+    margin: 0 5px 0 5px;
   }
 
   #oa_system_panel {
