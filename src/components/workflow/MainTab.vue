@@ -34,7 +34,7 @@
     <!--展示所有数据的折叠面板-->
     <el-card style="margin-left: 20px; margin-right: 20px; margin-top: 40px;">
       <div slot="header">
-        <span>我发起的审批:</span>
+        <span style="font-size: larger">我发起的审批:</span>
         <el-button style="margin-left: 40px;"
                    @click="onClickRefreshWorkflowData()">刷新
         </el-button>
@@ -48,8 +48,6 @@
                           class="panel-title"></el-collapse-item>
         <el-collapse-item title="出差" name="3"
                           class="panel-title"></el-collapse-item>
-        <el-collapse-item title="外出" name="4"
-                          class="panel-title"></el-collapse-item>
         <el-collapse-item title="报销" name="5"
                           class="panel-title"></el-collapse-item>
       </el-collapse>
@@ -58,7 +56,7 @@
     <!--展示管理者数据的面板-->
     <el-card style="margin-left: 20px; margin-right: 20px; margin-top: 40px;">
       <div slot="header">
-        <span>我管理的审批:</span>
+        <span style="font-size: larger">我管理的审批:</span>
         <el-button style="margin-left: 40px;"
                    @click="onClickRefreshWorkflowData()">刷新
         </el-button>
@@ -71,8 +69,6 @@
         <el-collapse-item title="加班" name="2"
                           class="panel-title"></el-collapse-item>
         <el-collapse-item title="出差" name="3"
-                          class="panel-title"></el-collapse-item>
-        <el-collapse-item title="外出" name="4"
                           class="panel-title"></el-collapse-item>
         <el-collapse-item title="报销" name="5"
                           class="panel-title"></el-collapse-item>

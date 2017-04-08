@@ -58,7 +58,7 @@
   // eventbus
   import {EventBus} from '../../base/EventBus'
 
-  const URL_GET_OPEN_ASK_LEAVE = Cons.BASE_URL + '/ask_leave/open'
+  const URL_GET_ADMIN_ASK_LEAVE = Cons.BASE_URL + '/ask_leave/admin'
 
   export default{
     name: 'ask-leave-admin-panel',
@@ -70,7 +70,7 @@
     props: [],
     methods: {
       getAskLeaveList () {
-        this.$http.get(URL_GET_OPEN_ASK_LEAVE)
+        this.$http.get(URL_GET_ADMIN_ASK_LEAVE)
           .then(response => {
             if (response.body.ok !== true) {
               this.$message(response.body.msg)
