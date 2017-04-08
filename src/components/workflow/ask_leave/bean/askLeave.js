@@ -18,6 +18,7 @@ class AskLeave {
   static LEAVE_STATE_DRAFT = 'draft'
   static LEAVE_STATE_UNAPPROVED = 'unapproved'
   static LEAVE_STATE_APPROVED = 'approved'
+  static LEAVE_STATE_DECLINE = 'decline'
 
   constructor () {
     this.leaveType = ''
