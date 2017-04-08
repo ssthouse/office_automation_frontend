@@ -82,18 +82,32 @@
   import NewAskLeave from './ask_leave/AskLeave.vue'
   import TabItem from '../base/TabItem'
   import Vue from 'vue'
-  import AskLeavePanel from './panel/AskLeavePanel.vue'
-  import AskLeaveAdminPanel from './panel/AskLeaveAdminPanel.vue'
+  // askLeave
+  import AskLeavePanel from './ask_leave/panel/AskLeavePanel.vue'
+  import AskLeaveAdminPanel from './ask_leave/panel/AskLeaveAdminPanel.vue'
   import AskLeaveDetail from './ask_leave/AskLeaveDetail.vue'
   import AskLeaveAdminDetail from './ask_leave/AskLeaveAdminDetail.vue'
+  // work-overtime
+  import WorkOvertime from './work_overtime/WorkOvertime.vue'
+  import WorkOvertimeDetail from './work_overtime/WorkOvertimeDetail.vue'
+  import WorkOvertimeAdminDetail from './work_overtime/WorkOvertimeAdminDetail.vue'
+  import WorkOvertimePanel from './work_overtime/panel/WorkOvertimePanel.vue'
+  import WorkOvertimeAdminPanel from './work_overtime/panel/WorkOvertimeAdminPanel.vue'
   // 事件总线
   import {EventBus} from '../base/EventBus'
   import * as Cons from '../base/Constant'
 
+  // askLeave
   Vue.component(AskLeavePanel.name, AskLeavePanel)
   Vue.component(AskLeaveAdminPanel.name, AskLeaveAdminPanel)
   Vue.component(AskLeaveDetail.name, AskLeaveDetail)
   Vue.component(AskLeaveAdminDetail.name, AskLeaveAdminDetail)
+  // work-overtime
+  Vue.component(WorkOvertime.name, WorkOvertime)
+  Vue.component(WorkOvertimeDetail.name, WorkOvertimeDetail)
+  Vue.component(WorkOvertimeAdminDetail.name, WorkOvertimeAdminDetail)
+  Vue.component(WorkOvertimePanel.name, WorkOvertimePanel)
+  Vue.component(WorkOvertimeAdminPanel.name, WorkOvertimeAdminPanel)
 
   export default{
     name: 'workflow-main-tab',

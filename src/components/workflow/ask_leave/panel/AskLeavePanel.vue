@@ -40,7 +40,18 @@
           <!--the two button can is able only when in unapproved || approved state-->
           <el-button
             size="small"
-            @click="handleDetail(scope.$index, scope.row)">详情
+            @click="onClickHandleDetail(scope.$index, scope.row)">详情
+          </el-button>
+          <el-button
+            :disabled="scope.row.state !== 'draft'"
+            size="small"
+            @click="onClickHandleEdit(scope.$index, scope.row)">编辑
+          </el-button>
+          <el-button
+            :disabled="scope.row.state !== 'draft'"
+            size="small"
+            type="danger"
+            @click="onClickHandleDelete(scope.$index, scope.row)">删除
           </el-button>
         </template>
       </el-table-column>
@@ -49,19 +60,19 @@
 </template>
 
 <script>
-  import * as Cons from '../../base/Constant'
-  import * as MUTATION_TYPES from '../../../store/mutation-types'
-  import AskLeave from '../ask_leave/bean/askLeave'
-  import AskLeaveDetail from '../ask_leave/AskLeaveDetail.vue'
-  import AskLeaveAdminDetail from '../ask_leave/AskLeaveAdminDetail.vue'
-  import TabItem from '../../base/TabItem'
+  import * as Cons from '../../../base/Constant'
+  import * as MUTATION_TYPES from '../../../../store/mutation-types'
+  import AskLeave from '../../ask_leave/bean/askLeave'
+  import AskLeaveDetail from '../../ask_leave/AskLeaveDetail.vue'
+  import AskLeaveComponent from '../../ask_leave/AskLeave.vue'
+  import TabItem from '../../../base/TabItem'
   // eventbus
-  import {EventBus} from '../../base/EventBus'
+  import {EventBus} from '../../../base/EventBus'
 
-  const URL_GET_ADMIN_ASK_LEAVE = Cons.BASE_URL + '/ask_leave/admin'
+  const URL_GET_OPEN_ASK_LEAVE = Cons.BASE_URL + '/ask_leave/open'
 
   export default{
-    name: 'ask-leave-admin-panel',
+    name: 'ask-leave-panel',
     data () {
       return {
         askLeaveList: []
@@ -69,8 +80,40 @@
     },
     props: [],
     methods: {
+      onClickHandleDetail (index, data) {
+        this.$store.commit(MUTATION_TYPES.WORKFLOW_ADD_TAB, new TabItem('请假详情', AskLeaveDetail.name, data))
+      },
+      onClickHandleEdit (index, data) {
+        this.$store.commit(MUTATION_TYPES.WORKFLOW_ADD_TAB, new TabItem('请假', AskLeaveComponent.name, data))
+      },
+      onClickHandleDelete (index, data) {
+        this.$alert('确认删除? 此操作不可逆.', '确认操作', {
+          confirmButtonText: '确定',
+          callback: action => {
+            if (action === 'confirm') {
+              this.deleteAskLeave(index)
+            }
+          }
+        })
+      },
+      deleteAskLeave (index) {
+        this.$http.get(Cons.BASE_URL + '/ask_leave/delete', {
+          params: {
+            id: this.askLeaveList[index].id
+          }
+        }).then(response => {
+          if (response.body.ok !== true) {
+            this.$message(response.body.msg)
+            return
+          }
+          this.$message('删除成功')
+          this.getAskLeaveList()
+        }, response => {
+          this.$message('删除失败')
+        })
+      },
       getAskLeaveList () {
-        this.$http.get(URL_GET_ADMIN_ASK_LEAVE)
+        this.$http.get(URL_GET_OPEN_ASK_LEAVE)
           .then(response => {
             if (response.body.ok !== true) {
               this.$message(response.body.msg)
@@ -81,24 +124,16 @@
           }, response => {
             this.$message('请假审批列表获取失败')
           })
-      },
-      handleDetail (rowIndex, data) {
-        let tabName = ''
-        if (data.state === AskLeave.LEAVE_STATE_APPROVED) {
-          tabName = AskLeaveDetail.name
-        } else {
-          tabName = AskLeaveAdminDetail.name
-        }
-        this.$store.commit(MUTATION_TYPES.WORKFLOW_ADD_TAB, new TabItem('审核请假', tabName, data))
       }
     },
     computed: {},
     created: function () {
       this.getAskLeaveList()
-      // 注册监听事件
+      // 全局数据刷新
       EventBus.$on(Cons.EVENT_WORKFLOW_UPDATE_ALL, () => {
         this.getAskLeaveList()
       })
+      // 请假审批数据刷新
       EventBus.$on(Cons.EVENT_WORKFLOW_UPDATE_ASK_LEAVE, () => {
         this.getAskLeaveList()
       })
