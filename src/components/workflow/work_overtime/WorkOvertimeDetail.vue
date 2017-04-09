@@ -73,7 +73,6 @@
         }
       },
       getIsHoliday () {
-        // TODO 获取是否为节假日描述语句
         if (this.workOvertime.isHoliday) {
           return '是法定节假日'
         } else {
