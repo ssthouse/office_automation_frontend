@@ -16,15 +16,7 @@
             </el-button>
             <el-button type="primary"
                        class="workflow-tag"
-                       @click="onClickBusinessTrip">出差
-            </el-button>
-            <el-button type="primary"
-                       class="workflow-tag"
-                       @click="onClickOuting()">外出
-            </el-button>
-            <el-button type="primary"
-                       class="workflow-tag"
-                       @click="onClickReimburse()">报销
+                       @click="onClickOuting()">出差
             </el-button>
           </el-button-group>
         </div>
@@ -50,9 +42,8 @@
         </el-collapse-item>
         <el-collapse-item title="出差" name="3"
                           class="panel-title">
+          <outing-panel></outing-panel>
         </el-collapse-item>
-        <el-collapse-item title="报销" name="5"
-                          class="panel-title"></el-collapse-item>
       </el-collapse>
     </el-card>
 
@@ -74,9 +65,9 @@
           <work-overtime-admin-panel></work-overtime-admin-panel>
         </el-collapse-item>
         <el-collapse-item title="出差" name="3"
-                          class="panel-title"></el-collapse-item>
-        <el-collapse-item title="报销" name="5"
-                          class="panel-title"></el-collapse-item>
+                          class="panel-title">
+          <outing-admin-panel></outing-admin-panel>
+        </el-collapse-item>
       </el-collapse>
     </el-card>
   </div>
@@ -98,6 +89,12 @@
   import WorkOvertimeAdminDetail from './work_overtime/WorkOvertimeAdminDetail.vue'
   import WorkOvertimePanel from './work_overtime/panel/WorkOvertimePanel.vue'
   import WorkOvertimeAdminPanel from './work_overtime/panel/WorkOvertimeAdminPanel.vue'
+  // outing
+  import Outing from './outing/Outing.vue'
+  import OutingDetail from './outing/OutingDetail.vue'
+  import OutingAdminDetail from './outing/OutingAdminDetail.vue'
+  import OutingPanel from './outing/panel/OutingPanel.vue'
+  import OutingAdminPanel from './outing/panel/OutingAdminPanel.vue'
   // 事件总线
   import {EventBus} from '../base/EventBus'
   import * as Cons from '../base/Constant'
@@ -113,6 +110,12 @@
   Vue.component(WorkOvertimeAdminDetail.name, WorkOvertimeAdminDetail)
   Vue.component(WorkOvertimePanel.name, WorkOvertimePanel)
   Vue.component(WorkOvertimeAdminPanel.name, WorkOvertimeAdminPanel)
+  // outing
+  Vue.component(Outing.name, Outing)
+  Vue.component(OutingDetail.name, Outing)
+  Vue.component(OutingAdminDetail.name, OutingAdminDetail)
+  Vue.component(OutingPanel.name, OutingPanel)
+  Vue.component(OutingAdminPanel.name, OutingAdminPanel)
 
   export default{
     name: 'workflow-main-tab',
@@ -127,14 +130,8 @@
       onClickWorkOvertime () {
         this.$store.commit(types.WORKFLOW_ADD_TAB, new TabItem('新建加班审批', WorkOvertime.name, null))
       },
-      onClickBusinessTrip () {
-
-      },
       onClickOuting () {
-
-      },
-      onClickReimburse () {
-
+        this.$store.commit(types.WORKFLOW_ADD_TAB, new TabItem('新建出差', Outing.name, null))
       },
       onClickRefreshWorkflowData () {
         // 触发刷新所有的数据的 event
