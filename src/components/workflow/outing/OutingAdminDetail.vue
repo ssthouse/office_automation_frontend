@@ -6,17 +6,13 @@
 
 <script>
   export default{
-    name: 'outing-admin-panel',
+    name: 'outing-admin-detail',
     data () {
       return {}
     },
     props: [],
-    methods: {
-
-    },
-    computed: {
-
-    },
+    methods: {},
+    computed: {},
     created: function () {
 
     }

@@ -112,7 +112,7 @@
   Vue.component(WorkOvertimeAdminPanel.name, WorkOvertimeAdminPanel)
   // outing
   Vue.component(Outing.name, Outing)
-  Vue.component(OutingDetail.name, Outing)
+  Vue.component(OutingDetail.name, OutingDetail)
   Vue.component(OutingAdminDetail.name, OutingAdminDetail)
   Vue.component(OutingPanel.name, OutingPanel)
   Vue.component(OutingAdminPanel.name, OutingAdminPanel)

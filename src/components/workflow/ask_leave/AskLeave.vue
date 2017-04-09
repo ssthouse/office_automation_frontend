@@ -133,7 +133,7 @@
     },
     props: ['data'],
     methods: {
-      fillInAskLeaveData () {
+      fillInOutingData () {
         // 格式化时间字符串
         this.askLeave.beginDate = Utils.getFormatDateStr(this.beginDate)
         this.askLeave.endDate = Utils.getFormatDateStr(this.endDate)
@@ -142,7 +142,7 @@
       },
       // 直接提交为待审核
       onClickSaveAsUnapproved () {
-        this.fillInAskLeaveData()
+        this.fillInOutingData()
         if (this.askLeave.isValid() !== true) {
           this.$message('表单信息不完整')
           return
@@ -152,7 +152,7 @@
       },
       // 保存为草稿
       onClickSaveAsDraft () {
-        this.fillInAskLeaveData()
+        this.fillInOutingData()
         if (this.askLeave.isValid() !== true) {
           this.$message('表单信息不完整')
           return

@@ -104,7 +104,7 @@
     },
     props: ['data'],
     methods: {
-      fillInAskLeaveData () {
+      fillInOutingData () {
         // 格式化时间字符串
         this.workOvertime.beginDate = Utils.getFormatDateStr(this.beginDate)
         this.workOvertime.endDate = Utils.getFormatDateStr(this.endDate)
@@ -112,7 +112,7 @@
         this.workOvertime.username = this.$store.state.mainModule.user.username
       },
       onClickSaveAsDraft () {
-        this.fillInAskLeaveData()
+        this.fillInOutingData()
         if (this.workOvertime.isValid() !== true) {
           this.$message('表格数据不完整')
           return
@@ -121,7 +121,7 @@
         this.postWorkOvertime()
       },
       onClickSaveAsUnapproved () {
-        this.fillInAskLeaveData()
+        this.fillInOutingData()
         if (this.workOvertime.isValid() !== true) {
           this.$message('表格数据不完整')
           return
