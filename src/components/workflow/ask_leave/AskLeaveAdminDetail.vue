@@ -12,7 +12,7 @@
         </tr>
         <tr>
           <td width="72">姓名</td>
-          <td width="62">李白</td>
+          <td width="62">{{askLeave.username}}</td>
           <td width="70">部门</td>
           <td width="77">行政部</td>
           <td width="80">职位</td>
