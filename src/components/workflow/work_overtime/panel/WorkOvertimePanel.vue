@@ -59,6 +59,7 @@
   import * as Cons from '../../../base/Constant'
   import * as MUTATION_TYPES from '../../../../store/mutation-types'
   import WorkOvertime from '../../work_overtime/WorkOvertime.vue'
+  import WOrkOvertimeEntity from '../../work_overtime/bean/workOvertime'
   import WorkOvertimeDetail from '../../work_overtime/WorkOvertimeDetail.vue'
   import TabItem from '../../../base/TabItem'
   // eventbus
@@ -102,7 +103,7 @@
               this.$message('获取加班数据失败: ' + response.body.msg)
               return
             }
-            this.workOvertimeList = response.body.workOvertimeList
+            this.workOvertimeList = WOrkOvertimeEntity.parseWorkOvertimeList(response.body.workOvertimeList)
           }, response => {
             this.$message('获取加班数据失败')
           })

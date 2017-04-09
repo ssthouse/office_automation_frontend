@@ -156,7 +156,8 @@
       if (this.data === null || this.data === undefined) {
         return
       }
-      this.askLeave = this.data
+      console.log('this is the work overtime data I get')
+      this.workOvertime = this.data
       // 将日期解析到UI
       this.beginDate = new Date(this.workOvertime.beginDate)
       this.endDate = new Date(this.workOvertime.endDate)

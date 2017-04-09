@@ -34,6 +34,20 @@ class WorkOvertime {
     return new WorkOvertime()
   }
 
+  static parseWorkOvertimeList (workOvertimeListJson) {
+    let workOvertimeList = []
+    workOvertimeListJson.forEach(function (workOvertimeJson) {
+      workOvertimeList.push(WorkOvertime.parseWorkOvertime(workOvertimeJson))
+    })
+    return workOvertimeList
+  }
+
+  static parseWorkOvertime (workOvertimeJson) {
+    let workOvertime = new WorkOvertime()
+    Object.assign(workOvertime, workOvertimeJson)
+    return workOvertime
+  }
+
   isValid () {
     if (this.beginDate.length === 0 ||
       this.endDate.length === 0 ||
