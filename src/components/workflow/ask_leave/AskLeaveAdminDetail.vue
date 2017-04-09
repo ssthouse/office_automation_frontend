@@ -63,6 +63,7 @@
 <script>
   import AskLeave from './bean/askLeave'
   import * as Cons from '../../base/Constant'
+  import Utils from '../../base/Utils'
 
   const URL_POST_UPDATE_ASK_LEAVE = Cons.BASE_URL + '/ask_leave/update'
 
@@ -77,18 +78,7 @@
     props: ['data'],
     methods: {
       getAskLeaveStateDescription () {
-        switch (this.askLeave.state) {
-          case AskLeave.STATE_DRAFT:
-            return '尚未提交申请, 处于草稿状态'
-          case AskLeave.STATE_UNAPPROVED:
-            return '尚未通过审核'
-          case AskLeave.STATE_APPROVED:
-            return '已通过审核'
-          case AskLeave.STATE_DECLINE:
-            return '审核已被拒绝'
-          default:
-            return '审核状态不合法'
-        }
+        return Utils.getStateDescription(this.askLeave.state)
       },
       onClickApprove () {
         this.askLeave.state = AskLeave.STATE_APPROVED

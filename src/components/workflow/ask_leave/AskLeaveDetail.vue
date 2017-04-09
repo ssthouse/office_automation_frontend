@@ -12,7 +12,7 @@
         </tr>
         <tr>
           <td width="72">姓名</td>
-          <td width="62">李白</td>
+          <td width="62">{{askLeave.username}}</td>
           <td width="70">部门</td>
           <td width="77">行政部</td>
           <td width="80">职位</td>
@@ -52,7 +52,7 @@
 </template>
 
 <script>
-  import AskLeave from './bean/askLeave'
+  import Utils from '../../base/Utils'
 
   export default{
     name: 'ask-leave-detail',
@@ -64,18 +64,7 @@
     props: ['data'],
     methods: {
       getAskLeaveStateDescription () {
-        switch (this.askLeave.state) {
-          case AskLeave.STATE_DRAFT:
-            return '尚未提交申请, 处于草稿状态'
-          case AskLeave.STATE_UNAPPROVED:
-            return '尚未通过审核'
-          case AskLeave.STATE_APPROVED:
-            return '已通过审核'
-          case AskLeave.STATE_DECLINE:
-            return '审核已被拒绝'
-          default:
-            return '审核状态不合法'
-        }
+        return Utils.getStateDescription(this.askLeave.state)
       }
     },
     computed: {},
