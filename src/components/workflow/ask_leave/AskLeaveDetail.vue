@@ -65,13 +65,13 @@
     methods: {
       getAskLeaveStateDescription () {
         switch (this.askLeave.state) {
-          case AskLeave.LEAVE_STATE_DRAFT:
+          case AskLeave.STATE_DRAFT:
             return '尚未提交申请, 处于草稿状态'
-          case AskLeave.LEAVE_STATE_UNAPPROVED:
+          case AskLeave.STATE_UNAPPROVED:
             return '尚未通过审核'
-          case AskLeave.LEAVE_STATE_APPROVED:
+          case AskLeave.STATE_APPROVED:
             return '已通过审核'
-          case AskLeave.LEAVE_STATE_DECLINE:
+          case AskLeave.STATE_DECLINE:
             return '审核已被拒绝'
           default:
             return '审核状态不合法'

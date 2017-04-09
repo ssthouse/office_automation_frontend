@@ -84,7 +84,7 @@
       },
       handleDetail (rowIndex, data) {
         let tabName = ''
-        if (data.state === AskLeave.LEAVE_STATE_APPROVED) {
+        if (data.state === AskLeave.STATE_APPROVED) {
           tabName = AskLeaveDetail.name
         } else {
           tabName = AskLeaveAdminDetail.name
