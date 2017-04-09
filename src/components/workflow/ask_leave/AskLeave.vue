@@ -72,12 +72,12 @@
         <div>
           <el-button type="primary"
                      :disabled="isFinished"
-                     @click="saveAsDraft()">保存草稿
+                     @click="onClickSaveAsDraft()">保存草稿
           </el-button>
           <el-button type="primary"
                      style="margin-left: 60px;"
                      :disabled="isFinished"
-                     @click="saveAsUnapproved()">提交申请
+                     @click="onClickSaveAsUnapproved()">提交申请
           </el-button>
         </div>
       </el-form>
@@ -89,6 +89,7 @@
 <script>
   import AskLeave from './bean/askLeave'
   import * as Cons from '../../base/Constant'
+  import Utils from '../../base/Utils'
 
   const URL_POST_NEW_ASK_LEAVE = Cons.BASE_URL + '/ask_leave/new'
   const URL_POST_UPDATE_ASK_LEAVE = Cons.BASE_URL + '/ask_leave/update'
@@ -132,45 +133,36 @@
     },
     props: ['data'],
     methods: {
-      getFormatDateStr (date) {
-        if (date === undefined || date === null) {
-          return ''
-        }
-        if (!(date instanceof Date)) {
-          return ''
-        }
-        return date.toISOString().slice(0, 10)
-      },
       fillInAskLeaveData () {
         // 格式化时间字符串
-        this.askLeave.beginDate = this.getFormatDateStr(this.beginDate)
-        this.askLeave.endDate = this.getFormatDateStr(this.endDate)
+        this.askLeave.beginDate = Utils.getFormatDateStr(this.beginDate)
+        this.askLeave.endDate = Utils.getFormatDateStr(this.endDate)
         // 填充username
         this.askLeave.username = this.$store.state.mainModule.user.username
       },
       // 直接提交为待审核
-      saveAsUnapproved () {
+      onClickSaveAsUnapproved () {
         this.fillInAskLeaveData()
         if (this.askLeave.isValid() !== true) {
           this.$message('表单信息不完整')
           return
         }
-        this.askLeave.state = AskLeave.LEAVE_STATE_UNAPPROVED
+        this.askLeave.state = AskLeave.STATE_UNAPPROVED
         this.postAskLeave()
       },
       // 保存为草稿
-      saveAsDraft () {
+      onClickSaveAsDraft () {
         this.fillInAskLeaveData()
         if (this.askLeave.isValid() !== true) {
           this.$message('表单信息不完整')
           return
         }
-        this.askLeave.state = AskLeave.LEAVE_STATE_DRAFT
+        this.askLeave.state = AskLeave.STATE_DRAFT
         this.postAskLeave()
       },
       postAskLeave () {
         let url = ''
-        if (this.askLeave.id !== undefined || this.askLeave.id <= 0) {
+        if (this.askLeave.id !== undefined && this.askLeave.id > 0) {
           url = URL_POST_UPDATE_ASK_LEAVE
         } else {
           url = URL_POST_NEW_ASK_LEAVE

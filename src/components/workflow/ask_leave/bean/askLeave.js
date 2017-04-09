@@ -15,10 +15,10 @@
 class AskLeave {
 
   // 请假申请的状态
-  static LEAVE_STATE_DRAFT = 'draft'
-  static LEAVE_STATE_UNAPPROVED = 'unapproved'
-  static LEAVE_STATE_APPROVED = 'approved'
-  static LEAVE_STATE_DECLINE = 'decline'
+  static STATE_DRAFT = 'draft'
+  static STATE_UNAPPROVED = 'unapproved'
+  static STATE_APPROVED = 'approved'
+  static STATE_DECLINE = 'decline'
 
   constructor () {
     this.leaveType = ''
@@ -28,7 +28,7 @@ class AskLeave {
     this.description = ''
     this.username = ''
     this.approverUsername = ''
-    this.state = AskLeave.LEAVE_STATE_DRAFT
+    this.state = AskLeave.STATE_DRAFT
   }
 
   isValid () {

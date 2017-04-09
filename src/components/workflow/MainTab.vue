@@ -45,9 +45,12 @@
           <ask-leave-panel></ask-leave-panel>
         </el-collapse-item>
         <el-collapse-item title="加班" name="2"
-                          class="panel-title"></el-collapse-item>
+                          class="panel-title">
+          <work-overtime-panel></work-overtime-panel>
+        </el-collapse-item>
         <el-collapse-item title="出差" name="3"
-                          class="panel-title"></el-collapse-item>
+                          class="panel-title">
+        </el-collapse-item>
         <el-collapse-item title="报销" name="5"
                           class="panel-title"></el-collapse-item>
       </el-collapse>
@@ -67,7 +70,9 @@
           <ask-leave-admin-panel></ask-leave-admin-panel>
         </el-collapse-item>
         <el-collapse-item title="加班" name="2"
-                          class="panel-title"></el-collapse-item>
+                          class="panel-title">
+          <work-overtime-admin-panel></work-overtime-admin-panel>
+        </el-collapse-item>
         <el-collapse-item title="出差" name="3"
                           class="panel-title"></el-collapse-item>
         <el-collapse-item title="报销" name="5"
@@ -120,7 +125,7 @@
         this.$store.commit(types.WORKFLOW_ADD_TAB, new TabItem('新建请假流程', NewAskLeave.name, null))
       },
       onClickWorkOvertime () {
-
+        this.$store.commit(types.WORKFLOW_ADD_TAB, new TabItem('新建加班审批', WorkOvertime.name, null))
       },
       onClickBusinessTrip () {
 
