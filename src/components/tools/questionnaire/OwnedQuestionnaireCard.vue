@@ -45,7 +45,7 @@
   import * as types from '../../../store/mutation-types'
 
   export default{
-    name: '',
+    name: 'questionnaire-admin-card',
     data () {
       return {
         types,

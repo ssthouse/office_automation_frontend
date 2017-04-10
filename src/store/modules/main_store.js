@@ -1,16 +1,37 @@
 import Vue from 'vue'
 import * as types from '../mutation-types.js'
+import * as Cons from '../../components/base/Constant'
 
 const state = {
   user: {
     name: '用户名',
     username: 'username'
+  },
+  userConfig: {
+    // string arrays to define panel
+    homePageConfig: '',
+    toolsPageConfig: ''
   }
 }
 
 const mutations = {
   [types.MAIN_SET_USER] (state, user) {
     state.user = user
+  }
+}
+
+const getters = {
+  getHomePageConfig (state) {
+    // TODO split str
+    return state.userConfig.homePageConfig.split(',')
+  },
+  getToolsPageConfig (state) {
+    if (state.userConfig.toolsPageConfig === null || state.userConfig.toolsPageConfig.length === 0) {
+      let allState = [Cons.TOOLS_QUESTIONNAIRE, Cons.TOOLS_QUESTIONNAIRE_ADMIN,
+        Cons.TOOLS_VOTING, Cons.TOOLS_VOTING_ADMIN]
+      state.userConfig.toolsPageConfig = allState.join(',')
+    }
+    return state.userConfig.toolsPageConfig.split(',')
   }
 }
 
@@ -36,5 +57,6 @@ const actions = {
 export default {
   state,
   mutations,
-  actions
+  actions,
+  getters
 }
