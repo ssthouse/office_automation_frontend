@@ -1,19 +1,20 @@
 <template>
-  <div>
+  <div style="margin-top: -40px;">
     <el-row>
-      <el-col :span="12">
+      <el-col :span="12"
+              class="card-col">
         <questionnaire-card></questionnaire-card>
       </el-col>
-      <el-col :span="12">
+      <el-col :span="12"
+              class="card-col">
         <owned-questionnaire-card></owned-questionnaire-card>
       </el-col>
-    </el-row>
-
-    <el-row>
-      <el-col :span="12">
+      <el-col :span="12"
+              class="card-col">
         <voting-card></voting-card>
       </el-col>
-      <el-col :span="12">
+      <el-col :span="12"
+              class="card-col">
         <owned-voting-card></owned-voting-card>
       </el-col>
     </el-row>
@@ -47,5 +48,7 @@
 </script>
 
 <style>
-
+  .card-col {
+    margin-top: 20px;
+  }
 </style>
