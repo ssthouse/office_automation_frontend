@@ -130,7 +130,6 @@
         this.postWorkOvertime()
       },
       postWorkOvertime () {
-        // TODO wait for backend to finish
         let url = ''
         if (this.workOvertime.id !== undefined && this.workOvertime.id > 0) {
           url = URL_POST_WORK_OVERTIME_UPDATE
