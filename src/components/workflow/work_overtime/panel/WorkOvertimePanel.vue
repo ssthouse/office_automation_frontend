@@ -111,7 +111,6 @@
     },
     computed: {},
     created: function () {
-      // TODO ask for the data list
       this.getWorkOvertimeList()
       // 注册监听事件
       EventBus.$on(Cons.EVENT_WORKFLOW_UPDATE_WORK_OVERTIME, () => {

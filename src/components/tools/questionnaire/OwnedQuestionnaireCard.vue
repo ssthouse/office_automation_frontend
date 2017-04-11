@@ -3,7 +3,7 @@
     <el-card style="margin-left: 10px; margin-right: 10px;">
       <!--标题-->
       <div slot="header" style="height: 20px">
-        <span class="card-title">我的问卷</span>
+        <span class="card-title">我管理的问卷</span>
         <el-button-group style="float: right;">
           <el-button size="small"
                      icon="plus"
@@ -45,7 +45,7 @@
   import * as types from '../../../store/mutation-types'
 
   export default{
-    name: '',
+    name: 'questionnaire-admin-card',
     data () {
       return {
         types,

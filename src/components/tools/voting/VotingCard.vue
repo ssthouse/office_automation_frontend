@@ -31,7 +31,7 @@
   import VotingFill from './VotingFill.vue'
 
   export default{
-    name: '',
+    name: 'voting-card',
     data () {
       return {
         MUTATION_TYPES

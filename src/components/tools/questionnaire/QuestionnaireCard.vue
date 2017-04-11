@@ -33,6 +33,7 @@
   import TabItem from '../../base/TabItem'
 
   export default{
+    name: 'questionnaire-card',
     data () {
       return {
         isLoading: false,

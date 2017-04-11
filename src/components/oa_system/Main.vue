@@ -82,6 +82,12 @@
         this.$message(errorMsg)
         console.log('获取用户数据失败')
       })
+      // 获取用户配置信息
+      this.$store.dispatch(this.MUTATION_TYPES.ACTION_GET_USER_CONFIG).then(success => {
+        console.log(('获取用户配置信息成功'))
+      }, errorMsg => {
+        console.log('获取用户配置信息失败')
+      })
     }
   }
 </script>

@@ -1,7 +1,11 @@
 // main 用于存储全局使用的数据: user
 export const MAIN_SET_USER = 'main/set_user'
+export const MAIN_SET_USER_CONFIG = 'main/set_user_config'
 
 export const ACTION_GET_USERINFO = 'main/action/get_userinfo'
+export const ACTION_GET_USER_CONFIG = 'main/action/get_user_config'
+export const ACTION_POST_USER_CONFIG_TOOLS = 'main/action/set_tools_config'
+export const ACTION_POST_USER_CONFIG_HOMEPAGE = 'main/action/set_home_page_config'
 
 // Homepage 模块
 export const HOMEPAGE_ADD_TAB = 'homepage/add_tab'

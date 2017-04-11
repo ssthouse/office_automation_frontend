@@ -35,7 +35,7 @@
   import VotingReport from './VotingReport.vue'
 
   export default{
-    name: '',
+    name: 'voting-admin-card',
     data () {
       return {
         MUTATION_TYPES
