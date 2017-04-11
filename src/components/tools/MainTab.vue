@@ -66,11 +66,11 @@
         return componentName
       },
       updateConfig () {
-        // TODO upload tools config to server
         console.log(this.newPageConfig)
         this.$store.dispatch(types.ACTION_POST_USER_CONFIG_TOOLS, this.newPageConfig.join(','))
           .then(success => {
             this.$message('更新成功')
+            EventBus.$emit(Cons.EVENT_MAIN_UPDATE_USER_CONFIG)
           }, fail => {
             this.$message('更新失败')
           })

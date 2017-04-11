@@ -101,7 +101,6 @@ const actions = {
   [types.ACTION_POST_USER_CONFIG_TOOLS] (context, toolsPageConfig) {
     return new Promise((resolve, reject) => {
       context.state.userConfig.toolsPageConfig = toolsPageConfig
-      console.log(JSON.stringify(context.state.userConfig))
       Vue.http.post(Cons.BASE_URL + '/user_config/update', JSON.stringify(context.state.userConfig))
         .then(response => {
           if (response.body.ok !== true) {
