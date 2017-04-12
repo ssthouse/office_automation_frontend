@@ -10,38 +10,29 @@
   <!--"approverUsername": "ssthouse",-->
   <!--"state": "draft"-->
   <!--}-->
-  <div>
-    <el-table
-      :data="workOvertimeList"
-      stripe
-      style="width: 100%">
-      <el-table-column label="时间区间"
-                       width="220">
-        <template scope="scope">
-          <span>{{scope.row.beginDate}} 至 {{scope.row.endDate}}</span>
-        </template>
-      </el-table-column>
-      <el-table-column label="时长"
-                       width="100"
-                       prop="hourNum"></el-table-column>
-      <el-table-column label="状态"
-                       width="120"
-                       prop="state"></el-table-column>
-      <el-table-column label="审批人"
-                       width="120"
-                       prop="approverUsername"></el-table-column>
-      <el-table-column label="操作"
-                       width="200">
-        <template scope="scope">
-          <!--the two button can is able only when in unapproved || approved state-->
-          <el-button
-            size="small"
-            @click="onClickHandleDetail(scope.$index, scope.row)">详情
-          </el-button>
-        </template>
-      </el-table-column>
-    </el-table>
-  </div>
+  <el-table
+    :data="workOvertimeList"
+    stripe
+    style="width: 100%">
+    <el-table-column label="时长"
+                     width="100"
+                     prop="hourNum"></el-table-column>
+    <el-table-column label="状态"
+                     width="100"
+                     prop="state"></el-table-column>
+    <el-table-column label="审批人"
+                     width="100"
+                     prop="approverUsername"></el-table-column>
+    <el-table-column label="操作">
+      <template scope="scope">
+        <!--the two button can is able only when in unapproved || approved state-->
+        <el-button
+          size="small"
+          @click="onClickHandleDetail(scope.$index, scope.row)">详情
+        </el-button>
+      </template>
+    </el-table-column>
+  </el-table>
 </template>
 
 <script>

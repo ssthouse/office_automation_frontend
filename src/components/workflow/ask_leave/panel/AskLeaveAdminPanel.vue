@@ -1,41 +1,39 @@
 <template>
-  <div>
-    <!--需要展示的数据:-->
-    <!--{-->
-    <!--"id": 1,-->
-    <!--"leaveType": "sick",-->
-    <!--"beginDate": "2017-11-11",-->
-    <!--"endDate": "2017-11-11",-->
-    <!--"dayNum": 1,-->
-    <!--"description": "des",-->
-    <!--"username": "ssthouse",-->
-    <!--"approverUsername": "ssthouse",-->
-    <!--"state": "begin"-->
-    <!--}-->
-    <el-table
-      :data="askLeaveList"
-      stripe
-      style="width: 100%">
-      <el-table-column prop="leaveType"
-                       label="类型"
-                       width="100"></el-table-column>
-      <el-table-column label="天数"
-                       width="100"
-                       prop="dayNum"></el-table-column>
-      <el-table-column label="状态"
-                       width="100"
-                       prop="state"></el-table-column>
-      <el-table-column label="操作">
-        <template scope="scope">
-          <!--the two button can is able only when in unapproved || approved state-->
-          <el-button
-            size="small"
-            @click="handleDetail(scope.$index, scope.row)">详情
-          </el-button>
-        </template>
-      </el-table-column>
-    </el-table>
-  </div>
+  <!--需要展示的数据:-->
+  <!--{-->
+  <!--"id": 1,-->
+  <!--"leaveType": "sick",-->
+  <!--"beginDate": "2017-11-11",-->
+  <!--"endDate": "2017-11-11",-->
+  <!--"dayNum": 1,-->
+  <!--"description": "des",-->
+  <!--"username": "ssthouse",-->
+  <!--"approverUsername": "ssthouse",-->
+  <!--"state": "begin"-->
+  <!--}-->
+  <el-table
+    :data="askLeaveList"
+    stripe
+    style="width: 100%">
+    <el-table-column prop="leaveType"
+                     label="类型"
+                     width="100"></el-table-column>
+    <el-table-column label="天数"
+                     width="100"
+                     prop="dayNum"></el-table-column>
+    <el-table-column label="状态"
+                     width="100"
+                     prop="state"></el-table-column>
+    <el-table-column label="操作">
+      <template scope="scope">
+        <!--the two button can is able only when in unapproved || approved state-->
+        <el-button
+          size="small"
+          @click="handleDetail(scope.$index, scope.row)">详情
+        </el-button>
+      </template>
+    </el-table-column>
+  </el-table>
 </template>
 
 <script>

@@ -10,49 +10,35 @@
   <!--"approverUsername": "ssthouse",-->
   <!--"state": "draft"-->
   <!--}-->
-  <div>
-    <el-table
-      :data="workOvertimeList"
-      stripe
-      style="width: 100%">
-      <el-table-column label="时间区间"
-                       width="220">
-        <template scope="scope">
-          <span>{{scope.row.beginDate}} 至 {{scope.row.endDate}}</span>
-        </template>
-      </el-table-column>
-      <el-table-column label="时长"
-                       width="100"
-                       prop="hourNum"></el-table-column>
-      <el-table-column label="状态"
-                       width="120"
-                       prop="state"></el-table-column>
-      <el-table-column label="审批人"
-                       width="120"
-                       prop="approverUsername"></el-table-column>
-      <el-table-column label="操作"
-                       width="200">
-        <template scope="scope">
-          <!--the two button can is able only when in unapproved || approved state-->
-          <el-button
-            size="small"
-            @click="onClickHandleDetail(scope.$index, scope.row)">详情
-          </el-button>
-          <el-button
-            :disabled="scope.row.state !== 'draft'"
-            size="small"
-            @click="onClickHandleEdit(scope.$index, scope.row)">编辑
-          </el-button>
-          <el-button
-            :disabled="scope.row.state !== 'draft'"
-            size="small"
-            type="danger"
-            @click="onClickHandleDelete(scope.$index, scope.row)">删除
-          </el-button>
-        </template>
-      </el-table-column>
-    </el-table>
-  </div>
+  <el-table
+    :data="workOvertimeList"
+    stripe
+    style="width: 100%">
+    <el-table-column label="时长"
+                     width="100"
+                     prop="hourNum"></el-table-column>
+    <el-table-column label="状态"
+                     width="100"
+                     prop="state"></el-table-column>
+    <el-table-column label="审批人"
+                     width="100"
+                     prop="approverUsername"></el-table-column>
+    <el-table-column label="操作">
+      <template scope="scope">
+        <el-dropdown @command="handleCommand">
+            <span class="el-dropdown-link">
+             操作
+             <i class="el-icon-caret-bottom el-icon--right"></i>
+            </span>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item :command="scope.$index+',detail'">详情</el-dropdown-item>
+            <el-dropdown-item :command="scope.$index+',edit'">编辑</el-dropdown-item>
+            <el-dropdown-item :command="scope.$index+',delete'">删除</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+      </template>
+    </el-table-column>
+  </el-table>
 </template>
 
 <script>
@@ -77,13 +63,32 @@
     },
     props: [],
     methods: {
-      onClickHandleDetail (index, data) {
+      /**
+       * the cmdStr contains index and operation str , joined by ','
+       * @param cmdStr
+       */
+      handleCommand (cmdStr) {
+        let index = parseInt(cmdStr.split(',')[0])
+        let operation = cmdStr.split(',')[1]
+        switch (operation) {
+          case 'detail':
+            this.onClickHandleDetail(this.workOvertimeList[index])
+            break
+          case 'edit':
+            this.onClickHandleEdit(this.workOvertimeList[index])
+            break
+          case 'delete':
+            this.onClickHandleDelete(this.workOvertimeList[index])
+            break
+        }
+      },
+      onClickHandleDetail (data) {
         this.$store.commit(MUTATION_TYPES.WORKFLOW_ADD_TAB, new TabItem('加班审批详情', WorkOvertimeDetail.name, data))
       },
-      onClickHandleEdit (index, data) {
+      onClickHandleEdit (data) {
         this.$store.commit(MUTATION_TYPES.WORKFLOW_ADD_TAB, new TabItem('编辑加班审批', WorkOvertime.name, data))
       },
-      onClickHandleDelete (index, data) {
+      onClickHandleDelete (data) {
         this.$http.get(URL_GET_DELETE_WORK_OVERTIME, {params: {entityId: data.id}})
           .then(response => {
             if (response.body.ok !== true) {

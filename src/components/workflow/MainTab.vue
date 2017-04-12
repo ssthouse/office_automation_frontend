@@ -1,28 +1,5 @@
 <template>
-  <div style="height: 100%;">
-    <!--上方 新增的一排按钮-->
-    <el-col :span="24" style="margin-top: -40px;">
-      <el-card style="margin: 20px;">
-        <div style="margin-bottom: -10px;">
-          <span style="font-size: large; margin-right: 20px;">新建审批事项:</span>
-          <el-button-group>
-            <el-button type="primary"
-                       class="workflow-tag"
-                       @click="onClickAskLeave()">请假
-            </el-button>
-            <el-button type="primary"
-                       class="workflow-tag"
-                       @click="onClickWorkOvertime()">加班
-            </el-button>
-            <el-button type="primary"
-                       class="workflow-tag"
-                       @click="onClickOuting()">出差
-            </el-button>
-          </el-button-group>
-        </div>
-      </el-card>
-    </el-col>
-
+  <div style="height: 100%; margin-top: -20px;">
     <el-row style="height: 100%;">
       <el-col :span="12" style="height: 100%">
         <!--展示所有数据的折叠面板-->
@@ -80,11 +57,9 @@
 </template>
 
 <script>
-  import * as types from '../../store/mutation-types'
-  import NewAskLeave from './ask_leave/AskLeave.vue'
-  import TabItem from '../base/TabItem'
   import Vue from 'vue'
   // askLeave
+  import AskLeave from './ask_leave/AskLeave.vue'
   import AskLeavePanel from './ask_leave/panel/AskLeavePanel.vue'
   import AskLeaveAdminPanel from './ask_leave/panel/AskLeaveAdminPanel.vue'
   import AskLeaveDetail from './ask_leave/AskLeaveDetail.vue'
@@ -106,6 +81,7 @@
   import * as Cons from '../base/Constant'
 
   // askLeave
+  Vue.component(AskLeave.name, AskLeave)
   Vue.component(AskLeavePanel.name, AskLeavePanel)
   Vue.component(AskLeaveAdminPanel.name, AskLeaveAdminPanel)
   Vue.component(AskLeaveDetail.name, AskLeaveDetail)
@@ -130,15 +106,6 @@
     },
     props: [],
     methods: {
-      onClickAskLeave () {
-        this.$store.commit(types.WORKFLOW_ADD_TAB, new TabItem('新建请假流程', NewAskLeave.name, null))
-      },
-      onClickWorkOvertime () {
-        this.$store.commit(types.WORKFLOW_ADD_TAB, new TabItem('新建加班审批', WorkOvertime.name, null))
-      },
-      onClickOuting () {
-        this.$store.commit(types.WORKFLOW_ADD_TAB, new TabItem('新建出差', Outing.name, null))
-      },
       onClickRefreshWorkflowData () {
         // 触发刷新所有的数据的 event
         EventBus.$emit(Cons.EVENT_WORKFLOW_UPDATE_ALL)

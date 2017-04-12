@@ -67,6 +67,9 @@
        */
       clickUserInfo: function () {
         this.$store.commit(MUTATION_TYPES.HOMEPAGE_ADD_TAB, new TabItem('个人信息', UserInfo.name, ''))
+      },
+      onClick: function () {
+        this.$message('final')
       }
     },
     computed: {

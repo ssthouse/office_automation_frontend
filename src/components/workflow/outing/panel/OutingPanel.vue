@@ -1,62 +1,45 @@
 <template>
-  <div>
-    <!--需要展示的数据:-->
-    <!--{-->
-    <!--"id": 1,-->
-    <!--"destination": "ShangHai",-->
-    <!--"beginDate": "2017-11-11",-->
-    <!--"endDate": "2017-11-11",-->
-    <!--"dayNum": 1,-->
-    <!--"description": "des",-->
-    <!--"username": "ssthouse",-->
-    <!--"approverUsername": "ssthouse",-->
-    <!--"state": "begin"-->
-    <!--}-->
-    <el-table
-      :data="outingList"
-      stripe
-      style="width: 100%">
-      <el-table-column prop="destination"
-                       label="目的地"
-                       width="100"></el-table-column>
-      <el-table-column label="时间区间"
-                       width="220">
-        <template scope="scope">
-          <span>{{scope.row.beginDate}} 至 {{scope.row.endDate}}</span>
-        </template>
-      </el-table-column>
-      <el-table-column label="天数"
-                       width="100"
-                       prop="dayNum"></el-table-column>
-      <el-table-column label="状态"
-                       width="120"
-                       prop="state"></el-table-column>
-      <el-table-column label="审批人"
-                       width="120"
-                       prop="approverUsername"></el-table-column>
-      <el-table-column label="操作"
-                       width="200">
-        <template scope="scope">
-          <!--the two button can is able only when in unapproved || approved state-->
-          <el-button
-            size="small"
-            @click="onClickHandleDetail(scope.$index, scope.row)">详情
-          </el-button>
-          <el-button
-            :disabled="scope.row.state !== 'draft'"
-            size="small"
-            @click="onClickHandleEdit(scope.$index, scope.row)">编辑
-          </el-button>
-          <el-button
-            :disabled="scope.row.state !== 'draft'"
-            size="small"
-            type="danger"
-            @click="onClickHandleDelete(scope.$index, scope.row)">删除
-          </el-button>
-        </template>
-      </el-table-column>
-    </el-table>
-  </div>
+  <!--需要展示的数据:-->
+  <!--{-->
+  <!--"id": 1,-->
+  <!--"destination": "ShangHai",-->
+  <!--"beginDate": "2017-11-11",-->
+  <!--"endDate": "2017-11-11",-->
+  <!--"dayNum": 1,-->
+  <!--"description": "des",-->
+  <!--"username": "ssthouse",-->
+  <!--"approverUsername": "ssthouse",-->
+  <!--"state": "begin"-->
+  <!--}-->
+  <el-table
+    :data="outingList"
+    stripe
+    style="width: 100%">
+    <el-table-column label="天数"
+                     width="100"
+                     prop="dayNum"></el-table-column>
+    <el-table-column label="状态"
+                     width="100"
+                     prop="state"></el-table-column>
+    <el-table-column label="审批人"
+                     width="100"
+                     prop="approverUsername"></el-table-column>
+    <el-table-column label="操作">
+      <template scope="scope">
+        <el-dropdown @command="handleCommand">
+            <span class="el-dropdown-link">
+             操作
+             <i class="el-icon-caret-bottom el-icon--right"></i>
+            </span>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item :command="scope.$index+',detail'">详情</el-dropdown-item>
+            <el-dropdown-item :command="scope.$index+',edit'">编辑</el-dropdown-item>
+            <el-dropdown-item :command="scope.$index+',delete'">删除</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+      </template>
+    </el-table-column>
+  </el-table>
 </template>
 
 <script>
@@ -80,6 +63,25 @@
     },
     props: [],
     methods: {
+      /**
+       * the cmdStr contains index and operation str , joined by ','
+       * @param cmdStr
+       */
+      handleCommand (cmdStr) {
+        let index = parseInt(cmdStr.split(',')[0])
+        let operation = cmdStr.split(',')[1]
+        switch (operation) {
+          case 'detail':
+            this.onClickHandleDetail(this.outingList[index])
+            break
+          case 'edit':
+            this.onClickHandleEdit(this.outingList[index])
+            break
+          case 'delete':
+            this.onClickHandleDelete(index)
+            break
+        }
+      },
       getOutingList () {
         this.$http.get(URL_GET_OPEN_OUTING)
           .then(response => {
@@ -92,13 +94,13 @@
             this.$message('获取出差数据失败')
           })
       },
-      onClickHandleDetail (index, data) {
+      onClickHandleDetail (data) {
         this.$store.commit(MUTATION_TYPES.WORKFLOW_ADD_TAB, new TabItem('出差详情', OutingDetail.name, data))
       },
-      onClickHandleEdit (index, data) {
+      onClickHandleEdit (data) {
         this.$store.commit(MUTATION_TYPES.WORKFLOW_ADD_TAB, new TabItem('出差', OutingComponent.name, data))
       },
-      onClickHandleDelete (index, data) {
+      onClickHandleDelete (index) {
         this.$alert('确认删除? 此操作不可逆.', '确认操作', {
           confirmButtonText: '确定',
           callback: action => {

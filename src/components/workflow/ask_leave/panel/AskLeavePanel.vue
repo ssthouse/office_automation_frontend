@@ -1,50 +1,45 @@
 <template>
-  <div>
-    <!--需要展示的数据:-->
-    <!--{-->
-    <!--"id": 1,-->
-    <!--"leaveType": "sick",-->
-    <!--"beginDate": "2017-11-11",-->
-    <!--"endDate": "2017-11-11",-->
-    <!--"dayNum": 1,-->
-    <!--"description": "des",-->
-    <!--"username": "ssthouse",-->
-    <!--"approverUsername": "ssthouse",-->
-    <!--"state": "begin"-->
-    <!--}-->
-    <el-table
-      :data="askLeaveList"
-      stripe
-      style="width: 100%">
-      <el-table-column prop="leaveType"
-                       label="类型"
-                       width="80"></el-table-column>
-      <el-table-column label="天数"
-                       width="80"
-                       prop="dayNum"></el-table-column>
-      <el-table-column label="状态"
-                       width="100"
-                       prop="state"></el-table-column>
-      <el-table-column label="审批人"
-                       width="100"
-                       prop="approverUsername"></el-table-column>
-      <el-table-column label="操作">
-        <template scope="scope">
-          <el-dropdown @command="handleCommand">
+  <!--需要展示的数据:-->
+  <!--{-->
+  <!--"id": 1,-->
+  <!--"leaveType": "sick",-->
+  <!--"beginDate": "2017-11-11",-->
+  <!--"endDate": "2017-11-11",-->
+  <!--"dayNum": 1,-->
+  <!--"description": "des",-->
+  <!--"username": "ssthouse",-->
+  <!--"approverUsername": "ssthouse",-->
+  <!--"state": "begin"-->
+  <!--}-->
+  <el-table
+    :data="askLeaveList"
+    stripe
+    style="width: 100%">
+    <el-table-column prop="leaveType"
+                     label="类型"
+                     width="100"></el-table-column>
+    <el-table-column label="天数"
+                     width="100"
+                     prop="dayNum"></el-table-column>
+    <el-table-column label="状态"
+                     width="100"
+                     prop="state"></el-table-column>
+    <el-table-column label="操作">
+      <template scope="scope">
+        <el-dropdown @command="handleCommand">
             <span class="el-dropdown-link">
              操作
              <i class="el-icon-caret-bottom el-icon--right"></i>
             </span>
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item :command="scope.$index+',detail'">详情</el-dropdown-item>
-              <el-dropdown-item :command="scope.$index+',edit'">编辑</el-dropdown-item>
-              <el-dropdown-item :command="scope.$index+',delete'">删除</el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
-        </template>
-      </el-table-column>
-    </el-table>
-  </div>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item :command="scope.$index+',detail'">详情</el-dropdown-item>
+            <el-dropdown-item :command="scope.$index+',edit'">编辑</el-dropdown-item>
+            <el-dropdown-item :command="scope.$index+',delete'">删除</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+      </template>
+    </el-table-column>
+  </el-table>
 </template>
 
 <script>

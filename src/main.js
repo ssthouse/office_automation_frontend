@@ -13,15 +13,16 @@ import {router} from './router'
 import store from './store'
 // 注册一些全局的组件
 import UserInfo from './components/home_page/UserInfo.vue'
+
+require('!style!css!bootstrap/dist/css/bootstrap.css')
+require('!style!css!vue-material/dist/vue-material.css')
+
 Vue.component(UserInfo.name, UserInfo)
 
 Vue.use(ElementUI)
 Vue.use(VueResource)
 Vue.use(VueMaterial)
 // Vue.use(VueQuillEditor)
-
-require('!style!css!bootstrap/dist/css/bootstrap.css')
-require('!style!css!vue-material/dist/vue-material.css')
 
 /* eslint-disable no-new */
 new Vue({
