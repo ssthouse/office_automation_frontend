@@ -19,23 +19,13 @@
       <el-table-column prop="leaveType"
                        label="类型"
                        width="100"></el-table-column>
-      <el-table-column label="时间区间"
-                       width="220">
-        <template scope="scope">
-          <span>{{scope.row.beginDate}} 至 {{scope.row.endDate}}</span>
-        </template>
-      </el-table-column>
       <el-table-column label="天数"
                        width="100"
                        prop="dayNum"></el-table-column>
       <el-table-column label="状态"
-                       width="120"
+                       width="100"
                        prop="state"></el-table-column>
-      <el-table-column label="审批人"
-                       width="120"
-                       prop="approverUsername"></el-table-column>
-      <el-table-column label="操作"
-                       width="200">
+      <el-table-column label="操作">
         <template scope="scope">
           <!--the two button can is able only when in unapproved || approved state-->
           <el-button

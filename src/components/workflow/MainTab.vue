@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div style="height: 100%;">
     <!--上方 新增的一排按钮-->
-    <el-col :span="24">
+    <el-col :span="24" style="margin-top: -40px;">
       <el-card style="margin: 20px;">
         <div style="margin-bottom: -10px;">
           <span style="font-size: large; margin-right: 20px;">新建审批事项:</span>
@@ -23,53 +23,59 @@
       </el-card>
     </el-col>
 
-    <!--展示所有数据的折叠面板-->
-    <el-card style="margin-left: 20px; margin-right: 20px; margin-top: 40px;">
-      <div slot="header">
-        <span style="font-size: larger">我发起的审批:</span>
-        <el-button style="margin-left: 40px;"
-                   @click="onClickRefreshWorkflowData()">刷新
-        </el-button>
-      </div>
-      <el-collapse accordion>
-        <el-collapse-item title="请假" name="1"
-                          class="panel-title">
-          <ask-leave-panel></ask-leave-panel>
-        </el-collapse-item>
-        <el-collapse-item title="加班" name="2"
-                          class="panel-title">
-          <work-overtime-panel></work-overtime-panel>
-        </el-collapse-item>
-        <el-collapse-item title="出差" name="3"
-                          class="panel-title">
-          <outing-panel></outing-panel>
-        </el-collapse-item>
-      </el-collapse>
-    </el-card>
+    <el-row style="height: 100%;">
+      <el-col :span="12" style="height: 100%">
+        <!--展示所有数据的折叠面板-->
+        <el-card style="margin: 5px;">
+          <div slot="header">
+            <span style="font-size: larger">我发起的审批:</span>
+            <el-button style="margin-left: 40px;"
+                       @click="onClickRefreshWorkflowData()">刷新
+            </el-button>
+          </div>
+          <el-collapse accordion>
+            <el-collapse-item title="请假" name="1"
+                              class="panel-title">
+              <ask-leave-panel></ask-leave-panel>
+            </el-collapse-item>
+            <el-collapse-item title="加班" name="2"
+                              class="panel-title">
+              <work-overtime-panel></work-overtime-panel>
+            </el-collapse-item>
+            <el-collapse-item title="出差" name="3"
+                              class="panel-title">
+              <outing-panel></outing-panel>
+            </el-collapse-item>
+          </el-collapse>
+        </el-card>
+      </el-col>
 
-    <!--展示管理者数据的面板-->
-    <el-card style="margin-left: 20px; margin-right: 20px; margin-top: 40px;">
-      <div slot="header">
-        <span style="font-size: larger">我管理的审批:</span>
-        <el-button style="margin-left: 40px;"
-                   @click="onClickRefreshWorkflowData()">刷新
-        </el-button>
-      </div>
-      <el-collapse accordion>
-        <el-collapse-item title="请假" name="1"
-                          class="panel-title">
-          <ask-leave-admin-panel></ask-leave-admin-panel>
-        </el-collapse-item>
-        <el-collapse-item title="加班" name="2"
-                          class="panel-title">
-          <work-overtime-admin-panel></work-overtime-admin-panel>
-        </el-collapse-item>
-        <el-collapse-item title="出差" name="3"
-                          class="panel-title">
-          <outing-admin-panel></outing-admin-panel>
-        </el-collapse-item>
-      </el-collapse>
-    </el-card>
+      <el-col :span="12">
+        <!--展示管理者数据的面板-->
+        <el-card style="margin: 5px;">
+          <div slot="header">
+            <span style="font-size: larger">我管理的审批:</span>
+            <el-button style="margin-left: 40px;"
+                       @click="onClickRefreshWorkflowData()">刷新
+            </el-button>
+          </div>
+          <el-collapse accordion>
+            <el-collapse-item title="请假" name="1"
+                              class="panel-title">
+              <ask-leave-admin-panel></ask-leave-admin-panel>
+            </el-collapse-item>
+            <el-collapse-item title="加班" name="2"
+                              class="panel-title">
+              <work-overtime-admin-panel></work-overtime-admin-panel>
+            </el-collapse-item>
+            <el-collapse-item title="出差" name="3"
+                              class="panel-title">
+              <outing-admin-panel></outing-admin-panel>
+            </el-collapse-item>
+          </el-collapse>
+        </el-card>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
