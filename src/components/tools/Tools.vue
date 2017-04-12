@@ -8,13 +8,13 @@
 
 <script>
   import BaseItem from '../base/BaseItem.vue'
+  import * as types from '../../store/mutation-types'
   import MainTab from './MainTab.vue'
   import Vue from 'vue'
   // 问卷模块
   import Questionnaire from './questionnaire/Questionnaire.vue'
   import QuestionnaireFill from './questionnaire/QuestionnaireFill.vue'
-  import AnswerReport from './questionnaire/QuestionnaireReport.vue'
-  import * as types from '../../store/mutation-types'
+  import QuestionnaireReport from './questionnaire/QuestionnaireReport.vue'
   // 投票模块
   import Voting from './voting/Voting.vue'
   import VotingFill from './voting/VotingFill.vue'
@@ -23,13 +23,13 @@
   Vue.component(MainTab.name, MainTab)
   Vue.component(Questionnaire.name, Questionnaire)
   Vue.component(QuestionnaireFill.name, QuestionnaireFill)
-  Vue.component(AnswerReport.name, AnswerReport)
+  Vue.component(QuestionnaireReport.name, QuestionnaireReport)
   Vue.component(Voting.name, Voting)
   Vue.component(VotingFill.name, VotingFill)
   Vue.component(VotingReport.name, VotingReport)
 
   export default{
-    name: '',
+    name: 'tools',
     data () {
       return {
         MainTab

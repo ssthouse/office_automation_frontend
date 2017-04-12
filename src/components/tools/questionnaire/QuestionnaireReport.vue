@@ -61,7 +61,7 @@
   const URL_GET_ANSWER_ANALYSIS = 'http://127.0.0.1:8080/office_automation_backend/questionnaire/answer_analysis'
 
   export default{
-    name: 'answer-report',
+    name: 'questionnaire-report',
     data () {
       return {
         questionnaire: this.data,

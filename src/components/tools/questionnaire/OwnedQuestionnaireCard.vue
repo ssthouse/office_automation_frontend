@@ -39,7 +39,7 @@
 
 <script>
   import Questionnaire from './Questionnaire.vue'
-  import AnswerReport from './QuestionnaireReport.vue'
+  import QuestionnaireReport from './QuestionnaireReport.vue'
   import QuestionnaireBean from './bean/questionnaire'
   import TabItem from '../../base/TabItem'
   import * as types from '../../../store/mutation-types'
@@ -48,18 +48,18 @@
     name: 'questionnaire-admin-card',
     data () {
       return {
-        types,
-        Questionnaire
+        types
       }
     },
     props: [],
     methods: {
       onAdd: function () {
         let questionnaire = QuestionnaireBean.getEmptyQuestionnaire()
-        this.$store.commit(types.TOOLS_ADD_TAB, new TabItem('新建调查问卷', Questionnaire.name, questionnaire))
+        console.log('this is the tab name: ' + Questionnaire.name)
+        this.$store.commit(types.TOOLS_ADD_TAB, new TabItem('新建调查问卷', 'questionnaire', questionnaire))
       },
       clickQuestionnaire (questionnaire) {
-        let tabItem = new TabItem(questionnaire.title, AnswerReport.name, questionnaire)
+        let tabItem = new TabItem(questionnaire.title, QuestionnaireReport.name, questionnaire)
         this.$store.commit(types.TOOLS_ADD_TAB, tabItem)
       },
       clickEditQuestionnaire (questionnaire) {

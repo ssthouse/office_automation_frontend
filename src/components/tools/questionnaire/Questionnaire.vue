@@ -79,7 +79,7 @@
       <el-input type="textarea"
                 autosize
                 placeholder="选项, 以回车换行"
-                style="width: 90%;"
+                style="width: 90%; margin-top: 10px; margin-bottom: 10px;"
                 v-model="currentRadioQuestion.selections"></el-input>
       <p>预览选项:</p>
       <div v-text="currentRadioQuestion.selections.split('/n')"></div>
@@ -132,18 +132,6 @@
 <script>
   import {QUESTION_TYPES, Question} from './bean/question'
   import Questionnaire from './bean/questionnaire'
-
-  // check is
-  var checkNewQuestionInput = function (data, questionType) {
-    switch (questionType) {
-      case QUESTION_TYPES.RADIO:
-        return data.currentRadioQuestion.isEmpty()
-      case QUESTION_TYPES.CHECK_BOX:
-        return data.currentCheckboxQuestion.isEmpty()
-      case QUESTION_TYPES.TEXT_AREA:
-        return data.currentTextAreaQuestion.isEmpty()
-    }
-  }
 
   export default{
     name: 'questionnaire',
@@ -235,7 +223,7 @@
        * @param questionType
        */
       onEnsureDialog (questionType) {
-        if (!checkNewQuestionInput(this, questionType)) {
+        if (!this.checkNewQuestionInput(questionType)) {
           console.log('input invalid')
           return
         }
@@ -295,6 +283,16 @@
           }, fail => {
             this.$message(fail)
           })
+      },
+      checkNewQuestionInput: function (questionType) {
+        switch (questionType) {
+          case QUESTION_TYPES.RADIO:
+            return this.currentRadioQuestion.isEmpty()
+          case QUESTION_TYPES.CHECK_BOX:
+            return this.currentCheckboxQuestion.isEmpty()
+          case QUESTION_TYPES.TEXT_AREA:
+            return this.currentTextAreaQuestion.isEmpty()
+        }
       }
     },
     created () {
