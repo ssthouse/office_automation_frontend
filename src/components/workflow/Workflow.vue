@@ -1,9 +1,15 @@
 <template>
-  <base-item
-    :tabs="tabs"
-    v-on:remove-tab="handleRemoveTab"
-    mainTabName="审批管理"
-    :mainTabIs="MainTab.name"></base-item>
+  <div>
+    <base-item
+      :tabs="tabs"
+      v-on:remove-tab="handleRemoveTab"
+      mainTabName="审批管理"
+      :mainTabIs="MainTab.name"></base-item>
+
+    <md-button class="md-fab md-fab-bottom-right">
+      <md-icon>add</md-icon>
+    </md-button>
+  </div>
 </template>
 
 <script>

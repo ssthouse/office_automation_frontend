@@ -6,6 +6,7 @@ import App from './components/App'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
 import VueResource from 'vue-resource'
+import VueMaterial from 'vue-material'
 
 // import VueQuillEditor from 'vue-quill-editor'
 import {router} from './router'
@@ -16,9 +17,11 @@ Vue.component(UserInfo.name, UserInfo)
 
 Vue.use(ElementUI)
 Vue.use(VueResource)
+Vue.use(VueMaterial)
 // Vue.use(VueQuillEditor)
 
 require('!style!css!bootstrap/dist/css/bootstrap.css')
+require('!style!css!vue-material/dist/vue-material.css')
 
 /* eslint-disable no-new */
 new Vue({
