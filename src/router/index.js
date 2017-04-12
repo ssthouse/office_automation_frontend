@@ -9,7 +9,6 @@ import Login from '../components/oa_system/login/Login.vue'
 import Main from '../components/oa_system/Main.vue'
 import HomePage from '../components/home_page/HomePage.vue'
 import Workflow from '../components/workflow/Workflow.vue'
-import PublicInfo from '../components/public_info/PublicInfo.vue'
 import OfficlalDoc from '../components/official_doc/OfficialDoc.vue'
 import Tools from '../components/tools/Tools.vue'
 
@@ -32,9 +31,6 @@ const HOME_PAGE_PATH = OA_SYSTEM_PATH + '/' + HOME_PAGE
 
 const WORKFLOW = 'workflow'
 const WORKFLOW_PATH = OA_SYSTEM_PATH + '/' + WORKFLOW
-
-const PUBLIC_INFO = 'public_info'
-const PUBLIC_INFO_PATH = OA_SYSTEM_PATH + '/' + PUBLIC_INFO
 
 const OFFICIAL_DOC = 'official_doc'
 const OFFICIAL_DOC_PATH = OA_SYSTEM_PATH + '/' + OFFICIAL_DOC
@@ -59,10 +55,6 @@ const PATHS = {
   // 流程审批
   WORKFLOW,
   WORKFLOW_PATH,
-
-  // 信息发布
-  PUBLIC_INFO,
-  PUBLIC_INFO_PATH,
 
   // 公文处理
   OFFICIAL_DOC,
@@ -92,7 +84,6 @@ const routes = [
       {path: '/', component: HomePage},
       {path: HOME_PAGE, component: HomePage},
       {path: WORKFLOW, component: Workflow},
-      {path: PUBLIC_INFO, component: PublicInfo},
       {path: OFFICIAL_DOC, component: OfficlalDoc},
       {path: OA_TOOLS, component: Tools}
     ]

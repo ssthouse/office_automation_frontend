@@ -6,7 +6,6 @@
       style="height: 100%">
       <el-menu-item :index="PATHS.HOME_PAGE_PATH">个人首页</el-menu-item>
       <el-menu-item :index="PATHS.WORKFLOW_PATH">审批管理</el-menu-item>
-      <el-menu-item :index="PATHS.PUBLIC_INFO_PATH">信息发布</el-menu-item>
       <el-menu-item :index="PATHS.OFFICIAL_DOC_PATH">公文处理</el-menu-item>
       <el-menu-item :index="PATHS.OA_TOOLS_PATH">常用工具</el-menu-item>
     </el-menu>
