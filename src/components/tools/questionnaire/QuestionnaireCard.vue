@@ -4,12 +4,11 @@
       <!--标题-->
       <div slot="header" class="card-header">
         <span class="card-title">待填问卷</span>
-        <el-button-group style="float: right;">
-          <el-button size="small"
-                     @click="refreshData">
-            刷新
-          </el-button>
-        </el-button-group>
+        <el-button size="small"
+                   style="float: right"
+                   @click="refreshData">
+          刷新
+        </el-button>
       </div>
       <!--问卷列表-->
       <div v-loading.body=isLoading class="card-body">
@@ -75,21 +74,17 @@
 </script>
 
 <style>
-  .span {
-    line-height: 28px;
-  }
-
   .card-panel {
-    margin-left: 10px;
-    margin-right: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
   }
 
   .card-header {
-    height: 20px;
+    height: 10px;
   }
 
   .card-body {
-    height: 200px;
+    height: 160px;
     overflow-y: scroll;
   }
 </style>

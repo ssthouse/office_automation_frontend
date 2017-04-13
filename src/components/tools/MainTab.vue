@@ -1,7 +1,7 @@
 <template>
   <div style="margin-top: -40px;">
     <el-row>
-      <el-col :span="12"
+      <el-col :span="8"
               class="card-col"
               v-for="configName in toolsPageConfig">
         <div v-bind:is="getComponentIs(toolsPageConfig.indexOf(configName))">

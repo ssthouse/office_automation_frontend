@@ -1,30 +1,28 @@
 <template>
-  <div>
-    <el-card class="card-panel">
-      <div slot="header" class="card-header">
-        <span class="card-title">待投票</span>
-        <el-button-group style="float: right;">
-          <el-button size="small"
-                     @click="refreshData">
-            刷新
-          </el-button>
-        </el-button-group>
-      </div>
+  <el-card class="card-panel">
+    <div slot="header" class="card-header">
+      <span class="card-title">待投票</span>
+      <el-button size="small"
+                 style="float: right"
+                 @click="refreshData">
+        刷新
+      </el-button>
+    </div>
 
-      <div class="card-body">
-        <div v-for="voting in openVotingList">
-          <div style="clear: both; margin-top: 5px; margin-bottom: 5px;">
-            <a @click="onClickVoting(voting)"
-               class="card-link"
-               href="javascript:void(0);">
-              {{voting.title}}
-            </a>
-          </div>
+    <div class="card-body">
+      <div v-for="voting in openVotingList">
+        <div style="clear: both; margin-top: 5px; margin-bottom: 5px;">
+          <a @click="onClickVoting(voting)"
+             class="card-link"
+             href="javascript:void(0);">
+            {{voting.title}}
+          </a>
         </div>
       </div>
-    </el-card>
-  </div>
+    </div>
+  </el-card>
 </template>
+
 <script>
   import * as MUTATION_TYPES from '../../../store/mutation-types'
   import TabItem from '../../base/TabItem'

@@ -53,11 +53,31 @@
         </el-card>
       </el-col>
     </el-row>
+
+    <md-button class="md-fab md-fab-bottom-right"
+               id="btnAdd"
+               @click.native="onClickAddWorkflow()">
+      <md-icon>add</md-icon>
+    </md-button>
+
+    <!--dialog to select new workflow type-->
+    <md-dialog md-open-from="#btnAdd" md-close-from="#btnAdd" ref="dialogAdd">
+      <md-dialog-title>新建审批</md-dialog-title>
+      <md-dialog-content>
+        <md-list>
+          <md-button @click.native="onClickAskLeave()">请假</md-button>
+          <md-button @click.native="onClickWorkOvertime()">加班</md-button>
+          <md-button @click.native="onClickOuting()">出差</md-button>
+        </md-list>
+      </md-dialog-content>
+    </md-dialog>
   </div>
 </template>
 
 <script>
   import Vue from 'vue'
+  import TabItem from '../base/TabItem'
+  import * as types from '../../store/mutation-types'
   // askLeave
   import AskLeave from './ask_leave/AskLeave.vue'
   import AskLeavePanel from './ask_leave/panel/AskLeavePanel.vue'
@@ -109,6 +129,21 @@
       onClickRefreshWorkflowData () {
         // 触发刷新所有的数据的 event
         EventBus.$emit(Cons.EVENT_WORKFLOW_UPDATE_ALL)
+      },
+      onClickAddWorkflow () {
+        this.$refs['dialogAdd'].open()
+      },
+      onClickAskLeave () {
+        this.$store.commit(types.WORKFLOW_ADD_TAB, new TabItem('新建请假流程', AskLeave.name, null))
+        this.$refs['dialogAdd'].close()
+      },
+      onClickWorkOvertime () {
+        this.$store.commit(types.WORKFLOW_ADD_TAB, new TabItem('新建加班审批', WorkOvertime.name, null))
+        this.$refs['dialogAdd'].close()
+      },
+      onClickOuting () {
+        this.$store.commit(types.WORKFLOW_ADD_TAB, new TabItem('新建出差', Outing.name, null))
+        this.$refs['dialogAdd'].close()
       }
     },
     components: {

@@ -1,12 +1,14 @@
 <template>
   <div class="main_div">
     <el-tabs type="card"
+             style="height: 90%;"
              @tab-remove="handleTabRemove"
              class="content_tabs">
 
       <!--主标签: 用于包含卡片 ===> 用于触发其他tab   本tab不可关闭-->
-      <el-tab-pane :label="mainTabName">
-        <div :is="mainTabIs"></div>
+      <el-tab-pane :label="mainTabName"
+                   style="height: 100%;">
+        <div :is="mainTabIs" style="height: 100%;"></div>
       </el-tab-pane>
 
       <!--其他动态增加减少的标签-->
