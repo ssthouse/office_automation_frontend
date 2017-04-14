@@ -1,6 +1,7 @@
 <template>
   <base-item :tabs="tabs"
              mainTabName="工具集"
+             :activeTabIndex="activeTabIndex"
              v-on:remove-tab="handleRemoveTab"
              :mainTabIs="MainTab.name">
   </base-item>
@@ -32,7 +33,8 @@
     name: 'tools',
     data () {
       return {
-        MainTab
+        MainTab,
+        activeTabIndex: '0'
       }
     },
     props: [],

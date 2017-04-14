@@ -9,6 +9,7 @@ export const EVENT_WORKFLOW_UPDATE_ALL = 'workflow/update'
 export const EVENT_WORKFLOW_UPDATE_ASK_LEAVE = 'workflow/ask_leave/update'
 export const EVENT_WORKFLOW_UPDATE_WORK_OVERTIME = 'workflow/work_overtime/update'
 export const EVENT_WORKFLOW_UPDATE_OUTING = 'workflow/outing/update'
+export const EVENT_WORKFLOW_NEW_TAB = 'workflow/new_tab'
 
 export const EVENT_MAIN_UPDATE_USER_CONFIG = 'main/user_config/update'
 

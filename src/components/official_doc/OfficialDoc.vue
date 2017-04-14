@@ -1,6 +1,7 @@
 <template>
   <base-item :tabs="tabs"
              :mainTabIs="MainTab.name"
+             :activeTabIndex="activeTabIndex"
              v-on:remove-tab="handleRemoveTab"
              mainTabName="公文处理">
     This is the official doc.
@@ -19,7 +20,8 @@
     name: '',
     data () {
       return {
-        MainTab
+        MainTab,
+        activeTabIndex: '0'
       }
     },
     props: [],

@@ -3,6 +3,7 @@
              style="overflow-y: scroll"
              mainTabName="个人主页"
              :mainTabIs="MainTab.name"
+             :activeTabIndex="activeTabIndex"
              v-on:remove-tab="handleRemoveTab"></base-item>
 </template>
 
@@ -20,7 +21,8 @@
     name: 'home-page',
     data () {
       return {
-        MainTab
+        MainTab,
+        activeTabIndex: '0'
       }
     },
     props: [],
