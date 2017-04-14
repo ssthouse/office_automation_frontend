@@ -37,7 +37,7 @@
     methods: {
       handleRemoveTab (tabName) {
         let index = parseInt(tabName) - 1
-        let tabIs = this.$store.state.workflowModule.workflow_tabs[index].tabIs
+        let tabIs = this.tabs[index].tabIs
         this.$store.commit(types.WORKFLOW_REMOVE_TAB, tabIs)
       }
     },

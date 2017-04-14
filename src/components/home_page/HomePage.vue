@@ -8,6 +8,8 @@
 </template>
 
 <script>
+  import {EventBus} from '../base/EventBus'
+  import * as Cons from '../base/Constant'
   import MainTab from './MainTab.vue'
   import BaseItem from '../base/BaseItem.vue'
   import Vue from 'vue'
@@ -35,10 +37,22 @@
       }
     },
     methods: {
-      handleRemoveTab (tabIs) {
-        // 从store中移除当前tabIs的tab
+      /**
+       *
+       * @param tabName int str
+       */
+      handleRemoveTab (tabName) {
+        let index = parseInt(tabName)
+        let tabIs = this.tabs[index - 1].tabIs
+        console.log(tabIs)
         this.$store.commit(types.HOMEPAGE_REMOVE_TAB, tabIs)
       }
+    },
+    created: function () {
+      EventBus.$on(Cons.EVENT_HOMEPAGE_NEW_TAB, () => {
+        let index = this.tabs.length
+        this.activeTabIndex = index.toString()
+      })
     }
   }
 </script>

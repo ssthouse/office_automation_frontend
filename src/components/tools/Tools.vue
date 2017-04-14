@@ -55,7 +55,7 @@
        */
       handleRemoveTab (tabName) {
         let index = parseInt(tabName)
-        let tabIs = this.$store.state.toolsModule.allTabs[index - 1]
+        let tabIs = this.tabs[index - 1].tabIs
         this.$store.commit(types.TOOLS_REMOVE_TAB, tabIs)
       }
     },
