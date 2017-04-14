@@ -9,7 +9,7 @@
 <script>
   import * as types from '../../store/mutation-types'
   import TabItem from '../base/TabItem'
-  import Questionnaire from '../tools/questionnaire/Questionnaire.vue'
+  import QuestionnaireBean from '../tools/questionnaire/bean/questionnaire'
 
   export default{
     name: 'official-doc-main-tab',
@@ -19,7 +19,7 @@
     props: [],
     methods: {
       addTab () {
-        this.$store.commit(types.OFFICIAL_DOC_ADD_TAB, new TabItem('测试标签', Questionnaire.name))
+        this.$store.commit(types.OFFICIAL_DOC_ADD_TAB, new TabItem('测试标签', 'questionnaire', QuestionnaireBean.getEmptyQuestionnaire()))
       }
     }
   }

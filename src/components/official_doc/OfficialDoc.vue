@@ -9,6 +9,8 @@
 </template>
 
 <script>
+  import {EventBus} from '../base/EventBus'
+  import * as Cons from '../base/Constant'
   import BaseItem from '../base/BaseItem.vue'
   import MainTab from './MainTab.vue'
   import Vue from 'vue'
@@ -17,7 +19,7 @@
   Vue.component(MainTab.name, MainTab)
 
   export default{
-    name: '',
+    name: 'official-doc',
     data () {
       return {
         MainTab,
@@ -34,9 +36,17 @@
       }
     },
     methods: {
-      handleRemoveTab (tabIs) {
+      handleRemoveTab (tabName) {
+        let index = parseInt(tabName)
+        let tabIs = this.tabs[index - 1].tabIs
         this.$store.commit(types.OFFICIAL_DOC_REMOVE_TAB, tabIs)
       }
+    },
+    created: function () {
+      EventBus.$on(Cons.EVENT_OFFICIAL_DOC_NEW_TAB, () => {
+        let index = this.tabs.length
+        this.activeTabIndex = index.toString()
+      })
     }
   }
 </script>

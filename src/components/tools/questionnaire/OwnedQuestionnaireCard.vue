@@ -53,7 +53,6 @@
     methods: {
       onAdd: function () {
         let questionnaire = QuestionnaireBean.getEmptyQuestionnaire()
-        console.log('this is the tab name: ' + Questionnaire.name)
         this.$store.commit(types.TOOLS_ADD_TAB, new TabItem('新建调查问卷', 'questionnaire', questionnaire))
       },
       clickQuestionnaire (questionnaire) {
