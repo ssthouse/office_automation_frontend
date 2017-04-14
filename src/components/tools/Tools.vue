@@ -8,6 +8,8 @@
 </template>
 
 <script>
+  import * as Cons from '../base/Constant'
+  import {EventBus} from '../base/EventBus'
   import BaseItem from '../base/BaseItem.vue'
   import * as types from '../../store/mutation-types'
   import MainTab from './MainTab.vue'
@@ -47,9 +49,21 @@
       }
     },
     methods: {
-      handleRemoveTab (tabIs) {
+      /**
+       * handle base item remove tab event
+       * @param tabName number str
+       */
+      handleRemoveTab (tabName) {
+        let index = parseInt(tabName)
+        let tabIs = this.$store.state.toolsModule.allTabs[index - 1]
         this.$store.commit(types.TOOLS_REMOVE_TAB, tabIs)
       }
+    },
+    created: function () {
+      EventBus.$on(Cons.EVENT_TOOLS_NEW_TAB, () => {
+        let index = this.tabs.length
+        this.activeTabIndex = index.toString()
+      })
     }
   }
 </script>
