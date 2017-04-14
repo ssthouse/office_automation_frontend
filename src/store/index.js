@@ -3,7 +3,6 @@ import Vuex from 'vuex'
 
 import homePageModule from './modules/homepage_store'
 import workflowModule from './modules/workflow_store'
-import publicInfoModule from './modules/public_info_store'
 import officialDocModule from './modules/official_doc_store'
 import toolsModule from './modules/tools_store'
 // main store
@@ -19,7 +18,6 @@ export default new Vuex.Store({
   modules: {
     homePageModule,
     workflowModule,
-    publicInfoModule,
     officialDocModule,
     toolsModule,
     // main module
