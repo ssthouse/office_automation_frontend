@@ -1,20 +1,19 @@
 <template>
   <div class="main_div">
     <el-tabs type="card"
-             style="height: 90%;"
-             @tab-remove="handleTabRemove"
-             class="content_tabs">
+             @tab-remove="handleTabRemove">
 
       <!--主标签: 用于包含卡片 ===> 用于触发其他tab   本tab不可关闭-->
-      <el-tab-pane :label="mainTabName"
-                   style="height: 100%;">
-        <div :is="mainTabIs" style="height: 100%;"></div>
+      <el-tab-pane :label="mainTabName">
+        <div>
+          <div :is="mainTabIs"></div>
+        </div>
       </el-tab-pane>
 
       <!--其他动态增加减少的标签-->
       <el-tab-pane v-for="tab in tabs"
                    closable
-                   :name="tab.tabIs"
+                   :name="tabs.indexOf(tab)"
                    :label="tab.tabLabel">
         <div v-bind:is="tab.tabIs"
              :data="tab.data"
@@ -43,5 +42,6 @@
 <style>
   .main_div {
     width: 100%;
+    height: 100%;
   }
 </style>

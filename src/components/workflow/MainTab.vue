@@ -1,7 +1,7 @@
 <template>
-  <div style="height: 100%; margin-top: -20px;">
-    <el-row style="height: 100%;">
-      <el-col :span="12" style="height: 100%">
+  <div style="height: auto;margin-top: -20px;">
+    <el-row>
+      <el-col :span="12">
         <!--展示所有数据的折叠面板-->
         <el-card style="margin: 5px;">
           <div slot="header">
@@ -55,6 +55,7 @@
     </el-row>
 
     <md-button class="md-fab md-fab-bottom-right"
+               style="margin-bottom: 60px;"
                id="btnAdd"
                @click.native="onClickAddWorkflow()">
       <md-icon>add</md-icon>
