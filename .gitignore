@@ -4,3 +4,4 @@ dist/
 npm-debug.log
 .idea/vcs.xml
 .idea/workspace.xml
+.idea/

@@ -1,5 +1,5 @@
 import * as types from '../mutation-types'
-import {EventBus} from '../../components/base/EventBus'
+import { EventBus } from '../../components/base/EventBus'
 import * as Cons from '../../components/base/Constant'
 import Vue from 'vue'
 
@@ -20,7 +20,10 @@ const state = {
   ownedQuestionnaireList: [],
   // voting
   openVotingList: [],
-  ownedVotingList: []
+  ownedVotingList: [],
+  // meeting
+  meetingList: [],
+  ownedMeetingList: []
 }
 
 const tabIsSet = new Set()
@@ -45,20 +48,6 @@ const mutations = {
     if (tabIsSet.has(tabIs)) {
       tabIsSet.delete(tabIs)
     }
-  },
-  // set questionnaire
-  [types.TOOLS_SET_OPEN_QUESTIONNAIRE_LIST] (state, openList) {
-    state.questionnaireList = openList
-  },
-  [types.TOOLS_SET_OWNED_QUESTIONNAIRE_LIST] (state, ownedList) {
-    state.ownedQuestionnaireList = ownedList
-  },
-  // set voting
-  [types.TOOLS_SET_VOTING_OPEN_LIST] (state, openList) {
-    state.openVotingList = openList
-  },
-  [types.TOOLS_SET_VOTING_OWNED_LIST] (state, ownedList) {
-    state.ownedVotingList = ownedList
   }
 }
 
@@ -77,8 +66,8 @@ const actions = {
             return
           }
           // 设置数据到本地
-          context.commit(types.TOOLS_SET_OPEN_QUESTIONNAIRE_LIST, success.body.data.questionnaireList)
-          context.commit(types.TOOLS_SET_OWNED_QUESTIONNAIRE_LIST, success.body.data.ownedQuestionnaireList)
+          context.state.questionnaireList = success.body.data.questionnaireList
+          context.state.ownedQuestionnaireList = success.body.data.ownedQuestionnaireList
           resolve('问卷数据获取成功')
         }, function (error) {
           reject(error.msg)
@@ -98,7 +87,7 @@ const actions = {
             reject('获取投票数据出错')
             return
           }
-          context.commit(types.TOOLS_SET_VOTING_OPEN_LIST, success.body.openVotingList)
+          context.state.openVotingList = success.body.openVotingList
           resolve('获取投票模块数据成功')
         }, fail => {
           reject('获取投票数据出错')
@@ -118,7 +107,7 @@ const actions = {
             reject('获取管理者voting数据失败')
             return
           }
-          context.commit(types.TOOLS_SET_VOTING_OWNED_LIST, success.body.ownedVotingList)
+          context.state.ownedVotingList = success.body.ownedVotingList
           resolve('获取管理者voting数据成功')
         }, fail => {
           reject('获取管理者voting数据失败')
@@ -129,16 +118,16 @@ const actions = {
 
 const getters = {
   getQuestionnaireList: (state) => {
-    return state.questionnaireList == null ? [] : state.questionnaireList
+    return state.questionnaireList === null ? [] : state.questionnaireList
   },
   getOwnedQuestionnaireList: (state) => {
-    return state.ownedQuestionnaireList == null ? [] : state.ownedQuestionnaireList
+    return state.ownedQuestionnaireList === null ? [] : state.ownedQuestionnaireList
   },
   getOpenVotingList: (state) => {
-    return state.openVotingList == null ? [] : state.openVotingList
+    return state.openVotingList === null ? [] : state.openVotingList
   },
   getOwnedVotingList: (state) => {
-    return state.ownedVotingList == null ? [] : state.ownedVotingList
+    return state.ownedVotingList === null ? [] : state.ownedVotingList
   }
 }
 

@@ -26,7 +26,7 @@
           <el-button @click="clickEditQuestionnaire(questionnaire)"
                      type="text"
                      :disabled="questionnaire.published"
-                     style="margin-left: 20px;">
+                     style="float: right">
             编辑
           </el-button>
         </div>
