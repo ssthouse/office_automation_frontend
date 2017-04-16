@@ -3,10 +3,8 @@
     <el-row>
       <el-col :span="8"
               class="card-col"
-              v-for="configName in toolsPageConfig">
-        <div v-bind:is="getComponentIs(toolsPageConfig.indexOf(configName))">
-
-        </div>
+              v-for="cardIs in cardList">
+        <div v-bind:is="cardIs"></div>
       </el-col>
     </el-row>
 
@@ -31,13 +29,16 @@
 <script>
   import * as Cons from '../base/Constant'
   import * as types from '../../store/mutation-types'
-  import {EventBus} from '../base/EventBus'
+  import { EventBus } from '../base/EventBus'
   // 问卷模块
   import QuestionnaireCard from './questionnaire/QuestionnaireCard.vue'
   import OwnedQuestionnaireCard from './questionnaire/OwnedQuestionnaireCard.vue'
   // 投票模块
   import VotingCard from './voting/VotingCard.vue'
   import OwnedVotingCard from './voting/OwnedVotingCard.vue'
+  // 会议模块
+  import MeetingCard from './meeting/MeetingCard.vue'
+  import OwnedMettingCard from './meeting/OwnedMeetingCard.vue'
   // Vue
   import Vue from 'vue'
 
@@ -45,12 +46,15 @@
   Vue.component(OwnedQuestionnaireCard.name, OwnedQuestionnaireCard)
   Vue.component(VotingCard.name, VotingCard)
   Vue.component(OwnedVotingCard.name, OwnedVotingCard)
+  Vue.component(MeetingCard.name, MeetingCard)
+  Vue.component(OwnedMettingCard.name, OwnedMettingCard)
 
   export default{
     name: 'tools-main-tab',
     data () {
       return {
-        toolsPageConfig: this.$store.getters.getToolsPageConfig,
+        cardList: [QuestionnaireCard.name, VotingCard.name, MeetingCard.name,
+          OwnedQuestionnaireCard.name, OwnedVotingCard.name, OwnedMettingCard.name],
         componentDic: Cons.ToolsPageComponent,
         Cons: Cons,
         newPageConfig: []
@@ -60,11 +64,6 @@
     components: {},
     computed: {},
     methods: {
-      getComponentIs (index) {
-        let configName = this.toolsPageConfig[index]
-        let componentName = Cons.ToolsPageComponent[configName]
-        return componentName
-      },
       updateConfig () {
         console.log(this.newPageConfig)
         this.$store.dispatch(types.ACTION_POST_USER_CONFIG_TOOLS, this.newPageConfig.join(','))

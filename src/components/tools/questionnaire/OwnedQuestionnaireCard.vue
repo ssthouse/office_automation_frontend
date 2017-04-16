@@ -6,9 +6,7 @@
       <el-button-group style="float: right;">
         <el-button size="small"
                    icon="plus"
-                   @click="onAdd">
-
-        </el-button>
+                   @click="onAdd"></el-button>
         <el-button size="small"
                    @click="refreshData">
           刷新

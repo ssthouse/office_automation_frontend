@@ -9,7 +9,7 @@
 
 <script>
   import * as Cons from '../base/Constant'
-  import {EventBus} from '../base/EventBus'
+  import { EventBus } from '../base/EventBus'
   import BaseItem from '../base/BaseItem.vue'
   import * as types from '../../store/mutation-types'
   import MainTab from './MainTab.vue'
@@ -22,6 +22,9 @@
   import Voting from './voting/Voting.vue'
   import VotingFill from './voting/VotingFill.vue'
   import VotingReport from './voting/VotingReport.vue'
+  // 会议模块
+  import Meeting from './meeting/Metting.vue'
+  import MeetingDetail from './meeting/MeetingDetail.vue'
 
   Vue.component(MainTab.name, MainTab)
   Vue.component(Questionnaire.name, Questionnaire)
@@ -30,6 +33,8 @@
   Vue.component(Voting.name, Voting)
   Vue.component(VotingFill.name, VotingFill)
   Vue.component(VotingReport.name, VotingReport)
+  Vue.component(Meeting.name, Meeting)
+  Vue.component(MeetingDetail.name, MeetingDetail)
 
   export default{
     name: 'tools',

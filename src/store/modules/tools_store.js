@@ -59,7 +59,7 @@ const actions = {
    */
   [types.ACTION_FETCH_QUESTIONNAIRE]: function (context) {
     return new Promise((resolve, reject) => {
-      Vue.http.get('http://127.0.0.1:8080/office_automation_backend/questionnaire/detail')
+      Vue.http.get(Cons.BASE_URL + '/questionnaire/detail')
         .then(function (success) {
           if (success.body.ok !== true) {
             reject('获取问卷数据出错')
@@ -81,7 +81,7 @@ const actions = {
    */
   [types.ACTION_FETCH_OPEN_VOTING]: function (context) {
     return new Promise((resolve, reject) => {
-      Vue.http.get('http://127.0.0.1:8080/office_automation_backend/voting/open')
+      Vue.http.get(Cons.BASE_URL + '/voting/open')
         .then(success => {
           if (success.body.ok !== true) {
             reject('获取投票数据出错')
@@ -101,7 +101,7 @@ const actions = {
    */
   [types.ACTION_FETCH_OWNED_VOTING]: function (context) {
     return new Promise((resolve, reject) => {
-      Vue.http.get('http://127.0.0.1:8080/office_automation_backend/voting/owned')
+      Vue.http.get(Cons.BASE_URL + '/voting/owned')
         .then(success => {
           if (success.body.ok !== true) {
             reject('获取管理者voting数据失败')
@@ -111,6 +111,45 @@ const actions = {
           resolve('获取管理者voting数据成功')
         }, fail => {
           reject('获取管理者voting数据失败')
+        })
+    })
+  },
+  /**
+   * 获取公开会议数据
+   * @param context
+   * @returns {Promise}
+   */
+  [types.ACTION_FETCH_OPEN_MEETING]: function (context) {
+    return new Promise((resolve, reject) => {
+      Vue.http.get(Cons.BASE_URL + '/meeting/open')
+        .then(success => {
+          if (success.body.ok !== true) {
+            reject('获取会议信息失败: ' + success.body.msg)
+            return
+          }
+          context.state.meetingList = success.body.meetingList
+        }, fail => {
+          reject('获取会议信息失败')
+        })
+    })
+  },
+  /**
+   * 获取管理的会议数据
+   * @param context
+   * @returns {Promise}
+   */
+  [types.ACTION_FETCH_OWNED_MEETING]: function (context) {
+    return new Promise((resolve, reject) => {
+      Vue.http.get(Cons.BASE_URL + '/meeting/owned')
+        .then(success => {
+          if (success.body.ok !== true) {
+            reject('获取会议信息失败: ' + success.body.msg)
+            return
+          }
+          context.state.ownedMeetingList = success.body.meetingList
+          console.log(success.body.meetingList)
+        }, fail => {
+          reject('获取会议信息失败')
         })
     })
   }
@@ -128,6 +167,12 @@ const getters = {
   },
   getOwnedVotingList: (state) => {
     return state.ownedVotingList === null ? [] : state.ownedVotingList
+  },
+  getOpenMeetingList: (state) => {
+    return state.meetingList === null ? [] : state.meetingList
+  },
+  getOwnedMeetingList: (state) => {
+    return state.ownedMeetingList === null ? [] : state.ownedMeetingList
   }
 }
 

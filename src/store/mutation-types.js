@@ -24,8 +24,10 @@ export const TOOLS_ADD_TAB = 'tools/add_tab'
 export const TOOLS_REMOVE_TAB = 'tools/remove_tab'
 
 // 获取用户相关的questionnaire到store
-export const ACTION_FETCH_QUESTIONNAIRE = 'tool/action/fetch_questionnaire'
+export const ACTION_FETCH_QUESTIONNAIRE = 'tools/action/fetch_questionnaire'
 // 获取关于voting 的数据
-export const ACTION_FETCH_OPEN_VOTING = 'tool/action/fetch_open_voting'
-export const ACTION_FETCH_OWNED_VOTING = 'tool/action/fetch_owned_voting'
+export const ACTION_FETCH_OPEN_VOTING = 'tools/action/fetch_open_voting'
+export const ACTION_FETCH_OWNED_VOTING = 'tools/action/fetch_owned_voting'
+export const ACTION_FETCH_OPEN_MEETING = 'tools/action/fetch_open_meeting'
+export const ACTION_FETCH_OWNED_MEETING = 'tools/action/fetch_owned_meeting'
 
