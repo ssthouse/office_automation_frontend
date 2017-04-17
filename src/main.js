@@ -12,7 +12,7 @@ import VueMaterial from 'vue-material'
 import {router} from './router'
 import store from './store'
 // 注册一些全局的组件
-import UserInfo from './components/home_page/UserInfo.vue'
+import UserInfo from './components/home_page/userinfo/UserInfo.vue'
 
 require('!style!css!bootstrap/dist/css/bootstrap.css')
 require('!style!css!vue-material/dist/vue-material.css')

@@ -1,16 +1,25 @@
 <template>
   <div>
-    这里是修改密码的地方
+
   </div>
 </template>
 
 <script>
   export default{
-    name: '',
+    name: 'news',
     data () {
       return {}
     },
-    props: []
+    props: [],
+    methods: {
+
+    },
+    computed: {
+
+    },
+    created: function () {
+
+    }
   }
 </script>
 

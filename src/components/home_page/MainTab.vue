@@ -1,7 +1,16 @@
 <template>
-  <div>
-    this is the main page for home page.
-    <el-button @click="addTab()">add tab</el-button>
+  <div style="margin-top: -40px;">
+    <el-row>
+      <el-col :span="8">
+        <img-news-card class="card-col"></img-news-card>
+      </el-col>
+      <el-col :span="8">
+        <news-card class="card-col"></news-card>
+      </el-col>
+      <el-col :span="8">
+        <calendar-card class="card-col"></calendar-card>
+      </el-col>
+    </el-row>
   </div>
 </template>
 

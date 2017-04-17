@@ -43,7 +43,7 @@
   import OaSystemMenu from './OaSystemMenu.vue'
   import * as MUTATION_TYPES from '../../store/mutation-types'
   import TabItem from '../base/TabItem'
-  import UserInfo from '../home_page/UserInfo.vue'
+  import UserInfo from '../home_page/userinfo/UserInfo.vue'
 
   export default {
     name: 'main',

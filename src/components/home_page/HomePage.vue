@@ -8,16 +8,24 @@
 </template>
 
 <script>
-  import {instance} from '../base/EventBus'
-  import * as Cons from '../base/Constant'
+  import * as EventBus from '../base/EventBus'
   import MainTab from './MainTab.vue'
   import BaseItem from '../base/BaseItem.vue'
   import Vue from 'vue'
   import * as types from '../../store/mutation-types'
-  import UserInfo from './UserInfo.vue'
+  // components
+  import NewsCard from './news/NewsCard.vue'
+  import News from './news/News.vue'
+  import ImgNewsCard from './img_news/ImgNewsCard.vue'
+  import CalendarCard from './calendar/CalendarCard.vue'
+  import UserInfo from './userinfo/UserInfo.vue'
 
   Vue.component(MainTab.name, MainTab)
   Vue.component(UserInfo.name, UserInfo)
+  Vue.component(NewsCard.name, NewsCard)
+  Vue.component(News.name, News)
+  Vue.component(ImgNewsCard.name, ImgNewsCard)
+  Vue.component(CalendarCard.name, CalendarCard)
 
   export default{
     name: 'home-page',
@@ -49,7 +57,7 @@
       }
     },
     created: function () {
-      instance.$on(Cons.EVENT_HOMEPAGE_NEW_TAB, () => {
+      EventBus.instance.$on(EventBus.EVENT_HOMEPAGE_NEW_TAB, () => {
         let index = this.tabs.length
         this.activeTabIndex = index.toString()
       })
