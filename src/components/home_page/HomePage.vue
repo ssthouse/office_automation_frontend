@@ -8,7 +8,7 @@
 </template>
 
 <script>
-  import {EventBus} from '../base/EventBus'
+  import {instance} from '../base/EventBus'
   import * as Cons from '../base/Constant'
   import MainTab from './MainTab.vue'
   import BaseItem from '../base/BaseItem.vue'
@@ -49,7 +49,7 @@
       }
     },
     created: function () {
-      EventBus.$on(Cons.EVENT_HOMEPAGE_NEW_TAB, () => {
+      instance.$on(Cons.EVENT_HOMEPAGE_NEW_TAB, () => {
         let index = this.tabs.length
         this.activeTabIndex = index.toString()
       })

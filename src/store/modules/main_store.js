@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import * as types from '../mutation-types.js'
 import * as Cons from '../../components/base/Constant'
-import {EventBus} from '../../components/base/EventBus'
+import * as EventBus from '../../components/base/EventBus'
 
 const state = {
   user: {
@@ -24,7 +24,7 @@ const mutations = {
       return
     }
     state.userConfig = userConfig
-    EventBus.$emit(Cons.EVENT_MAIN_UPDATE_USER_CONFIG)
+    EventBus.instance.$emit(EventBus.EVENT_MAIN_UPDATE_USER_CONFIG)
   }
 }
 

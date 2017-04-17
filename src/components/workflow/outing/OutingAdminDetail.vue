@@ -63,7 +63,7 @@
 
 <script>
   import Utils from '../../base/Utils'
-  import {EventBus} from '../../base/EventBus'
+  import * as EventBus from '../../base/EventBus'
   import * as Cons from '../../base/Constant'
 
   const URL_POST_UPDATE_OUTING = Cons.BASE_URL + '/outing/update'
@@ -99,7 +99,7 @@
             }
             this.$message('更新状态成功')
             this.isFinished = true
-            EventBus.$emit(Cons.EVENT_WORKFLOW_UPDATE_OUTING)
+            EventBus.instance.$emit(EventBus.EVENT_WORKFLOW_UPDATE_OUTING)
           }, response => {
             this.$message('更新失败')
           })

@@ -37,7 +37,7 @@
     props: [],
     methods: {
       onClickRefresh () {
-        console.log('refresh')
+        this.$store.dispatch(MUTATIONS.ACTION_FETCH_OPEN_MEETING)
       },
       onClickMeeting (meeting) {
         console.log('on click meeting')

@@ -50,7 +50,7 @@
   import OutingComponent from '../../outing/Outing.vue'
   import TabItem from '../../../base/TabItem'
   // eventbus
-  import {EventBus} from '../../../base/EventBus'
+  import * as EventBus from '../../../base/EventBus'
 
   const URL_GET_OPEN_OUTING = Cons.BASE_URL + '/outing/open'
 
@@ -131,11 +131,11 @@
     created: function () {
       this.getOutingList()
       // 全局数据刷新
-      EventBus.$on(Cons.EVENT_WORKFLOW_UPDATE_ALL, () => {
+      EventBus.instance.$on(EventBus.EVENT_WORKFLOW_UPDATE_ALL, () => {
         this.getOutingList()
       })
       // 出差审批数据刷新
-      EventBus.$on(Cons.EVENT_WORKFLOW_UPDATE_OUTING, () => {
+      EventBus.instance.$on(EventBus.EVENT_WORKFLOW_UPDATE_OUTING, () => {
         this.getOutingList()
       })
     }

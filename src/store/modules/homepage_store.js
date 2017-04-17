@@ -1,6 +1,5 @@
 import * as types from '../mutation-types'
-import {EventBus} from '../../components/base/EventBus'
-import * as Cons from '../../components/base/Constant'
+import * as EventBus from '../../components/base/EventBus'
 
 // 所有的数据
 const state = {
@@ -17,7 +16,7 @@ const mutations = {
     }
     tabIsSet.add(tabItem.tabIs)
     state.allTabs.push(tabItem)
-    EventBus.$emit(Cons.EVENT_HOMEPAGE_NEW_TAB)
+    EventBus.instance.$emit(EventBus.EVENT_HOMEPAGE_NEW_TAB)
   },
   // 移除tab
   [types.HOMEPAGE_REMOVE_TAB] (state, tabIs) {

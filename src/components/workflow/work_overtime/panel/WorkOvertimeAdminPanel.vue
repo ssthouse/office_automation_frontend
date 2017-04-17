@@ -42,7 +42,7 @@
   import WorkOvertimeAdminDetail from '../WorkOvertimeAdminDetail.vue'
   import WorkOvertimeDetail from '../WorkOvertimeDetail.vue'
   import WorkOvertime from '../bean/workOvertime'
-  import {EventBus} from '../../../base/EventBus'
+  import * as EventBus from '../../../base/EventBus'
 
   export default{
     name: 'work-overtime-admin-panel',
@@ -77,10 +77,10 @@
     computed: {},
     created: function () {
       this.getAdminWorkOvertimeList()
-      EventBus.$on(Cons.EVENT_WORKFLOW_UPDATE_WORK_OVERTIME, () => {
+      EventBus.instance.$on(EventBus.EVENT_WORKFLOW_UPDATE_WORK_OVERTIME, () => {
         this.getAdminWorkOvertimeList()
       })
-      EventBus.$on(Cons.EVENT_WORKFLOW_UPDATE_ALL, () => {
+      EventBus.instance.$on(EventBus.EVENT_WORKFLOW_UPDATE_ALL, () => {
         this.getAdminWorkOvertimeList()
       })
     }

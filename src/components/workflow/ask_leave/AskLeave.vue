@@ -95,7 +95,7 @@
   const URL_POST_UPDATE_ASK_LEAVE = Cons.BASE_URL + '/ask_leave/update'
 
   // eventbus
-  import {EventBus} from '../../base/EventBus'
+  import * as EventBus from '../../base/EventBus'
 
   export default{
     name: 'ask-leave',
@@ -175,7 +175,7 @@
             }
             this.$message('提交成功')
             this.isFinished = true
-            EventBus.$emit(Cons.EVENT_WORKFLOW_UPDATE_ASK_LEAVE)
+            EventBus.instance.$emit(EventBus.EVENT_WORKFLOW_UPDATE_ASK_LEAVE)
           }, response => {
             this.$message('提交失败: 请稍后重试')
           })

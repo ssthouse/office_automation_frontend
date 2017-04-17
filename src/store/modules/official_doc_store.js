@@ -1,6 +1,5 @@
 import * as types from '../mutation-types'
-import {EventBus} from '../../components/base/EventBus'
-import * as Cons from '../../components/base/Constant'
+import * as EventBus from '../../components/base/EventBus'
 
 const state = {
   allTabs: []
@@ -9,7 +8,7 @@ const state = {
 const tabIsSet = new Set()
 
 const emitEvent = function () {
-  EventBus.$emit(Cons.EVENT_OFFICIAL_DOC_NEW_TAB)
+  EventBus.instance.$emit(EventBus.EVENT_OFFICIAL_DOC_NEW_TAB)
 }
 
 const mutations = {

@@ -44,7 +44,7 @@
   import OutingAdminDetail from '../../outing/OutingAdminDetail.vue'
   import TabItem from '../../../base/TabItem'
   // eventbus
-  import {EventBus} from '../../../base/EventBus'
+  import * as EventBus from '../../../base/EventBus'
 
   const URL_GET_ADMIN_OUTING = Cons.BASE_URL + '/outing/admin'
 
@@ -80,10 +80,10 @@
     computed: {},
     created: function () {
       this.getOutingList()
-      EventBus.$on(Cons.EVENT_WORKFLOW_UPDATE_OUTING, () => {
+      EventBus.instance.$on(EventBus.EVENT_WORKFLOW_UPDATE_OUTING, () => {
         this.getOutingList()
       })
-      EventBus.$on(Cons.EVENT_WORKFLOW_UPDATE_ALL, () => {
+      EventBus.instance.$on(EventBus.EVENT_WORKFLOW_UPDATE_ALL, () => {
         this.getOutingList()
       })
     }

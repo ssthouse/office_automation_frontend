@@ -64,6 +64,7 @@
   import AskLeave from './bean/askLeave'
   import * as Cons from '../../base/Constant'
   import Utils from '../../base/Utils'
+  import * as EventBus from '../../base/EventBus'
 
   const URL_POST_UPDATE_ASK_LEAVE = Cons.BASE_URL + '/ask_leave/update'
 
@@ -97,6 +98,7 @@
             }
             this.$message('更新状态成功')
             this.isFinished = true
+            EventBus.instance.$emit(EventBus.EVENT_WORKFLOW_UPDATE_ASK_LEAVE)
           }, response => {
             this.$message('更新失败')
           })

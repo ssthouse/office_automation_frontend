@@ -98,7 +98,7 @@
   import OutingPanel from './outing/panel/OutingPanel.vue'
   import OutingAdminPanel from './outing/panel/OutingAdminPanel.vue'
   // 事件总线
-  import {EventBus} from '../base/EventBus'
+  import {instance} from '../base/EventBus'
   import * as Cons from '../base/Constant'
 
   // askLeave
@@ -129,7 +129,7 @@
     methods: {
       onClickRefreshWorkflowData () {
         // 触发刷新所有的数据的 event
-        EventBus.$emit(Cons.EVENT_WORKFLOW_UPDATE_ALL)
+        instance.$emit(Cons.EVENT_WORKFLOW_UPDATE_ALL)
       },
       onClickAddWorkflow () {
         this.$refs['dialogAdd'].open()

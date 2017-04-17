@@ -45,11 +45,11 @@
   import * as Cons from '../../../base/Constant'
   import * as MUTATION_TYPES from '../../../../store/mutation-types'
   import WorkOvertime from '../../work_overtime/WorkOvertime.vue'
-  import WOrkOvertimeEntity from '../../work_overtime/bean/workOvertime'
+  import WorkOvertimeEntity from '../../work_overtime/bean/workOvertime'
   import WorkOvertimeDetail from '../../work_overtime/WorkOvertimeDetail.vue'
   import TabItem from '../../../base/TabItem'
   // eventbus
-  import {EventBus} from '../../../base/EventBus'
+  import * as EventBus from '../../../base/EventBus'
 
   const URL_GET_OPEN_WORK_OVERTIME = Cons.BASE_URL + '/work_overtime/open'
   const URL_GET_DELETE_WORK_OVERTIME = Cons.BASE_URL + '/work_overtime/delete'
@@ -96,7 +96,7 @@
               return
             }
             this.$message('删除成功')
-            EventBus.$emit(Cons.EVENT_WORKFLOW_UPDATE_WORK_OVERTIME)
+            EventBus.instance.$emit(EventBus.EVENT_WORKFLOW_UPDATE_WORK_OVERTIME)
           }, response => {
             this.$message('删除失败')
           })
@@ -108,7 +108,7 @@
               this.$message('获取加班数据失败: ' + response.body.msg)
               return
             }
-            this.workOvertimeList = WOrkOvertimeEntity.parseWorkOvertimeList(response.body.workOvertimeList)
+            this.workOvertimeList = WorkOvertimeEntity.parseWorkOvertimeList(response.body.workOvertimeList)
           }, response => {
             this.$message('获取加班数据失败')
           })
@@ -118,7 +118,7 @@
     created: function () {
       this.getWorkOvertimeList()
       // 注册监听事件
-      EventBus.$on(Cons.EVENT_WORKFLOW_UPDATE_WORK_OVERTIME, () => {
+      EventBus.instance.$on(EventBus.EVENT_WORKFLOW_UPDATE_WORK_OVERTIME, () => {
         this.getWorkOvertimeList()
       })
     }

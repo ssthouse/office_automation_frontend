@@ -97,7 +97,7 @@
   import Outing from './bean/outing'
   import Utils from '../../base/Utils'
   import * as Cons from '../../base/Constant'
-  import {EventBus} from '../../base/EventBus'
+  import * as EventBus from '../../base/EventBus'
 
   const URL_POST_UPDATE_OUTING = Cons.BASE_URL + '/outing/update'
   const URL_POST_NEW_OUTING = Cons.BASE_URL + '/outing/new'
@@ -161,7 +161,7 @@
             }
             this.$message('提交成功')
             this.isFinished = true
-            EventBus.$emit(Cons.EVENT_WORKFLOW_UPDATE_OUTING)
+            EventBus.instance.$emit(EventBus.EVENT_WORKFLOW_UPDATE_OUTING)
           }, response => {
             this.$message('提交失败: 请稍后重试')
           })

@@ -29,7 +29,7 @@
 <script>
   import * as Cons from '../base/Constant'
   import * as types from '../../store/mutation-types'
-  import { EventBus } from '../base/EventBus'
+  import { instance } from '../base/EventBus'
   // 问卷模块
   import QuestionnaireCard from './questionnaire/QuestionnaireCard.vue'
   import OwnedQuestionnaireCard from './questionnaire/OwnedQuestionnaireCard.vue'
@@ -69,7 +69,7 @@
         this.$store.dispatch(types.ACTION_POST_USER_CONFIG_TOOLS, this.newPageConfig.join(','))
           .then(success => {
             this.$message('更新成功')
-            EventBus.$emit(Cons.EVENT_MAIN_UPDATE_USER_CONFIG)
+            instance.$emit(Cons.EVENT_MAIN_UPDATE_USER_CONFIG)
           }, fail => {
             this.$message('更新失败')
           })
@@ -89,7 +89,7 @@
       // init config
       this.getConfig()
       // register config change event
-      EventBus.$on(Cons.EVENT_MAIN_UPDATE_USER_CONFIG, () => {
+      instance.$on(Cons.EVENT_MAIN_UPDATE_USER_CONFIG, () => {
         this.getConfig()
       })
     }

@@ -44,7 +44,7 @@
   import AskLeaveAdminDetail from '../../ask_leave/AskLeaveAdminDetail.vue'
   import TabItem from '../../../base/TabItem'
   // eventbus
-  import {EventBus} from '../../../base/EventBus'
+  import * as EventBus from '../../../base/EventBus'
 
   const URL_GET_ADMIN_ASK_LEAVE = Cons.BASE_URL + '/ask_leave/admin'
 
@@ -84,10 +84,10 @@
     created: function () {
       this.getAskLeaveList()
       // 注册监听事件
-      EventBus.$on(Cons.EVENT_WORKFLOW_UPDATE_ALL, () => {
+      EventBus.instance.$on(EventBus.EVENT_WORKFLOW_UPDATE_ALL, () => {
         this.getAskLeaveList()
       })
-      EventBus.$on(Cons.EVENT_WORKFLOW_UPDATE_ASK_LEAVE, () => {
+      EventBus.instance.$on(EventBus.EVENT_WORKFLOW_UPDATE_ASK_LEAVE, () => {
         this.getAskLeaveList()
       })
     }

@@ -83,6 +83,7 @@
   import WorkOvertime from './bean/workOvertime'
   import * as Cons from '../../base/Constant'
   import Utils from '../../base/Utils'
+  import * as EventBus from '../../base/EventBus'
 
   const URL_POST_WORK_OVERTIME_UPDATE = Cons.BASE_URL + '/work_overtime/update'
   const URL_POST_WORK_OVERTIME_NEW = Cons.BASE_URL + '/work_overtime/new'
@@ -144,6 +145,7 @@
             }
             this.$message('提交成功')
             this.isFinished = true
+            EventBus.instance.$emit(EventBus.EVENT_WORKFLOW_UPDATE_WORK_OVERTIME)
           }, response => {
             this.$message('提交失败')
           })

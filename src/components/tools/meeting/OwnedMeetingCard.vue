@@ -46,7 +46,7 @@
         this.$store.commit(MUTATIONS.TOOLS_ADD_TAB, new TabItem('新增会议', Meeting.name, null))
       },
       onClickRefresh () {
-        console.log('on click refresh')
+        this.$store.dispatch(MUTATIONS.ACTION_FETCH_OWNED_MEETING)
       },
       onClickMeeting () {
         console.log('on click meeting')

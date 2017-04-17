@@ -8,8 +8,7 @@
 </template>
 
 <script>
-  import * as Cons from '../base/Constant'
-  import { EventBus } from '../base/EventBus'
+  import * as EventBus from '../base/EventBus'
   import BaseItem from '../base/BaseItem.vue'
   import * as types from '../../store/mutation-types'
   import MainTab from './MainTab.vue'
@@ -65,7 +64,7 @@
       }
     },
     created: function () {
-      EventBus.$on(Cons.EVENT_TOOLS_NEW_TAB, () => {
+      EventBus.instance.$on(EventBus.EVENT_TOOLS_NEW_TAB, () => {
         let index = this.tabs.length
         this.activeTabIndex = index.toString()
       })

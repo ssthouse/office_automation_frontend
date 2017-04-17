@@ -29,6 +29,45 @@ class Utils {
         return '审核状态不合法'
     }
   }
+
+  static isStrEmpty (str) {
+    if (str === null ||
+      str === undefined ||
+      str.length === 0) {
+      return true
+    }
+    return false
+  }
+
+  /**
+   * 判断传入的数据中是否有一个为空
+   */
+  static isAnyEmpty () {
+    for (let item of arguments) {
+      if (this.isStrEmpty(item)) {
+        return true
+      }
+    }
+    return false
+  }
+
+  static isNumEmpty (num) {
+    if (num === null ||
+      num === undefined ||
+      num <= 0) {
+      return true
+    }
+    return false
+  }
+
+  static isAnyNumEmpty () {
+    for (let num of arguments) {
+      if (this.isNumEmpty(num)) {
+        return true
+      }
+    }
+    return false
+  }
 }
 
 export default Utils

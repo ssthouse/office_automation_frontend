@@ -11,7 +11,7 @@
 
 <script>
   import * as types from '../../store/mutation-types'
-  import {EventBus} from '../base/EventBus'
+  import {instance} from '../base/EventBus'
   import * as Cons from '../base/Constant'
   import BaseItem from '../base/BaseItem.vue'
   import MainTab from './MainTab.vue'
@@ -43,7 +43,7 @@
     },
     created: function () {
       // register the tab change event
-      EventBus.$on(Cons.EVENT_WORKFLOW_NEW_TAB, () => {
+      instance.$on(Cons.EVENT_WORKFLOW_NEW_TAB, () => {
         let index = this.tabs.length
         this.activeTabIndex = index.toString()
       })

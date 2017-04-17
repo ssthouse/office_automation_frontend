@@ -1,5 +1,5 @@
 import * as types from '../mutation-types'
-import { EventBus } from '../../components/base/EventBus'
+import * as EventBus from '../../components/base/EventBus'
 import * as Cons from '../../components/base/Constant'
 import Vue from 'vue'
 
@@ -41,7 +41,7 @@ const mutations = {
       tabIsSet.add(tabItem.tabIs)
     }
     state.allTabs.push(tabItem)
-    EventBus.$emit(Cons.EVENT_TOOLS_NEW_TAB)
+    EventBus.instance.$emit(EventBus.EVENT_TOOLS_NEW_TAB)
   },
   // 移除tab
   [types.TOOLS_REMOVE_TAB] (state, tabIs) {
