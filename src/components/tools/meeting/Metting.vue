@@ -62,7 +62,6 @@
                    :disabled="isFinished">提交申请
         </el-button>
       </el-form>
-
     </el-card>
   </div>
 </template>

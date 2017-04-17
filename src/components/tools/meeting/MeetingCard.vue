@@ -28,6 +28,8 @@
 
 <script>
   import * as MUTATIONS from '../../../store/mutation-types'
+  import TabItem from '../../base/TabItem'
+  import MeetingDetail from './MeetingDetail.vue'
 
   export default{
     name: 'meeting-card',
@@ -40,7 +42,7 @@
         this.$store.dispatch(MUTATIONS.ACTION_FETCH_OPEN_MEETING)
       },
       onClickMeeting (meeting) {
-        console.log('on click meeting')
+        this.$store.commit(MUTATIONS.TOOLS_ADD_TAB, new TabItem('会议详情', MeetingDetail.name, meeting))
       }
     },
     computed: {

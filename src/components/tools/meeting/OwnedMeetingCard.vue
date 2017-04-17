@@ -34,6 +34,7 @@
   import * as MUTATIONS from '../../../store/mutation-types'
   import TabItem from '../../base/TabItem'
   import Meeting from './Metting.vue'
+  import MeetingDetail from './MeetingDetail.vue'
 
   export default{
     name: 'owned-meeting-card',
@@ -48,8 +49,8 @@
       onClickRefresh () {
         this.$store.dispatch(MUTATIONS.ACTION_FETCH_OWNED_MEETING)
       },
-      onClickMeeting () {
-        console.log('on click meeting')
+      onClickMeeting (meeting) {
+        this.$store.commit(MUTATIONS.TOOLS_ADD_TAB, new TabItem('会议详情', MeetingDetail.name, meeting))
       }
     },
     computed: {
