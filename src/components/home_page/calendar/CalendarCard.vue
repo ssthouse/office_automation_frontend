@@ -9,7 +9,13 @@
                  @click="onClickDetail()"></el-button>
     </div>
     <div class="card-body">
-      <p v-for="todo in todoList">{{todo}}</p>
+      <div v-for="todo in todoList"
+           style="margin-top: 5px; margin-bottom: 5px">
+        <div style="clear: both; margin-top: 5px; margin-bottom: 5px;">
+          <a class="card-link"
+             href="javascript:void(0);">{{todo}}</a>
+        </div>
+      </div>
     </div>
   </el-card>
 </template>

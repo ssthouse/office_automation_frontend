@@ -1,6 +1,10 @@
 <template>
-  <div>
-
+  <div height="100%" style="height: 100%;">
+    <iframe src="http://www.baidu.com/"
+            height="100%"
+            style="height: 100%;"
+            width="100%"
+            scrolling="yes"></iframe>
   </div>
 </template>
 
@@ -11,12 +15,8 @@
       return {}
     },
     props: [],
-    methods: {
-
-    },
-    computed: {
-
-    },
+    methods: {},
+    computed: {},
     created: function () {
 
     }
