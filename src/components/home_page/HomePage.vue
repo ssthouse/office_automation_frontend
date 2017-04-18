@@ -19,6 +19,7 @@
   import ImgNewsCard from './img_news/ImgNewsCard.vue'
   import CalendarCard from './calendar/CalendarCard.vue'
   import UserInfo from './userinfo/UserInfo.vue'
+  import CalendarDetail from './calendar/CalendarDetail.vue'
 
   Vue.component(MainTab.name, MainTab)
   Vue.component(UserInfo.name, UserInfo)
@@ -26,6 +27,7 @@
   Vue.component(News.name, News)
   Vue.component(ImgNewsCard.name, ImgNewsCard)
   Vue.component(CalendarCard.name, CalendarCard)
+  Vue.component(CalendarDetail.name, CalendarDetail)
 
   export default{
     name: 'home-page',

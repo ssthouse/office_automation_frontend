@@ -9,21 +9,31 @@
                  @click="onClickDetail()"></el-button>
     </div>
     <div class="card-body">
-
+      <p v-for="todo in todoList">{{todo}}</p>
     </div>
   </el-card>
 </template>
 
 <script>
+  import * as MUTATIONS from '../../../store/mutation-types'
+  import TabItem from '../../base/TabItem'
+  import CalendarDetail from './CalendarDetail.vue'
+
   export default{
     name: 'calendar-card',
     data () {
-      return {}
+      return {
+        todoList: [
+          '提交后台分工会议纪要',
+          '提交公文处理, 等待上级的审批',
+          '安排技术面试算法题'
+        ]
+      }
     },
     props: [],
     methods: {
       onClickDetail () {
-        console.log('detail')
+        this.$store.commit(MUTATIONS.HOMEPAGE_ADD_TAB, new TabItem('日程详情', CalendarDetail.name, null))
       }
     },
     computed: {},
