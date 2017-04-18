@@ -9,7 +9,6 @@
       :mainTabIs="MainTab.name"></base-item>
 
     <md-button class="md-fab md-fab-bottom-right"
-               style="margin-bottom: 60px;"
                id="btnAdd"
                @click.native="onClickAddWorkflow()">
       <md-icon>add</md-icon>

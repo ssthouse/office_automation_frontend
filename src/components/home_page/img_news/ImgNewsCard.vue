@@ -1,7 +1,10 @@
 <template>
   <div>
     <el-card class="card-panel">
-      <span slot="header">图片新闻</span>
+      <div class="card-header"
+           slot="header">
+        <span>图片新闻</span>
+      </div>
       <div style="height: 160px;">
         <el-carousel>
           <el-carousel-item>

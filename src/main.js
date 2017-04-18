@@ -9,7 +9,7 @@ import VueResource from 'vue-resource'
 import VueMaterial from 'vue-material'
 
 // import VueQuillEditor from 'vue-quill-editor'
-import {router} from './router'
+import { router } from './router'
 import store from './store'
 // 注册一些全局的组件
 import UserInfo from './components/home_page/userinfo/UserInfo.vue'
@@ -23,6 +23,10 @@ Vue.use(ElementUI)
 Vue.use(VueResource)
 Vue.use(VueMaterial)
 // Vue.use(VueQuillEditor)
+
+import 'vue-event-calendar/dist/style.css' // ^1.1.10, CSS has been extracted as one file, so you can easily update it.
+import vueEventCalendar from 'vue-event-calendar'
+Vue.use(vueEventCalendar, {locale: 'zh'}) // locale can be 'zh' or 'en'
 
 /* eslint-disable no-new */
 new Vue({

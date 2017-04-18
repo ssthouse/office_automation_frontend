@@ -80,7 +80,7 @@
   }
 
   .card-header {
-    height: 10px;
+    height: 15px;
   }
 
   .card-body {

@@ -1,6 +1,9 @@
 <template>
   <el-card class="card-panel">
-    <span slot="header">公告</span>
+    <div class="card-header"
+         slot="header">
+      <span>公告</span>
+    </div>
     <div class="card-body">
 
     </div>
