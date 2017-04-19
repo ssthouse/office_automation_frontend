@@ -1,22 +1,47 @@
 <template>
-  <base-item :tabs="tabs"
-             :mainTabIs="MainTab.name"
-             :activeTabIndex="activeTabIndex"
-             v-on:remove-tab="handleRemoveTab"
-             mainTabName="公文处理">
-    This is the official doc.
-  </base-item>
+  <div>
+    <base-item :tabs="tabs"
+               :mainTabIs="MainTab.name"
+               :activeTabIndex="activeTabIndex"
+               v-on:remove-tab="handleRemoveTab"
+               mainTabName="公文处理">
+      This is the official doc.
+    </base-item>
+
+    <!--floating action button-->
+    <md-button class="md-fab md-fab-bottom-right"
+               id="btnAdd"
+               @click.native="onClickOpenDialog()">
+      <md-icon>add</md-icon>
+    </md-button>
+
+    <!--dialog to select new workflow type-->
+    <md-dialog md-open-from="#btnAdd" md-close-from="#btnAdd" ref="dialogAdd">
+      <md-dialog-title>发起公文</md-dialog-title>
+      <md-dialog-content>
+        <md-list>
+          <md-button @click.native="onClickDispatch()">发文单</md-button>
+          <md-button @click.native="onClickInComing()">收文单</md-button>
+        </md-list>
+      </md-dialog-content>
+    </md-dialog>
+  </div>
 </template>
 
 <script>
-  import {instance} from '../base/EventBus'
-  import * as Cons from '../base/Constant'
+  import * as EventBus from '../base/EventBus'
+  import * as MUTATIONS from '../../store/mutation-types'
   import BaseItem from '../base/BaseItem.vue'
   import MainTab from './MainTab.vue'
   import Vue from 'vue'
-  import * as types from '../../store/mutation-types'
+  // tabs component
+  import TabItem from '../base/TabItem'
+  import DispatchDoc from './DispatchDoc.vue'
+  import IncomingDoc from './IncomingDoc.vue'
 
   Vue.component(MainTab.name, MainTab)
+  Vue.component(DispatchDoc.name, DispatchDoc)
+  Vue.component(IncomingDoc.name, IncomingDoc)
 
   export default{
     name: 'official-doc',
@@ -39,11 +64,22 @@
       handleRemoveTab (tabName) {
         let index = parseInt(tabName)
         let tabIs = this.tabs[index - 1].tabIs
-        this.$store.commit(types.OFFICIAL_DOC_REMOVE_TAB, tabIs)
+        this.$store.commit(MUTATIONS.OFFICIAL_DOC_REMOVE_TAB, tabIs)
+      },
+      onClickOpenDialog () {
+        this.$refs['dialogAdd'].open()
+      },
+      onClickDispatch () {
+        this.$refs['dialogAdd'].close()
+        this.$store.commit(MUTATIONS.OFFICIAL_DOC_ADD_TAB, new TabItem('发起发文单', DispatchDoc.name, null))
+      },
+      onClickInComing () {
+        this.$refs['dialogAdd'].close()
+        this.$store.commit(MUTATIONS.OFFICIAL_DOC_ADD_TAB, new TabItem('发起收文单', IncomingDoc.name, null))
       }
     },
     created: function () {
-      instance.$on(Cons.EVENT_OFFICIAL_DOC_NEW_TAB, () => {
+      EventBus.instance.$on(EventBus.EVENT_OFFICIAL_DOC_NEW_TAB, () => {
         let index = this.tabs.length
         this.activeTabIndex = index.toString()
       })

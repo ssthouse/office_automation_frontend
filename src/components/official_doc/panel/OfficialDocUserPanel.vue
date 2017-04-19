@@ -22,7 +22,8 @@
       <!--状态-->
       <el-table-column label="状态"
                        prop="state"></el-table-column>
-      <el-table-column label="操作">
+      <el-table-column label="操作"
+                       width="280">
         <template scope="scope">
           <el-button @click="onClickDetail(scope.$index)" size="small">查看</el-button>
           <el-button @click="onClickUrge(scope.$index)" size="small">催办</el-button>
