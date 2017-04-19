@@ -15,6 +15,11 @@ class Utils {
     return date.toISOString().slice(0, 10)
   }
 
+  static getFormatDateStrFromMillis (millis) {
+    let timeDate = new Date(millis)
+    return timeDate.toISOString().slice(0, 10)
+  }
+
   static getStateDescription (state) {
     switch (state) {
       case Utils.STATE_DRAFT:
