@@ -2,6 +2,7 @@ import Vue from 'vue'
 import * as types from '../mutation-types.js'
 import * as Cons from '../../components/base/Constant'
 import * as EventBus from '../../components/base/EventBus'
+import Utils from '../../components/base/Utils'
 
 const state = {
   user: {
@@ -10,8 +11,7 @@ const state = {
   },
   userConfig: {
     // string arrays to define panel
-    homePageConfig: '',
-    toolsPageConfig: ''
+    homePageConfig: ''
   }
 }
 
@@ -30,11 +30,8 @@ const mutations = {
 
 const getters = {
   getHomePageConfig (state) {
-    if (state.userConfig.homePageConfig === null ||
-      state.userConfig.homePageConfig === undefined ||
-      state.userConfig.homePageConfig.length === 0) {
-      let allState = [Cons.TOOLS_QUESTIONNAIRE, Cons.TOOLS_QUESTIONNAIRE_ADMIN,
-        Cons.TOOLS_VOTING, Cons.TOOLS_VOTING_ADMIN]
+    if (Utils.isStrEmpty(state.userConfig.homePageConfig)) {
+      let allState = [Cons.HOMEPAGE_IMG_NEWS, Cons.HOMEPAGE_NEWS, Cons.HOMEPAGE_CALENDAR]
       state.userConfig.homePageConfig = allState.join(',')
     }
     return state.userConfig.homePageConfig.split(',')
