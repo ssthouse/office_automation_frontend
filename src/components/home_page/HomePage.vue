@@ -10,7 +10,7 @@
     <md-button class="md-fab md-fab-bottom-right"
                id="btnConfig"
                @click.native="onClickConfig()">
-      <md-icon>add</md-icon>
+      <md-icon>home</md-icon>
     </md-button>
 
     <!--dialog to select new workflow type-->
