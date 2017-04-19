@@ -13,27 +13,8 @@
   import * as types from '../../store/mutation-types'
   import MainTab from './MainTab.vue'
   import Vue from 'vue'
-  // 问卷模块
-  import Questionnaire from './questionnaire/Questionnaire.vue'
-  import QuestionnaireFill from './questionnaire/QuestionnaireFill.vue'
-  import QuestionnaireReport from './questionnaire/QuestionnaireReport.vue'
-  // 投票模块
-  import Voting from './voting/Voting.vue'
-  import VotingFill from './voting/VotingFill.vue'
-  import VotingReport from './voting/VotingReport.vue'
-  // 会议模块
-  import Meeting from './meeting/Metting.vue'
-  import MeetingDetail from './meeting/MeetingDetail.vue'
 
   Vue.component(MainTab.name, MainTab)
-  Vue.component(Questionnaire.name, Questionnaire)
-  Vue.component(QuestionnaireFill.name, QuestionnaireFill)
-  Vue.component(QuestionnaireReport.name, QuestionnaireReport)
-  Vue.component(Voting.name, Voting)
-  Vue.component(VotingFill.name, VotingFill)
-  Vue.component(VotingReport.name, VotingReport)
-  Vue.component(Meeting.name, Meeting)
-  Vue.component(MeetingDetail.name, MeetingDetail)
 
   export default{
     name: 'tools',
