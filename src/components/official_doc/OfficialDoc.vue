@@ -70,10 +70,12 @@
         this.$refs['dialogAdd'].open()
       },
       onClickDispatch () {
+        // TODO: open new tab to create a new dipatch official doc
         this.$refs['dialogAdd'].close()
         this.$store.commit(MUTATIONS.OFFICIAL_DOC_ADD_TAB, new TabItem('发起发文单', DispatchDoc.name, null))
       },
       onClickInComing () {
+        // TODO: open new tab to create a new incoming official doc
         this.$refs['dialogAdd'].close()
         this.$store.commit(MUTATIONS.OFFICIAL_DOC_ADD_TAB, new TabItem('发起收文单', IncomingDoc.name, null))
       }

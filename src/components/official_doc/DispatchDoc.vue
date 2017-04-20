@@ -53,6 +53,7 @@
         <el-form-item label="核稿:">
           <div style="margin-right: 20px;">
             <el-input class="form-item-content"
+                      :disabled="checkDisabled"
                       v-model="dispatch.check"></el-input>
           </div>
         </el-form-item>
@@ -60,6 +61,7 @@
         <el-form-item label="会签:">
           <div style="margin-right: 20px;">
             <el-input class="form-item-content"
+                      :disabled="countersignDisabled"
                       v-model="dispatch.countersign"></el-input>
           </div>
         </el-form-item>
@@ -67,6 +69,7 @@
         <el-form-item label="签发:">
           <div style="margin-right: 20px;">
             <el-input class="form-item-content"
+                      :disabled="signDisabled"
                       v-model="dispatch.sign"></el-input>
           </div>
         </el-form-item>
@@ -95,7 +98,7 @@
         <el-form-item label="下一步:">
           <div class="form-item-content"
                style="margin-top: 8px;">
-            <el-radio-group v-model="nextStep"
+            <el-radio-group v-model="nextState"
                             style="float: left;">
               <el-radio label="begin">发文该稿
               </el-radio>
@@ -133,13 +136,14 @@
 
 <script>
   import Dispatch from './bean/dispatch'
+  import Utils from '../base/Utils'
 
   export default{
     name: 'dispatch-doc',
     data () {
       return {
         dispatch: '',
-        nextStep: '',
+        nextState: '',
         typeOptions: Dispatch.Type,
         isFinished: false,
         pickerOptionsStartDate: {
@@ -152,19 +156,56 @@
     props: ['data'],
     methods: {
       onClickSubmit () {
-
+        console.log(this.dispatch)
+        if (!this.isFormValid()) {
+          this.$message('数据不完整')
+          return
+        }
       },
       onClickCancel () {
 
+      },
+      isFormValid () {
+        if (Utils.isStrEmpty(this.nextState)) {
+          return false
+        }
+        if (!this.dispatch.isValid()) {
+          return false
+        }
+        return true
       }
     },
-    computed: {},
+    computed: {
+      checkDisabled () {
+        if (this.dispatch.state === Dispatch.STATE_CHECK) {
+          return false
+        } else {
+          return true
+        }
+      },
+      countersignDisabled () {
+        if (this.dispatch.state === Dispatch.STATE_COUNTERSIGN) {
+          return false
+        } else {
+          return true
+        }
+      },
+      signDisabled () {
+        if (this.dispatch.state === Dispatch.STATE_SIGN) {
+          return false
+        } else {
+          return true
+        }
+      }
+    },
     created: function () {
       if (this.data === null || this.data === undefined) {
         this.dispatch = Dispatch.emptyInstance()
-        return
+      } else {
+        this.dispatch = this.data
       }
-      this.dispatch = this.data
+      // initial owner data
+      this.dispatch.owner = this.$store.state.mainModule.user.username
     }
   }
 </script>
