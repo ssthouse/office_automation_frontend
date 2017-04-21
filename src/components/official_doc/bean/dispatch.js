@@ -3,6 +3,23 @@
  */
 import Utils from '../../base/Utils'
 
+/**
+ {
+   "owner":"ssthouse",
+   "state":"begin",
+   "beginDate":1492684270881,
+   "deadline":1492684270881,
+   "type":"决议",
+   "title":"标题",
+   "targetOrganization":"单位一",
+   "copyToOrganization":"单位二",
+   "content":"这里是正文",
+   "checkComment":"",
+   "countersign":"",
+   "sign":"",
+   "executors":"ssthouse,cgj"
+}
+ */
 class Dispatch {
 
   static STATE_BEGIN = 'begin'
@@ -22,7 +39,7 @@ class Dispatch {
     this.targetOrganization = ''
     this.copyToOrganization = ''
     this.content = ''
-    this.check = ''
+    this.checkComment = ''
     this.countersign = ''
     this.sign = ''
     this.executors = ''
@@ -45,7 +62,7 @@ class Dispatch {
       case Dispatch.STATE_BEGIN:
         break
       case Dispatch.STATE_CHECK:
-        if (Utils.isStrEmpty(this.check)) {
+        if (Utils.isStrEmpty(this.checkComment)) {
           return false
         }
         break

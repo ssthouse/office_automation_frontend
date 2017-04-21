@@ -37,7 +37,8 @@
 
 <script>
   import Utils from '../../base/Utils'
-  import Dispatch from '../bean/dispatch'
+  import * as Cons from '../../base/Constant'
+//  import Dispatch from '../bean/dispatch'
 
   export default{
     name: 'official-doc-user-panel',
@@ -60,11 +61,23 @@
       },
       onClickTransmit (index) {
         console.log(';;;')
+      },
+      fetchDispatchList () {
+        this.$http.get(Cons.BASE_URL + '/dispatch/user')
+          .then(response => {
+            if (response.body.ok !== true) {
+              console.log('error get user dispatch list')
+              return
+            }
+            this.dispatchList = response.body.dispatchList
+          }, response => {
+            console.log('error get user dispatch list')
+          })
       }
     },
     computed: {},
     created: function () {
-      this.dispatchList.push(Dispatch.emptyInstance())
+      this.fetchDispatchList()
     }
   }
 </script>

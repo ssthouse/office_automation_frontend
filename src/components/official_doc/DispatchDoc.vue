@@ -54,7 +54,7 @@
           <div style="margin-right: 20px;">
             <el-input class="form-item-content"
                       :disabled="checkDisabled"
-                      v-model="dispatch.check"></el-input>
+                      v-model="dispatch.checkComment"></el-input>
           </div>
         </el-form-item>
         <!--countersign-->
@@ -156,7 +156,7 @@
     props: ['data'],
     methods: {
       onClickSubmit () {
-        console.log(this.dispatch)
+        console.log(JSON.stringify(this.dispatch))
         if (!this.isFormValid()) {
           this.$message('数据不完整')
           return

@@ -38,10 +38,12 @@
   import TabItem from '../base/TabItem'
   import DispatchDoc from './DispatchDoc.vue'
   import IncomingDoc from './IncomingDoc.vue'
+  import DispatchDetail from './DispatchDetail.vue'
 
   Vue.component(MainTab.name, MainTab)
   Vue.component(DispatchDoc.name, DispatchDoc)
   Vue.component(IncomingDoc.name, IncomingDoc)
+  Vue.component(DispatchDetail.name, DispatchDetail)
 
   export default{
     name: 'official-doc',
