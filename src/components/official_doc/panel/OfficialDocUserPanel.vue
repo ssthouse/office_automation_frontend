@@ -37,8 +37,9 @@
 
 <script>
   import Utils from '../../base/Utils'
+  import * as EventBus from '../../base/EventBus'
   import * as Cons from '../../base/Constant'
-//  import Dispatch from '../bean/dispatch'
+  //  import Dispatch from '../bean/dispatch'
 
   export default{
     name: 'official-doc-user-panel',
@@ -78,6 +79,9 @@
     computed: {},
     created: function () {
       this.fetchDispatchList()
+      EventBus.instance.$on(EventBus.EVENT_OFFICIAL_DOC_UPDATE_ALL_DISPATCH, () => {
+        this.fetchDispatchList()
+      })
     }
   }
 </script>

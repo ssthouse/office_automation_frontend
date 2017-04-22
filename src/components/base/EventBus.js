@@ -7,6 +7,9 @@ export const EVENT_WORKFLOW_UPDATE_ASK_LEAVE = 'workflow/ask_leave/update'
 export const EVENT_WORKFLOW_UPDATE_WORK_OVERTIME = 'workflow/work_overtime/update'
 export const EVENT_WORKFLOW_UPDATE_OUTING = 'workflow/outing/update'
 
+// official doc event
+export const EVENT_OFFICIAL_DOC_UPDATE_ALL_DISPATCH = 'official_doc//dispatch/update'
+
 // new tab event
 export const EVENT_HOMEPAGE_NEW_TAB = 'homepage/new_tab'
 export const EVENT_WORKFLOW_NEW_TAB = 'workflow/new_tab'

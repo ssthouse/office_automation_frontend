@@ -46,11 +46,40 @@
       <el-button type="primary" @click="onEnsureUrge()">确 定</el-button>
       </span>
     </el-dialog>
+
+    <!--转办dialog-->
+    <el-dialog title="转办" v-model="showTransmitDialog">
+      <el-form>
+        <el-form-item v-for="executor in executorList"
+                      v-bind:label="'原办理人: ' + executor">
+          <el-input placeholder="请输入新的办理人"></el-input>
+        </el-form-item>
+      </el-form>
+
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="showTransmitDialog = false">取消</el-button>
+        <el-button type="primary"
+                   @click="onEnsureTransmit">确认
+        </el-button>
+      </div>
+    </el-dialog>
+
+    <!--作废dialog-->
+    <el-dialog title="确认作废该公文?" v-model="showCancelDialog">
+      <b>{{cancelTitle}}</b>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="showCancelDialog = false">取消</el-button>
+        <el-button type="primary"
+                   @click="onEnsureCancel">确认
+        </el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
 <script>
   import Utils from '../../base/Utils'
+  import * as EventBus from '../../base/EventBus'
   import * as Cons from '../../base/Constant'
   import TabItem from '../../base/TabItem'
   import * as MUTATIONS from '../../../store/mutation-types'
@@ -63,10 +92,17 @@
       return {
         dispatchList: [],
         Utils: Utils,
+        // 催办数据
         showUrgeDialog: false,
         urgeDispatchIndex: 0,
         urgeShortMsg: false,
-        urgeEmail: false
+        urgeEmail: false,
+        // 转办数据
+        showTransmitDialog: false,
+        transmitIndex: 0,
+        // 作废数据
+        showCancelDialog: false,
+        cancelIndex: 0
       }
     },
     props: [],
@@ -77,18 +113,43 @@
       },
       onClickUrge (index) {
         this.urgeDispatchIndex = index
-        console.log('this is the index: ' + index)
         this.showUrgeDialog = true
       },
       onClickCancel (index) {
-        console.log(';;;')
+        this.cancelIndex = index
+        this.showCancelDialog = true
       },
       onClickTransmit (index) {
-        console.log(';;;')
+        this.transmitIndex = index
+        this.showTransmitDialog = true
+      },
+      onEnsureTransmit () {
+        // TODO 逻辑尚未实现
+        this.showTransmitDialog = false
+        this.$message('公文转办处理成功')
       },
       onEnsureUrge () {
         this.$message('已发送提醒 :)')
         this.showUrgeDialog = false
+      },
+      onEnsureCancel () {
+        this.showCancelDialog = false
+        this.deleteDispatch(this.dispatchList[this.cancelIndex])
+      },
+      // 发出废除公文请求
+      deleteDispatch (dispatch) {
+        let url = Cons.BASE_URL + '/dispatch/delete?id=' + dispatch.id
+        this.$http.delete(url)
+          .then(response => {
+            if (response.body.ok !== true) {
+              this.$message('废除公文失败: ' + response.body.msg)
+              return
+            }
+            this.$message('公文废除成功')
+            EventBus.instance.$emit(EventBus.EVENT_OFFICIAL_DOC_UPDATE_ALL_DISPATCH)
+          }, response => {
+            this.$message('废除公文失败')
+          })
       },
       fetchDispatchList () {
         this.$http.get(Cons.BASE_URL + '/dispatch/owner')
@@ -105,16 +166,34 @@
     },
     computed: {
       urgeContent () {
-        console.log(this.dispatchList.length + '********')
         if (this.dispatchList === null || this.dispatchList === undefined ||
           this.dispatchList.length - 1 < this.urgeDispatchIndex) {
           return ''
         }
         return '请及时办理:' + this.dispatchList[this.urgeDispatchIndex].title
+      },
+      executorList () {
+        if (this.dispatchList === null || this.dispatchList === undefined ||
+          this.dispatchList.length - 1 < this.transmitIndex) {
+          return []
+        }
+        console.log(this.dispatchList[this.transmitIndex].executors.split(','))
+        return this.dispatchList[this.transmitIndex].executors.split(',')
+      },
+      cancelTitle () {
+        if (this.dispatchList === null || this.dispatchList === undefined ||
+          this.dispatchList.length - 1 < this.cancelIndex) {
+          return ''
+        }
+        return this.dispatchList[this.cancelIndex].title
       }
     },
     created: function () {
       this.fetchDispatchList()
+      // 注册dispatch更新事件
+      EventBus.instance.$on(EventBus.EVENT_OFFICIAL_DOC_UPDATE_ALL_DISPATCH, () => {
+        this.fetchDispatchList()
+      })
     }
   }
 </script>
