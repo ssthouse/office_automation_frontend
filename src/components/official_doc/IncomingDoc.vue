@@ -159,7 +159,7 @@
     props: ['data'],
     methods: {
       onClickSubmit () {
-        this.dispatch.deadline = this.deadline.getTime()
+        this.incoming.deadline = this.deadline.getTime()
         console.log(JSON.stringify(this.incoming))
         if (!this.isFormValid()) {
           this.$message('数据不完整')
