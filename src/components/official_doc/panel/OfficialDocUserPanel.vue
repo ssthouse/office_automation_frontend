@@ -37,7 +37,6 @@
   import Utils from '../../base/Utils'
   import * as EventBus from '../../base/EventBus'
   import * as Cons from '../../base/Constant'
-  //  import Dispatch from '../bean/dispatch'
 
   export default{
     name: 'official-doc-user-panel',
@@ -50,10 +49,10 @@
     props: [],
     methods: {
       onClickDetail (index) {
-        console.log(';;;')
+        // TODO
       },
       onClickDeal (index) {
-        console.log(';;;')
+        // TODO
       },
       fetchDispatchList () {
         this.$http.get(Cons.BASE_URL + '/dispatch/user')

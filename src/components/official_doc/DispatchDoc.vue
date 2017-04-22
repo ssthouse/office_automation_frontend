@@ -85,7 +85,7 @@
             </el-date-picker>
             <b style="margin-left: 20px; margin-right: 20px;">截止日期:</b>
             <el-date-picker
-              v-model="dispatch.deadline"
+              v-model="deadline"
               type="date"
               placeholder="结束日期"
               :picker-options="pickerOptionsStartDate">
@@ -137,6 +137,7 @@
 <script>
   import Dispatch from './bean/dispatch'
   import Utils from '../base/Utils'
+  import * as Cons from '../base/Constant'
 
   export default{
     name: 'dispatch-doc',
@@ -144,6 +145,7 @@
       return {
         dispatch: '',
         nextState: '',
+        deadline: new Date(),
         typeOptions: Dispatch.Type,
         isFinished: false,
         pickerOptionsStartDate: {
@@ -156,11 +158,13 @@
     props: ['data'],
     methods: {
       onClickSubmit () {
+        this.dispatch.deadline = this.deadline.getTime()
         console.log(JSON.stringify(this.dispatch))
         if (!this.isFormValid()) {
           this.$message('数据不完整')
           return
         }
+        this.postNewDispatch()
       },
       onClickCancel () {
 
@@ -173,6 +177,18 @@
           return false
         }
         return true
+      },
+      postNewDispatch () {
+        this.$http.post(Cons.BASE_URL + '/dispatch/new', this.dispatch)
+          .then(response => {
+            if (response.body.ok !== true) {
+              this.$message('提交失败: ' + this.body.msg)
+              return
+            }
+            this.$message('提交成功')
+          }, response => {
+            this.$message('提交失败')
+          })
       }
     },
     computed: {
