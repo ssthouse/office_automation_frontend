@@ -85,7 +85,7 @@
             </el-date-picker>
             <b style="margin-left: 20px; margin-right: 20px;">截止日期:</b>
             <el-date-picker
-              v-model="incoming.deadline"
+              v-model="deadline"
               type="date"
               placeholder="结束日期"
               :picker-options="pickerOptionsStartDate">
@@ -138,12 +138,14 @@
 <script>
   import Incoming from './bean/incoming'
   import Utils from '../base/Utils'
+  import * as Cons from '../base/Constant'
 
   export default{
     name: 'incoming-doc',
     data () {
       return {
         incoming: '',
+        deadline: new Date(),
         nextState: '',
         typeOptions: Incoming.Type,
         isFinished: false,
@@ -157,15 +159,15 @@
     props: ['data'],
     methods: {
       onClickSubmit () {
+        this.dispatch.deadline = this.deadline.getTime()
         console.log(JSON.stringify(this.incoming))
         if (!this.isFormValid()) {
           this.$message('数据不完整')
           return
         }
+        this.postNewIncoming()
       },
-      onClickCancel () {
-
-      },
+      onClickCancel () {},
       isFormValid () {
         if (Utils.isStrEmpty(this.nextState)) {
           return false
@@ -174,6 +176,18 @@
           return false
         }
         return true
+      },
+      postNewIncoming () {
+        this.$http.post(Cons.BASE_URL + '/incoming/new', this.incoming)
+          .then(response => {
+            if (response.body.ok !== true) {
+              this.$message('提交失败: ' + response.body.msg)
+              return
+            }
+            this.$message('提交成功')
+          }, response => {
+            this.$message('提交失败')
+          })
       }
     },
     computed: {
