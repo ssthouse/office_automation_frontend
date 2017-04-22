@@ -35,8 +35,11 @@
 
 <script>
   import Utils from '../../base/Utils'
+  import * as Mutations from '../../../store/mutation-types'
+  import TabItem from '../../base/TabItem'
   import * as EventBus from '../../base/EventBus'
   import * as Cons from '../../base/Constant'
+  import DispatchDetail from '../DispatchDetail.vue'
 
   export default{
     name: 'official-doc-user-panel',
@@ -49,7 +52,7 @@
     props: [],
     methods: {
       onClickDetail (index) {
-        // TODO
+        this.$store.commit(Mutations.OFFICIAL_DOC_ADD_TAB, new TabItem('公文详情', DispatchDetail.name, this.dispatchList[index]))
       },
       onClickDeal (index) {
         // TODO
