@@ -113,6 +113,14 @@
           <td style="background-color:#fff; text-align: left;  padding: 3px; border: 1px solid #6faadb; " colspan="5">
             <input type="hidden" id="receiverId" value="">{{dispatch.state}}<span id="receiverId_disp"></span></td>
         </tr>
+        <tr>
+          <td
+            style="background-color:#fff; text-align: right; background-color: #f1f9fe; padding: 3px; border: 1px solid #6faadb; ">
+            执行人：
+          </td>
+          <td style="background-color:#fff; text-align: left;  padding: 3px; border: 1px solid #6faadb; " colspan="5">
+            <input type="hidden" value="">{{dispatch.executors}}<span></span></td>
+        </tr>
         </tbody>
       </table>
     </el-card>

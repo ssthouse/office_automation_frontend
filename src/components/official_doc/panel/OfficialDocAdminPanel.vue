@@ -50,9 +50,9 @@
     <!--转办dialog-->
     <el-dialog title="转办" v-model="showTransmitDialog">
       <el-form>
-        <el-form-item v-for="executor in executorList"
-                      v-bind:label="'原办理人: ' + executor">
-          <el-input placeholder="请输入新的办理人"></el-input>
+        <el-form-item v-bind:label="'原办理人: ' + executorList.join(',')">
+          <el-input placeholder="请输入新的办理人"
+                    v-model="newExecutors"></el-input>
         </el-form-item>
       </el-form>
 
@@ -66,7 +66,7 @@
 
     <!--作废dialog-->
     <el-dialog title="确认作废该公文?" v-model="showCancelDialog">
-      <b>{{cancelTitle}}</b>
+      <b>{{'公文标题: ' + cancelTitle}}</b>
       <div slot="footer" class="dialog-footer">
         <el-button @click="showCancelDialog = false">取消</el-button>
         <el-button type="primary"
@@ -100,6 +100,7 @@
         // 转办数据
         showTransmitDialog: false,
         transmitIndex: 0,
+        newExecutors: '',
         // 作废数据
         showCancelDialog: false,
         cancelIndex: 0
@@ -124,9 +125,8 @@
         this.showTransmitDialog = true
       },
       onEnsureTransmit () {
-        // TODO 逻辑尚未实现
         this.showTransmitDialog = false
-        this.$message('公文转办处理成功')
+        this.transmitDispatch()
       },
       onEnsureUrge () {
         this.$message('已发送提醒 :)')
@@ -149,6 +149,22 @@
             EventBus.instance.$emit(EventBus.EVENT_OFFICIAL_DOC_UPDATE_ALL_DISPATCH)
           }, response => {
             this.$message('废除公文失败')
+          })
+      },
+      // 发起转办请求
+      transmitDispatch () {
+        let dispatch = this.dispatchList[this.transmitIndex]
+        dispatch.executors = this.newExecutors
+        this.$http.post(Cons.BASE_URL + '/dispatch/update', JSON.stringify(dispatch))
+          .then(response => {
+            if (response.body.ok !== true) {
+              this.$message('转办失败: ' + response.body.msg)
+              return
+            }
+            this.$message('转办成功')
+            EventBus.instance.$emit(EventBus.EVENT_OFFICIAL_DOC_UPDATE_ALL_DISPATCH)
+          }, response => {
+            this.$message('转办失败')
           })
       },
       fetchDispatchList () {
@@ -177,7 +193,6 @@
           this.dispatchList.length - 1 < this.transmitIndex) {
           return []
         }
-        console.log(this.dispatchList[this.transmitIndex].executors.split(','))
         return this.dispatchList[this.transmitIndex].executors.split(',')
       },
       cancelTitle () {
