@@ -26,9 +26,7 @@
                        width="280">
         <template scope="scope">
           <el-button @click="onClickDetail(scope.$index)" size="small">查看</el-button>
-          <el-button @click="onClickUrge(scope.$index)" size="small">催办</el-button>
-          <el-button @click="onClickCancel(scope.$index)" size="small">作废</el-button>
-          <el-button @click="onClickTransmit(scope.$index)" size="small">转办</el-button>
+          <el-button @click="onClickDeal(scope.$index)" size="small">办理</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -54,13 +52,7 @@
       onClickDetail (index) {
         console.log(';;;')
       },
-      onClickUrge (index) {
-        console.log(';;;')
-      },
-      onClickCancel (index) {
-        console.log(';;;')
-      },
-      onClickTransmit (index) {
+      onClickDeal (index) {
         console.log(';;;')
       },
       fetchDispatchList () {
