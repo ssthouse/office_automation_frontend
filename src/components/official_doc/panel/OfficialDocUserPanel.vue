@@ -40,6 +40,7 @@
   import * as EventBus from '../../base/EventBus'
   import * as Cons from '../../base/Constant'
   import DispatchDetail from '../DispatchDetail.vue'
+  import DealDispatch from '../DealDispatch.vue'
 
   export default{
     name: 'official-doc-user-panel',
@@ -56,6 +57,7 @@
       },
       onClickDeal (index) {
         // TODO
+        this.$store.commit(Mutations.OFFICIAL_DOC_ADD_TAB, new TabItem('处理公文', DealDispatch.name, this.dispatchList[index]))
       },
       fetchDispatchList () {
         this.$http.get(Cons.BASE_URL + '/dispatch/user')

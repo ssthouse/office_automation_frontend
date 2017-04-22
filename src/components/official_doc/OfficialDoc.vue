@@ -39,11 +39,13 @@
   import DispatchDoc from './DispatchDoc.vue'
   import IncomingDoc from './IncomingDoc.vue'
   import DispatchDetail from './DispatchDetail.vue'
+  import DealDispatch from './DealDispatch.vue'
 
   Vue.component(MainTab.name, MainTab)
   Vue.component(DispatchDoc.name, DispatchDoc)
   Vue.component(IncomingDoc.name, IncomingDoc)
   Vue.component(DispatchDetail.name, DispatchDetail)
+  Vue.component(DealDispatch.name, DealDispatch)
 
   export default{
     name: 'official-doc',

@@ -26,6 +26,7 @@ class Dispatch {
   static STATE_CHECK = 'check'
   static STATE_COUNTERSIGN = 'countersign'
   static STATE_SIGN = 'sign'
+  static STATE_FINISH = 'finish'
 
   static Type = ['决议', '决定', '公告', '通告', '通知', '通报', '报告', '请示']
 
