@@ -14,17 +14,10 @@
             </el-button>
           </div>
           <el-collapse accordion>
-            <el-collapse-item title="请假" name="1"
-                              class="panel-title">
-              <ask-leave-panel></ask-leave-panel>
-            </el-collapse-item>
-            <el-collapse-item title="加班" name="2"
-                              class="panel-title">
-              <work-overtime-panel></work-overtime-panel>
-            </el-collapse-item>
-            <el-collapse-item title="出差" name="3"
-                              class="panel-title">
-              <outing-panel></outing-panel>
+            <el-collapse-item v-for="index in 3"
+                              class="panel-title"
+                              v-bind:title="titleLabelList[index-1]">
+              <div v-bind:is="componentIsList[index-1]"></div>
             </el-collapse-item>
           </el-collapse>
         </el-card>
@@ -40,17 +33,10 @@
             </el-button>
           </div>
           <el-collapse accordion>
-            <el-collapse-item title="请假" name="1"
+            <el-collapse-item v-for="index in 3"
+                              v-bind:title="titleLabelList[index-1]"
                               class="panel-title">
-              <ask-leave-admin-panel></ask-leave-admin-panel>
-            </el-collapse-item>
-            <el-collapse-item title="加班" name="2"
-                              class="panel-title">
-              <work-overtime-admin-panel></work-overtime-admin-panel>
-            </el-collapse-item>
-            <el-collapse-item title="出差" name="3"
-                              class="panel-title">
-              <outing-admin-panel></outing-admin-panel>
+              <div v-bind:is="componentIsListAdmin[index-1]"></div>
             </el-collapse-item>
           </el-collapse>
         </el-card>
@@ -104,7 +90,11 @@
   export default{
     name: 'workflow-main-tab',
     data () {
-      return {}
+      return {
+        titleLabelList: ['请假', '加班', '出差'],
+        componentIsListAdmin: ['ask-leave-admin-panel', 'work-overtime-admin-panel', 'outing-admin-panel'],
+        componentIsList: ['ask-leave-panel', 'work-overtime-panel', 'outing-panel']
+      }
     },
     props: [],
     methods: {
