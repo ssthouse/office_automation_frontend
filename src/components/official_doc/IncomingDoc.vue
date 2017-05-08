@@ -12,7 +12,8 @@
           </el-select>
         </el-form-item>
         <!--title-->
-        <el-form-item label="标题:">
+        <el-form-item label="标题:"
+                      class="form-item">
           <div style="margin-right: 20px;">
             <el-input placeholder="标题"
                       class="form-item-content"
@@ -20,29 +21,32 @@
           </div>
         </el-form-item>
         <!--targetOrganization-->
-        <el-form-item label="主送单位:">
+        <el-form-item label="主送单位:"
+                      class="form-item">
           <div style="margin-right: 20px;">
             <el-input class="form-item-content"
                       v-model="incoming.targetOrganization"></el-input>
           </div>
         </el-form-item>
         <!--copyToOrganization-->
-        <el-form-item label="抄送单位:">
+        <el-form-item label="抄送单位:"
+                      class="form-item">
           <div style="margin-right: 20px;">
             <el-input class="form-item-content"
                       v-model="incoming.copyToOrganization"></el-input>
           </div>
         </el-form-item>
         <!--content-->
-        <el-form-item label="正文:">
+        <el-form-item label="正文:"
+                      class="form-item">
           <div style="margin-right: 20px;">
             <el-input class="form-item-content"
-                      type="textarea"
                       v-model="incoming.content"></el-input>
           </div>
         </el-form-item>
         <!--owner-->
-        <el-form-item label="拟稿人:">
+        <el-form-item label="拟稿人:"
+                      class="form-item">
           <div style="margin-right: 20px;">
             <el-input class="form-item-content"
                       :disabled="true"
@@ -50,7 +54,8 @@
           </div>
         </el-form-item>
         <!--check-->
-        <el-form-item label="拟办:">
+        <el-form-item label="拟办:"
+                      class="form-item">
           <div style="margin-right: 20px;">
             <el-input class="form-item-content"
                       :disabled="proposeDisabled"
@@ -58,7 +63,8 @@
           </div>
         </el-form-item>
         <!--countersign-->
-        <el-form-item label="批办:">
+        <el-form-item label="批办:"
+                      class="form-item">
           <div style="margin-right: 20px;">
             <el-input class="form-item-content"
                       :disabled="approveDisabled"
@@ -66,7 +72,8 @@
           </div>
         </el-form-item>
         <!--sign-->
-        <el-form-item label="办理:">
+        <el-form-item label="办理:"
+                      class="form-item">
           <div style="margin-right: 20px;">
             <el-input class="form-item-content"
                       :disabled="dealDisabled"
@@ -74,7 +81,8 @@
           </div>
         </el-form-item>
         <!--起始日期 deadline-->
-        <el-form-item label="发文日期:">
+        <el-form-item label="发文日期:"
+                      class="form-item">
           <div class="form-item-content">
             <el-date-picker
               v-model="incoming.beginDate"
@@ -95,7 +103,8 @@
         <hr/>
 
         <!--下一步的选择-->
-        <el-form-item label="下一步:">
+        <el-form-item label="下一步:"
+                      class="form-item">
           <div class="form-item-content"
                style="margin-top: 8px;">
             <el-radio-group v-model="nextState"
@@ -109,7 +118,8 @@
         </el-form-item>
 
         <!--任务执行人-->
-        <el-form-item label="执行人:">
+        <el-form-item label="执行人:"
+                      class="form-item">
           <div style="margin-right: 20px;">
             <el-input class="form-item-content"
                       v-model="incoming.executors"></el-input>

@@ -19,7 +19,7 @@
               <template slot="title">
                 <span>{{titleLabelList[index-1]}}</span>
                 <el-badge :value='getBadgeNum(index-1, false, 0)'
-                          style="margin-left: 20px;">
+                          style="margin-left: 40px;">
                   <el-tag type="gray">待审批</el-tag>
                 </el-badge>
                 <el-badge :value="getBadgeNum(index-1, false, 1)"
@@ -52,7 +52,7 @@
               <template slot="title">
                 <span>{{titleLabelList[index-1]}}</span>
                 <el-badge :value="getBadgeNum(index-1, true, 0)"
-                          style="margin-left: 20px;">
+                          style="margin-left: 40px;">
                   <el-tag type="gray">待审批</el-tag>
                 </el-badge>
                 <el-badge :value="getBadgeNum(index-1, true, 1)"

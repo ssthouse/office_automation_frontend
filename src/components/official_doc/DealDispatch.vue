@@ -13,7 +13,8 @@
           </el-select>
         </el-form-item>
         <!--title-->
-        <el-form-item label="标题:">
+        <el-form-item label="标题:"
+                      class="form-item">
           <div style="margin-right: 20px;">
             <el-input placeholder="标题"
                       :disabled="true"
@@ -22,7 +23,8 @@
           </div>
         </el-form-item>
         <!--targetOrganization-->
-        <el-form-item label="主送单位:">
+        <el-form-item label="主送单位:"
+                      class="form-item">
           <div style="margin-right: 20px;">
             <el-input class="form-item-content"
                       :disabled="true"
@@ -30,7 +32,8 @@
           </div>
         </el-form-item>
         <!--copyToOrganization-->
-        <el-form-item label="抄送单位:">
+        <el-form-item label="抄送单位:"
+                      class="form-item">
           <div style="margin-right: 20px;">
             <el-input class="form-item-content"
                       :disabled="true"
@@ -38,16 +41,17 @@
           </div>
         </el-form-item>
         <!--content-->
-        <el-form-item label="正文:">
+        <el-form-item label="正文:"
+                      class="form-item">
           <div style="margin-right: 20px;">
             <el-input class="form-item-content"
                       :disabled="true"
-                      type="textarea"
                       v-model="dispatch.content"></el-input>
           </div>
         </el-form-item>
         <!--owner-->
-        <el-form-item label="拟稿人:">
+        <el-form-item label="拟稿人:"
+                      class="form-item">
           <div style="margin-right: 20px;">
             <el-input class="form-item-content"
                       :disabled="true"
@@ -55,34 +59,35 @@
           </div>
         </el-form-item>
         <!--check-->
-        <el-form-item label="核稿:">
+        <el-form-item label="核稿:"
+                      class="form-item">
           <div style="margin-right: 20px;">
             <el-input class="form-item-content"
-                      type="textarea"
                       :disabled="checkDisabled"
                       v-model="dispatch.checkComment"></el-input>
           </div>
         </el-form-item>
         <!--countersign-->
-        <el-form-item label="会签:">
+        <el-form-item label="会签:"
+                      class="form-item">
           <div style="margin-right: 20px;">
             <el-input class="form-item-content"
-                      type="textarea"
                       :disabled="countersignDisabled"
                       v-model="dispatch.countersign"></el-input>
           </div>
         </el-form-item>
         <!--sign-->
-        <el-form-item label="签发:">
+        <el-form-item label="签发:"
+                      class="form-item">
           <div style="margin-right: 20px;">
             <el-input class="form-item-content"
-                      type="textarea"
                       :disabled="signDisabled"
                       v-model="dispatch.sign"></el-input>
           </div>
         </el-form-item>
         <!--起始日期 deadline-->
-        <el-form-item label="发文日期:">
+        <el-form-item label="发文日期:"
+                      class="form-item">
           <div class="form-item-content">
             <el-date-picker
               v-model="dispatch.beginDate"
@@ -104,14 +109,16 @@
         <hr/>
 
         <!--下一步的选择-->
-        <el-form-item label="下一步:">
+        <el-form-item label="下一步:"
+                      class="form-item">
           <div class="form-item-content"
                style="margin-top: 8px;">
             <b>{{getNextStepStr()}}</b>
           </div>
         </el-form-item>
         <!--任务执行人-->
-        <el-form-item label="执行人:">
+        <el-form-item label="执行人:"
+                      class="form-item">
           <div style="margin-right: 20px;">
             <el-input class="form-item-content"
                       v-model="dispatch.executors"></el-input>
@@ -255,5 +262,7 @@
 </script>
 
 <style>
-
+  .form-item {
+    margin-top: -20px;
+  }
 </style>
