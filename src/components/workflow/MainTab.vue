@@ -20,15 +20,15 @@
                 <span>{{titleLabelList[index-1]}}</span>
                 <el-badge :value='getBadgeNum(index-1, false, 0)'
                           style="margin-left: 20px;">
-                  <el-button size="small">待审批</el-button>
+                  <el-tag type="gray">待审批</el-tag>
                 </el-badge>
                 <el-badge :value="getBadgeNum(index-1, false, 1)"
                           style="margin-left: 20px;">
-                  <el-button size="small">未通过</el-button>
+                  <el-tag type="gray">未通过</el-tag>
                 </el-badge>
                 <el-badge :value="getBadgeNum(index-1, false, 2)"
                           style="margin-left: 20px;">
-                  <el-button size="small">已通过</el-button>
+                  <el-tag type="gray">已通过</el-tag>
                 </el-badge>
               </template>
               <div v-bind:is="componentIsList[index-1]"></div>
@@ -53,15 +53,15 @@
                 <span>{{titleLabelList[index-1]}}</span>
                 <el-badge :value="getBadgeNum(index-1, true, 0)"
                           style="margin-left: 20px;">
-                  <el-button size="small">待审批</el-button>
+                  <el-tag type="gray">待审批</el-tag>
                 </el-badge>
                 <el-badge :value="getBadgeNum(index-1, true, 1)"
                           style="margin-left: 20px;">
-                  <el-button size="small">未通过</el-button>
+                  <el-tag type="gray">未通过</el-tag>
                 </el-badge>
                 <el-badge :value="getBadgeNum(index-1, true, 2)"
                           style="margin-left: 20px;">
-                  <el-button size="small">已通过</el-button>
+                  <el-tag type="gray">已通过</el-tag>
                 </el-badge>
               </template>
               <div v-bind:is="componentIsListAdmin[index-1]"></div>
