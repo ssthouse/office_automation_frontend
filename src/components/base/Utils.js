@@ -73,6 +73,23 @@ class Utils {
     }
     return false
   }
+
+  /**
+   * 根据state名称 获得相应的颜色
+   * @param stateName draft | unapproved | approved | decline
+   */
+  static getStateColor (stateName) {
+    switch (stateName) {
+      case 'draft':
+        return 'grey'
+      case 'unapproved':
+        return 'primary'
+      case 'approved':
+        return 'success'
+      case 'decline':
+        return 'danger'
+    }
+  }
 }
 
 export default Utils

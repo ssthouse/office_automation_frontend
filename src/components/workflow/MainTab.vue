@@ -24,11 +24,11 @@
                 </el-badge>
                 <el-badge :value="getBadgeNum(index-1, false, 1)"
                           style="margin-left: 20px;">
-                  <el-tag type="gray">未通过</el-tag>
+                  <el-tag type="gray">已通过</el-tag>
                 </el-badge>
                 <el-badge :value="getBadgeNum(index-1, false, 2)"
                           style="margin-left: 20px;">
-                  <el-tag type="gray">已通过</el-tag>
+                  <el-tag type="gray">未通过</el-tag>
                 </el-badge>
               </template>
               <div v-bind:is="componentIsList[index-1]"></div>
@@ -57,11 +57,11 @@
                 </el-badge>
                 <el-badge :value="getBadgeNum(index-1, true, 1)"
                           style="margin-left: 20px;">
-                  <el-tag type="gray">未通过</el-tag>
+                  <el-tag type="gray">已通过</el-tag>
                 </el-badge>
                 <el-badge :value="getBadgeNum(index-1, true, 2)"
                           style="margin-left: 20px;">
-                  <el-tag type="gray">已通过</el-tag>
+                  <el-tag type="gray">未通过</el-tag>
                 </el-badge>
               </template>
               <div v-bind:is="componentIsListAdmin[index-1]"></div>
@@ -160,7 +160,6 @@
       getStateNumInList (beanList, stateName) {
         let result = 0
         for (let bean of beanList) {
-          console.log(bean)
           if (bean.state === stateName) {
             result += 1
           }

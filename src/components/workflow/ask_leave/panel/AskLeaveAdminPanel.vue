@@ -22,8 +22,13 @@
                      width="100"
                      prop="dayNum"></el-table-column>
     <el-table-column label="状态"
-                     width="100"
-                     prop="state"></el-table-column>
+                     width="100">
+      <template scope="scope">
+        <el-tag :type="Utils.getStateColor(askLeaveList[scope.$index].state)">
+          {{askLeaveList[scope.$index].state}}
+        </el-tag>
+      </template>
+    </el-table-column>
     <el-table-column label="操作">
       <template scope="scope">
         <!--the two button can is able only when in unapproved || approved state-->
@@ -45,6 +50,7 @@
   import TabItem from '../../../base/TabItem'
   // eventbus
   import * as EventBus from '../../../base/EventBus'
+  import Utils from '../../../base/Utils'
 
   const URL_GET_ADMIN_ASK_LEAVE = Cons.BASE_URL + '/ask_leave/admin'
 
@@ -52,7 +58,8 @@
     name: 'ask-leave-admin-panel',
     data () {
       return {
-        askLeaveList: []
+        askLeaveList: [],
+        Utils
       }
     },
     props: [],
