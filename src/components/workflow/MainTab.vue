@@ -15,8 +15,22 @@
           </div>
           <el-collapse accordion>
             <el-collapse-item v-for="index in 3"
-                              class="panel-title"
-                              v-bind:title="titleLabelList[index-1]">
+                              class="panel-title">
+              <template slot="title">
+                <span>{{titleLabelList[index-1]}}</span>
+                <el-badge :value='getBadgeNum(index-1, false, 0)'
+                          style="margin-left: 20px;">
+                  <el-button size="small">待审批</el-button>
+                </el-badge>
+                <el-badge :value="getBadgeNum(index-1, false, 1)"
+                          style="margin-left: 20px;">
+                  <el-button size="small">未通过</el-button>
+                </el-badge>
+                <el-badge :value="getBadgeNum(index-1, false, 2)"
+                          style="margin-left: 20px;">
+                  <el-button size="small">已通过</el-button>
+                </el-badge>
+              </template>
               <div v-bind:is="componentIsList[index-1]"></div>
             </el-collapse-item>
           </el-collapse>
@@ -34,8 +48,22 @@
           </div>
           <el-collapse accordion>
             <el-collapse-item v-for="index in 3"
-                              v-bind:title="titleLabelList[index-1]"
                               class="panel-title">
+              <template slot="title">
+                <span>{{titleLabelList[index-1]}}</span>
+                <el-badge :value="getBadgeNum(index-1, true, 0)"
+                          style="margin-left: 20px;">
+                  <el-button size="small">待审批</el-button>
+                </el-badge>
+                <el-badge :value="getBadgeNum(index-1, true, 1)"
+                          style="margin-left: 20px;">
+                  <el-button size="small">未通过</el-button>
+                </el-badge>
+                <el-badge :value="getBadgeNum(index-1, true, 2)"
+                          style="margin-left: 20px;">
+                  <el-button size="small">已通过</el-button>
+                </el-badge>
+              </template>
               <div v-bind:is="componentIsListAdmin[index-1]"></div>
             </el-collapse-item>
           </el-collapse>
@@ -93,7 +121,9 @@
       return {
         titleLabelList: ['请假', '加班', '出差'],
         componentIsListAdmin: ['ask-leave-admin-panel', 'work-overtime-admin-panel', 'outing-admin-panel'],
-        componentIsList: ['ask-leave-panel', 'work-overtime-panel', 'outing-panel']
+        componentIsList: ['ask-leave-panel', 'work-overtime-panel', 'outing-panel'],
+        // state name list
+        stateList: ['unapproved', 'approved', 'decline']
       }
     },
     props: [],
@@ -104,6 +134,38 @@
       },
       onClickAddBtn () {
         EventBus.instance.$emit(EventBus.EVENT_WORKFLOW_CLICK_NEW)
+      },
+      getBadgeNum (typeIndex, isAdmin, stateIndex) {
+        let stateName = this.stateList[stateIndex]
+        if (isAdmin) {
+          switch (typeIndex) {
+            case 0:
+              return this.getStateNumInList(this.$store.state.workflowModule.askLeaveList, stateName)
+            case 1:
+              return this.getStateNumInList(this.$store.state.workflowModule.workOvertimeList, stateName)
+            case 2:
+              return this.getStateNumInList(this.$store.state.workflowModule.outingList, stateName)
+          }
+        } else {
+          switch (typeIndex) {
+            case 0:
+              return this.getStateNumInList(this.$store.state.workflowModule.askLeaveAdminList, stateName)
+            case 1:
+              return this.getStateNumInList(this.$store.state.workflowModule.workOvertimeAdminList, stateName)
+            case 2:
+              return this.getStateNumInList(this.$store.state.workflowModule.outingAdminList, stateName)
+          }
+        }
+      },
+      getStateNumInList (beanList, stateName) {
+        let result = 0
+        for (let bean of beanList) {
+          console.log(bean)
+          if (bean.state === stateName) {
+            result += 1
+          }
+        }
+        return result
       }
     },
     components: {
