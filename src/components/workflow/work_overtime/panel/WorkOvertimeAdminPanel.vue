@@ -18,8 +18,13 @@
                      width="100"
                      prop="hourNum"></el-table-column>
     <el-table-column label="状态"
-                     width="100"
-                     prop="state"></el-table-column>
+                     width="100">
+      <template scope="scope">
+        <el-tag :type="Utils.getStateColor(workOvertimeList[scope.$index].state)">
+          {{workOvertimeList[scope.$index].state}}
+        </el-tag>
+      </template>
+    </el-table-column>
     <el-table-column label="审批人"
                      width="100"
                      prop="approverUsername"></el-table-column>
@@ -43,12 +48,14 @@
   import WorkOvertimeDetail from '../WorkOvertimeDetail.vue'
   import WorkOvertime from '../bean/workOvertime'
   import * as EventBus from '../../../base/EventBus'
+  import Utils from '../../../base/Utils'
 
   export default{
     name: 'work-overtime-admin-panel',
     data () {
       return {
-        workOvertimeList: []
+        workOvertimeList: [],
+        Utils
       }
     },
     props: ['data'],

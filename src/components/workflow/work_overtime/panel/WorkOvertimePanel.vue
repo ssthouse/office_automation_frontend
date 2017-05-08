@@ -18,8 +18,13 @@
                      width="100"
                      prop="hourNum"></el-table-column>
     <el-table-column label="状态"
-                     width="100"
-                     prop="state"></el-table-column>
+                     width="100">
+      <template scope="scope">
+        <el-tag :type="Utils.getStateColor(workOvertimeList[scope.$index].state)">
+          {{workOvertimeList[scope.$index].state}}
+        </el-tag>
+      </template>
+    </el-table-column>
     <el-table-column label="审批人"
                      width="100"
                      prop="approverUsername"></el-table-column>
@@ -50,6 +55,7 @@
   import TabItem from '../../../base/TabItem'
   // eventbus
   import * as EventBus from '../../../base/EventBus'
+  import Utils from '../../../base/Utils'
 
   const URL_GET_OPEN_WORK_OVERTIME = Cons.BASE_URL + '/work_overtime/open'
   const URL_GET_DELETE_WORK_OVERTIME = Cons.BASE_URL + '/work_overtime/delete'
@@ -58,7 +64,8 @@
     name: 'work-overtime-panel',
     data () {
       return {
-        workOvertimeList: []
+        workOvertimeList: [],
+        Utils
       }
     },
     props: [],

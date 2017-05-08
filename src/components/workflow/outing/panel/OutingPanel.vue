@@ -19,8 +19,13 @@
                      width="100"
                      prop="dayNum"></el-table-column>
     <el-table-column label="状态"
-                     width="100"
-                     prop="state"></el-table-column>
+                     width="100">
+      <template scope="scope">
+        <el-tag :type="Utils.getStateColor(outingList[scope.$index].state)">
+          {{outingList[scope.$index].state}}
+        </el-tag>
+      </template>
+    </el-table-column>
     <el-table-column label="审批人"
                      width="100"
                      prop="approverUsername"></el-table-column>
@@ -51,6 +56,7 @@
   import TabItem from '../../../base/TabItem'
   // eventbus
   import * as EventBus from '../../../base/EventBus'
+  import Utils from '../../../base/Utils'
 
   const URL_GET_OPEN_OUTING = Cons.BASE_URL + '/outing/open'
 
@@ -58,7 +64,8 @@
     name: 'outing-panel',
     data () {
       return {
-        outingList: []
+        outingList: [],
+        Utils
       }
     },
     props: [],

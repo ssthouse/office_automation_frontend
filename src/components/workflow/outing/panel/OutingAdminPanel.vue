@@ -22,8 +22,13 @@
                      width="100"
                      prop="dayNum"></el-table-column>
     <el-table-column label="状态"
-                     width="100"
-                     prop="state"></el-table-column>
+                     width="100">
+      <template scope="scope">
+        <el-tag :type="Utils.getStateColor(outingList[scope.$index].state)">
+          {{outingList[scope.$index].state}}
+        </el-tag>
+      </template>
+    </el-table-column>
     <el-table-column label="操作">
       <template scope="scope">
         <!--the two button can is able only when in unapproved || approved state-->
@@ -45,6 +50,7 @@
   import TabItem from '../../../base/TabItem'
   // eventbus
   import * as EventBus from '../../../base/EventBus'
+  import Utils from '../../../base/Utils'
 
   const URL_GET_ADMIN_OUTING = Cons.BASE_URL + '/outing/admin'
 
@@ -52,7 +58,8 @@
     name: 'outing-admin-panel',
     data () {
       return {
-        outingList: []
+        outingList: [],
+        Utils
       }
     },
     props: [],
