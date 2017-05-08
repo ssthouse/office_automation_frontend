@@ -109,6 +109,7 @@
               return
             }
             this.workOvertimeList = WorkOvertimeEntity.parseWorkOvertimeList(response.body.workOvertimeList)
+            this.$store.commit(MUTATION_TYPES.WORKFLOW_SET_WORK_OVERTIME, this.workOvertimeList)
           }, response => {
             this.$message('获取加班数据失败')
           })

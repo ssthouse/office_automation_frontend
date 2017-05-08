@@ -123,6 +123,7 @@
             }
             // 请求成功
             this.askLeaveList = AskLeave.parseAskLeaveList(response.body.askLeaveList)
+            this.$store.commit(MUTATION_TYPES.WORKFLOW_SET_ASK_LEAVE, this.askLeaveList)
           }, response => {
             this.$message('请假审批列表获取失败')
           })

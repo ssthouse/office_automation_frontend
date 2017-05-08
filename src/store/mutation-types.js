@@ -14,6 +14,12 @@ export const HOMEPAGE_REMOVE_TAB = 'homepage/remove_tab'
 // Workflow 模块
 export const WORKFLOW_ADD_TAB = 'workflow/add_tab'
 export const WORKFLOW_REMOVE_TAB = 'workflow/remove_tab'
+export const WORKFLOW_SET_ASK_LEAVE = 'workflow/ask_leave'
+export const WORKFLOW_SET_ASK_LEAVE_ADMIN = 'workflow/ask_leave_admin'
+export const WORKFLOW_SET_WORK_OVERTIME = 'workflow/work_overtime'
+export const WORKFLOW_SET_WORK_OVERTIME_ADMIN = 'workflow/work_overtime_admin'
+export const WORKFLOW_SET_OUTING = 'workflow/outing'
+export const WORKFLOW_SET_OUTING_ADMIN = 'workflow/outing_admin'
 
 // OfficialDoc 公文管理模块
 export const OFFICIAL_DOC_ADD_TAB = 'official_doc/add_tab'

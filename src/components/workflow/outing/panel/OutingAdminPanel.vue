@@ -65,6 +65,7 @@
               return
             }
             this.outingList = Outing.parseOutingList(response.body.outingList)
+            this.$store.commit(MUTATION_TYPES.WORKFLOW_SET_OUTING_ADMIN, this.outingList)
           }, response => {
             this.$message('获取出差数据失败')
           })
