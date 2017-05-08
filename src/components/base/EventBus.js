@@ -8,7 +8,8 @@ export const EVENT_WORKFLOW_UPDATE_WORK_OVERTIME = 'workflow/work_overtime/updat
 export const EVENT_WORKFLOW_UPDATE_OUTING = 'workflow/outing/update'
 
 // official doc event
-export const EVENT_OFFICIAL_DOC_UPDATE_ALL_DISPATCH = 'official_doc//dispatch/update'
+export const EVENT_OFFICIAL_DOC_UPDATE_ALL_DISPATCH = 'official_doc/dispatch/update'
+export const EVENT_OFFICIAL_DOC_CLICK_NEW = 'official_doc/click_new'
 
 // new tab event
 export const EVENT_HOMEPAGE_NEW_TAB = 'homepage/new_tab'

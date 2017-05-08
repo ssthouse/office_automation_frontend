@@ -46,7 +46,7 @@
           </td>
           <td style="background-color:#fff; text-align: left;  padding: 0px; border: 1px solid #6faadb; " colspan="5">
             <input type="hidden" value="">{{dispatch.content}}<input type="hidden">
-            <div style="min-height: 50px; overflow:visible; padding-right: 3px;" id="checkDocument_div"></div>
+            <div style="min-height: 30px; overflow:visible; padding-right: 3px;" id="checkDocument_div"></div>
           </td>
         </tr>
         <tr>
@@ -66,7 +66,7 @@
           <td style="background-color:#fff; text-align: left;  padding: 0px; border: 1px solid #6faadb; " colspan="5">
             <input type="hidden" id="checkDocument__datas" value="">{{dispatch.checkComment}}<input type="hidden"
                                                                                                     id="checkDocument__signData">
-            <div style="min-height: 50px; overflow:visible; padding-right: 3px;"></div>
+            <div style="min-height: 30px; overflow:visible; padding-right: 3px;"></div>
           </td>
         </tr>
         <tr>
@@ -77,7 +77,7 @@
           <td style="background-color:#fff; text-align: left;  padding: 0px; border: 1px solid #6faadb; " colspan="5">
             <input type="hidden" id="countersign__datas" value="">{{dispatch.countersign}}<input type="hidden"
                                                                                                  id="countersign__signData">
-            <div style="min-height: 50px; overflow:visible; padding-right: 3px;" id="countersign_div"></div>
+            <div style="min-height: 30px; overflow:visible; padding-right: 3px;" id="countersign_div"></div>
           </td>
         </tr>
         <tr>
@@ -87,7 +87,7 @@
           </td>
           <td style="background-color:#fff; text-align: left;  padding: 0px; border: 1px solid #6faadb; " colspan="5">
             <input type="hidden" id="sign__datas" value="">{{dispatch.sign}}<input type="hidden" id="sign__signData">
-            <div style="min-height: 50px; overflow:visible; padding-right: 3px;" id="sign_div"></div>
+            <div style="min-height: 30px; overflow:visible; padding-right: 3px;" id="sign_div"></div>
           </td>
         </tr>
         <tr>

@@ -10,6 +10,7 @@
 
     <!--floating action button-->
     <md-button class="md-fab md-fab-bottom-right"
+               style="visibility: hidden;"
                id="btnAdd"
                @click.native="onClickOpenDialog()">
       <md-icon>add</md-icon>
@@ -86,6 +87,10 @@
       EventBus.instance.$on(EventBus.EVENT_OFFICIAL_DOC_NEW_TAB, () => {
         let index = this.tabs.length
         this.activeTabIndex = index.toString()
+      })
+      // the event of try to click the add button
+      EventBus.instance.$on(EventBus.EVENT_OFFICIAL_DOC_CLICK_NEW, () => {
+        this.onClickOpenDialog()
       })
     }
   }
