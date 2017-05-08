@@ -13,6 +13,7 @@ export const EVENT_OFFICIAL_DOC_UPDATE_ALL_DISPATCH = 'official_doc//dispatch/up
 // new tab event
 export const EVENT_HOMEPAGE_NEW_TAB = 'homepage/new_tab'
 export const EVENT_WORKFLOW_NEW_TAB = 'workflow/new_tab'
+export const EVENT_WORKFLOW_CLICK_NEW = 'workflow/click_new'
 export const EVENT_OFFICIAL_DOC_NEW_TAB = 'official_doc/new_tab'
 export const EVENT_TOOLS_NEW_TAB = 'tools/new_tab'
 

@@ -9,6 +9,7 @@
       :mainTabIs="MainTab.name"></base-item>
 
     <md-button class="md-fab md-fab-bottom-right"
+               style="visibility: hidden"
                id="btnAdd"
                @click.native="onClickAddWorkflow()">
       <md-icon>add</md-icon>
@@ -84,6 +85,10 @@
       EventBus.instance.$on(EventBus.EVENT_WORKFLOW_NEW_TAB, () => {
         let index = this.tabs.length
         this.activeTabIndex = index.toString()
+      })
+      // register the add btn click event
+      EventBus.instance.$on(EventBus.EVENT_WORKFLOW_CLICK_NEW, () => {
+        this.onClickAddWorkflow()
       })
     },
     props: [],

@@ -4,10 +4,13 @@
       <el-col :span="12">
         <!--展示所有数据的折叠面板-->
         <el-card style="margin: 5px;">
-          <div slot="header">
-            <span style="font-size: larger">我发起的审批:</span>
-            <el-button style="margin-left: 40px;"
+          <div slot="header" style="height: 20px;">
+            <span style="font-size: larger; float: left;">我发起的审批:</span>
+            <el-button style="float: right; vertical-align: middle; margin-left: 10px;"
                        @click="onClickRefreshWorkflowData()">刷新
+            </el-button>
+            <el-button style="float: right;"
+                       @click="onClickAddBtn()">新增
             </el-button>
           </div>
           <el-collapse accordion>
@@ -30,9 +33,9 @@
       <el-col :span="12">
         <!--展示管理者数据的面板-->
         <el-card style="margin: 5px;">
-          <div slot="header">
-            <span style="font-size: larger">我管理的审批:</span>
-            <el-button style="margin-left: 40px;"
+          <div slot="header" style="height: 20px;">
+            <span style="font-size: larger; float: left;">我管理的审批:</span>
+            <el-button style="float: right; margin-bottom: 20px;"
                        @click="onClickRefreshWorkflowData()">刷新
             </el-button>
           </div>
@@ -77,8 +80,7 @@
   import OutingPanel from './outing/panel/OutingPanel.vue'
   import OutingAdminPanel from './outing/panel/OutingAdminPanel.vue'
   // 事件总线
-  import { instance } from '../base/EventBus'
-  import * as Cons from '../base/Constant'
+  import * as EventBus from '../base/EventBus'
 
   // askLeave
   Vue.component(AskLeave.name, AskLeave)
@@ -108,7 +110,10 @@
     methods: {
       onClickRefreshWorkflowData () {
         // 触发刷新所有的数据的 event
-        instance.$emit(Cons.EVENT_WORKFLOW_UPDATE_ALL)
+        EventBus.instance.$emit(EventBus.EVENT_WORKFLOW_UPDATE_ALL)
+      },
+      onClickAddBtn () {
+        EventBus.instance.$emit(EventBus.EVENT_WORKFLOW_CLICK_NEW)
       }
     },
     components: {
