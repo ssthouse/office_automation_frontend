@@ -26,6 +26,7 @@ class Incoming {
   static STATE_PROPOSE = 'propose'
   static STATE_APPROVE = 'approve'
   static STATE_DEAL = 'deal'
+  static STATE_FINISH = 'finish'
 
   static Type = ['决议', '决定', '公告', '通告', '通知', '通报', '报告', '请示']
 

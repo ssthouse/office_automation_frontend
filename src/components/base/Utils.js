@@ -1,3 +1,6 @@
+import Dispatch from '../official_doc/bean/dispatch'
+import Incoming from '../official_doc/bean/incoming'
+
 class Utils {
 
   static STATE_DRAFT = 'draft'
@@ -88,6 +91,27 @@ class Utils {
         return 'success'
       case 'decline':
         return 'danger'
+    }
+  }
+
+  static getOfficialDocStateColor (stateName) {
+    switch (stateName) {
+      // 开始状态
+      case Dispatch.STATE_BEGIN:
+        return 'grey'
+      // 发文单执行状态
+      case Dispatch.STATE_CHECK:
+      case Dispatch.STATE_COUNTERSIGN:
+      case Dispatch.STATE_SIGN:
+        return 'primary'
+      // 收文单执行状态
+      case Incoming.STATE_PROPOSE:
+      case Incoming.STATE_APPROVE:
+      case Incoming.STATE_DEAL:
+        return 'primary'
+      // 完成状态
+      case Dispatch.STATE_FINISH:
+        return 'success'
     }
   }
 }

@@ -20,8 +20,13 @@
         </template>
       </el-table-column>
       <!--状态-->
-      <el-table-column label="状态"
-                       prop="state"></el-table-column>
+      <el-table-column label="状态">
+        <template scope="scope">
+          <el-tag :type="Utils.getOfficialDocStateColor(dispatchList[scope.$index].state)">
+            {{dispatchList[scope.$index].state}}
+          </el-tag>
+        </template>
+      </el-table-column>
       <el-table-column label="操作"
                        width="280">
         <template scope="scope">
