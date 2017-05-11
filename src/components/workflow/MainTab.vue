@@ -6,7 +6,7 @@
         <el-card style="margin: 5px;">
           <div slot="header" style="height: 20px;">
             <span style="font-size: larger; float: left;">我发起的审批:</span>
-            <el-button style="float: right; vertical-align: middle; margin-left: 10px;"
+            <el-button style="float: right; vertical-align: middle; margin-left: 10px; visibility: collapse; margin-bottom: -50px;"
                        @click="onClickRefreshWorkflowData()">刷新
             </el-button>
             <el-button style="float: right;"
@@ -46,7 +46,7 @@
         <el-card style="margin: 5px;">
           <div slot="header" style="height: 20px;">
             <span style="font-size: larger; float: left;">我管理的审批:</span>
-            <el-button style="float: right; margin-bottom: 20px;"
+            <el-button style="float: right; margin-bottom: 20px; visibility: hidden"
                        @click="onClickRefreshWorkflowData()">刷新
             </el-button>
           </div>

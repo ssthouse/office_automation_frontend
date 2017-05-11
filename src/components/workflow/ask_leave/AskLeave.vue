@@ -49,6 +49,7 @@
         <el-form-item label="请假天数">
           <div style="margin-left: 20px;">
             <el-input v-model="askLeave.dayNum"
+                      :disabled="true"
                       placeholder="请输入数字"
                       style="clear: both; margin-right: 20px;"></el-input>
           </div>
@@ -179,6 +180,15 @@
           }, response => {
             this.$message('提交失败: 请稍后重试')
           })
+      },
+      updateDayNum () {
+        if (this.beginDate === '' ||
+          this.beginDate === undefined ||
+          this.endDate === '' ||
+          this.endDate === undefined) {
+          return
+        }
+        this.askLeave.dayNum = (this.endDate.getTime() - this.beginDate.getTime()) / (24 * 60 * 60 * 1000) + 1
       }
     },
     computed: {},
@@ -191,6 +201,15 @@
       // 将日期解析到UI
       this.beginDate = new Date(this.askLeave.beginDate)
       this.endDate = new Date(this.askLeave.endDate)
+    },
+    watch: {
+      beginDate: function () {
+        console.log(this.beginDate)
+        this.updateDayNum()
+      },
+      endDate: function () {
+        this.updateDayNum()
+      }
     }
   }
 </script>

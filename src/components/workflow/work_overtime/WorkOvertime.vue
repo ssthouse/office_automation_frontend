@@ -40,7 +40,7 @@
           </el-checkbox>
         </el-form-item>
         <!--请假天数-->
-        <el-form-item label="加班时长">
+        <el-form-item label="小时数">
           <div style="margin-left: 20px; float: left;">
             <el-input-number v-model="workOvertime.hourNum"
                              placeholder="请输入数字"

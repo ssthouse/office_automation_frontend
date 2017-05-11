@@ -29,14 +29,14 @@
       <el-form label-width="80px"
                label-position="right">
         <!--请假的类型-->
-        <el-form-item label="类型">
+        <el-form-item label="出差地点">
           <el-input v-model="outing.destination"
                     placeholder="目的地"
                     class="form-item-content">
           </el-input>
         </el-form-item>
         <!--请假的 起始 结束日期-->
-        <el-form-item label="请假日期">
+        <el-form-item label="出差日期">
           <div class="form-item-content">
             <el-date-picker
               v-model="beginDate"
@@ -54,15 +54,16 @@
           </div>
         </el-form-item>
         <!--请假天数-->
-        <el-form-item label="请假天数">
+        <el-form-item label="出差天数">
           <div style="margin-left: 20px;">
             <el-input v-model="outing.dayNum"
                       placeholder="请输入数字"
+                      :disabled="true"
                       style="clear: both; margin-right: 20px;"></el-input>
           </div>
         </el-form-item>
         <!--请假事由-->
-        <el-form-item label="请假事由">
+        <el-form-item label="出差事由">
           <div style="margin-left: 20px;">
             <el-input type="textarea" v-model="outing.description">
             </el-input>
@@ -165,6 +166,15 @@
           }, response => {
             this.$message('提交失败: 请稍后重试')
           })
+      },
+      updateDayNum () {
+        if (this.beginDate === '' ||
+          this.beginDate === undefined ||
+          this.endDate === '' ||
+          this.endDate === undefined) {
+          return
+        }
+        this.outing.dayNum = (this.endDate.getTime() - this.beginDate.getTime()) / (24 * 60 * 60 * 1000) + 1
       }
     },
     computed: {},
@@ -177,6 +187,15 @@
       // 将日期解析到UI
       this.beginDate = new Date(this.outing.beginDate)
       this.endDate = new Date(this.outing.endDate)
+    },
+    watch: {
+      beginDate: function () {
+        console.log(this.beginDate)
+        this.updateDayNum()
+      },
+      endDate: function () {
+        this.updateDayNum()
+      }
     }
   }
 </script>
