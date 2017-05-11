@@ -16,7 +16,7 @@
       <el-form label-width="100px"
                label-position="right">
         <!--请假的 起始 结束日期-->
-        <el-form-item label="请假日期">
+        <el-form-item label="加班日期">
           <div class="form-item-content">
             <el-date-picker
               v-model="beginDate"

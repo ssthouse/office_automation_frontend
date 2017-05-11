@@ -18,15 +18,19 @@
                               class="panel-title">
               <template slot="title">
                 <span>{{titleLabelList[index-1]}}</span>
-                <el-badge :value='getBadgeNum(index-1, false, 0)'
+                <el-badge :value="getBadgeNum(index-1, false, 0)"
                           style="margin-left: 40px;">
+                  <el-tag type="grey">草稿</el-tag>
+                </el-badge>
+                <el-badge :value='getBadgeNum(index-1, false, 1)'
+                          style="margin-left: 20px;">
                   <el-tag type="primary">待审批</el-tag>
                 </el-badge>
-                <el-badge :value="getBadgeNum(index-1, false, 1)"
+                <el-badge :value="getBadgeNum(index-1, false, 2)"
                           style="margin-left: 20px;">
                   <el-tag type="success">已通过</el-tag>
                 </el-badge>
-                <el-badge :value="getBadgeNum(index-1, false, 2)"
+                <el-badge :value="getBadgeNum(index-1, false, 3)"
                           style="margin-left: 20px;">
                   <el-tag type="danger">未通过</el-tag>
                 </el-badge>
@@ -53,13 +57,17 @@
                 <span>{{titleLabelList[index-1]}}</span>
                 <el-badge :value="getBadgeNum(index-1, true, 0)"
                           style="margin-left: 40px;">
-                  <el-tag type="primary">待审批</el-tag>
+                  <el-tag type="grey">草稿</el-tag>
                 </el-badge>
                 <el-badge :value="getBadgeNum(index-1, true, 1)"
                           style="margin-left: 20px;">
-                  <el-tag type="success">已通过</el-tag>
+                  <el-tag type="primary">待审批</el-tag>
                 </el-badge>
                 <el-badge :value="getBadgeNum(index-1, true, 2)"
+                          style="margin-left: 20px;">
+                  <el-tag type="success">已通过</el-tag>
+                </el-badge>
+                <el-badge :value="getBadgeNum(index-1, true, 3)"
                           style="margin-left: 20px;">
                   <el-tag type="danger">未通过</el-tag>
                 </el-badge>
@@ -123,7 +131,7 @@
         componentIsListAdmin: ['ask-leave-admin-panel', 'work-overtime-admin-panel', 'outing-admin-panel'],
         componentIsList: ['ask-leave-panel', 'work-overtime-panel', 'outing-panel'],
         // state name list
-        stateList: ['unapproved', 'approved', 'decline']
+        stateList: ['draft', 'unapproved', 'approved', 'decline']
       }
     },
     props: [],
@@ -137,7 +145,7 @@
       },
       getBadgeNum (typeIndex, isAdmin, stateIndex) {
         let stateName = this.stateList[stateIndex]
-        if (isAdmin) {
+        if (!isAdmin) {
           switch (typeIndex) {
             case 0:
               return this.getStateNumInList(this.$store.state.workflowModule.askLeaveList, stateName)
