@@ -181,4 +181,9 @@
   .panel-title {
     text-align: left;
   }
+
+  .el-badge__content {
+    background-color: #1d90e6;
+    margin-top: 10px;
+  }
 </style>

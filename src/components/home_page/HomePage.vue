@@ -1,6 +1,10 @@
 <template>
 <div>
-  <base-item :tabs="tabs" style="overflow-y: scroll" mainTabName="个人主页" :mainTabIs="MainTab.name" :activeTabIndex="activeTabIndex" v-on:remove-tab="handleRemoveTab"></base-item>
+  <base-item :tabs="tabs" style="overflow-y: scroll"
+             mainTabName="个人首页"
+             :mainTabIs="MainTab.name"
+             :activeTabIndex="activeTabIndex"
+             v-on:remove-tab="handleRemoveTab"></base-item>
 
   <md-button class="md-fab md-fab-bottom-right" id="btnConfig" @click.native="onClickConfig()">
     <md-icon>home</md-icon>
@@ -39,17 +43,13 @@ import * as MUTATIONS from '../../store/mutation-types'
 import NewsCard from './news/NewsCard.vue'
 import News from './news/News.vue'
 import ImgNewsCard from './img_news/ImgNewsCard.vue'
-import CalendarCard from './calendar/CalendarCard.vue'
 import UserInfo from './userinfo/UserInfo.vue'
-import CalendarDetail from './calendar/CalendarDetail.vue'
 
 Vue.component(MainTab.name, MainTab)
 Vue.component(UserInfo.name, UserInfo)
 Vue.component(NewsCard.name, NewsCard)
 Vue.component(News.name, News)
 Vue.component(ImgNewsCard.name, ImgNewsCard)
-Vue.component(CalendarCard.name, CalendarCard)
-Vue.component(CalendarDetail.name, CalendarDetail)
 
 export default {
   name: 'home-page',

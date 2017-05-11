@@ -4,12 +4,15 @@
     <el-row style="margin-top: 0px; margin-bottom: 0px; height: 8%">
       <el-col :span="20">
         <el-menu theme="dark"
-                 :router=true
-                 style="margin-left: 0px; margin-top: 0px;"
+                 style="margin-left: 10px; margin-top: 0px;"
                  default-active="/portal"
                  mode="horizontal"
                  @select="changeMenuItem">
-          <el-menu-item :index=paths.OA_SYSTEM_INDEX><i class="el-icon-menu"></i>OA 系统</el-menu-item>
+          <el-menu-item :index=paths.OA_SYSTEM_INDEX style="font-size: 20px">
+            <img src="../../assets/logo.png"
+                 style="width: 30px; height: 30px;"/>
+            <span>OA管理系统</span>
+          </el-menu-item>
         </el-menu>
       </el-col>
 
@@ -39,7 +42,7 @@
 </template>
 
 <script>
-  import {PATHS} from '../../router/index'
+  import { PATHS } from '../../router/index'
   import OaSystemMenu from './OaSystemMenu.vue'
   import * as MUTATION_TYPES from '../../store/mutation-types'
   import TabItem from '../base/TabItem'
