@@ -94,6 +94,19 @@ class Utils {
     }
   }
 
+  static getStateName (state) {
+    switch (state) {
+      case 'draft':
+        return '草稿'
+      case 'unapproved':
+        return '待审核'
+      case 'approved':
+        return '已通过'
+      case 'decline':
+        return '未通过'
+    }
+  }
+
   static getOfficialDocStateColor (stateName) {
     switch (stateName) {
       // 开始状态

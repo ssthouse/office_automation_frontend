@@ -25,7 +25,7 @@
                      width="100">
       <template scope="scope">
         <el-tag :type="Utils.getStateColor(outingList[scope.$index].state)">
-          {{outingList[scope.$index].state}}
+          {{Utils.getStateName(outingList[scope.$index].state)}}
         </el-tag>
       </template>
     </el-table-column>

@@ -25,7 +25,7 @@
                      width="100">
       <template scope="scope">
         <el-tag :type="Utils.getStateColor(askLeaveList[scope.$index].state)">
-          {{askLeaveList[scope.$index].state}}
+          {{Utils.getStateName(askLeaveList[scope.$index].state)}}
         </el-tag>
       </template>
     </el-table-column>

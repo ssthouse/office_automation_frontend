@@ -21,7 +21,7 @@
                      width="100">
       <template scope="scope">
         <el-tag :type="Utils.getStateColor(workOvertimeList[scope.$index].state)">
-          {{workOvertimeList[scope.$index].state}}
+          {{Utils.getStateName(workOvertimeList[scope.$index].state)}}
         </el-tag>
       </template>
     </el-table-column>
