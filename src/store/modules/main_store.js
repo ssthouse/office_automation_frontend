@@ -25,6 +25,9 @@ const mutations = {
     }
     state.userConfig = userConfig
     EventBus.instance.$emit(EventBus.EVENT_MAIN_UPDATE_USER_CONFIG)
+  },
+  [types.MAIN_SET_USER_HOMEPAGE_CONFIG] (state, homepageConfig) {
+    state.userConfig.homePageConfig = homepageConfig
   }
 }
 

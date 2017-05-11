@@ -3,7 +3,7 @@
     <el-row>
       <el-col :span="8"
               class="card-col"
-              v-for="cardName in cardNameList">
+              v-for="cardName in getCardList()">
         <div :is="componentMap[cardName]"></div>
       </el-col>
     </el-row>
@@ -11,8 +11,6 @@
 </template>
 
 <script>
-  import * as EventBus from '../base/EventBus'
-  import * as MUTATIONS from '../../store/mutation-types'
   import * as Cons from '../base/Constant'
 
   export default{
@@ -20,35 +18,16 @@
     data () {
       return {
         componentMap: Cons.ComponentMap,
-        cardNameList: [],
-        newConfig: []
+        cardNameList: []
       }
     },
     props: [],
     methods: {
-      getConfigCardList () {
-        let _this = this
-        this.cardNameList = this.$store.getters.getHomePageConfig
-        this.cardNameList.forEach(function (cardName) {
-          _this.newConfig.push(cardName)
-        })
-      },
-      updateConfig () {
-        console.log(this.newConfig)
-        this.$store.dispatch(MUTATIONS.ACTION_POST_USER_CONFIG_HOMEPAGE, this.newConfig.join(','))
-          .then(success => {
-            this.$message('更新成功')
-            EventBus.instance.$emit(EventBus.EVENT_MAIN_UPDATE_USER_CONFIG)
-          }, fail => {
-            this.$message('更新失败')
-          })
+      getCardList () {
+        return this.$store.getters.getHomePageConfig
       }
     },
-    created: function () {
-      EventBus.instance.$on(EventBus.EVENT_MAIN_UPDATE_USER_CONFIG, () => {
-        this.getConfigCardList()
-      })
-    }
+    created: function () {}
   }
 </script>
 
