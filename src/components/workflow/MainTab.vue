@@ -6,8 +6,9 @@
         <el-card style="margin: 5px;">
           <div slot="header" style="height: 20px;">
             <span style="font-size: larger; float: left;">我发起的审批:</span>
-            <el-button style="float: right; vertical-align: middle; margin-left: 10px; visibility: collapse; margin-bottom: -50px;"
-                       @click="onClickRefreshWorkflowData()">刷新
+            <el-button
+              style="float: right; vertical-align: middle; margin-left: 10px; visibility: collapse; margin-bottom: -50px;"
+              @click="onClickRefreshWorkflowData()">刷新
             </el-button>
             <el-button style="float: right;"
                        @click="onClickAddBtn()">新增
@@ -56,11 +57,11 @@
               <template slot="title">
                 <span>{{titleLabelList[index-1]}}</span>
                 <el-badge :value="getBadgeNum(index-1, true, 0)"
-                          style="margin-left: 40px;">
+                          style="margin-left: 40px; visibility: collapse;">
                   <el-tag type="grey">草稿</el-tag>
                 </el-badge>
                 <el-badge :value="getBadgeNum(index-1, true, 1)"
-                          style="margin-left: 20px;">
+                          style="margin-left: -40px;">
                   <el-tag type="primary">待审批</el-tag>
                 </el-badge>
                 <el-badge :value="getBadgeNum(index-1, true, 2)"

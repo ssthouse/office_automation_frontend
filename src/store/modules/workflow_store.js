@@ -14,23 +14,13 @@ const state = {
   outingAdminList: []
 }
 
-const tabIsSet = new Set()
-// const tabExcludedSet = new Set()
-
 const mutations = {
   [types.WORKFLOW_ADD_TAB] (state, tabItem) {
-    if (tabIsSet.has(tabItem.tabIs)) {
-      return
-    }
-    tabIsSet.add(tabItem.tabIs)
     state.workflow_tabs.push(tabItem)
     // emit new tab event
     EventBus.instance.$emit(EventBus.EVENT_WORKFLOW_NEW_TAB)
   },
   [types.WORKFLOW_REMOVE_TAB] (state, tabIs) {
-    if (tabIsSet.has(tabIs)) {
-      tabIsSet.delete(tabIs)
-    }
   },
   // the mutations to commit list data
   [types.WORKFLOW_SET_ASK_LEAVE] (state, askLeaveList) {

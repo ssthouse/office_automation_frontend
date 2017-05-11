@@ -38,7 +38,9 @@
             </span>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item :command="scope.$index+',detail'">详情</el-dropdown-item>
-            <el-dropdown-item :command="scope.$index+',edit'">编辑</el-dropdown-item>
+            <el-dropdown-item :command="scope.$index+',edit'"
+                              :disabled="askLeaveList[scope.$index].state !== 'draft'">编辑
+            </el-dropdown-item>
             <el-dropdown-item :command="scope.$index+',delete'">删除</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>

@@ -28,7 +28,7 @@ class Utils {
       case Utils.STATE_DRAFT:
         return '尚未提交申请, 处于草稿状态'
       case Utils.STATE_UNAPPROVED:
-        return '尚未通过审核'
+        return '尚未经过审核'
       case Utils.STATE_APPROVED:
         return '已通过审核'
       case Utils.STATE_DECLINE:
