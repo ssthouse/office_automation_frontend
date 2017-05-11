@@ -6,15 +6,6 @@
               v-for="cardName in cardNameList">
         <div :is="componentMap[cardName]"></div>
       </el-col>
-      <!--<el-col :span="8">-->
-      <!--<img-news-card class="card-col"></img-news-card>-->
-      <!--</el-col>-->
-      <!--<el-col :span="8">-->
-      <!--<news-card class="card-col"></news-card>-->
-      <!--</el-col>-->
-      <!--<el-col :span="8">-->
-      <!--<calendar-card class="card-col"></calendar-card>-->
-      <!--</el-col>-->
     </el-row>
   </div>
 </template>

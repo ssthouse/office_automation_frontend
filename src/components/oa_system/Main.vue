@@ -28,11 +28,11 @@
 
     <el-row id="oa_system_panel">
       <!--承载 menu-->
-      <el-col :span="4" style="height: 100%;">
+      <el-col :span="3" style="height: 100%;">
         <oa-system-menu></oa-system-menu>
       </el-col>
       <!--承载右边内容==>会随着左边菜单改变而改变-->
-      <el-col :span="20" class="content_tab_pane">
+      <el-col :span="21" class="content_tab_pane">
         <keep-alive>
           <router-view></router-view>
         </keep-alive>
