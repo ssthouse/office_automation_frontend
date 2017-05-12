@@ -14,7 +14,7 @@ class AnswerBean {
     // 将选择题选项添加进来
     for (let index in answer.selections) {
       let selection = answer.selections[index]
-      if (this.dict[selection] !== null) {
+      if (this.dict[selection] === null || this.dict[selection] === undefined) {
         this.dict[selection] = 0
       }
       this.dict[selection] += 1

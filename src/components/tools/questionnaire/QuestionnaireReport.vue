@@ -20,34 +20,48 @@
     </el-card>
 
     <!--每道题详细数据-->
-    <el-card class="box-card" v-for="question in questionnaire.questions">
-      <!--当前题目的标题-->
-      <h5 style="margin-left: 10px; float: left; margin-top: -5px;">
-        题目{{questionnaire.questions.indexOf(question) + 1}}:
-        {{questionnaire.questions[questionnaire.questions.indexOf(question)].title}}</h5>
+    <el-row style="margin-left: 20px; margin-right: 20px;">
+      <el-col :span="8" v-for="question in questionnaire.questions">
+        <!--<el-card class="box-card">-->
+          <el-col>
+            <el-row>
+              <!--当前题目的标题-->
+              <h5 style="margin-left: 10px; float: left; margin-top: -10px;">
+                题目{{questionnaire.questions.indexOf(question) + 1}}:
+                {{questionnaire.questions[questionnaire.questions.indexOf(question)].title}}</h5>
+            </el-row>
+            <el-row style="margin-top: -20px;">
+              <!--如果是选择题, 画一幅扇形图-->
+              <div v-if="question.type === QUESTION_TYPES.RADIO || question.type === QUESTION_TYPES.CHECK_BOX"
+                   style="margin-top: 20px">
+                <canvas :ref="questionnaire.questions.indexOf(question).toString() + 'chart'"
+                        :id="questionnaire.questions.indexOf(question).toString() + 'chart'"
+                        style="width: 500px;"></canvas>
+              </div>
 
-      <!--如果是选择题, 画一幅扇形图-->
-      <div v-if="question.type === QUESTION_TYPES.RADIO || question.type === QUESTION_TYPES.CHECK_BOX"
-           style="margin-top: 20px">
-        <canvas :ref="questionnaire.questions.indexOf(question).toString() + 'chart'"
-                :id="questionnaire.questions.indexOf(question).toString() + 'chart'"
-                style="height: 300px;"></canvas>
-      </div>
+              <!--如果是文字题, 给一个下拉面板-->
+              <el-collapse v-model="nameModel[questionnaire.questions.indexOf(question)]"
+                           v-if="question.type === QUESTION_TYPES.TEXT_AREA"
+                           style="margin-top: 20px; text-align: left">
+                <el-collapse-item title="所有回答:"
+                                  name="questionnaire.questions.indexOf(question)"
+                                  style="text-align: left">
+                  <div v-for="answer in answerBeanList[questionnaire.questions.indexOf(question)].answers">
+                    {{answer}}
+                  </div>
+                </el-collapse-item>
+              </el-collapse>
+            </el-row>
+          </el-col>
+        <!--</el-card>-->
+      </el-col>
+    </el-row>
 
-      <!--如果是文字题, 给一个下拉面板-->
-      <el-collapse v-model="nameModel[questionnaire.questions.indexOf(question)]"
-                   v-if="question.type === QUESTION_TYPES.TEXT_AREA"
-                   style="margin-top: 20px; text-align: left">
-        <el-collapse-item title="所有回答:"
-                          name="questionnaire.questions.indexOf(question)"
-                          style="text-align: left">
-          <div v-for="answer in answerBeanList[questionnaire.questions.indexOf(question)].answers">
-            {{answer}}
-          </div>
-        </el-collapse-item>
-      </el-collapse>
-    </el-card>
 
+    <!--测试换成三个一行-->
+    <!--<el-card class="box-card" v-for="row in (questionSum() / 3)">-->
+    <!--hahaha-->
+    <!--</el-card>-->
   </div>
 </template>
 
@@ -57,7 +71,7 @@
    */
   import Chart from 'chart.js'
   import AnswerAnalysis from './bean/answerAnalysis'
-  import {QUESTION_TYPES} from './bean/question'
+  import { QUESTION_TYPES } from './bean/question'
   const URL_GET_ANSWER_ANALYSIS = 'http://127.0.0.1:8080/office_automation_backend/questionnaire/answer_analysis'
 
   export default{
@@ -73,11 +87,6 @@
       }
     },
     props: ['data'],
-    computed: {
-      answerBeanList () {
-        return this.answerAnalysis.answerBeans
-      }
-    },
     methods: {
       getAnswerBean (question) {
         let index = this.questionnaire.questions.indexOf(question)
@@ -125,6 +134,23 @@
           })
           component.none = chart
         })
+      },
+      questionSum () {
+        console.log(this.questionnaire)
+        if (this.questionnaire === undefined) {
+          return 0
+        }
+        if (this.questionnaire.questions === undefined) {
+          console.log('what? the questions are undefined??')
+          return 0
+        }
+        console.log(this.questionnaire.questions)
+        return this.questionnaire.questions.length
+      }
+    },
+    computed: {
+      answerBeanList () {
+        return this.answerAnalysis.answerBeans
       }
     },
     created: function () {

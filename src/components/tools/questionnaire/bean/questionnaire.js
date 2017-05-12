@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import mainStore from '../../../../store/modules/main_store'
-import {Question} from './question'
+import { Question } from './question'
 
 /**
  {
@@ -111,10 +111,10 @@ class Questionnaire {
           if (response.body.ok !== true) {
             reject(response.body.msg)
           } else {
-            resolve('save questionnaire successfully')
+            resolve('保存问卷成功')
           }
         }, response => {
-          reject('save questionnaire to backend fail')
+          reject('保存问卷失败')
         })
     })
   }

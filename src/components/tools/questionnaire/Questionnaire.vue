@@ -40,7 +40,7 @@
             v-if="showQuestions">
       <el-button @click="addRadioQues">单选题</el-button>
       <el-button @click="addCheckboxQues">多选题</el-button>
-      <el-button @click="addTextAreaQues">文字题</el-button>
+      <!--<el-button @click="addTextAreaQues" style="visibility: collapse;">文字题</el-button>-->
     </el-row>
     <el-button style="width: 90%"
                type="primary"
