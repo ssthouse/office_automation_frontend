@@ -31,7 +31,6 @@
         <el-button @click="onQuestionUpClicked(questionnaire.questions.indexOf(question))">上移</el-button>
         <el-button @click="onQuestionDownClicked(questionnaire.questions.indexOf(question))">下移</el-button>
         <el-button @click="onQuestionDeleteClicked(questionnaire.questions.indexOf(question))">删除</el-button>
-        <el-button @click="onQuestionDuplicateClicked(questionnaire.questions.indexOf(question))">复用</el-button>
       </el-button-group>
     </el-card>
 
@@ -130,7 +129,7 @@
 </template>
 
 <script>
-  import {QUESTION_TYPES, Question} from './bean/question'
+  import { QUESTION_TYPES, Question } from './bean/question'
   import Questionnaire from './bean/questionnaire'
 
   export default{
@@ -253,9 +252,6 @@
       },
       onQuestionDeleteClicked (questionIndex) {
         this.questionnaire.deleteQuestion(questionIndex)
-      },
-      onQuestionDuplicateClicked (questionIndex) {
-        this.questionnaire.duplicateQuestion(questionIndex)
       },
       // 保存问卷
       saveQuestionnaire: function () {

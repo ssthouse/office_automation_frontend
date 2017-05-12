@@ -61,7 +61,6 @@
         this.$store.commit(Mutations.OFFICIAL_DOC_ADD_TAB, new TabItem('公文详情', DispatchDetail.name, this.dispatchList[index]))
       },
       onClickDeal (index) {
-        // TODO
         this.$store.commit(Mutations.OFFICIAL_DOC_ADD_TAB, new TabItem('处理公文', DealDispatch.name, this.dispatchList[index]))
       },
       fetchDispatchList () {
