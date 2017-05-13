@@ -68,6 +68,7 @@
 
 <script>
   import Voting from './bean/voting'
+  import * as EventBus from '../../base/EventBus'
 
   const URL_POST_NEW_VOTING = 'http://127.0.0.1:8080/office_automation_backend/voting/new'
 
@@ -104,8 +105,9 @@
               this.$message('投票保存失败: ' + response.body.msg)
               return
             }
-            this.$message(response.body.msg)
+            EventBus.instance.$emit(EventBus.EVENT_VOTING_UPDATE)
             this.published = true
+            this.$message(response.body.msg)
           }, response => {
             this.$message('投票保持失败')
           })

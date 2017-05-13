@@ -22,3 +22,4 @@ export const EVENT_MAIN_UPDATE_USER_CONFIG = 'main/user_config/update'
 
 // tools panels update
 export const EVENT_QUESTIONNAIRE_UPDATE = 'tools/questionnaire/update'
+export const EVENT_VOTING_UPDATE = 'tools/voting/update'

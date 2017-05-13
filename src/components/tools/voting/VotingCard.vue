@@ -27,13 +27,12 @@
   import * as MUTATION_TYPES from '../../../store/mutation-types'
   import TabItem from '../../base/TabItem'
   import VotingFill from './VotingFill.vue'
+  import * as EventBus from '../../base/EventBus'
 
   export default{
     name: 'voting-card',
     data () {
-      return {
-        MUTATION_TYPES
-      }
+      return {}
     },
     props: [],
     methods: {
@@ -56,6 +55,9 @@
     },
     created: function () {
       this.refreshData()
+      EventBus.instance.$on(EventBus.EVENT_VOTING_UPDATE, () => {
+        this.refreshData()
+      })
     }
   }
 </script>

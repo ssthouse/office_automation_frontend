@@ -29,6 +29,8 @@
 </template>
 
 <script>
+  import * as EventBus from '../../base/EventBus'
+
   const URL_POST_NEW_VOTING = 'http://127.0.0.1:8080/office_automation_backend/voting/vote'
 
   export default{
@@ -61,6 +63,7 @@
               return
             }
             this.$message('投票提交成功')
+            EventBus.instance.$emit(EventBus.EVENT_VOTING_UPDATE)
             this.isPublished = true
           }, fail => {
             this.$message('投票提交失败')

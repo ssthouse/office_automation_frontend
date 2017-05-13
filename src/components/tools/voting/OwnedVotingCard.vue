@@ -33,6 +33,7 @@
   import TabItem from '../../base/TabItem'
   import Voting from './Voting.vue'
   import VotingReport from './VotingReport.vue'
+  import * as EventBus from '../../base/EventBus'
 
   export default{
     name: 'voting-admin-card',
@@ -65,6 +66,10 @@
     },
     created: function () {
       this.refreshData()
+      // 注册投票数据刷新事件
+      EventBus.instance.$on(EventBus.EVENT_VOTING_UPDATE, () => {
+        this.refreshData()
+      })
     }
   }
 </script>
