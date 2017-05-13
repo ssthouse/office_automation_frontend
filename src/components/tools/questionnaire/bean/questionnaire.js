@@ -140,6 +140,7 @@ class Questionnaire {
     questionnaire.title = ''
     questionnaire.deadline = ''
     questionnaire.questions = []
+    questionnaire.published = false
     return questionnaire
   }
 }

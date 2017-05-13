@@ -20,7 +20,14 @@
           <div style="clear: both; margin-top: 5px; margin-bottom: 5px;">
             <a class="card-link"
                @click="onClickVoting(voting)"
-               href="javascript:void(0);">{{voting.title}}</a>
+               href="javascript:void(0);">{{voting.title}}
+            </a>
+            <el-button @click="clickEditVoting(voting)"
+                       type="text"
+                       :disabled="voting.published"
+                       style="float: right">
+              编辑
+            </el-button>
           </div>
         </div>
       </div>
@@ -53,10 +60,14 @@
           })
       },
       onAdd () {
-        this.$store.commit(MUTATION_TYPES.TOOLS_ADD_TAB, new TabItem('新建投票', Voting.name, ''))
+        this.$store.commit(MUTATION_TYPES.TOOLS_ADD_TAB, new TabItem('新建投票', Voting.name, null))
       },
       onClickVoting (voting) {
         this.$store.commit(MUTATION_TYPES.TOOLS_ADD_TAB, new TabItem(voting.title + '-统计数据', VotingReport.name, voting))
+      },
+      clickEditVoting (voting) {
+        let tabItem = new TabItem(voting.title, Voting.name, voting)
+        this.$store.commit(MUTATION_TYPES.TOOLS_ADD_TAB, tabItem)
       }
     },
     computed: {

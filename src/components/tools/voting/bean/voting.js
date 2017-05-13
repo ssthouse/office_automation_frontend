@@ -11,17 +11,24 @@ class VoteOption {
     }
     return true
   }
+
+  static parseVoteOptionData (data) {
+    let voteOption = new VoteOption()
+    Object.assign(voteOption, data)
+    return voteOption
+  }
 }
 
 class Voting {
 
   constructor () {
     this.createrId = ''
-    this.votingId = 1
+    this.votingId = 0
     this.title = ''
     this.deadline = ''
     this.description = ''
     this.voteOptions = []
+    this.published = false
   }
 
   isValid () {
@@ -60,6 +67,20 @@ class Voting {
 
   static getEmptyInstance () {
     return new Voting()
+  }
+
+  /**
+   * 从json数据中得到 带有全部方法属性的voting对象
+   * @param votingData
+   */
+  static parseVotingData (votingData) {
+    let voting = new Voting()
+    Object.assign(voting, votingData)
+    // 填充votingOption的方法属性
+    for (let index in voting.voteOptions) {
+      voting.voteOptions[index] = VoteOption.parseVoteOptionData(voting.voteOptions[index])
+    }
+    return voting
   }
 }
 

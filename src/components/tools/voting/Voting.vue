@@ -23,27 +23,30 @@
       </div>
     </el-card>
 
-    <h3>投票选项:</h3>
+    <el-row>
+      <el-col :span="12">
+        <h3 style="float: right;">投票选项:</h3>
+      </el-col>
+      <el-col :span="12">
+        <el-button @click="addOption()" type="primary" style="margin-bottom: 20px; margin-top: 20px;">增加选项</el-button>
+      </el-col>
+    </el-row>
 
     <!--所有选项-->
     <el-card class="box-card"
              v-for="voteOption in voting.voteOptions">
-      <div style="margin-left: 20px; margin-top: -10px;">
-        <h4 style="text-align: left">
-          选项{{voting.voteOptions.indexOf(voteOption) + 1}}:
-        </h4>
-      </div>
-      <div style="margin-top: -30px; margin-bottom: -20px;">
-        <el-input v-model="voteOption.title"></el-input>
-      </div>
-      <div style="margin-top: 20px">
-        <el-button type="primary" style="margin-right: 40px; float: right"
-                   @click="removeOption(voteOption)">删除
-        </el-button>
-      </div>
+      <el-row style="margin-top: -10px; margin-bottom: -20px;">
+        <el-col :span="20">
+          <el-input v-model="voteOption.title"
+                    style="margin-right: 100px; clear: both; float: left;"></el-input>
+        </el-col>
+        <el-col :span="4">
+          <el-button type="primary" style="margin-right: 40px; float: right"
+                     @click="removeOption(voteOption)">删除
+          </el-button>
+        </el-col>
+      </el-row>
     </el-card>
-
-    <el-button @click="addOption()" type="primary" style="margin-bottom: 20px; margin-top: 20px;">增加选项</el-button>
 
     <hr/>
 
@@ -57,6 +60,11 @@
         :picker-options="pickerOptions0">
       </el-date-picker>
 
+      <el-button type="primary"
+                 style="margin-left: 30px"
+                 :disabled="published"
+                 @click="saveVoting()">保存投票
+      </el-button>
       <el-button @click="publishVoting()"
                  :disabled="published"
                  type="primary"
@@ -91,15 +99,34 @@
       addOption () {
         this.voting.addEmptyOption()
       },
-      publishVoting () {
-        // 填充创建者
+      saveVoting () {
         this.voting.createrId = this.$store.state.mainModule.user.username
         if (!this.voting.isValid()) {
           this.$message('投票数据不完整')
           return
         }
-        let requestBody = JSON.stringify(this.voting)
-        this.$http.post(URL_POST_NEW_VOTING, requestBody)
+        this.$http.post(URL_POST_NEW_VOTING, JSON.stringify(this.voting))
+          .then(response => {
+            if (response.body.ok !== true) {
+              this.$message('投票保存失败: ' + response.body.msg)
+              return
+            }
+            EventBus.instance.$emit(EventBus.EVENT_VOTING_UPDATE)
+            this.published = true
+            this.$message(response.body.msg)
+          }, response => {
+            this.$message('投票保持失败')
+          })
+      },
+      publishVoting () {
+        // 填充创建者
+        this.voting.createrId = this.$store.state.mainModule.user.username
+        this.voting.published = true
+        if (!this.voting.isValid()) {
+          this.$message('投票数据不完整')
+          return
+        }
+        this.$http.post(URL_POST_NEW_VOTING, JSON.stringify(this.voting))
           .then(response => {
             if (response.body.ok !== true) {
               this.$message('投票保存失败: ' + response.body.msg)
@@ -120,6 +147,10 @@
     },
     computed: {},
     created: function () {
+      if (this.data === null || this.data === undefined) {
+        return
+      }
+      this.voting = Voting.parseVotingData(this.data)
     }
   }
 </script>
