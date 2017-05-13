@@ -28,6 +28,10 @@
         <h3 style="float: right;">投票选项:</h3>
       </el-col>
       <el-col :span="12">
+        <el-checkbox style="margin-right: 40px;"
+                     v-model="voting.multipleChoice">
+          <span style="font-size: larger;">是否多选</span>
+        </el-checkbox>
         <el-button @click="addOption()" type="primary" style="margin-bottom: 20px; margin-top: 20px;">增加选项</el-button>
       </el-col>
     </el-row>
