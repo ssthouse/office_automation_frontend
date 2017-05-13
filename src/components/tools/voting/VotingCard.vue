@@ -11,13 +11,13 @@
 
     <div class="card-body">
       <div v-for="voting in openVotingList">
-        <div style="clear: both; margin-top: 5px; margin-bottom: 5px;">
+        <el-row style=" margin-top: 5px; margin-bottom: 10px;">
           <a @click="onClickVoting(voting)"
              class="card-link"
              href="javascript:void(0);">
             {{voting.title}}
           </a>
-        </div>
+        </el-row>
       </div>
     </div>
   </el-card>

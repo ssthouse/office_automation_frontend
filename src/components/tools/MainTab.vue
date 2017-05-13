@@ -36,8 +36,8 @@
     name: 'tools-main-tab',
     data () {
       return {
-        cardList: [QuestionnaireCard.name, VotingCard.name, MeetingCard.name,
-          OwnedQuestionnaireCard.name, OwnedVotingCard.name, OwnedMettingCard.name],
+        cardList: [QuestionnaireCard.name, OwnedQuestionnaireCard.name,
+          VotingCard.name, OwnedVotingCard.name],
         componentDic: Cons.ComponentMap,
         Cons: Cons
       }
