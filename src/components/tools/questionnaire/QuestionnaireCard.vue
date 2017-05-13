@@ -30,6 +30,7 @@
   import * as types from '../../../store/mutation-types'
   import QuestionnaireFill from './QuestionnaireFill.vue'
   import TabItem from '../../base/TabItem'
+  import * as EventBus from '../../base/EventBus'
 
   export default{
     name: 'questionnaire-card',
@@ -52,6 +53,16 @@
       // 打开填写问卷的tab
       clickQuestionnaire: function (questionnaire) {
         this.$store.commit(types.TOOLS_ADD_TAB, new TabItem(questionnaire.title, QuestionnaireFill.name, questionnaire))
+      },
+      fetchQuestionnaire () {
+        // 加载问卷数据
+        let component = this
+        this.$store.dispatch(types.ACTION_FETCH_QUESTIONNAIRE)
+          .then(function (success) {
+            // component.$message(success)
+          }, function (fail) {
+            component.$message(fail)
+          })
       }
     },
     computed: {
@@ -60,14 +71,9 @@
       }
     },
     created: function () {
-      // 加载问卷数据
-      let component = this
-      this.$store.dispatch(types.ACTION_FETCH_QUESTIONNAIRE)
-        .then(function (success) {
-          // component.$message(success)
-        }, function (fail) {
-          component.$message(fail)
-        })
+      EventBus.instance.$on(EventBus.EVENT_QUESTIONNAIRE_UPDATE, () => {
+        this.fetchQuestionnaire()
+      })
     },
     props: []
   }

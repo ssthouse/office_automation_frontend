@@ -38,31 +38,30 @@
   import QuestionnaireReport from './QuestionnaireReport.vue'
   import QuestionnaireBean from './bean/questionnaire'
   import TabItem from '../../base/TabItem'
-  import * as types from '../../../store/mutation-types'
+  import * as MUTATIONS from '../../../store/mutation-types'
+  import * as EventBus from '../../base/EventBus'
 
   export default{
     name: 'questionnaire-admin-card',
     data () {
-      return {
-        types
-      }
+      return {}
     },
     props: [],
     methods: {
       onAdd: function () {
         let questionnaire = QuestionnaireBean.getEmptyQuestionnaire()
-        this.$store.commit(types.TOOLS_ADD_TAB, new TabItem('新建调查问卷', 'questionnaire', questionnaire))
+        this.$store.commit(MUTATIONS.TOOLS_ADD_TAB, new TabItem('新建调查问卷', 'questionnaire', questionnaire))
       },
       clickQuestionnaire (questionnaire) {
         let tabItem = new TabItem(questionnaire.title, QuestionnaireReport.name, questionnaire)
-        this.$store.commit(types.TOOLS_ADD_TAB, tabItem)
+        this.$store.commit(MUTATIONS.TOOLS_ADD_TAB, tabItem)
       },
       clickEditQuestionnaire (questionnaire) {
         let tabItem = new TabItem(questionnaire.title, Questionnaire.name, questionnaire)
-        this.$store.commit(types.TOOLS_ADD_TAB, tabItem)
+        this.$store.commit(MUTATIONS.TOOLS_ADD_TAB, tabItem)
       },
       refreshData () {
-        this.$store.dispatch(types.ACTION_FETCH_QUESTIONNAIRE)
+        this.$store.dispatch(MUTATIONS.ACTION_FETCH_QUESTIONNAIRE)
           .then(success => {
             this.$message(success)
           }, error => {
@@ -77,7 +76,11 @@
     },
     created: function () {
       // 请求问卷数据 => 但是不提示用户
-      this.$store.dispatch(types.ACTION_FETCH_QUESTIONNAIRE)
+      this.$store.dispatch(MUTATIONS.ACTION_FETCH_QUESTIONNAIRE)
+      // 注册问卷数据变化event
+      EventBus.instance.$on(EventBus.EVENT_QUESTIONNAIRE_UPDATE, () => {
+        this.$store.dispatch(MUTATIONS.ACTION_FETCH_QUESTIONNAIRE)
+      })
     }
   }
 </script>

@@ -61,10 +61,12 @@
 
       <el-button type="primary"
                  style="margin-left: 30px"
+                 :disabled="finished"
                  @click="saveQuestionnaire">保存问卷
       </el-button>
       <el-button type="primary"
                  style="margin-left: 30px"
+                 :disabled="finished"
                  @click="publishQuestionnaire">发布问卷
       </el-button>
     </div>
@@ -131,6 +133,7 @@
 <script>
   import { QUESTION_TYPES, Question } from './bean/question'
   import Questionnaire from './bean/questionnaire'
+  import * as EventBus from '../../base/EventBus'
 
   export default{
     name: 'questionnaire',
@@ -162,7 +165,11 @@
          */
         showAddRadioDialog: false,
         showAddCheckboxDialog: false,
-        showAddTextAreaDialog: false
+        showAddTextAreaDialog: false,
+        /**
+         * 时候结束操作
+         */
+        finished: false
       }
     },
     /**
@@ -260,8 +267,10 @@
           this.$message.warning('问卷内容不完整')
           return
         }
+        this.finished = true
         this.questionnaire.saveToServer().then(function (success) {
           component.$message(success)
+          EventBus.instance.$emit(EventBus.EVENT_QUESTIONNAIRE_UPDATE)
         }, function (error) {
           component.$message(error)
         })
@@ -272,10 +281,12 @@
           this.$message.warning('问卷内容不完整')
           return
         }
+        this.finished = true
         this.questionnaire.published = true
         this.questionnaire.publishQuestionnaire()
           .then(success => {
             this.$message(success)
+            EventBus.instance.$emit(EventBus.EVENT_QUESTIONNAIRE_UPDATE)
           }, fail => {
             this.$message(fail)
           })

@@ -19,3 +19,6 @@ export const EVENT_OFFICIAL_DOC_NEW_TAB = 'official_doc/new_tab'
 export const EVENT_TOOLS_NEW_TAB = 'tools/new_tab'
 
 export const EVENT_MAIN_UPDATE_USER_CONFIG = 'main/user_config/update'
+
+// tools panels update
+export const EVENT_QUESTIONNAIRE_UPDATE = 'tools/questionnaire/update'
