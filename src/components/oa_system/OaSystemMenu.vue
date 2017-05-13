@@ -26,6 +26,7 @@
 
 <script>
   import { PATHS } from '../../router/index'
+  import * as EventBus from '../base/EventBus'
 
   export default{
     name: '',
@@ -34,7 +35,12 @@
         PATHS
       }
     },
-    props: []
+    props: [],
+    created: function () {
+      EventBus.instance.$on(EventBus.EVENT_TO_TOOLS, () => {
+        this.$router.push({path: PATHS.OA_TOOLS_PATH})
+      })
+    }
   }
 </script>
 

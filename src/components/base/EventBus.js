@@ -1,6 +1,9 @@
 import Vue from 'vue'
 export const instance = new Vue()
 
+// homepage event
+export const EVENT_TO_TOOLS = 'homepage/to_tools'
+
 // workflow module event
 export const EVENT_WORKFLOW_UPDATE_ALL = 'workflow/update'
 export const EVENT_WORKFLOW_UPDATE_ASK_LEAVE = 'workflow/ask_leave/update'

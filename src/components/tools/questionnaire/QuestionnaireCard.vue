@@ -31,6 +31,7 @@
   import QuestionnaireFill from './QuestionnaireFill.vue'
   import TabItem from '../../base/TabItem'
   import * as EventBus from '../../base/EventBus'
+  import Utils from '../../base/Utils'
 
   export default{
     name: 'questionnaire-card',
@@ -52,6 +53,7 @@
       },
       // 打开填写问卷的tab
       clickQuestionnaire: function (questionnaire) {
+        Utils.jumpToTools()
         this.$store.commit(types.TOOLS_ADD_TAB, new TabItem(questionnaire.title, QuestionnaireFill.name, questionnaire))
       },
       fetchQuestionnaire () {

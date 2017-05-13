@@ -1,5 +1,6 @@
 import Dispatch from '../official_doc/bean/dispatch'
 import Incoming from '../official_doc/bean/incoming'
+import * as EventBus from './EventBus'
 
 class Utils {
 
@@ -7,6 +8,10 @@ class Utils {
   static STATE_UNAPPROVED = 'unapproved'
   static STATE_APPROVED = 'approved'
   static STATE_DECLINE = 'decline'
+
+  static jumpToTools () {
+    EventBus.instance.$emit(EventBus.EVENT_TO_TOOLS)
+  }
 
   static getFormatDateStr (date) {
     if (date === undefined || date === null) {

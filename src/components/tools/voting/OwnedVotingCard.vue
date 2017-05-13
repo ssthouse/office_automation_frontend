@@ -41,6 +41,7 @@
   import Voting from './Voting.vue'
   import VotingReport from './VotingReport.vue'
   import * as EventBus from '../../base/EventBus'
+  import Utils from '../../base/Utils'
 
   export default{
     name: 'voting-admin-card',
@@ -63,9 +64,11 @@
         this.$store.commit(MUTATION_TYPES.TOOLS_ADD_TAB, new TabItem('新建投票', Voting.name, null))
       },
       onClickVoting (voting) {
+        Utils.jumpToTools()
         this.$store.commit(MUTATION_TYPES.TOOLS_ADD_TAB, new TabItem(voting.title + '-统计数据', VotingReport.name, voting))
       },
       clickEditVoting (voting) {
+        Utils.jumpToTools()
         let tabItem = new TabItem(voting.title, Voting.name, voting)
         this.$store.commit(MUTATION_TYPES.TOOLS_ADD_TAB, tabItem)
       }

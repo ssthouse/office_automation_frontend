@@ -34,12 +34,13 @@
 </template>
 
 <script>
-//  import Questionnaire from './Questionnaire.vue'
+  //  import Questionnaire from './Questionnaire.vue'
   import QuestionnaireReport from './QuestionnaireReport.vue'
   import QuestionnaireBean from './bean/questionnaire'
   import TabItem from '../../base/TabItem'
   import * as MUTATIONS from '../../../store/mutation-types'
   import * as EventBus from '../../base/EventBus'
+  import Utils from '../../base/Utils'
 
   export default{
     name: 'questionnaire-admin-card',
@@ -53,10 +54,12 @@
         this.$store.commit(MUTATIONS.TOOLS_ADD_TAB, new TabItem('新建调查问卷', 'questionnaire', questionnaire))
       },
       clickQuestionnaire (questionnaire) {
+        Utils.jumpToTools()
         let tabItem = new TabItem(questionnaire.title, QuestionnaireReport.name, questionnaire)
         this.$store.commit(MUTATIONS.TOOLS_ADD_TAB, tabItem)
       },
       clickEditQuestionnaire (questionnaire) {
+        Utils.jumpToTools()
         let tabItem = new TabItem(questionnaire.title, 'questionnaire', questionnaire)
         this.$store.commit(MUTATIONS.TOOLS_ADD_TAB, tabItem)
       },

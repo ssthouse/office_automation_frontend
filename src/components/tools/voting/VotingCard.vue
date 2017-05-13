@@ -28,6 +28,7 @@
   import TabItem from '../../base/TabItem'
   import VotingFill from './VotingFill.vue'
   import * as EventBus from '../../base/EventBus'
+  import Utils from '../../base/Utils'
 
   export default{
     name: 'voting-card',
@@ -45,6 +46,7 @@
           })
       },
       onClickVoting (voting) {
+        Utils.jumpToTools()
         this.$store.commit(MUTATION_TYPES.TOOLS_ADD_TAB, new TabItem(voting.title, VotingFill.name, voting))
       }
     },
