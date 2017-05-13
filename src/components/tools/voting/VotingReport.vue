@@ -18,13 +18,18 @@
       </div>
 
       <!--投票结果的图表-->
-      <h4>柱状分布</h4>
-      <canvas ref="barChart"
-              style="height: 300px;"></canvas>
-
-      <h4 style=" margin-top: 60px">饼状分布</h4>
-      <canvas ref="pieChart"
-              style="height: 300px;"></canvas>
+      <el-row style="margin-top: -10px;">
+        <el-col :span="12">
+          <h4>柱状分布</h4>
+          <canvas ref="barChart"
+                  style="height: 300px;"></canvas>
+        </el-col>
+        <el-col :span="12">
+          <h4>饼状分布</h4>
+          <canvas ref="pieChart"
+                  style="height: 300px;"></canvas>
+        </el-col>
+      </el-row>
     </el-card>
   </div>
 </template>
