@@ -34,7 +34,7 @@
 </template>
 
 <script>
-  import Questionnaire from './Questionnaire.vue'
+//  import Questionnaire from './Questionnaire.vue'
   import QuestionnaireReport from './QuestionnaireReport.vue'
   import QuestionnaireBean from './bean/questionnaire'
   import TabItem from '../../base/TabItem'
@@ -57,7 +57,7 @@
         this.$store.commit(MUTATIONS.TOOLS_ADD_TAB, tabItem)
       },
       clickEditQuestionnaire (questionnaire) {
-        let tabItem = new TabItem(questionnaire.title, Questionnaire.name, questionnaire)
+        let tabItem = new TabItem(questionnaire.title, 'questionnaire', questionnaire)
         this.$store.commit(MUTATIONS.TOOLS_ADD_TAB, tabItem)
       },
       refreshData () {
