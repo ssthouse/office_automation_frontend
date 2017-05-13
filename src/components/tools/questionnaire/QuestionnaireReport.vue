@@ -15,44 +15,40 @@
       </div>
     </el-card>
 
-    <el-card class="box-card">
-      <h4 style="margin-bottom: -10px; margin-top: 0px;">问卷统计数据</h4>
-    </el-card>
-
     <!--每道题详细数据-->
-    <el-row style="margin-left: 20px; margin-right: 20px;">
+    <el-row style="margin-left: 30px; margin-right: 30px;">
       <el-col :span="8" v-for="question in questionnaire.questions">
         <!--<el-card class="box-card">-->
-          <el-col>
-            <el-row>
-              <!--当前题目的标题-->
-              <h5 style="margin-left: 10px; float: left; margin-top: -10px;">
-                题目{{questionnaire.questions.indexOf(question) + 1}}:
-                {{questionnaire.questions[questionnaire.questions.indexOf(question)].title}}</h5>
-            </el-row>
-            <el-row style="margin-top: -20px;">
-              <!--如果是选择题, 画一幅扇形图-->
-              <div v-if="question.type === QUESTION_TYPES.RADIO || question.type === QUESTION_TYPES.CHECK_BOX"
-                   style="margin-top: 20px">
-                <canvas :ref="questionnaire.questions.indexOf(question).toString() + 'chart'"
-                        :id="questionnaire.questions.indexOf(question).toString() + 'chart'"
-                        style="width: 500px;"></canvas>
-              </div>
+        <el-col>
+          <el-row>
+            <!--当前题目的标题-->
+            <h5 style="margin-left: 10px; float: left; margin-top: -10px;">
+              题目{{questionnaire.questions.indexOf(question) + 1}}:
+              {{questionnaire.questions[questionnaire.questions.indexOf(question)].title}}</h5>
+          </el-row>
+          <el-row style="margin-top: -20px;">
+            <!--如果是选择题, 画一幅扇形图-->
+            <div v-if="question.type === QUESTION_TYPES.RADIO || question.type === QUESTION_TYPES.CHECK_BOX"
+                 style="margin-top: 20px">
+              <canvas :ref="questionnaire.questions.indexOf(question).toString() + 'chart'"
+                      :id="questionnaire.questions.indexOf(question).toString() + 'chart'"
+                      style="width: 500px;"></canvas>
+            </div>
 
-              <!--如果是文字题, 给一个下拉面板-->
-              <el-collapse v-model="nameModel[questionnaire.questions.indexOf(question)]"
-                           v-if="question.type === QUESTION_TYPES.TEXT_AREA"
-                           style="margin-top: 20px; text-align: left">
-                <el-collapse-item title="所有回答:"
-                                  name="questionnaire.questions.indexOf(question)"
-                                  style="text-align: left">
-                  <div v-for="answer in answerBeanList[questionnaire.questions.indexOf(question)].answers">
-                    {{answer}}
-                  </div>
-                </el-collapse-item>
-              </el-collapse>
-            </el-row>
-          </el-col>
+            <!--如果是文字题, 给一个下拉面板-->
+            <el-collapse v-model="nameModel[questionnaire.questions.indexOf(question)]"
+                         v-if="question.type === QUESTION_TYPES.TEXT_AREA"
+                         style="margin-top: 20px; text-align: left">
+              <el-collapse-item title="所有回答:"
+                                name="questionnaire.questions.indexOf(question)"
+                                style="text-align: left">
+                <div v-for="answer in answerBeanList[questionnaire.questions.indexOf(question)].answers">
+                  {{answer}}
+                </div>
+              </el-collapse-item>
+            </el-collapse>
+          </el-row>
+        </el-col>
         <!--</el-card>-->
       </el-col>
     </el-row>
