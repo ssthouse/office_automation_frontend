@@ -9,8 +9,9 @@
                  mode="horizontal"
                  @select="changeMenuItem">
           <el-menu-item :index=paths.OA_SYSTEM_INDEX style="font-size: 20px">
-            <img src="../../assets/logo.png"
-                 style="width: 30px; height: 30px;"/>
+            <!--<img src="../../assets/logo.png"-->
+            <!--style="width: 30px; height: 30px;"/>-->
+            <md-icon class="menu_icon" style="margin-top: -6px;">home</md-icon>
             <span>OA管理系统</span>
           </el-menu-item>
         </el-menu>
