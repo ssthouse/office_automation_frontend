@@ -3,6 +3,7 @@ export const instance = new Vue()
 
 // homepage event
 export const EVENT_TO_TOOLS = 'homepage/to_tools'
+export const EVENT_UPDATE_NEWS = 'homepage/news'
 
 // workflow module event
 export const EVENT_WORKFLOW_UPDATE_ALL = 'workflow/update'
