@@ -31,7 +31,11 @@
                        width="280">
         <template scope="scope">
           <el-button @click="onClickDetail(scope.$index)" size="small">查看</el-button>
-          <el-button @click="onClickDeal(scope.$index)" size="small">办理</el-button>
+          <el-button @click="onClickDeal(scope.$index)"
+                     size="small"
+                     :disabled="dispatchList[scope.$index].state === 'sign'">
+            办理
+          </el-button>
         </template>
       </el-table-column>
     </el-table>
