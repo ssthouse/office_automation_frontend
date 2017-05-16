@@ -17,15 +17,15 @@
     </md-button>
 
     <!--dialog to select new workflow type-->
-    <md-dialog md-open-from="#btnAdd" md-close-from="#btnAdd" ref="dialogAdd">
-      <md-dialog-title>发起公文</md-dialog-title>
-      <md-dialog-content>
-        <md-list>
-          <md-button @click.native="onClickDispatch()">发文单</md-button>
-          <md-button @click.native="onClickInComing()">收文单</md-button>
-        </md-list>
-      </md-dialog-content>
-    </md-dialog>
+    <!--<md-dialog md-open-from="#btnAdd" md-close-from="#btnAdd" ref="dialogAdd">-->
+      <!--<md-dialog-title>发起公文</md-dialog-title>-->
+      <!--<md-dialog-content>-->
+        <!--<md-list>-->
+          <!--<md-button @click.native="onClickDispatch()">发文单</md-button>-->
+          <!--<md-button @click.native="onClickInComing()">收文单</md-button>-->
+        <!--</md-list>-->
+      <!--</md-dialog-content>-->
+    <!--</md-dialog>-->
   </div>
 </template>
 
@@ -72,14 +72,13 @@
         this.$store.commit(MUTATIONS.OFFICIAL_DOC_REMOVE_TAB, tabIs)
       },
       onClickOpenDialog () {
-        this.$refs['dialogAdd'].open()
+//        this.$refs['dialogAdd'].open()
       },
       onClickDispatch () {
-        this.$refs['dialogAdd'].close()
         this.$store.commit(MUTATIONS.OFFICIAL_DOC_ADD_TAB, new TabItem('发起发文单', DispatchDoc.name, null))
       },
       onClickInComing () {
-        this.$refs['dialogAdd'].close()
+//        this.$refs['dialogAdd'].close()
         this.$store.commit(MUTATIONS.OFFICIAL_DOC_ADD_TAB, new TabItem('发起收文单', IncomingDoc.name, null))
       }
     },
@@ -90,7 +89,9 @@
       })
       // the event of try to click the add button
       EventBus.instance.$on(EventBus.EVENT_OFFICIAL_DOC_CLICK_NEW, () => {
-        this.onClickOpenDialog()
+        // 去除dialog选择公文类型 => 只保留dispatch类型公文
+        // this.onClickOpenDialog()
+        this.onClickDispatch()
       })
     }
   }

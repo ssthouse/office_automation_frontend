@@ -112,6 +112,21 @@ class Utils {
     }
   }
 
+  static getOfficialDocStateName (state) {
+    switch (state) {
+      case Dispatch.STATE_BEGIN:
+        return '待核稿'
+      case Dispatch.STATE_CHECK:
+        return '待会签'
+      case Dispatch.STATE_COUNTERSIGN:
+        return '待签收'
+      case Dispatch.STATE_SIGN:
+        return '已完成'
+      case Dispatch.STATE_FINISH:
+        return '已完成'
+    }
+  }
+
   static getOfficialDocStateColor (stateName) {
     switch (stateName) {
       // 开始状态

@@ -23,7 +23,7 @@
       <el-table-column label="状态">
         <template scope="scope">
           <el-tag :type="Utils.getOfficialDocStateColor(dispatchList[scope.$index].state)">
-            {{dispatchList[scope.$index].state}}
+            {{Utils.getOfficialDocStateName(dispatchList[scope.$index].state)}}
           </el-tag>
         </template>
       </el-table-column>
