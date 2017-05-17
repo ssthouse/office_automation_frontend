@@ -15,6 +15,8 @@
   // 会议模块
   import Meeting from './tools/meeting/Metting.vue'
   import MeetingDetail from './tools/meeting/MeetingDetail.vue'
+  // 部门， 用户管理 dialog
+  import ChooseUser from '../components/base/common/ChooseUser.vue'
 
   Vue.component(Questionnaire.name, Questionnaire)
   Vue.component(QuestionnaireFill.name, QuestionnaireFill)
@@ -24,6 +26,8 @@
   Vue.component(VotingReport.name, VotingReport)
   Vue.component(Meeting.name, Meeting)
   Vue.component(MeetingDetail.name, MeetingDetail)
+  // 部门， 用户管理 dialog
+  Vue.component(ChooseUser.name, ChooseUser)
 
   export default {
     name: 'app',

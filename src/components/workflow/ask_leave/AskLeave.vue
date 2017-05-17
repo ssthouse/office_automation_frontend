@@ -64,6 +64,7 @@
         <el-form-item label="审批人">
           <div style="margin-left: 20px;">
             <el-input v-model="askLeave.approverUsername"
+                      @focus="onClickChooseUser()"
                       placeholder="请输入审批人id"
                       style="float: left;"></el-input>
             <el-button style="float: right; margin-top: 5px;">查找审批人</el-button>
@@ -84,6 +85,10 @@
       </el-form>
     </el-card>
 
+    <!--选择用户dialog-->
+    <choose-user-dialog v-bind:showDialog="showDialog"
+                        @cancel="showDialog = false"
+                        @ensure="onEnsureChooseUser"></choose-user-dialog>
   </div>
 </template>
 
@@ -129,11 +134,20 @@
             return time.getTime() < Date.now() - 8.64e7
           }
         },
+        showDialog: false,
         isFinished: false
       }
     },
     props: ['data'],
     methods: {
+      onClickChooseUser () {
+        console.log('on click choose user')
+        this.showDialog = true
+      },
+      onEnsureChooseUser (userList) {
+        console.log(userList)
+        this.showDialog = false
+      },
       fillInOutingData () {
         // 格式化时间字符串
         this.askLeave.beginDate = Utils.getFormatDateStr(this.beginDate)
