@@ -1,6 +1,7 @@
 <template>
   <el-dialog title="选择用户"
-             v-model="showDialog">
+             v-model="showDialog"
+             :show-close="false">
     <span slot="footer" class="dialog-footer">
       <el-button @click="onClickCancel()">取 消</el-button>
       <el-button type="primary" @click="onClickEnsure()">确 定</el-button>
@@ -28,6 +29,7 @@
     },
     computed: {},
     created: function () {
+      // 获取department数据
 
     }
   }

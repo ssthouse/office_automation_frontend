@@ -141,7 +141,6 @@
     props: ['data'],
     methods: {
       onClickChooseUser () {
-        console.log('on click choose user')
         this.showDialog = true
       },
       onEnsureChooseUser (userList) {

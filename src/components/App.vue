@@ -17,6 +17,7 @@
   import MeetingDetail from './tools/meeting/MeetingDetail.vue'
   // 部门， 用户管理 dialog
   import ChooseUser from '../components/base/common/ChooseUser.vue'
+  import ChooseDepartment from '../components/base/common/ChooseDepartment.vue'
 
   Vue.component(Questionnaire.name, Questionnaire)
   Vue.component(QuestionnaireFill.name, QuestionnaireFill)
@@ -28,6 +29,7 @@
   Vue.component(MeetingDetail.name, MeetingDetail)
   // 部门， 用户管理 dialog
   Vue.component(ChooseUser.name, ChooseUser)
+  Vue.component(ChooseDepartment.name, ChooseDepartment)
 
   export default {
     name: 'app',

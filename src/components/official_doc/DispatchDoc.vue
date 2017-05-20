@@ -25,6 +25,7 @@
                       class="form-item">
           <div style="margin-right: 20px;">
             <el-input class="form-item-content"
+                      @focus="onClickTargetOrganization()"
                       v-model="dispatch.targetOrganization"></el-input>
           </div>
         </el-form-item>
@@ -33,6 +34,7 @@
                       class="form-item">
           <div style="margin-right: 20px;">
             <el-input class="form-item-content"
+                      @focus="onClickCopyToOrganization()"
                       v-model="dispatch.copyToOrganization"></el-input>
           </div>
         </el-form-item>
@@ -141,6 +143,17 @@
       </el-form>
     </el-card>
 
+    <!--主送单位dialog-->
+    <choose-department-dialog :showDialog="showTargetOrganizationDialog"
+                              @cancel="showTargetOrganizationDialog = false"
+                              @ensure="onEnsureTargetOrganization">
+    </choose-department-dialog>
+
+    <!--抄送单位dialog-->
+    <choose-department-dialog :showDialog="showCopyToOrganizationDialog"
+                              @cancel="showCopyToOrganizationDialog = false"
+                              @ensure="onEnsureCopyToOrganization">
+    </choose-department-dialog>
   </div>
 </template>
 
@@ -162,11 +175,37 @@
           disabledDate (time) {
             return time.getTime() < Date.now() - 8.64e7
           }
-        }
+        },
+        showTargetOrganizationDialog: false,
+        showCopyToOrganizationDialog: false
       }
     },
     props: ['data'],
     methods: {
+      onEnsureTargetOrganization (targetDepartmentList) {
+        this.showTargetOrganizationDialog = false
+        // 刷新数据
+        let targetOrganization = []
+        for (let department of targetDepartmentList) {
+          targetOrganization.push(department.name)
+        }
+        this.dispatch.targetOrganization = targetOrganization.join(',')
+      },
+      onEnsureCopyToOrganization (copyToDepartmentList) {
+        this.showCopyToOrganizationDialog = false
+        // 刷新数据
+        let copyToOrganization = []
+        for (let department of copyToDepartmentList) {
+          copyToOrganization.push(department.name)
+        }
+        this.dispatch.copyToOrganization = copyToOrganization.join(',')
+      },
+      onClickTargetOrganization () {
+        this.showTargetOrganizationDialog = true
+      },
+      onClickCopyToOrganization () {
+        this.showCopyToOrganizationDialog = true
+      },
       onClickSubmit () {
         this.dispatch.deadline = this.deadline.getTime()
         console.log(JSON.stringify(this.dispatch))
