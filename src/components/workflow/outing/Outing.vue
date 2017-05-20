@@ -72,6 +72,7 @@
         <el-form-item label="审批人">
           <div style="margin-left: 20px;">
             <el-input v-model="outing.approverUsername"
+                      @focus="onClickChooseUser()"
                       placeholder="请输入审批人id"
                       style="float: left;"></el-input>
             <el-button style="float: right; margin-top: 5px;">查找审批人</el-button>
@@ -91,6 +92,11 @@
         </div>
       </el-form>
     </el-card>
+
+    <!--选择用户dialog-->
+    <choose-user-dialog v-bind:showDialog="showDialog"
+                        @cancel="showDialog = false"
+                        @ensure="onEnsureChooseUser"></choose-user-dialog>
   </div>
 </template>
 
@@ -113,13 +119,21 @@
             return time.getTime() < Date.now() - 8.64e7
           }
         },
-        isFinished: false,
         beginDate: '',
-        endDate: ''
+        endDate: '',
+        isFinished: false,
+        showDialog: false
       }
     },
     props: ['data'],
     methods: {
+      onClickChooseUser () {
+        this.showDialog = true
+      },
+      onEnsureChooseUser (userList) {
+        this.outing.approverUsername = userList
+        this.showDialog = false
+      },
       fillInOutingData () {
         // 格式化时间字符串
         this.outing.beginDate = Utils.getFormatDateStr(this.beginDate)
