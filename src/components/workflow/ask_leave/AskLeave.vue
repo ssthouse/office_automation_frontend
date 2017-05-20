@@ -144,7 +144,7 @@
         this.showDialog = true
       },
       onEnsureChooseUser (userList) {
-        console.log(userList)
+        this.askLeave.approverUsername = userList
         this.showDialog = false
       },
       fillInOutingData () {
