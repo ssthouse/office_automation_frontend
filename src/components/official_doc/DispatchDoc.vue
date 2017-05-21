@@ -53,14 +53,6 @@
                       v-model="dispatch.copyToOrganization"></el-input>
           </div>
         </el-form-item>
-        <!--content-->
-        <el-form-item label="正文:"
-                      class="form-item">
-          <div style="margin-right: 20px;">
-            <el-input class="form-item-content"
-                      v-model="dispatch.content"></el-input>
-          </div>
-        </el-form-item>
         <!--owner-->
         <el-form-item label="拟稿人:"
                       class="form-item">
@@ -70,13 +62,37 @@
                       v-model="dispatch.owner"></el-input>
           </div>
         </el-form-item>
+        <!--content-->
+        <el-form-item label="正文:"
+                      class="form-item">
+          <div style="margin-right: 20px;">
+            <el-input class="form-item-content"
+                      style="float: left; width: 60%"
+                      v-model="dispatch.content"></el-input>
+
+            <el-input class="form-item-content"
+                      style="width: 30%; float: right;"
+                      placeholder="下一步执行人"
+                      @focus="onClickChooseUser()"
+                      v-model="dispatch.executors"></el-input>
+          </div>
+        </el-form-item>
         <!--check-->
         <el-form-item label="核稿:"
                       class="form-item">
           <div style="margin-right: 20px;">
             <el-input class="form-item-content"
                       :disabled="checkDisabled"
+                      style="float: left; width: 60%"
                       v-model="dispatch.checkComment"></el-input>
+
+            <el-input class="form-item-content"
+                      style="width: 30%; float: right;"
+                      :disabled="checkDisabled"
+                      v-if="!checkDisabled"
+                      placeholder="下一步执行人"
+                      @focus="onClickChooseUser()"
+                      v-model="dispatch.executors"></el-input>
           </div>
         </el-form-item>
         <!--countersign-->
@@ -85,7 +101,16 @@
           <div style="margin-right: 20px;">
             <el-input class="form-item-content"
                       :disabled="countersignDisabled"
+                      style="float: left; width: 60%"
                       v-model="dispatch.countersign"></el-input>
+
+            <el-input class="form-item-content"
+                      style="width: 30%; float: right;"
+                      :disabled="countersignDisabled"
+                      v-if="!countersignDisabled"
+                      placeholder="下一步执行人"
+                      @focus="onClickChooseUser()"
+                      v-model="dispatch.executors"></el-input>
           </div>
         </el-form-item>
         <!--sign-->
@@ -93,8 +118,17 @@
                       class="form-item">
           <div style="margin-right: 20px;">
             <el-input class="form-item-content"
+                      style="float: left; width: 60%"
                       :disabled="signDisabled"
                       v-model="dispatch.sign"></el-input>
+
+            <el-input class="form-item-content"
+                      style="width: 30%; float: right;"
+                      :disabled="signDisabled"
+                      v-if="!signDisabled"
+                      placeholder="下一步执行人"
+                      @focus="onClickChooseUser()"
+                      v-model="dispatch.executors"></el-input>
           </div>
         </el-form-item>
         <!--起始日期 deadline-->
@@ -113,42 +147,29 @@
         </el-form-item>
         <!--<hr/>-->
 
-        <!--下一步的选择-->
-        <el-form-item label="下一步:"
-                      style="margin-top: -50px;"
-                      class="form-item">
-          <div class="form-item-content"
-               style="margin-top: 8px;">
-            <el-radio-group v-model="nextState"
-                            style="float: left;">
-              <el-radio label="begin">发文该稿
-              </el-radio>
-              <el-radio label="finish">结束
-              </el-radio>
-            </el-radio-group>
-          </div>
-        </el-form-item>
-        <!--任务执行人-->
-        <el-form-item label="执行人:"
-                      class="form-item">
-          <div style="margin-right: 20px;">
-            <el-input class="form-item-content"
-                      @focus="onClickChooseUser()"
-                      v-model="dispatch.executors"></el-input>
-          </div>
-        </el-form-item>
-        <hr/>
+        <!--&lt;!&ndash;下一步的选择&ndash;&gt;-->
+        <!--<el-form-item label="下一步:"-->
+        <!--style="margin-top: -50px;"-->
+        <!--class="form-item">-->
+        <!--<div class="form-item-content"-->
+        <!--style="margin-top: 8px;">-->
+        <!--<el-radio-group v-model="nextState"-->
+        <!--style="float: left;">-->
+        <!--<el-radio label="begin">发文该稿-->
+        <!--</el-radio>-->
+        <!--<el-radio label="finish">结束-->
+        <!--</el-radio>-->
+        <!--</el-radio-group>-->
+        <!--</div>-->
+        <!--</el-form-item>-->
+        <!--<hr/>-->
 
         <!--提交按钮-->
         <div>
           <el-button type="primary"
+                     style="width: 100px; margin-top: -60px;"
                      :disabled="isFinished"
                      @click="onClickSubmit()">提交
-          </el-button>
-          <el-button type="primary"
-                     style="margin-left: 60px;"
-                     :disabled="isFinished"
-                     @click="onClickCancel()">取消
           </el-button>
         </div>
       </el-form>
@@ -168,14 +189,13 @@
 
     <!--选择用户dialog-->
     <choose-user-dialog v-bind:showDialog="showChooseUserDialog"
-                        @cancel="showDialog = false"
+                        @cancel="showChooseUserDialog = false"
                         @ensure="onEnsureChooseUser"></choose-user-dialog>
   </div>
 </template>
 
 <script>
   import Dispatch from './bean/dispatch'
-  import Utils from '../base/Utils'
   import * as Cons from '../base/Constant'
   import * as EventBus from '../base/EventBus'
 
@@ -184,7 +204,6 @@
     data () {
       return {
         dispatch: '',
-        nextState: '',
         deadline: new Date(),
         typeOptions: Dispatch.Type,
         isFinished: false,
@@ -240,17 +259,8 @@
         }
         this.postNewDispatch()
       },
-      onClickCancel () {
-
-      },
       isFormValid () {
-        if (Utils.isStrEmpty(this.nextState)) {
-          return false
-        }
-        if (!this.dispatch.isValid()) {
-          return false
-        }
-        return true
+        return this.dispatch.isValid()
       },
       postNewDispatch () {
         this.$http.post(Cons.BASE_URL + '/dispatch/new', this.dispatch)

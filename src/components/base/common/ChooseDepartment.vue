@@ -1,6 +1,7 @@
 <template>
   <el-dialog title="选择部门"
              v-model="showDialog"
+             :close-on-click-modal="false"
              :show-close="false">
 
     <el-tree style="float: left; width: 100%; text-align: left; margin-bottom: 10px;"
@@ -54,7 +55,7 @@
             return
           }
           this.departmentList = response.body.departmentList
-          console.log(this.departmentList)
+//          console.log(this.departmentList)
         }, response => {
           this.$message('获取部门数据失败')
         })
