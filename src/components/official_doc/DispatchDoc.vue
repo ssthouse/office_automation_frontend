@@ -14,11 +14,26 @@
         <!--title-->
         <el-form-item label="标题:"
                       class="form-item">
-          <div style="margin-right: 20px;">
-            <el-input placeholder="标题"
-                      class="form-item-content"
-                      v-model="dispatch.title"></el-input>
-          </div>
+          <el-row style="margin-top: -5px;">
+            <div style="margin-right: 20px; float: left;">
+              <el-input placeholder="标题"
+                        style="float: left; margin-right: 100px;"
+                        class="form-item-content"
+                        v-model="dispatch.title"></el-input>
+
+            </div>
+            <div style="float: right;">
+              <b style="margin-left: 20px; margin-right: 20px;">截止日期:</b>
+              <el-date-picker
+                style="float: right;"
+                v-model="deadline"
+                type="date"
+                placeholder="结束日期"
+                :picker-options="pickerOptionsStartDate">
+              </el-date-picker>
+            </div>
+          </el-row>
+
         </el-form-item>
         <!--targetOrganization-->
         <el-form-item label="主送单位:"
@@ -84,6 +99,7 @@
         </el-form-item>
         <!--起始日期 deadline-->
         <el-form-item label="发文日期:"
+                      style="visibility: collapse"
                       class="form-item">
           <div class="form-item-content">
             <el-date-picker
@@ -93,19 +109,13 @@
               placeholder="起始日期"
               :picker-options="pickerOptionsStartDate">
             </el-date-picker>
-            <b style="margin-left: 20px; margin-right: 20px;">截止日期:</b>
-            <el-date-picker
-              v-model="deadline"
-              type="date"
-              placeholder="结束日期"
-              :picker-options="pickerOptionsStartDate">
-            </el-date-picker>
           </div>
         </el-form-item>
-        <hr/>
+        <!--<hr/>-->
 
         <!--下一步的选择-->
         <el-form-item label="下一步:"
+                      style="margin-top: -50px;"
                       class="form-item">
           <div class="form-item-content"
                style="margin-top: 8px;">
@@ -123,6 +133,7 @@
                       class="form-item">
           <div style="margin-right: 20px;">
             <el-input class="form-item-content"
+                      @focus="onClickChooseUser()"
                       v-model="dispatch.executors"></el-input>
           </div>
         </el-form-item>
@@ -154,6 +165,11 @@
                               @cancel="showCopyToOrganizationDialog = false"
                               @ensure="onEnsureCopyToOrganization">
     </choose-department-dialog>
+
+    <!--选择用户dialog-->
+    <choose-user-dialog v-bind:showDialog="showChooseUserDialog"
+                        @cancel="showDialog = false"
+                        @ensure="onEnsureChooseUser"></choose-user-dialog>
   </div>
 </template>
 
@@ -161,6 +177,7 @@
   import Dispatch from './bean/dispatch'
   import Utils from '../base/Utils'
   import * as Cons from '../base/Constant'
+  import * as EventBus from '../base/EventBus'
 
   export default{
     name: 'dispatch-doc',
@@ -177,11 +194,19 @@
           }
         },
         showTargetOrganizationDialog: false,
-        showCopyToOrganizationDialog: false
+        showCopyToOrganizationDialog: false,
+        showChooseUserDialog: false
       }
     },
     props: ['data'],
     methods: {
+      onClickChooseUser () {
+        this.showChooseUserDialog = true
+      },
+      onEnsureChooseUser (userList) {
+        this.dispatch.executors = userList
+        this.showChooseUserDialog = false
+      },
       onEnsureTargetOrganization (targetDepartmentList) {
         this.showTargetOrganizationDialog = false
         // 刷新数据
@@ -235,6 +260,8 @@
               return
             }
             this.$message('提交成功')
+            EventBus.instance.$emit(EventBus.EVENT_OFFICIAL_DOC_UPDATE_ALL_DISPATCH)
+            this.isFinished = true
           }, response => {
             this.$message('提交失败')
           })
