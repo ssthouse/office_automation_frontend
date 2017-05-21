@@ -40,62 +40,16 @@
                       v-model="dispatch.copyToOrganization"></el-input>
           </div>
         </el-form-item>
-        <!--content-->
-        <el-form-item label="正文:"
-                      class="form-item">
-          <div style="margin-right: 20px;">
-            <el-input class="form-item-content"
-                      :disabled="true"
-                      v-model="dispatch.content"></el-input>
-          </div>
-        </el-form-item>
+
         <!--owner-->
         <el-form-item label="拟稿人:"
                       class="form-item">
           <div style="margin-right: 20px;">
             <el-input class="form-item-content"
                       :disabled="true"
+                      style="width: 50%;"
                       v-model="dispatch.owner"></el-input>
-          </div>
-        </el-form-item>
-        <!--check-->
-        <el-form-item label="核稿:"
-                      class="form-item">
-          <div style="margin-right: 20px;">
-            <el-input class="form-item-content"
-                      :disabled="checkDisabled"
-                      v-model="dispatch.checkComment"></el-input>
-          </div>
-        </el-form-item>
-        <!--countersign-->
-        <el-form-item label="会签:"
-                      class="form-item">
-          <div style="margin-right: 20px;">
-            <el-input class="form-item-content"
-                      :disabled="countersignDisabled"
-                      v-model="dispatch.countersign"></el-input>
-          </div>
-        </el-form-item>
-        <!--sign-->
-        <el-form-item label="签发:"
-                      class="form-item">
-          <div style="margin-right: 20px;">
-            <el-input class="form-item-content"
-                      :disabled="signDisabled"
-                      v-model="dispatch.sign"></el-input>
-          </div>
-        </el-form-item>
-        <!--起始日期 deadline-->
-        <el-form-item label="发文日期:"
-                      class="form-item">
-          <div class="form-item-content">
-            <el-date-picker
-              v-model="dispatch.beginDate"
-              type="date"
-              :disabled="true"
-              placeholder="起始日期"
-              :picker-options="pickerOptionsStartDate">
-            </el-date-picker>
+
             <b style="margin-left: 20px; margin-right: 20px;">截止日期:</b>
             <el-date-picker
               v-model="deadline"
@@ -106,41 +60,102 @@
             </el-date-picker>
           </div>
         </el-form-item>
-        <hr/>
 
-        <!--下一步的选择-->
-        <el-form-item label="下一步:"
-                      class="form-item">
-          <div class="form-item-content"
-               style="margin-top: 8px;">
-            <b>{{getNextStepStr()}}</b>
-          </div>
-        </el-form-item>
-        <!--任务执行人-->
-        <el-form-item label="执行人:"
+        <!--content-->
+        <el-form-item label="正文:"
                       class="form-item">
           <div style="margin-right: 20px;">
             <el-input class="form-item-content"
+                      type="textarea"
+                      :disabled="true"
+                      v-model="dispatch.content"></el-input>
+          </div>
+        </el-form-item>
+
+        <!--check-->
+        <el-form-item label="核稿:"
+                      class="form-item"
+                      style="margin-top: -10px;">
+          <div style="margin-right: 20px;">
+            <el-input class="form-item-content"
+                      style="width: 50%;"
+                      :disabled="checkDisabled"
+                      v-model="dispatch.checkComment"></el-input>
+
+            <b style="margin-left: 20px; margin-right: 20px;"
+               v-if="!checkDisabled">下一步执行人:</b>
+            <el-input class="form-item-content"
+                      style="width: 30%; float: right;"
+                      v-if="!checkDisabled"
+                      placeholder="下一步执行人"
+                      @focus="onClickChooseUser()"
                       v-model="dispatch.executors"></el-input>
           </div>
         </el-form-item>
+        <!--countersign-->
+        <el-form-item label="会签:"
+                      class="form-item">
+          <div style="margin-right: 20px;">
+            <el-input class="form-item-content"
+                      style="width: 50%;"
+                      :disabled="countersignDisabled"
+                      v-model="dispatch.countersign"></el-input>
+
+            <b style="margin-left: 20px; margin-right: 20px;"
+               v-if="!countersignDisabled">下一步执行人:</b>
+            <el-input class="form-item-content"
+                      style="width: 30%; float: right;"
+                      v-if="!countersignDisabled"
+                      placeholder="下一步执行人"
+                      @focus="onClickChooseUser()"
+                      v-model="dispatch.executors"></el-input>
+          </div>
+        </el-form-item>
+        <!--sign-->
+        <el-form-item label="签发:"
+                      class="form-item">
+          <div style="margin-right: 20px;">
+            <el-input class="form-item-content"
+                      :disabled="signDisabled"
+                      style="width: 50%;"
+                      v-model="dispatch.sign"></el-input>
+
+            <b style="margin-left: 20px; margin-right: 20px;"
+               v-if="!signDisabled">下一步执行人:</b>
+            <el-input class="form-item-content"
+                      style="width: 30%; float: right;"
+                      v-if="!signDisabled"
+                      placeholder="下一步执行人"
+                      @focus="onClickChooseUser()"
+                      v-model="dispatch.executors"></el-input>
+          </div>
+        </el-form-item>
+
+        <!--&lt;!&ndash;任务执行人&ndash;&gt;-->
+        <!--<el-form-item label="执行人:"-->
+        <!--class="form-item">-->
+        <!--<div style="margin-right: 20px;">-->
+        <!--<el-input class="form-item-content"-->
+        <!--v-model="dispatch.executors"></el-input>-->
+        <!--</div>-->
+        <!--</el-form-item>-->
         <hr/>
 
         <!--提交按钮-->
         <div>
           <el-button type="primary"
                      :disabled="isFinished"
+                     style="width: 100px;"
                      @click="onClickSubmit()">提交
-          </el-button>
-          <el-button type="primary"
-                     style="margin-left: 60px;"
-                     :disabled="isFinished"
-                     @click="onClickCancel()">取消
           </el-button>
         </div>
       </el-form>
     </el-card>
 
+    <!--选择用户dialog-->
+    <choose-user-dialog v-bind:showDialog="showChooseUserDialog"
+                        @cancel="showChooseUserDialog = false"
+                        @ensure="onEnsureChooseUser"></choose-user-dialog>
   </div>
 </template>
 
@@ -163,18 +178,24 @@
           disabledDate (time) {
             return time.getTime() < Date.now() - 8.64e7
           }
-        }
+        },
+        // 显示dialog的bool量
+        showChooseUserDialog: false
       }
     },
     props: ['data'],
     methods: {
+      onClickChooseUser () {
+        this.showChooseUserDialog = true
+      },
+      onEnsureChooseUser (userList) {
+        this.dispatch.executors = userList
+        this.showChooseUserDialog = false
+      },
       onClickSubmit () {
         this.dispatch.state = this.getNextState()
         console.log(JSON.stringify(this.dispatch))
         this.postUpdateDispatch()
-      },
-      onClickCancel () {
-
       },
       isFormValid () {
         if (Utils.isStrEmpty(this.nextState)) {

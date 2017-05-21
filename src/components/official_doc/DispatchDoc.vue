@@ -67,6 +67,7 @@
                       class="form-item">
           <div style="margin-right: 20px;">
             <el-input class="form-item-content"
+                      type="textarea"
                       style="float: left; width: 60%"
                       v-model="dispatch.content"></el-input>
 
