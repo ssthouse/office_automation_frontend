@@ -34,7 +34,7 @@ const mutations = {
 const getters = {
   getHomePageConfig (state) {
     if (Utils.isStrEmpty(state.userConfig.homePageConfig)) {
-      let allState = [Cons.HOMEPAGE_IMG_NEWS, Cons.HOMEPAGE_NEWS]
+      let allState = [Cons.HOMEPAGE_IMG_NEWS, Cons.HOMEPAGE_NEWS, Cons.HOMEPAGE_CALENDAR]
       state.userConfig.homePageConfig = allState.join(',')
     }
     return state.userConfig.homePageConfig.split(',')

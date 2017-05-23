@@ -19,6 +19,7 @@
   import ChooseUser from '../components/base/common/ChooseUser.vue'
   import ChooseDepartment from '../components/base/common/ChooseDepartment.vue'
 
+  // tools模块
   Vue.component(Questionnaire.name, Questionnaire)
   Vue.component(QuestionnaireFill.name, QuestionnaireFill)
   Vue.component(QuestionnaireReport.name, QuestionnaireReport)

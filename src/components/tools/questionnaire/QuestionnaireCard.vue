@@ -73,6 +73,7 @@
       }
     },
     created: function () {
+      this.fetchQuestionnaire()
       EventBus.instance.$on(EventBus.EVENT_QUESTIONNAIRE_UPDATE, () => {
         this.fetchQuestionnaire()
       })

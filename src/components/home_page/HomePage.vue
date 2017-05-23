@@ -17,15 +17,16 @@
         <el-checkbox-group v-model="newConfig">
           <el-checkbox :label="Cons.HOMEPAGE_IMG_NEWS">图片新闻</el-checkbox>
           <el-checkbox :label="Cons.HOMEPAGE_NEWS">公告</el-checkbox>
+          <el-checkbox :label="Cons.HOMEPAGE_CALENDAR">日程管理</el-checkbox>
           <el-checkbox :label="Cons.TOOLS_QUESTIONNAIRE">我的问卷</el-checkbox>
-          <!--<el-checkbox :label="Cons.TOOLS_QUESTIONNAIRE_ADMIN">我管理的问卷</el-checkbox>-->
           <el-checkbox :label="Cons.TOOLS_VOTING">我的投票</el-checkbox>
-          <!--<el-checkbox :label="Cons.TOOLS_VOTING_ADMIN">我管理的投票</el-checkbox>-->
-          <el-checkbox :label="Cons.TOOLS_MEETING" style="visibility: hidden;">我的会议</el-checkbox>
-          <!--<el-checkbox :label="Cons.TOOLS_MEETING_ADMIN" style="visibility: hidden;">我管理的会议</el-checkbox>-->
+          <el-checkbox :label="Cons.TOOLS_MEETING">我的会议</el-checkbox>
           <el-button @click="updateConfig()" style="margin-left: 40px;">更新设置
           </el-button>
         </el-checkbox-group>
+        <!--<el-checkbox :label="Cons.TOOLS_QUESTIONNAIRE_ADMIN">我管理的问卷</el-checkbox>-->
+        <!--<el-checkbox :label="Cons.TOOLS_VOTING_ADMIN">我管理的投票</el-checkbox>-->
+        <!--<el-checkbox :label="Cons.TOOLS_MEETING_ADMIN" style="visibility: hidden;">我管理的会议</el-checkbox>-->
       </md-dialog-content>
     </md-dialog>
   </div>
@@ -39,16 +40,10 @@
   import Vue from 'vue'
   import * as MUTATIONS from '../../store/mutation-types'
   // components
-  import NewsCard from './news/NewsCard.vue'
-  import News from './news/News.vue'
-  import ImgNewsCard from './img_news/ImgNewsCard.vue'
   import UserInfo from './userinfo/UserInfo.vue'
 
   Vue.component(MainTab.name, MainTab)
   Vue.component(UserInfo.name, UserInfo)
-  Vue.component(NewsCard.name, NewsCard)
-  Vue.component(News.name, News)
-  Vue.component(ImgNewsCard.name, ImgNewsCard)
 
   export default {
     name: 'home-page',
@@ -84,6 +79,7 @@
       },
       updateConfig () {
         this.$refs['dialogConfig'].close()
+        console.log(this.newConfig)
         this.$store.dispatch(MUTATIONS.ACTION_POST_USER_CONFIG_HOMEPAGE, this.newConfig.join(','))
           .then(success => {
             this.$message('更新成功')
