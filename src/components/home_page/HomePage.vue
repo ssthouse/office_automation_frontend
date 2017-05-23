@@ -18,11 +18,11 @@
           <el-checkbox :label="Cons.HOMEPAGE_IMG_NEWS">图片新闻</el-checkbox>
           <el-checkbox :label="Cons.HOMEPAGE_NEWS">公告</el-checkbox>
           <el-checkbox :label="Cons.TOOLS_QUESTIONNAIRE">我的问卷</el-checkbox>
-          <el-checkbox :label="Cons.TOOLS_QUESTIONNAIRE_ADMIN">我管理的问卷</el-checkbox>
+          <!--<el-checkbox :label="Cons.TOOLS_QUESTIONNAIRE_ADMIN">我管理的问卷</el-checkbox>-->
           <el-checkbox :label="Cons.TOOLS_VOTING">我的投票</el-checkbox>
-          <el-checkbox :label="Cons.TOOLS_VOTING_ADMIN">我管理的投票</el-checkbox>
+          <!--<el-checkbox :label="Cons.TOOLS_VOTING_ADMIN">我管理的投票</el-checkbox>-->
           <el-checkbox :label="Cons.TOOLS_MEETING" style="visibility: hidden;">我的会议</el-checkbox>
-          <el-checkbox :label="Cons.TOOLS_MEETING_ADMIN" style="visibility: hidden;">我管理的会议</el-checkbox>
+          <!--<el-checkbox :label="Cons.TOOLS_MEETING_ADMIN" style="visibility: hidden;">我管理的会议</el-checkbox>-->
           <el-button @click="updateConfig()" style="margin-left: 40px;">更新设置
           </el-button>
         </el-checkbox-group>

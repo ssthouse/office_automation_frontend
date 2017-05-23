@@ -1,7 +1,7 @@
 <template>
   <div style="margin-top: -40px;">
     <el-row>
-      <el-col :span="8"
+      <el-col :span="12"
               class="card-col"
               v-for="cardIs in cardList">
         <div v-bind:is="cardIs"></div>
@@ -36,8 +36,7 @@
     name: 'tools-main-tab',
     data () {
       return {
-        cardList: [QuestionnaireCard.name, OwnedQuestionnaireCard.name,
-          VotingCard.name, OwnedVotingCard.name],
+        cardList: [OwnedQuestionnaireCard.name, OwnedVotingCard.name],
         componentDic: Cons.ComponentMap,
         Cons: Cons
       }
