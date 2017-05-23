@@ -11,11 +11,20 @@
     <div class="card-body">
       <div v-for="news in newsList"
            style="margin-top: 5px; margin-bottom: 5px">
-        <div style="clear: both; margin-top: 5px; margin-bottom: 10px;">
-          <a class="card-link"
-             :href="news.link"
-             target="_blank">{{news.title}}</a>
-        </div>
+        <el-row style="margin-top: 5px; margin-bottom: 10px;">
+          <el-col :span="20">
+            <a :href="news.link"
+               class="card-link"
+               target="_blank">{{news.title}}</a>
+          </el-col>
+
+          <el-col :span="4">
+            <el-button type="text"
+                       :disabled="!showDeleteButton(news)"
+                       @click="onDeleteNews(news)">删除
+            </el-button>
+          </el-col>
+        </el-row>
       </div>
     </div>
   </el-card>
@@ -50,6 +59,22 @@
         }, response => {
           this.$message('获取公告数据失败: ' + response.body.msg)
         })
+      },
+      showDeleteButton (news) {
+        return news.creater === this.$store.state.mainModule.user.username
+      },
+      onDeleteNews (news) {
+        this.$http.get(Cons.BASE_URL + '/news/delete', {params: {beanId: news.id}})
+          .then(response => {
+            if (response.body.ok !== true) {
+              this.$message('删除失败: ' + response.body.msg)
+              return
+            }
+            this.$message('删除成功')
+            EventBus.instance.$emit(EventBus.EVENT_UPDATE_NEWS)
+          }, response => {
+            this.$message('删除失败')
+          })
       },
       onClickAdd () {
         let tabItem = new TabItem('新建公告', News.name, null)
