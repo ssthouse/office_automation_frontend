@@ -42,7 +42,11 @@
           this.$message('公告未填写完整')
           return
         }
-        // TODO
+        // 填充创建者
+        this.news.creater = this.$store.state.mainModule.user.username
+        this.postNews()
+      },
+      postNews () {
         this.$http.post(Cons.BASE_URL + '/news/new', JSON.stringify(this.news))
           .then(response => {
             if (response.body.ok !== true) {

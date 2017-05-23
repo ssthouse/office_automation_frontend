@@ -79,7 +79,6 @@
       },
       updateConfig () {
         this.$refs['dialogConfig'].close()
-        console.log(this.newConfig)
         this.$store.dispatch(MUTATIONS.ACTION_POST_USER_CONFIG_HOMEPAGE, this.newConfig.join(','))
           .then(success => {
             this.$message('更新成功')
