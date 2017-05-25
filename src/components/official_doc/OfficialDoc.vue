@@ -18,13 +18,13 @@
 
     <!--dialog to select new workflow type-->
     <!--<md-dialog md-open-from="#btnAdd" md-close-from="#btnAdd" ref="dialogAdd">-->
-      <!--<md-dialog-title>发起公文</md-dialog-title>-->
-      <!--<md-dialog-content>-->
-        <!--<md-list>-->
-          <!--<md-button @click.native="onClickDispatch()">发文单</md-button>-->
-          <!--<md-button @click.native="onClickInComing()">收文单</md-button>-->
-        <!--</md-list>-->
-      <!--</md-dialog-content>-->
+    <!--<md-dialog-title>发起公文</md-dialog-title>-->
+    <!--<md-dialog-content>-->
+    <!--<md-list>-->
+    <!--<md-button @click.native="onClickDispatch()">发文单</md-button>-->
+    <!--<md-button @click.native="onClickInComing()">收文单</md-button>-->
+    <!--</md-list>-->
+    <!--</md-dialog-content>-->
     <!--</md-dialog>-->
   </div>
 </template>
@@ -38,13 +38,11 @@
   // tabs component
   import TabItem from '../base/TabItem'
   import DispatchDoc from './DispatchDoc.vue'
-  import IncomingDoc from './IncomingDoc.vue'
   import DispatchDetail from './DispatchDetail.vue'
   import DealDispatch from './DealDispatch.vue'
 
   Vue.component(MainTab.name, MainTab)
   Vue.component(DispatchDoc.name, DispatchDoc)
-  Vue.component(IncomingDoc.name, IncomingDoc)
   Vue.component(DispatchDetail.name, DispatchDetail)
   Vue.component(DealDispatch.name, DealDispatch)
 
@@ -76,10 +74,6 @@
       },
       onClickDispatch () {
         this.$store.commit(MUTATIONS.OFFICIAL_DOC_ADD_TAB, new TabItem('发起发文单', DispatchDoc.name, null))
-      },
-      onClickInComing () {
-//        this.$refs['dialogAdd'].close()
-        this.$store.commit(MUTATIONS.OFFICIAL_DOC_ADD_TAB, new TabItem('发起收文单', IncomingDoc.name, null))
       }
     },
     created: function () {

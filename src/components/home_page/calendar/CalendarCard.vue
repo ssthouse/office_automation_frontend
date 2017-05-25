@@ -13,7 +13,11 @@
            style="margin-top: 5px; margin-bottom: 5px">
         <div style="clear: both; margin-top: 5px; margin-bottom: 5px;">
           <a class="card-link"
-             href="javascript:void(0);">{{todo}}</a>
+             href="javascript:void(0);">{{todo.content}}</a>
+          <a class="card-link"
+             href="javascript:void(0);">
+            {{Utils.getFormatDateStr(new Date(todo.time))}}
+          </a>
         </div>
       </div>
     </div>
@@ -24,16 +28,20 @@
   import * as MUTATIONS from '../../../store/mutation-types'
   import TabItem from '../../base/TabItem'
   import CalendarDetail from './CalendarDetail.vue'
+  import Utils from '../../base/Utils'
+  import Todo from './bean/todo'
 
   export default{
     name: 'calendar-card',
     data () {
       return {
-        todoList: [
-          '提交后台分工会议纪要',
-          '提交公文处理, 等待上级的审批',
-          '安排技术面试算法题'
-        ]
+//        todoList: [
+//          '提交后台分工会议纪要',
+//          '提交公文处理, 等待上级的审批',
+//          '安排技术面试算法题'
+//        ]
+        todoList: Todo.getTodoList(),
+        Utils: Utils
       }
     },
     props: [],
@@ -44,7 +52,12 @@
     },
     computed: {},
     created: function () {
-
+      this.$store.dispatch(MUTATIONS.HOMEPAGE_ACTION_UPDATE_TODO_LIST)
+//        .then(success => {
+//          console.log('获取日程数据成功')
+//        }, errMsg => {
+//          this.$message(errMsg)
+//        })
     }
   }
 </script>

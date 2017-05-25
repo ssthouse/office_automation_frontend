@@ -1,5 +1,4 @@
 import Dispatch from '../official_doc/bean/dispatch'
-import Incoming from '../official_doc/bean/incoming'
 import * as EventBus from './EventBus'
 
 class Utils {
@@ -136,11 +135,6 @@ class Utils {
       case Dispatch.STATE_CHECK:
       case Dispatch.STATE_COUNTERSIGN:
       case Dispatch.STATE_SIGN:
-        return 'primary'
-      // 收文单执行状态
-      case Incoming.STATE_PROPOSE:
-      case Incoming.STATE_APPROVE:
-      case Incoming.STATE_DEAL:
         return 'primary'
       // 完成状态
       case Dispatch.STATE_FINISH:

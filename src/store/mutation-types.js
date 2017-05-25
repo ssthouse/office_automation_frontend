@@ -11,6 +11,8 @@ export const ACTION_POST_USER_CONFIG_HOMEPAGE = 'main/action/set_home_page_confi
 // Homepage 模块
 export const HOMEPAGE_ADD_TAB = 'homepage/add_tab'
 export const HOMEPAGE_REMOVE_TAB = 'homepage/remove_tab'
+export const HOMEPAGE_SET_TODO_LIST = 'homepage/set_todo_list'
+export const HOMEPAGE_ACTION_UPDATE_TODO_LIST = 'homepage/action/update_todo_list'
 
 // Workflow 模块
 export const WORKFLOW_ADD_TAB = 'workflow/add_tab'

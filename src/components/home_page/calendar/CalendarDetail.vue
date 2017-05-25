@@ -2,7 +2,16 @@
   <div>
     <div style="height: 540px;">
       <vue-event-calendar :events="eventList"
-                          style="height: 540px;"></vue-event-calendar>
+                          style="height: 540px;">
+        <template scope="props">
+          <div v-for="(event, index) in props.showEvents" class="event-item">
+            <!-- In here do whatever you want, make you owner event template -->
+            {{event}}
+          </div>
+        </template>
+      </vue-event-calendar>
+
+
       <md-button class="md-fab md-fab-bottom-right"
                  @click.native="onClickAdd()">
         <md-icon>add</md-icon>
@@ -10,18 +19,15 @@
     </div>
 
     <el-dialog title="新建日程" v-model="newCalendarVisible">
-      <el-form v-model="newCalendar"
+      <el-form v-model="newTodo"
                label-width="80px"
                label-position="right">
         <el-form-item label="日期:">
           <el-input placeholder="格式为: 2017/11/11"
-                    v-model="newCalendar.date"></el-input>
+                    v-model="newTodo.time"></el-input>
         </el-form-item>
         <el-form-item label="标题:">
-          <el-input v-model="newCalendar.title"></el-input>
-        </el-form-item>
-        <el-form-item label="详细信息:">
-          <el-input v-model="newCalendar.desc"></el-input>
+          <el-input v-model="newTodo.content"></el-input>
         </el-form-item>
         <el-button @click="submitNewCalendar()">确认添加</el-button>
       </el-form>
@@ -30,17 +36,15 @@
 </template>
 
 <script>
+  import Todo from './bean/todo'
+
   export default{
     name: 'calendar-detail',
     data () {
       return {
         newCalendarVisible: false,
         // 用于保存新建的calendar
-        newCalendar: {
-          date: '',
-          title: '',
-          desc: ''
-        },
+        newTodo: new Todo(),
         // 所有的event
         eventList: [{
           date: '2016/12/15',
