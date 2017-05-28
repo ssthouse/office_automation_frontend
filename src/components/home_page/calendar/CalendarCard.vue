@@ -14,10 +14,10 @@
         <div style="clear: both; margin-top: 5px; margin-bottom: 5px;">
           <a class="card-link"
              href="javascript:void(0);">{{todo.content}}</a>
-          <a class="card-link"
-             href="javascript:void(0);">
+          <span class="card-link"
+                style="float: right;">
             {{Utils.getFormatDateStr(new Date(todo.time))}}
-          </a>
+          </span>
         </div>
       </div>
     </div>
@@ -29,7 +29,7 @@
   import TabItem from '../../base/TabItem'
   import CalendarDetail from './CalendarDetail.vue'
   import Utils from '../../base/Utils'
-  import Todo from './bean/todo'
+  //  import Todo from './bean/todo'
 
   export default{
     name: 'calendar-card',
@@ -40,7 +40,7 @@
 //          '提交公文处理, 等待上级的审批',
 //          '安排技术面试算法题'
 //        ]
-        todoList: Todo.getTodoList(),
+        todoList: this.$store.state.homePageModule.todoList,
         Utils: Utils
       }
     },
@@ -53,11 +53,6 @@
     computed: {},
     created: function () {
       this.$store.dispatch(MUTATIONS.HOMEPAGE_ACTION_UPDATE_TODO_LIST)
-//        .then(success => {
-//          console.log('获取日程数据成功')
-//        }, errMsg => {
-//          this.$message(errMsg)
-//        })
     }
   }
 </script>
