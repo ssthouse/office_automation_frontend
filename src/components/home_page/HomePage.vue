@@ -7,7 +7,7 @@
                v-on:remove-tab="handleRemoveTab"></base-item>
 
     <md-button class="md-fab md-fab-bottom-right" id="btnConfig" @click.native="onClickConfig()">
-      <md-icon>home</md-icon>
+      <md-icon>dashboard</md-icon>
     </md-button>
 
     <!--dialog to select new workflow type-->

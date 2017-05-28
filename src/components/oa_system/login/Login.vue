@@ -10,9 +10,9 @@
           <el-input type="password" placeholder="password" v-model="ruleForm.password"
                     @keyup.enter.native="getToken()"></el-input>
         </el-form-item>
-        <el-form-item>
-          <el-checkbox v-model="ruleForm.isAdmin">以管理员身份登录</el-checkbox>
-        </el-form-item>
+        <!--<el-form-item>-->
+        <!--<el-checkbox v-model="ruleForm.isAdmin">以管理员身份登录</el-checkbox>-->
+        <!--</el-form-item>-->
         <div class="login-btn">
           <el-button type="primary" @click="getToken()">登录</el-button>
         </div>
@@ -30,8 +30,7 @@
       return {
         ruleForm: {
           username: '',
-          password: '',
-          isAdmin: false
+          password: ''
         },
         rules: {
           username: [
@@ -47,8 +46,7 @@
       getToken () {
         let requestBody = JSON.stringify({
           username: this.ruleForm.username,
-          password: this.ruleForm.password,
-          isAdmin: this.ruleForm.isAdmin
+          password: this.ruleForm.password
         })
         this.$http.post('http://127.0.0.1:8080/office_automation_backend/token', requestBody)
           .then(response => {
