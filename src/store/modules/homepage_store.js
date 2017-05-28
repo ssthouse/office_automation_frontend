@@ -47,7 +47,8 @@ const actions = {
             return
           }
           context.state.todoList = response.body.todoList
-          console.log(response.body.todoList)
+          EventBus.instance.$emit(EventBus.EVENT_HOMEPAGE_UPDATE_TODO)
+          // console.log(response.body.todoList)
           resolve('获取日程数据成功')
         }, response => {
           reject('获取日程数据失败')

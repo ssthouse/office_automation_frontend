@@ -54,7 +54,7 @@
               return
             }
             this.$message('提交成功')
-            EventBus.instance.$emit(EventBus.EVENT_UPDATE_NEWS)
+            EventBus.instance.$emit(EventBus.EVENT_HOMEPAGE_UPDATE_NEWS)
             this.finished = true
           }, response => {
             this.$message('提交失败')

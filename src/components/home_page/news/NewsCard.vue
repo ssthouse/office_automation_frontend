@@ -71,7 +71,7 @@
               return
             }
             this.$message('删除成功')
-            EventBus.instance.$emit(EventBus.EVENT_UPDATE_NEWS)
+            EventBus.instance.$emit(EventBus.EVENT_HOMEPAGE_UPDATE_NEWS)
           }, response => {
             this.$message('删除失败')
           })
@@ -84,7 +84,7 @@
     computed: {},
     created: function () {
       this.fetchNewsList()
-      EventBus.instance.$on(EventBus.EVENT_UPDATE_NEWS, () => {
+      EventBus.instance.$on(EventBus.EVENT_HOMEPAGE_UPDATE_NEWS, () => {
         this.fetchNewsList()
       })
     }

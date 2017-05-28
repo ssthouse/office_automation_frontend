@@ -1,18 +1,21 @@
 <template>
   <div>
     <div style="height: 540px;">
-      <vue-event-calendar :events="eventList"
+      <vue-event-calendar :events="todoList"
                           style="height: 540px;">
         <template scope="props">
-          <div v-for="(event, index) in props.showEvents" class="event-item">
+          <div v-for="(event, index) in props.showEvents" class="event-item"
+               style=" text-align: center">
             <!-- In here do whatever you want, make you owner event template -->
-            {{event}}
+            <span style="font-size: larger; margin-top: 20px; text-align: center">{{event.content}}</span>
+            <span style="margin-top: 20px; text-align: center">{{event.date}}</span>
+            <md-button @click.native="onDeleteOnIndex(index)">删除</md-button>
           </div>
         </template>
       </vue-event-calendar>
 
 
-      <md-button class="md-fab md-fab-bottom-right"
+      <md-button class="md-fab md-fab-bottom-center"
                  @click.native="onClickAdd()">
         <md-icon>add</md-icon>
       </md-button>
@@ -37,6 +40,10 @@
 
 <script>
   import Todo from './bean/todo'
+  import Utils from '../../base/Utils'
+  import * as Cons from '../../base/Constant'
+  import * as EventBus from '../../base/EventBus'
+  import * as types from '../../../store/mutation-types'
 
   export default{
     name: 'calendar-detail',
@@ -58,7 +65,8 @@
           date: '2017/4/18',
           title: '安排技术面试算法题',
           desc: '准备安卓和后台面试人员的算法题目'
-        }]
+        }],
+        todoList: []
       }
     },
     props: [],
@@ -73,11 +81,36 @@
           'desc': this.newCalendar.desc
         })
         this.newCalendarVisible = false
+      },
+      onDeleteOnIndex (index) {
+        // TODO 删除指定todo
+        console.log('delete： ' + index)
+        this.$http.get(Cons.BASE_URL + '/todo/delete', {params: {id: this.todoList[index].id}})
+          .then(response => {
+            if (response.body.ok !== true) {
+              this.$message('操作失败')
+              return
+            }
+            this.$message('删除成功')
+            this.$store.dispatch(types.HOMEPAGE_ACTION_UPDATE_TODO_LIST)
+          }, response => {
+            this.$message('操作失败')
+          })
+      },
+      getTodoList () {
+        this.todoList = this.$store.state.homePageModule.todoList
+        // 为todoList填充date属性
+        this.todoList.forEach(function (todo) {
+          todo.date = Utils.getFormatDateStr(new Date(todo.time))
+        })
       }
     },
     computed: {},
     created: function () {
-
+      this.getTodoList()
+      EventBus.instance.$on(EventBus.EVENT_HOMEPAGE_UPDATE_TODO, () => {
+        this.getTodoList()
+      })
     }
   }
 </script>
