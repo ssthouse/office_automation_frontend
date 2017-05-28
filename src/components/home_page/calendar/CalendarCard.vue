@@ -29,17 +29,11 @@
   import TabItem from '../../base/TabItem'
   import CalendarDetail from './CalendarDetail.vue'
   import Utils from '../../base/Utils'
-  //  import Todo from './bean/todo'
 
   export default{
     name: 'calendar-card',
     data () {
       return {
-//        todoList: [
-//          '提交后台分工会议纪要',
-//          '提交公文处理, 等待上级的审批',
-//          '安排技术面试算法题'
-//        ]
         todoList: this.$store.state.homePageModule.todoList,
         Utils: Utils
       }

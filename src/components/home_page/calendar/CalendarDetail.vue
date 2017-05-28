@@ -83,8 +83,6 @@
         this.newCalendarVisible = false
       },
       onDeleteOnIndex (index) {
-        // TODO 删除指定todo
-        console.log('delete： ' + index)
         this.$http.get(Cons.BASE_URL + '/todo/delete', {params: {id: this.todoList[index].id}})
           .then(response => {
             if (response.body.ok !== true) {
