@@ -13,6 +13,7 @@
            style="margin-top: 5px; margin-bottom: 5px">
         <div style="clear: both; margin-top: 5px; margin-bottom: 5px;">
           <a class="card-link"
+             @click="onClickTodo()"
              href="javascript:void(0);">{{todo.content}}</a>
           <span class="card-link"
                 style="float: right;">
@@ -29,6 +30,7 @@
   import TabItem from '../../base/TabItem'
   import CalendarDetail from './CalendarDetail.vue'
   import Utils from '../../base/Utils'
+  import * as EventBus from '../../base/EventBus'
 
   export default{
     name: 'calendar-card',
@@ -42,11 +44,17 @@
     methods: {
       onClickDetail () {
         this.$store.commit(MUTATIONS.HOMEPAGE_ADD_TAB, new TabItem('日程详情', CalendarDetail.name, null))
+      },
+      onClickTodo () {
+        this.$store.commit(MUTATIONS.HOMEPAGE_ADD_TAB, new TabItem('日程详情', CalendarDetail.name, null))
       }
     },
     computed: {},
     created: function () {
       this.$store.dispatch(MUTATIONS.HOMEPAGE_ACTION_UPDATE_TODO_LIST)
+      EventBus.instance.$on(EventBus.EVENT_HOMEPAGE_UPDATE_TODO, () => {
+        this.todoList = this.$store.state.homePageModule.todoList
+      })
     }
   }
 </script>

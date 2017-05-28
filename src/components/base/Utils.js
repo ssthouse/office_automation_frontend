@@ -22,6 +22,16 @@ class Utils {
     return date.toISOString().slice(0, 10)
   }
 
+  static getDateStrWithSlash (date) {
+    if (date === undefined || date === null) {
+      return ''
+    }
+    if (!(date instanceof Date)) {
+      return ''
+    }
+    return date.toISOString().slice(0, 10).replace(/-/g, '/')
+  }
+
   static getFormatDateStrFromMillis (millis) {
     let timeDate = new Date(millis)
     return timeDate.toISOString().slice(0, 10)

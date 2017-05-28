@@ -26,8 +26,8 @@
                label-width="80px"
                label-position="right">
         <el-form-item label="日期:">
-          <el-input placeholder="格式为: 2017/11/11"
-                    v-model="newTodo.time"></el-input>
+          <el-date-picker type="date"
+                          v-model="newTodo.time"></el-date-picker>
         </el-form-item>
         <el-form-item label="标题:">
           <el-input v-model="newTodo.content"></el-input>
@@ -75,12 +75,23 @@
         this.newCalendarVisible = true
       },
       submitNewCalendar () {
-        this.eventList.push({
-          'date': this.newCalendar.date,
-          'title': this.newCalendar.title,
-          'desc': this.newCalendar.desc
-        })
-        this.newCalendarVisible = false
+        // 填充todo数据
+        this.newTodo.time = this.newTodo.time.getTime()
+        this.newTodo.creater = this.$store.state.mainModule.user.username
+        this.$http.post(Cons.BASE_URL + '/todo/add', JSON.stringify(this.newTodo))
+          .then(response => {
+            if (response.body.ok !== true) {
+              this.$message('提交失败')
+              return
+            }
+            // 显示提示 刷新数据
+            this.$message('提交成功')
+            this.$store.dispatch(types.HOMEPAGE_ACTION_UPDATE_TODO_LIST)
+            // 隐藏dialog
+            this.newCalendarVisible = false
+          }, response => {
+            this.$message('提交失败')
+          })
       },
       onDeleteOnIndex (index) {
         this.$http.get(Cons.BASE_URL + '/todo/delete', {params: {id: this.todoList[index].id}})
@@ -99,7 +110,7 @@
         this.todoList = this.$store.state.homePageModule.todoList
         // 为todoList填充date属性
         this.todoList.forEach(function (todo) {
-          todo.date = Utils.getFormatDateStr(new Date(todo.time))
+          todo.date = Utils.getDateStrWithSlash(new Date(todo.time))
         })
       }
     },
