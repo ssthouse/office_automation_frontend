@@ -92,6 +92,7 @@
           }, response => {
             this.$message('提交失败')
           })
+        this.newTodo.time = new Date()
       },
       onDeleteOnIndex (index) {
         this.$http.get(Cons.BASE_URL + '/todo/delete', {params: {id: this.todoList[index].id}})
@@ -120,6 +121,7 @@
       EventBus.instance.$on(EventBus.EVENT_HOMEPAGE_UPDATE_TODO, () => {
         this.getTodoList()
       })
+      this.newTodo.time = new Date()
     }
   }
 </script>
