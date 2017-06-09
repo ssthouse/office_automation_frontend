@@ -29,6 +29,7 @@ class Voting {
     this.description = ''
     this.voteOptions = []
     this.published = false
+    this.multipleChoice = false
   }
 
   isValid () {
