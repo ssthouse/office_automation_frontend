@@ -7,7 +7,7 @@
       </div>
       <h3 style="text-align: left; margin-left: 20px;">投票: {{voting.title}}</h3>
 
-      <h4 style="text-align: left; margin-left: 20px;">截止时间: {{voting.deadline}}</h4>
+      <h4 style="text-align: left; margin-left: 20px;">截止时间: {{voting.deadline.slice(0, 10)}}</h4>
 
       <h4 style="text-align: left; margin-left: 20px;">发起者: {{voting.createrId}}</h4>
     </el-card>
@@ -36,12 +36,14 @@
 
 <script>
   import Chart from 'chart.js'
+  import Utils from '../../base/Utils'
 
   export default{
     name: 'voting-report',
     data () {
       return {
         voting: this.data,
+        Utils: Utils,
         none: ''
       }
     },

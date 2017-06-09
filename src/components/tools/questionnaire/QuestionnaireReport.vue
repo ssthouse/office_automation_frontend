@@ -10,7 +10,7 @@
       </div>
       <div class="card-content">
         <h4>问卷填写数量: {{answerAnalysis.sum}} 份</h4>
-        <h4>截止日期: {{questionnaire.deadline}}</h4>
+        <h4>截止日期: {{questionnaire.deadline.slice(0, 10)}}</h4>
         <h4>问卷管理者: {{questionnaire.createrId}}</h4>
       </div>
     </el-card>
