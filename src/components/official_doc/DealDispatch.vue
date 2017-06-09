@@ -89,7 +89,7 @@
                       v-if="!checkDisabled"
                       placeholder="下一步执行人"
                       @focus="onClickChooseUser()"
-                      v-model="dispatch.executors"></el-input>
+                      v-model="executors"></el-input>
           </div>
         </el-form-item>
         <!--countersign-->
@@ -108,7 +108,7 @@
                       v-if="!countersignDisabled"
                       placeholder="下一步执行人"
                       @focus="onClickChooseUser()"
-                      v-model="dispatch.executors"></el-input>
+                      v-model="executors"></el-input>
           </div>
         </el-form-item>
         <!--sign-->
@@ -127,7 +127,7 @@
                       v-if="!signDisabled"
                       placeholder="下一步执行人"
                       @focus="onClickChooseUser()"
-                      v-model="dispatch.executors"></el-input>
+                      v-model="executors"></el-input>
           </div>
         </el-form-item>
 
@@ -171,6 +171,8 @@
       return {
         dispatch: this.data,
         nextState: '',
+        // 用于保存下一步处理人, 否则会直接显示上一步的执行人
+        executors: '',
         deadline: new Date(),
         typeOptions: Dispatch.Type,
         isFinished: false,
@@ -189,12 +191,14 @@
         this.showChooseUserDialog = true
       },
       onEnsureChooseUser (userList) {
-        this.dispatch.executors = userList
+        this.executors = userList
         this.showChooseUserDialog = false
       },
       onClickSubmit () {
+        // 填充下一状态 填充处理人
         this.dispatch.state = this.getNextState()
-        console.log(JSON.stringify(this.dispatch))
+        this.dispatch.executors = this.executors
+        // console.log(JSON.stringify(this.dispatch))
         this.postUpdateDispatch()
       },
       isFormValid () {
