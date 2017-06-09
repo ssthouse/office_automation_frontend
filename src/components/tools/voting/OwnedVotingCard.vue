@@ -26,7 +26,7 @@
                        type="text"
                        :disabled="voting.published"
                        style="float: right">
-              编辑
+              {{getControlText(voting.published)}}
             </el-button>
           </div>
         </div>
@@ -71,6 +71,13 @@
         Utils.jumpToTools()
         let tabItem = new TabItem(voting.title, Voting.name, voting)
         this.$store.commit(MUTATION_TYPES.TOOLS_ADD_TAB, tabItem)
+      },
+      getControlText (isPublished) {
+        if (isPublished) {
+          return '已发布'
+        } else {
+          return '草稿'
+        }
       }
     },
     computed: {

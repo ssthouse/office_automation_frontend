@@ -25,7 +25,7 @@
                      type="text"
                      :disabled="questionnaire.published"
                      style="float: right">
-            编辑
+            {{getControlText(questionnaire.published)}}
           </el-button>
         </div>
       </div>
@@ -70,6 +70,13 @@
           }, error => {
             this.$message(error)
           })
+      },
+      getControlText (isPublished) {
+        if (isPublished) {
+          return '已发布'
+        } else {
+          return '草稿'
+        }
       }
     },
     computed: {
